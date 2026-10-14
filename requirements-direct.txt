@@ -1,0 +1,12 @@
+# Dependencias directas del laboratorio.
+# Validadas en CPython 3.14.7. Python 3.14.8 usa el mismo ABI cp314,
+# así que estas ruedas se instalan en los dos equipos Fedora.
+# El registro completo de lo instalado en el equipo de trabajo está en requirements.txt.
+jupyterlab==4.6.4
+ipykernel==7.4.0
+numpy==2.5.4
+pandas==3.0.6
+matplotlib==3.11.2
+openpyxl==3.1.5
+scipy==1.18.1
+scikit-learn==1.9.1
