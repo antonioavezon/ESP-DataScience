@@ -205,7 +205,7 @@ Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado
 
 ### 2.14 — Desarrollo y evaluación experimental de modelos
 
-Fase A preparada, sin entrenamiento y sin resultados predictivos. El cuaderno es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Hay 30 curvas de mapping y 18 de surging, en tres pliegues cada una, sin partir una curva. Las fases de ajuste no están hechas.
+Fase A en cierre metodológico, sin entrenamiento y sin resultados predictivos. El protocolo `2.14-A` está en `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` y en `src/esp_datascience/protocolo.py`. Hay 30 curvas de mapping y 18 de surging, en tres pliegues cada una, sin partir una curva. La fase B no está iniciada.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

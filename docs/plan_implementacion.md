@@ -16,8 +16,8 @@ Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de g
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-Autorizada. La fase A está preparada y espera revisión. No hay modelos entrenados.
+Autorizada. La fase A está en cierre metodológico. No hay modelos entrenados.
 
-El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` fija tres pliegues por curvas completas, con anillo interno. Mapping reserva 10 curvas por pliegue y surging reserva 6. Cada pliegue conserva las dos velocidades, las tres presiones y las condiciones del protocolo en entrenamiento y en prueba. `GroupKFold` directo no se usa como reparto principal: en mapping deja un pliegue sin 100 psig y en surging deja un pliegue sin la fracción 1,25.
+El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` fija tres pliegues por curvas completas, con anillo interno. Mapping reserva 10 curvas por pliegue y surging reserva 6. Cada pliegue conserva las dos velocidades, las tres presiones y las condiciones del protocolo en entrenamiento y en prueba. La versión congelada es `2.14-A`: alcance, métrica principal (MAE en psi con igual peso por curva), RMSE, sesgo, comparación pareada y el tratamiento de Qgd ausente. Un cambio posterior es una modificación metodológica.
 
-La fase B, si se aprueba, estimará la recta y el polinomio de grado 2 con cresta sobre esos cortes. El MAE en psi sigue siendo la métrica principal prevista. Si ningún modelo supera a la recta con la regla del cuaderno 03, la recta sigue siendo el informe.
+La fase B no está iniciada. Cuando se autorice, estimará la recta y el polinomio de grado 2 con cresta sobre esos cortes, sin cambiarlos. Si ningún modelo supera a la recta con la regla del cuaderno 03, la recta sigue siendo el informe.

@@ -152,7 +152,7 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 | `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
-| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14, fase A: particiones por curvas, sin entrenamiento |
+| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14, fase A en cierre: protocolo congelado, sin entrenamiento |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -180,9 +180,9 @@ La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping
 
 La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
-La siguiente actividad, todavía sin hacer y sin autorización, es:
+La actividad 2.14 está autorizada. La fase A está en cierre metodológico: el protocolo de particiones y de evaluación queda congelado en el cuaderno 04, versión `2.14-A`. Todavía no entrena modelos. La fase B no está iniciada.
 
-**2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.** La fase A, de particiones, está en el cuaderno 04 y todavía no entrena modelos.
+**2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 
 El plan está en `docs/plan_implementacion.md`. Este repositorio no incluye modelos entrenados.
 

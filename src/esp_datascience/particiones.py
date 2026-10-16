@@ -216,3 +216,74 @@ def agua_utilizable(tabla_mapping_marcada: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("Hay una curva con gas sin curva de agua en su hoja y velocidad.")
     gas["agua_en_otro_pliegue"] = gas["pliegue"] != gas["pliegue_agua"]
     return gas
+
+
+def qgd_tecnico(qgd, es_monofasica):
+    """Copia numérica para un estimador. El cero del agua no es una medición.
+
+    No modifica la serie original ni el CSV.
+    """
+    import pandas as pd
+
+    gas = pd.Series(qgd).reset_index(drop=True)
+    agua = pd.Series(es_monofasica).reset_index(drop=True).astype(bool)
+    if len(gas) != len(agua) or not gas.isna().eq(agua).all():
+        raise ValueError("El vacío de qgd ya no coincide con el indicador de agua.")
+    copia = gas.astype(float).copy()
+    copia.loc[agua] = 0.0
+    if gas.isna().sum() != int(agua.sum()):
+        raise ValueError("La copia técnica alteró el conteo de ausencias originales.")
+    return copia
+
+
+def auditar_particiones(tabla: pd.DataFrame, protocolo: str, n_cortes_internos: int) -> dict:
+    """Revisa fuga, cobertura y repetibilidad. No entrena nada."""
+    columnas = list(tabla.columns)
+    marcada = marcar_pliegues(tabla, protocolo)
+    if list(tabla.columns) != columnas:
+        raise RuntimeError("La auditoría modificó la tabla de entrada.")
+    curvas = _curvas(marcada)
+    if int((curvas["n_pliegues"] != 1).sum()) != 0:
+        raise RuntimeError("Una curva quedó partida.")
+    resumen = resumen_pliegues_externos(marcada)
+    if not bool(resumen["condiciones_estimables"].all()):
+        raise RuntimeError("Una condición de prueba no está en el entrenamiento.")
+    if not bool(resumen["ambas_velocidades"].all() and resumen["tres_presiones"].all()):
+        raise RuntimeError("Un pliegue externo no cubre velocidad y presión.")
+    union: set[str] = set()
+    for pliegue, grupo in curvas.groupby("pliegue"):
+        ids_prueba = set(grupo["curva_id"])
+        if union & ids_prueba:
+            raise RuntimeError("Una curva aparece en dos pliegues de prueba.")
+        union |= ids_prueba
+        internos = pliegues_internos(marcada, int(pliegue), n_cortes_internos)
+        if not bool(internos["condiciones_estimables"].all()):
+            raise RuntimeError("Un corte interno deja una condición sin entrenamiento.")
+        if not bool(internos["ambas_velocidades"].all() and internos["tres_presiones"].all()):
+            raise RuntimeError("Un corte interno pierde velocidad o presión.")
+        entrenamiento = curvas[curvas["pliegue"] != pliegue].reset_index(drop=True)
+        grupos = entrenamiento["curva_id"].to_numpy()
+        vistos: set[str] = set()
+        cortes = GroupKFold(n_splits=n_cortes_internos)
+        for _tr, te in cortes.split(np.zeros((len(entrenamiento), 1)), groups=grupos):
+            ids_te = set(entrenamiento.iloc[te]["curva_id"])
+            if ids_te & ids_prueba:
+                raise RuntimeError("El anillo interno tomó una curva de la prueba externa.")
+            if vistos & ids_te:
+                raise RuntimeError("Una curva interna se repite.")
+            vistos |= ids_te
+        if vistos != set(entrenamiento["curva_id"]):
+            raise RuntimeError("El anillo interno no recorre todo el entrenamiento.")
+    if union != set(curvas["curva_id"]):
+        raise RuntimeError("Falta una curva en el reparto.")
+    repetida = marcar_pliegues(tabla, protocolo)
+    if not marcada["pliegue"].equals(repetida["pliegue"]):
+        raise RuntimeError("El reparto no se repite.")
+    return {
+        "protocolo": protocolo,
+        "n_curvas": int(curvas["curva_id"].nunique()),
+        "n_pliegues": int(curvas["pliegue"].nunique()),
+        "sin_fuga": True,
+        "reproducible": True,
+        "dominio_en_cada_pliegue": True,
+    }

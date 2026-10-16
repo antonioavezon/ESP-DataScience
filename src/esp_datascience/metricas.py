@@ -42,3 +42,32 @@ def coeficiente_determinacion(medicion, prediccion) -> float:
         raise ValueError("R² no se define si la medición no varía.")
     residuo = float(np.sum((y - yhat) ** 2))
     return float(1.0 - residuo / total)
+
+
+def metrica_por_curva(medicion, prediccion, curva_id, funcion) -> "pd.Series":
+    """Una cifra por curva. Cada curva pesa igual, sin importar cuántos puntos tenga."""
+    import pandas as pd
+
+    y, yhat = _par(medicion, prediccion)
+    curvas = pd.Series(curva_id).reset_index(drop=True)
+    if len(curvas) != len(y) or curvas.isna().any():
+        raise ValueError("Cada fila necesita un identificador de curva.")
+    tabla = pd.DataFrame({"y": y, "yhat": yhat, "curva": curvas.to_numpy()})
+    cifras = {
+        curva: float(funcion(grupo["y"].to_numpy(), grupo["yhat"].to_numpy()))
+        for curva, grupo in tabla.groupby("curva", sort=True)
+    }
+    return pd.Series(cifras, name="por_curva")
+
+
+def media_por_curva(medicion, prediccion, curva_id, funcion) -> float:
+    return float(metrica_por_curva(medicion, prediccion, curva_id, funcion).mean())
+
+
+def diferencia_pareada(serie_referencia, serie_candidata):
+    """Resta candidata menos referencia, curva por curva. Exige las mismas curvas."""
+    if not serie_referencia.index.equals(serie_candidata.index):
+        raise ValueError(
+            "Las curvas no coinciden. La comparación usa los mismos pliegues externos."
+        )
+    return serie_candidata - serie_referencia

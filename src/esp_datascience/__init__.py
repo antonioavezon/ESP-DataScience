@@ -15,7 +15,8 @@ from esp_datascience.normalizacion import (
 )
 from esp_datascience.rutas import encontrar_raiz_laboratorio, huella_sha256
 from esp_datascience.metricas import error_absoluto_medio
-from esp_datascience.particiones import SEMILLA, marcar_pliegues
+from esp_datascience.particiones import SEMILLA, auditar_particiones, marcar_pliegues
+from esp_datascience.protocolo import VERSION
 from esp_datascience.validacion import comprobar_conteos_publicados, pares_por_hoja
 
 __all__ = [
@@ -30,6 +31,8 @@ __all__ = [
     "normalizar_surging",
     "SEMILLA",
     "error_absoluto_medio",
+    "VERSION",
+    "auditar_particiones",
     "marcar_pliegues",
     "pares_por_hoja",
     "psep_de_hoja",
