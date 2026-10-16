@@ -201,11 +201,13 @@ Hay 30 curvas en mapping y 18 en surging. No se apilan. Las curvas de agua bajan
 
 Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado 2 con cresta, recta por la condición de gas y un bosque aleatorio poco profundo. En mapping se añade el cociente respecto de la curva de agua. No hay candidato principal único: la nota de la recta por condición y la del polinomio difieren en 0,15, y el primer puesto cambia si se da más peso a la validación. El mecanicista, el híbrido, las redes y la simulación de fluidos quedan pospuestos. Los Excel y los CSV no se modificaron.
 
-## Pendiente
+## Actividad 2.14, en curso
 
 ### 2.14 — Desarrollo y evaluación experimental de modelos
 
-Fase A cerrada y congelada en `2.14-A`. Fase B desarrollada y auditada para la recta y el polinomio de grado 2 con cresta, sin cambiar pliegues ni métrica. Una segunda ejecución reprodujo el MAE por curva: 3,999 psi y 1,364 psi en mapping, 2,312 psi y 1,114 psi en surging. El RMSE de esa tabla es la media por curva, no el RMSE global. Quedan abiertos el sesgo que cambia de signo, las predicciones negativas listadas en `docs/derivados/predicciones_negativas_fase_b.csv`, la curvatura de las curvas de agua y la repetición sin la velocidad de diseño. No hay ganador. La fase C no está iniciada. El detalle está en `docs/resultados_modelos_2_14.md`.
+Fase A cerrada y congelada en `2.14-A`. Fase B cerrada para la recta y el polinomio de grado 2 con cresta: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó completo con nbconvert. Una ejecución reprodujo el MAE por curva: 3,999 psi y 1,364 psi en mapping, 2,312 psi y 1,114 psi en surging. Ese cierre no cierra la actividad.
+
+Fase C desarrollada, sin iniciar la fase D. M3, la recta por condición, cubre las 30 y las 18 curvas y tiene MAE por curva de 3,783 psi en mapping y 2,041 psi en surging. En la mayoría de las curvas no mejora al polinomio. M4, el bosque de 100 árboles, quedó con profundidad 7 y hoja mínima 3 en mapping, y con profundidad 5 o 7 y hoja mínima 3 en surging. Su MAE por curva es 1,044 psi y 0,754 psi. No tiene predicciones negativas y sí tiene subidas locales en las seis curvas de agua; la mayor, en agua a 50 psig y 3500 rpm, es de 11,291 psi. M5 solo entra en el MAE de 5 curvas de mapping, todas a 50 psig, con 2,078 psi. No usa el agua reservada para la prueba. No hay ganador. El detalle está en `docs/resultados_modelos_2_14.md`.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

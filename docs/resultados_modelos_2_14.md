@@ -1,6 +1,6 @@
-# Resultados de la actividad 2.14, fase B
+# Resultados de la actividad 2.14
 
-Auditoría de cierre de la fase B. No es el cierre de la actividad 2.14 y no inicia la fase C. No hay un modelo definitivo ni un modelo físicamente validado.
+Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. No hay un modelo definitivo y la actividad 2.14 sigue abierta.
 
 La fase A permanece en la versión `2.14-A`. Una segunda ejecución de `evaluar_protocolo`, sobre los CSV originales, reprodujo la tabla ya publicada. No se cambió la métrica, la rejilla de alpha, el grado ni un pliegue. El registro ejecutable es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Las funciones están en `src/esp_datascience/entrenamiento.py`.
 
@@ -164,6 +164,133 @@ El sesgo medio es pequeño porque se cancela entre curvas. El polinomio cruza a 
 
 ## 16. Estado de cierre de la fase B
 
-La fase B está desarrollada, vuelta a ejecutar y documentada. Los datos originales y las huellas no cambiaron. Las predicciones negativas están identificadas. Las curvas de agua y el sesgo están desglosados. La fase C no está iniciada.
+La fase B está desarrollada, vuelta a ejecutar y documentada. Los datos originales y las huellas no cambiaron. Las predicciones negativas están identificadas. Las curvas de agua y el sesgo están desglosados.
 
-La fase B queda técnicamente preparada para la revisión de cierre. La decisión de cerrarla corresponde a esa revisión. No es el cierre de la actividad 2.14.
+La fase B queda cerrada con ese registro: 26 pruebas automatizadas, las de `tests/test_normalizacion.py`, `tests/test_particiones.py` y `tests/test_entrenamiento.py`, terminaron correctamente, y el cuaderno se ejecutó completo con nbconvert. Ese cierre no cierra la actividad 2.14. La fase C está en el capítulo 17.
+
+## 17. Fase C — M3, M4 y M5
+
+### 17.1 Objetivo e hipótesis
+
+La fase C estima los candidatos que la actividad 2.13 dejó después de la recta y el polinomio. El protocolo sigue siendo `2.14-A`. No se movió un pliegue, no se cambió la métrica principal y no se reajustaron M1 ni M2 con otra regla. Una ejecución nueva de `evaluar_protocolo` reprodujo el MAE por curva de la fase B: 3,999 psi y 1,364 psi en mapping; 2,312 psi y 1,114 psi en surging.
+
+Las hipótesis se escribieron antes de leer el error externo:
+
+- H3. Una recta propia de cada condición experimental puede reducir el error que viene de mezclar curvas distintas, y puede perder generalización cuando esa condición tiene pocos experimentos.
+- H4. Un bosque de árboles de profundidad limitada puede representar curvaturas e interacciones que la recta y el polinomio de grado 2 no escriben de forma explícita.
+- H5. En mapping, el cociente entre el incremento de presión con gas y el de la curva de agua, a caudal, velocidad y presión de separador comparables, puede describir el efecto del gas si esa agua está disponible sin mezclar entrenamiento y prueba.
+
+Estas frases no son el resultado. El resultado está en las tablas de este capítulo.
+
+### 17.2 Modelos
+
+M3 ajusta una regresión lineal distinta para cada condición, solo con las curvas de entrenamiento de esa condición. En mapping la condición es `Single Phase` o el valor de Qgd. Dentro de la condición, los predictores posibles son el caudal de líquido, la velocidad y la presión del separador. Entra en la recta solo el que toma al menos dos valores distintos en ese entrenamiento, y el caudal tiene que ser uno de ellos. Qgd y el indicador de agua son constantes dentro de la condición, así que no tienen pendiente. En surging la condición es la fracción de QBEP: 0,75, 1 y 1,25. GVF0 sigue siendo el gas continuo y entra como predictor, junto con la velocidad y la presión del separador cuando varían. El identificador de curva no entra. Si una condición de prueba no fuera estimable, sus filas quedarían sin predicción. No hay un modelo global de respaldo. En estas particiones todas las condiciones externas fueron estimables.
+
+La ecuación de una condición c, con el conjunto J_c de predictores identificables, es
+
+ŷ = β0,c + Σ βj,c xj, para j en J_c.
+
+M4 es un `RandomForestRegressor` de scikit-learn. Usa las mismas entradas que M1, incluida la copia técnica de Qgd en el agua. La semilla es 214, `n_jobs` es 1 y `max_features` es 1,0: entran todos los predictores autorizados y no se buscó un subconjunto. Antes de ver el error externo se fijó `n_estimators` en 100. La rejilla buscada, solo con el MAE interno por curva, es `max_depth` en {3, 5, 7} y `min_samples_leaf` en {3, 5, 10}. Si dos combinaciones empatan a menos de 10⁻⁹ psi, se queda la de menor profundidad y, dentro de ella, la de hoja mínima más grande. No se añadió otro hiperparámetro después de ver la prueba.
+
+`n_estimators` es el número de árboles cuyo promedio es la predicción. `max_depth` limita cuántos cortes sucesivos puede hacer un árbol. `min_samples_leaf` exige un mínimo de observaciones en cada hoja y así frena una hoja que coincida con un solo punto. `random_state` fija el muestreo bootstrap para que la misma tabla dé el mismo bosque.
+
+M5 es solo de mapping. En cada punto de gas cuyo caudal cae dentro de la curva de agua de la misma hoja y la misma velocidad, y solo si esa agua está en el entrenamiento, se calcula
+
+R = ΔP_gas / ΔP_agua.
+
+ΔP_agua se interpola en el caudal de líquido. Fuera del mínimo y el máximo medidos de esa agua no hay valor. La relación ajustada, solo con puntos de gas autorizados, es R̂ = β0 + β1 Qgd. La predicción en psi es R̂ por la presión de agua interpolada. No es la presión normalizada de Zhu y Zhang (2018): aquella usa la densidad de la mezcla, que estos archivos no traen. Una curva entra en el MAE de M5 solo si todos sus puntos tienen interpolación. No se rellenan los huecos. Las curvas de agua de prueba no se predicen y no se usan como referencia.
+
+### 17.3 Factibilidad de M3
+
+En el entrenamiento externo, las condiciones raras de mapping tienen dos curvas, una sola velocidad y dos presiones. La velocidad no recibe coeficiente. La presión de la curva de prueba de esa condición no está entre las dos presiones de entrenamiento: la predicción usa la pendiente de presión fuera de los valores vistos en esa condición. Eso ocurre en 18 de las 30 curvas de mapping. Qgd = 0,01 y `Single Phase` sí tienen las dos velocidades y las tres presiones en el entrenamiento de cada pliegue.
+
+En surging, cada fracción tiene cuatro curvas de entrenamiento, las dos velocidades y dos de las tres presiones. La presión de las dos curvas de prueba no está en el entrenamiento de esa fracción. Las 18 curvas quedan marcadas con esa extrapolación. Aun así la condición es estimable: hay pendiente de GVF0, de velocidad y de presión.
+
+En el anillo interno de mapping, 36 de 54 bloques de condición tienen una sola curva de entrenamiento. Siguen siendo estimables porque el caudal varía, pero entonces la velocidad y la presión no tienen coeficiente. M3 no elige hiperparámetros con ese anillo. El dato queda como límite de lo delgada que es una condición cuando se aparta una curva más. Ningún bloque interno quedó sin estimación. No se cambiaron los pliegues para evitarlo.
+
+### 17.4 Hiperparámetros de M4
+
+El MAE interno eligió, en mapping, profundidad 7 y hoja mínima 3 en los tres pliegues. En surging eligió profundidad 5 y hoja mínima 3 en el pliegue 0, y profundidad 7 y hoja mínima 3 en los pliegues 1 y 2. En mapping, esa esquina de la rejilla tenía un MAE interno de cerca de 1,39 psi, 1,26 psi y 1,37 psi, frente a cerca de 2,8 psi a 3,0 psi en la esquina más rígida. No se amplió la profundidad después de ver el error externo. El tope de la rejilla puede estar activo en mapping. En surging el pliegue 0 muestra que el procedimiento no elige siempre la combinación más flexible.
+
+### 17.5 Cobertura y métricas externas
+
+El MAE, el RMSE y el sesgo son medias sin ponderar de las curvas. R² usa las observaciones externas reunidas. La cobertura es completa en M1, M2, M3 y M4.
+
+| Protocolo | Modelo | MAE por curva (psi) | RMSE por curva (psi) | Sesgo (psi) | R² | Cobertura |
+|---|---|---:|---:|---:|---:|---|
+| Mapping | M1 | 3,999 | 4,865 | 0,043 | 0,543 | 30/30 |
+| Mapping | M2 | 1,364 | 1,707 | 0,025 | 0,940 | 30/30 |
+| Mapping | M3 | 3,783 | 4,488 | −0,153 | 0,591 | 30/30 |
+| Mapping | M4 | 1,044 | 1,546 | −0,007 | 0,937 | 30/30 |
+| Surging | M1 | 2,312 | 2,734 | 0,136 | 0,894 | 18/18 |
+| Surging | M2 | 1,114 | 1,353 | 0,146 | 0,962 | 18/18 |
+| Surging | M3 | 2,041 | 2,486 | 0,350 | 0,895 | 18/18 |
+| Surging | M4 | 0,754 | 0,963 | 0,041 | 0,972 | 18/18 |
+
+Las cifras de M1 y M2 son las de la fase B, reproducidas en esta ejecución. El RMSE de la tabla es la media por curva, no el RMSE global.
+
+La diferencia pareada es el MAE del candidato menos el MAE de la referencia, en las mismas curvas.
+
+En mapping, M3 queda por debajo de M1 en 12 de 30 curvas. La media de esas diferencias es −0,215 psi y la mediana es +0,054 psi: la media mejora por unas pocas curvas, no por el conjunto. M3 queda por debajo de M2 en 4 de 30 curvas. M4 queda por debajo de M1 en las 30 curvas, con media −2,955 psi, y por debajo de M2 en 21 de 30, con media −0,321 psi.
+
+En surging, M3 queda por debajo de M1 en 9 de 18 curvas, con media −0,271 psi y mediana −0,042 psi. Queda por debajo de M2 en 5 de 18. M4 queda por debajo de M1 en 17 de 18 curvas. La excepción es `150psig|3500|0.75Qbep`, donde el MAE de M4 supera al de M1 en 0,341 psi. M4 queda por debajo de M2 en 15 de 18 curvas, con media −0,360 psi.
+
+### 17.6 M5 y su cobertura
+
+En cada pliegue, las 8 curvas de gas de prueba tienen su agua en el entrenamiento. De las 16 curvas de gas de entrenamiento, solo 8 tienen el agua también en el entrenamiento. Las otras 8 tienen el agua reservada en la prueba y no entran al ajuste. Hay 2 curvas de agua en cada prueba. M5 no las predice.
+
+El ajuste fue posible en los tres pliegues, con 139, 148 y 140 puntos y 8 curvas de gas autorizadas. Los interceptos de R fueron 0,916, 0,922 y 0,886. Las pendientes respecto de Qgd fueron −8,186, −7,437 y −6,837. El signo es el de una relación que baja cuando el código de gas sube. Eso describe el ajuste. No demuestra que la fórmula sea el mecanismo de la bomba.
+
+Solo 5 de 30 curvas tienen todos sus caudales dentro del agua autorizada, y las cinco son de 50 psig: `50psig|1800|Qgd=0.01`, `50psig|1800|Qgd=0.015`, `50psig|3500|Qgd=0.02`, `50psig|3500|Qgd=0.04` y `50psig|3500|Qgd=0.05`. Son 89 filas. Hay predicción puntual en 427 de 570 filas, pero esas filas de curvas incompletas no entran al MAE ni se completan con un valor inventado.
+
+En esas 5 curvas, y solo en ellas, el MAE por curva es:
+
+| Modelo | MAE por curva (psi) | RMSE por curva (psi) | Sesgo (psi) | R² |
+|---|---:|---:|---:|---:|
+| M1 | 3,080 | 3,734 | −0,423 | 0,677 |
+| M2 | 1,048 | 1,290 | −0,101 | 0,961 |
+| M3 | 3,381 | 4,043 | 0,235 | 0,652 |
+| M4 | 1,206 | 1,500 | 0,607 | 0,950 |
+| M5 | 2,078 | 2,885 | 0,204 | 0,828 |
+
+Esas cifras no se comparan con el MAE de las 30 curvas. En el subconjunto que M5 alcanza, su error queda entre el de M1 y el de M2. No cubre 100 psig, 150 psig ni las curvas de agua.
+
+### 17.7 Error de entrenamiento y error externo
+
+En M3 el MAE de entrenamiento y el externo quedan cerca. En mapping, por pliegue, el de entrenamiento es 3,693 psi, 3,571 psi y 3,497 psi, y el externo es 3,627 psi, 3,826 psi y 3,897 psi. En surging son 1,847 psi, 1,731 psi y 1,834 psi frente a 1,916 psi, 2,153 psi y 2,055 psi. La recta por condición no memoriza el entrenamiento. Su límite está en la forma lineal y en la presión que no vio dentro de la condición.
+
+En M4 el error sobre las mismas curvas de entrenamiento es más bajo que el externo, y el MAE interno que eligió el hiperparámetro es más alto que el externo. En mapping, las medias de los tres pliegues son, en ese orden, cerca de 0,75 psi, 1,04 psi y 1,34 psi. En surging, cerca de 0,39 psi, 0,75 psi y 1,44 psi. El bosque ajusta las curvas de entrenamiento con más holgura de la que luego muestra fuera. El error externo de esta partición no superó la cifra con la que se eligió la rejilla. Esa diferencia no autoriza a profundizar los árboles después de haber visto la prueba.
+
+### 17.8 Diagnóstico físico
+
+No se sustituyó ninguna predicción negativa por cero y no se obligó a ninguna curva a ser decreciente.
+
+M3 tiene 4 predicciones negativas en mapping, todas en agua a 1800 rpm y en la zona alta del caudal. La más baja es −1,897 psi en `100psig|1800|Single Phase`, a 2349 bpd, donde la medición es 0,543 psi. Tres de esas cuatro filas están en el extremo de su curva; la cuarta está cerca, con fracción de abscisa 0,89. En surging hay 27 predicciones negativas, todas a 1800 rpm. La más baja es −13,993 psi en `150psig|1800|0.75Qbep`, con GVF0 de 19,141 % y medición de 0,383 psi. Varias no están en el extremo de la curva. La lista está en `docs/derivados/predicciones_negativas_fase_c.csv`. No son mediciones.
+
+M4 no produjo predicciones negativas. En mapping el mínimo es 0,451 psi y el máximo 28,706 psi. En surging el mínimo es 1,227 psi y el máximo 27,474 psi. Un bosque promedia valores de entrenamiento. Con mediciones positivas, la predicción se queda dentro del rango que las hojas vieron. Por eso no llega al mínimo medido de surging, 0,383 psi, ni al máximo medido de mapping, 31,210 psi. Esa contención no es una comprensión de la bomba. Es una restricción del promedio de las hojas.
+
+En las seis curvas de agua, la medición no tiene pasos ascendentes. M3 tampoco: la pendiente de caudal del agua es negativa en los tres pliegues y, dentro de una curva, la velocidad y la presión no cambian. En Qgd = 0,015 y en Qgd = 0,04 la pendiente de caudal cambia de signo entre pliegues, así que M3 no garantiza una curva de gas decreciente. M4 tiene pasos ascendentes en las seis curvas de agua. El caso mayor es `50psig|3500|Single Phase`: Spearman −0,549 y cuatro subidas. Entre 288,8 bpd y 717,1 bpd la predicción pasa de 2,121 psi a 13,412 psi, una subida de 11,291 psi, mientras la medición pasa de 31,210 psi a 31,146 psi. En ese primer punto, M3 predice 39,769 psi. Los dos modelos fallan el extremo de la misma curva, en sentidos distintos.
+
+La media de las medias por curva distingue 1800 rpm de 3500 rpm. En mapping la medición da 4,338 psi y 15,403 psi. M3 da 4,240 psi y 15,213 psi. M4 da 4,292 psi y 15,422 psi. En surging la medición da 3,681 psi y 15,893 psi. M3 da 4,068 psi y 16,207 psi. M4 da 3,706 psi y 15,951 psi. Los dos modelos reproducen el orden de magnitud de esa diferencia. No son una ley de afinidad.
+
+En el punto medio del caudal común de cada hoja y velocidad, la medición baja al subir Qgd en los seis grupos. M3 sube en cinco de esos seis. M4 sube en uno, el de 150 psig y 3500 rpm. La interpolación es descriptiva, no entra al ajuste y no identifica un régimen. Dentro de cada curva de surging, el coeficiente de GVF0 de M3 es negativo y el Spearman de la predicción con GVF0 es −1. M4 queda cerca de −1, pero no en todas las curvas: en `150psig|1800|1.25Qbep` es −0,977. La monotonía de M3 dentro de la curva sale de una recta con pendiente negativa, no de un mecanismo identificado.
+
+El sesgo medio sigue cancelándose. En mapping, M3 tiene 15 curvas por encima y 15 por debajo, con medias de sesgo +0,633 psi y −0,939 psi. M4 tiene 13 y 17, con +0,752 psi y −0,587 psi. En surging, M3 tiene 12 y 6, con +1,005 psi y −0,960 psi. M4 tiene 7 y 11, con +0,565 psi y −0,293 psi. En mapping, el sesgo por curva de M4 en agua es −1,179 psi y en Qgd = 0,05 es +1,245 psi. El MAE de M3 en mapping es 1,527 psi a 1800 rpm y 5,288 psi a 3500 rpm.
+
+### 17.9 Comparación provisional
+
+H3 no queda respaldada como ventaja general. El MAE medio de M3 es algo menor que el de M1, pero la mediana pareada está cerca de cero y M2 tiene menor error en la mayoría de las curvas. La especialización, además, predice presiones de separador que esa condición no vio en el entrenamiento.
+
+H4 queda como una reducción del MAE externo frente a M1 en casi todas las curvas y frente a M2 en la mayoría. Al mismo tiempo, el bosque dobla todas las curvas de agua, se aparta en más de 11 psi en un tramo de agua a 3500 rpm y ajusta el entrenamiento mejor de lo que predice fuera. Reproducir el orden de las velocidades no significa que el bosque entienda la hidráulica.
+
+H5 es viable solo como referencia parcial. Se pudo calcular sin usar el agua de prueba, y solo en 5 curvas de 50 psig. En ese subconjunto no mejora a M2 ni a M4. No es un competidor de las 30 curvas.
+
+No se nombra un ganador. La fase D es la que tiene la comparación con incertidumbre. No está iniciada.
+
+### 17.10 Entorno
+
+La ejecución usó el entorno `.venv` del laboratorio: Python 3.14.8, NumPy 2.5.4, pandas 3.0.6 y scikit-learn 1.9.1. La semilla es 214. El código de esta fase está en `src/esp_datascience/fase_c.py`. Las pruebas nuevas están en `tests/test_fase_c.py`. El cuaderno ejecutado de toda la actividad, de la fase A a la C, queda en `resultados/04_ejecucion_fase_c.ipynb`, separado del cuaderno fuente para no reescribir las salidas ya guardadas de la fase B.
+
+### 17.11 Conclusión de la fase
+
+M3, M4 y M5 quedaron estimados con el protocolo congelado. M3 y M4 cubren todas las curvas externas. M5 cubre cinco. Las predicciones negativas de M3 están listadas. Las curvas de agua y el sesgo están desglosados. M1 y M2 conservan sus cifras. No hay un modelo definitivo.

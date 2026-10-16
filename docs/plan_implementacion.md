@@ -1,6 +1,6 @@
 # Plan de las etapas siguientes
 
-La actividad 2.11 queda cerrada. El diccionario está en `docs/diccionario_variables.md`. La actividad 2.12 también queda cerrada: las tablas están en `data/processed/` y el procedimiento en `docs/normalizacion_datos.md`. La actividad 2.13 queda cerrada como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md` y la exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No hay modelos entrenados.
+La actividad 2.11 queda cerrada. El diccionario está en `docs/diccionario_variables.md`. La actividad 2.12 también queda cerrada: las tablas están en `data/processed/` y el procedimiento en `docs/normalizacion_datos.md`. La actividad 2.13 queda cerrada como selección metodológica, sin entrenamiento propio. La síntesis es `docs/estudio_modelos_2_13.md` y la exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. Los modelos de la actividad 2.14 se describen más abajo.
 
 ## 2.12 — Tabla larga, en dos archivos
 
@@ -16,8 +16,8 @@ Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de g
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-Autorizada. La fase A está cerrada y congelada en `2.14-A`. La fase B está desarrollada, evaluada y preparada para la revisión de cierre. No se cambiaron los pliegues ni la métrica. No hay un ganador de la actividad.
+Autorizada y no cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: las 26 pruebas de esa fase terminaron correctamente y el cuaderno se ejecutó completo con nbconvert. No se cambiaron los pliegues ni la métrica. En esas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging.
 
-El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` conserva los tres pliegues por curvas completas. Mapping reserva 10 curvas por pliegue y surging reserva 6. El informe es `docs/resultados_modelos_2_14.md`. En estas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging. El sesgo medio es pequeño porque se cancela entre curvas. Hay predicciones negativas y curvas de agua que el polinomio dobla. Esas listas están en `docs/derivados/`. No son mediciones.
+La fase C está desarrollada y queda para revisión científica. Estimó la recta por condición (M3), el bosque con profundidad y hoja mínima elegidas por el MAE interno (M4) y el cociente respecto del agua de entrenamiento (M5). M5 solo cubre 5 de las 30 curvas de mapping. M4 tiene menor MAE externo que M2 en la mayoría de las curvas y, a la vez, subidas locales en las seis curvas de agua. No hay ganador. La fase D, de comparación con incertidumbre, no está iniciada.
 
-La fase C está pendiente y no está iniciada. Corresponden a ella la recta por condición, el bosque poco profundo y, en mapping, el cociente respecto del agua.
+El cuaderno fuente es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. La ejecución completa de esta fase quedó en `resultados/04_ejecucion_fase_c.ipynb`, para no reescribir las salidas ya guardadas de la fase B. El informe es `docs/resultados_modelos_2_14.md`.
