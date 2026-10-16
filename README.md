@@ -209,9 +209,18 @@ Datos experimentales: Jianjun Zhu, Mendeley Data, DOI 10.17632/fk2b4r69bs.1, lic
 Artículo de referencia, no redistribuido aquí: DOI 10.1016/j.petrol.2019.05.059.
 
 
+
+## Naturaleza independiente, procedencia y atribución del estudio
+
+ESP-DataScience es una investigación de iniciativa personal. No es un encargo de una universidad, de una institución anfitriona ni de una empresa. Sirve al interés académico y a la preparación para una pasantía de investigación. No forma parte de los entregables asignados por esa pasantía, no es una publicación oficial de ella y no expresa una posición institucional. No se afirma supervisión, aprobación ni financiamiento institucional. No se usan logos. Este párrafo no es un dictamen de titularidad intelectual.
+
+Las mediciones son de Jianjun Zhu. El conjunto de Mendeley Data, DOI 10.17632/fk2b4r69bs.1, está bajo CC BY 4.0. Esa licencia no autoriza, por sí sola, a redistribuir PDF, figuras o tablas de artículos con otras condiciones editoriales. El PDF de Elsevier `docs/esp_gassy_flow_paper.pdf` está en `.gitignore` y no está en Git. `ProjectESP/` tampoco se publica. No se eliminaron esas copias locales ni se reescribió el historial. No se establece aquí una licencia general del repositorio.
+
+El procesamiento, los modelos M1–M5 y esta comparación son trabajo del laboratorio, con procedimientos estadísticos ya conocidos y reglas documentadas. Herramientas de inteligencia artificial apoyaron la búsqueda bibliográfica inicial y la redacción. No son autoras de los artículos de Zhu.
+
 ## Actividad 2.15
 
-Abierta y en desarrollo desde el 16 de octubre de 2026. No modifica los resultados de la 2.14.
+Desarrollada y en revisión científica desde el 16 de octubre de 2026. Todavía no está cerrada. No modifica los resultados de la 2.14.
 
 - Cuaderno: `notebooks/05_comparacion_cientifica_zhu.ipynb`
 - Informe: `docs/estudio_comparativo_zhu_2_15.md`

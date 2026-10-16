@@ -10,6 +10,10 @@ sys.path.insert(0, str(RAIZ / "src"))
 from esp_datascience.comparacion_zhu import (
     CONDICIONES_NUMERICAS,
     PARES_NO_EQUIVALENTES,
+    RegistroCondicion,
+    ResultadoPuerta,
+    auditar_matriz,
+    dossier_de_la_actividad_215,
     exigir_comparacion_numerica,
 )
 from esp_datascience.entrenamiento import HUELLAS_PLIEGUES
@@ -18,19 +22,60 @@ from esp_datascience.protocolo import VERSION
 from esp_datascience.rutas import huella_sha256
 
 
+def _registros_citados(resultado="cumple"):
+    return [
+        RegistroCondicion(
+            condicion=nombre,
+            resultado=resultado,
+            fuente="fuente de prueba, no es la bomba",
+            observaciones="registro sintético",
+            estado="citada_en_fuente",
+        )
+        for nombre in CONDICIONES_NUMERICAS
+    ]
+
+
 class Guardas(unittest.TestCase):
     def test_qgd_no_equivale_a_gvf(self):
         pares = {(a, b) for a, b, _ in PARES_NO_EQUIVALENTES}
         self.assertIn(("qgd", "gvf0_porcentaje"), pares)
         self.assertIn(("dp2_3_psi", "presion_absoluta"), pares)
 
-    def test_rechaza_si_falta_una_condicion(self):
-        completo = {nombre: True for nombre in CONDICIONES_NUMERICAS}
-        exigir_comparacion_numerica(**completo)
-        incompleto = dict(completo)
-        incompleto["ecuacion_verificada"] = False
+    def test_un_booleano_no_abre_la_puerta(self):
+        with self.assertRaises(TypeError):
+            exigir_comparacion_numerica(True)
+        with self.assertRaises(TypeError):
+            exigir_comparacion_numerica([True] * len(CONDICIONES_NUMERICAS))
+
+    def test_la_puerta_abierta_no_declara_equivalencia_fisica(self):
+        salida = exigir_comparacion_numerica(_registros_citados())
+        self.assertTrue(salida.puerta_administrativa)
+        self.assertFalse(salida.equivalencia_fisica_demostrada)
         with self.assertRaises(ValueError):
-            exigir_comparacion_numerica(**incompleto)
+            ResultadoPuerta(True, True, "no debe aceptarse")
+
+    def test_el_dossier_de_215_mantiene_la_puerta_cerrada(self):
+        with self.assertRaises(ValueError):
+            exigir_comparacion_numerica(dossier_de_la_actividad_215())
+
+    def test_una_cita_sin_fuente_no_se_construye(self):
+        with self.assertRaises(ValueError):
+            RegistroCondicion(
+                "objetivo_comun",
+                "cumple",
+                "  ",
+                "sin documento",
+                "citada_en_fuente",
+            )
+
+    def test_la_matriz_no_tiene_huecos_ni_duplicados(self):
+        resumen = auditar_matriz(RAIZ / "docs/matriz_evidencias_2_15.csv")
+        self.assertGreaterEqual(resumen["filas"], 19)
+        self.assertEqual(len(resumen["identificadores"]), len(set(resumen["identificadores"])))
+        texto = (RAIZ / "docs/matriz_evidencias_2_15.csv").read_text(encoding="utf-8")
+        self.assertNotIn("páginas 20-80", texto)
+        self.assertIn("página impresa 45", texto)
+        self.assertIn("ecuación (2.7)", texto)
 
     def test_las_huellas_de_214_siguen_iguales(self):
         self.assertEqual(VERSION, "2.14-A")

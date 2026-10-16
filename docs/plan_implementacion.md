@@ -28,4 +28,4 @@ El cuaderno fuente es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. La 
 
 ## 2.15 — Comparación con el conocimiento publicado por Zhu
 
-Abierta el 16 de octubre de 2026 y en desarrollo. No modifica los resultados de la 2.14. El cuaderno es `notebooks/05_comparacion_cientifica_zhu.ipynb`. El informe es `docs/estudio_comparativo_zhu_2_15.md`. La matriz es `docs/matriz_evidencias_2_15.csv`. No se declara terminada.
+Desarrollada y en revisión científica. Todavía no está cerrada. No modifica los resultados de la 2.14 ni abre otra actividad. El cuaderno es `notebooks/05_comparacion_cientifica_zhu.ipynb`. El informe es `docs/estudio_comparativo_zhu_2_15.md`. La matriz es `docs/matriz_evidencias_2_15.csv`. Una partición nueva del mismo Excel no se presenta como validación externa.
