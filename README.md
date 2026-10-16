@@ -20,7 +20,7 @@ Objetivos de aprendizaje:
 - Contar observaciones completas y distinguirlas de un resultado físico ya validado.
 - Dejar el trabajo en Git para continuarlo desde otro equipo Fedora.
 
-Objetivo científico de esta etapa: describir la hoja `50psig` del archivo de mapping y dejar pendiente el diccionario de variables. La línea de investigación más amplia es el modelado híbrido de ESP, que combina relaciones físicas con análisis de datos. Este laboratorio todavía está en la exploración inicial.
+Objetivo científico de esta etapa: describir la hoja `50psig` del archivo de mapping y cerrar el diccionario de variables con la tesis y los artículos. La línea de investigación más amplia es el modelado híbrido de ESP, que combina relaciones físicas con análisis de datos. Este laboratorio todavía está en la exploración inicial.
 
 ## Tecnologías
 
@@ -44,17 +44,17 @@ El kernel es el proceso de Python que ejecuta las celdas del cuaderno. Cada comp
 
 ```text
 ESP-DataScience/
-??? archive/                  el ZIP original se guarda aquí solo en cada equipo
-??? data/raw/                 Excel de trabajo
-??? data/processed/           reservado
-??? docs/                     bitácora y guía de sincronización
-??? notebooks/                cuadernos
-??? results/figures/          reservado
-??? results/models/           reservado; Git ignora los modelos generados
-??? src/                      reservado
-??? requirements-direct.txt   paquetes que el laboratorio pide instalar
-??? requirements.txt          versiones completas usadas en el equipo de trabajo
-??? .venv/                    entorno local; no está en Git
+- archive/                  el ZIP original se guarda aquí solo en cada equipo
+- data/raw/                 Excel de trabajo
+- data/processed/           reservado
+- docs/                     bitácora, diccionario 2.11 y guía de sincronización
+- notebooks/                cuadernos
+- results/figures/          reservado
+- results/models/           reservado; Git ignora los modelos generados
+- src/                      reservado
+- requirements-direct.txt   paquetes que el laboratorio pide instalar
+- requirements.txt          versiones completas usadas en el equipo de trabajo
+- .venv/                    entorno local; no está en Git
 ```
 
 ## Instalación en Fedora
@@ -140,26 +140,19 @@ Resultados verificados en esa hoja:
 | Pares a velocidad 3500 | 124 |
 | Columnas completamente vacías | 3, 6, 9, 12, 15 |
 
-Un par numérico completo es una fila en la que el caudal y `DP2-3` se leen como números a la vez. No equivale, por sí solo, a una medición físicamente validada ni a un experimento independiente. Las unidades de esas columnas siguen sin asignarse.
+Un par numérico completo es una fila en la que el caudal y `DP2-3` se leen como números a la vez. No equivale, por sí solo, a una medición físicamente validada ni a un experimento independiente. El diccionario de la actividad 2.11 está en `docs/diccionario_variables.md`: caudal en bpd, `DP2-3` en psi y `GVF0` en porcentaje, con la certeza que cada entrada declara.
 
 El detalle está en `docs/progreso_investigacion.md`.
 
 ## Plan de investigación
 
-La siguiente actividad, todavía pendiente, es:
+La actividad 2.11 está cerrada. El diccionario está en `docs/diccionario_variables.md`. Qmax de la TE-2700 a 3500 rpm es 4900 bpd. `Flow rate` se lee en bpd, `DP2-3` en psi y `GVF0` en porcentaje.
 
-**2.11 — Diccionario científico de variables ESP.**
+La siguiente actividad, todavía sin hacer, es:
 
-Hay que leer el artículo para establecer:
+**2.12 — Tabla larga de mapping y tabla larga de surging, por separado.**
 
-- Significado y unidades de `Qgd`.
-- Definición y unidades de `DP2-3`.
-- Unidades de `Flow rate`.
-- Unidades de `rotary speed`.
-- Significado experimental de `50psig`.
-- Condiciones del ensayo `Single Phase`.
-
-Después podrá decidirse cómo inspeccionar el resto de las hojas y cómo armar tablas en `data/processed`. Este repositorio no incluye modelos predictivos.
+El plan está en `docs/plan_implementacion.md`. Este repositorio no incluye modelos entrenados.
 
 Para pasar el trabajo de un Fedora al otro, siga `docs/sincronizacion_fedora.md`. GitHub no copia los archivos solo por tener el repositorio abierto: hace falta `git push` al terminar y `git pull` al empezar.
 
@@ -167,7 +160,7 @@ Para pasar el trabajo de un Fedora al otro, siga `docs/sincronizacion_fedora.md`
 
 - Las actividades 2.3 a 2.10 no se generalizan a `100psig`, `150psig` ni al libro de surging.
 - Surging, hoja `50psig`, tiene 9 columnas, no 18.
-- No se han definido las unidades ni el significado físico de los rótulos.
+- La tesis fija las unidades de trabajo en bpd y psi. Los rótulos `DP2-3` y `GVF0` no aparecen en esa tesis; su enlace está declarado como interpretación.
 - El gráfico del primer cuaderno es didáctico.
 - Los entornos `.venv` de cada computador son independientes.
 - Este repositorio no incluye una licencia de software. La licencia CC BY 4.0 se aplica a los datos experimentales citados arriba, no al código ni a los cuadernos.

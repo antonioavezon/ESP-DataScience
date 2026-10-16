@@ -165,24 +165,29 @@ Comprobación programática sobre Mapping/`50psig`:
 
 Las cuatro comprobaciones coinciden con el análisis anterior. 62 + 124 = 186.
 
+## 2.11 — Diccionario científico de variables
+
+Quedó cerrado con tres fuentes locales: el artículo de 2019 (`docs/esp_gassy_flow_paper.pdf`), Zhu et al. (2018b) en `ProjectESP/Papers/Zhu 2018b.pdf` y la tesis de Zhu (2017) en `ProjectESP/Papers/Thesis/Two-phase/Zhu 2017 (PhD thesis).pdf`. El diccionario, la auditoría, la matriz de modelos, la propuesta y el plan están en `docs/`. El cuaderno `notebooks/01_exploracion_inicial.ipynb` continúa después de la actividad 2.10. No se modificaron los Excel ni se entrenaron modelos. Las cifras de la actividad 2.10 no cambiaron.
+
+Lectura de trabajo:
+
+- Qgd = QG / Qmax, adimensional. Qmax de la TE-2700 a 3500 rpm es 4900 bpd.
+- QBEP a 3500 rpm es 2700 bpd, el mismo punto que 0,005 m³/s. Surging usa 0,75 QBEP, QBEP y 1,25 QBEP.
+- `Flow rate` se lee como QL en bpd.
+- `DP2-3` se lee como el incremento de presión de la etapa 3, en psi. El rótulo no está en la tesis. La certeza es media.
+- `GVF0` se lee como la fracción de gas de admisión en porcentaje. El sufijo 0 no está definido.
+- Psep de las hojas: 50, 100 y 150 psig.
+- A 1800 rpm el mapping usa Qgd = 0,005, 0,01 y 0,015. A 3500 rpm usa Qgd = 0,01, 0,02, 0,03, 0,04 y 0,05. Esa regla asigna la velocidad de Mapping/`100psig` y Mapping/`150psig`, cuyas celdas están vacías.
+
 ## Pendiente
 
-### 2.11 — Construcción del diccionario científico de variables mediante el artículo original
+### 2.12 — Tabla larga, en dos archivos
 
-Hay que resolverlo leyendo `docs/esp_gassy_flow_paper.pdf`. Todavía no está investigado de forma documental:
-
-- Significado y unidades de Qgd.
-- Definición y ubicación de DP2-3.
-- Unidades de Flow rate.
-- Unidades de rotary speed.
-- Ubicación de la presión identificada por 50psig.
-- Condiciones del experimento Single Phase.
-
-Esas definiciones no se completan por analogía ni por el nombre de la hoja.
+Armar la tabla de mapping y la de surging por separado, con las unidades del diccionario. No se apilan, no se entrenan modelos y no se modifica `data/raw`. El detalle está en `docs/plan_implementacion.md`.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10
 
 Los Excel de trabajo son copia, con otro nombre, del conjunto de Jianjun Zhu en Mendeley Data, DOI 10.17632/fk2b4r69bs.1, licencia CC BY 4.0. El SHA-256 de `data/raw/mapping.xlsx` y de `data/raw/surging.xlsx` coincide con el de los archivos originales. El contenido no se modificó para obtener las cifras de esta bitácora.
 
-El PDF del artículo no forma parte del repositorio Git. Sigue siendo la fuente pendiente de la actividad 2.11.
+El PDF de 2019 no forma parte del repositorio Git. La actividad 2.11 lo usó junto con la tesis de 2017 y el artículo de 2018b, que están en `ProjectESP` y tampoco se publican desde este laboratorio.
