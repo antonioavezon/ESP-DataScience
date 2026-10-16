@@ -195,9 +195,11 @@ Después de publicar la actividad 2.12 se copiaron sus funciones a `src/esp_data
 
 ## 2.13 — Estudio científico y selección de modelos
 
-Quedó cerrada como investigación metodológica, sin entrenar modelos y sin resultados de predicción. El documento es `docs/estudio_modelos_2_13.md`. Se usaron el diccionario, la normalización, la matriz previa y los textos locales de Zhu et al. (2019), Zhu et al. (2018) y la tesis de 2017.
+Quedó cerrada como selección metodológica, sin entrenar modelos y sin resultados de predicción. La síntesis es `docs/estudio_modelos_2_13.md`. El registro reproducible es `notebooks/03_seleccion_modelos.ipynb`, ejecutado de principio a fin en este entorno. Se usaron el diccionario, la normalización, la matriz previa, los textos locales de Zhu y un complemento bibliográfico de fichas verificadas.
 
-Hay 30 curvas en mapping y 18 en surging. No se apilan. Pasan a una fase experimental posterior, en este orden: regresión lineal, polinomio con cresta, recta por condición de gas, cociente respecto de la curva de agua solo en mapping, y bosque aleatorio. El modelo mecanicista de fronteras, el híbrido, las redes y la simulación de fluidos quedan pospuestos. No hay modelo ganador. Los Excel y los CSV no se modificaron.
+Hay 30 curvas en mapping y 18 en surging. No se apilan. Las curvas de agua bajan al subir el caudal. En 422 de 434 pares cercanos, la presión con gas queda por debajo del agua. En surging, las 18 curvas terminan más bajas de lo que empiezan. Esos hechos no identifican un régimen ni eligen un ganador.
+
+Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado 2 con cresta, recta por la condición de gas y un bosque aleatorio poco profundo. En mapping se añade el cociente respecto de la curva de agua. No hay candidato principal único: la nota de la recta por condición y la del polinomio difieren en 0,15, y el primer puesto cambia si se da más peso a la validación. El mecanicista, el híbrido, las redes y la simulación de fluidos quedan pospuestos. Los Excel y los CSV no se modificaron.
 
 ## Pendiente
 

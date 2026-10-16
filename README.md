@@ -51,6 +51,7 @@ ESP-DataScience/
 - notebooks/00_validacion_entorno.ipynb
 - notebooks/01_exploracion_inicial.ipynb
 - notebooks/02_normalizacion.ipynb
+- notebooks/03_seleccion_modelos.ipynb
 - src/esp_datascience/      copia reutilizable de las funciones de normalización
 - tests/                    pruebas de esa copia, con unittest
 - results/figures/          reservado
@@ -115,6 +116,7 @@ Orden recomendado:
 1. `notebooks/00_validacion_entorno.ipynb`
 2. `notebooks/01_exploracion_inicial.ipynb`
 3. `notebooks/02_normalizacion.ipynb`
+4. `notebooks/03_seleccion_modelos.ipynb`
 
 Cada cuaderno nuevo se agrega al final de esta lista, con el número siguiente. Ejecute las celdas de arriba hacia abajo. Los cuadernos `01` y `02` buscan `data/raw/mapping.xlsx` y `data/raw/surging.xlsx` subiendo desde el directorio de trabajo hasta la raíz del laboratorio.
 
@@ -147,6 +149,7 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `00_validacion_entorno.ipynb` | Intérprete, versiones y un gráfico con datos ficticios |
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
+| `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -172,7 +175,7 @@ La actividad 2.11 está cerrada. El diccionario está en `docs/diccionario_varia
 
 La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping_long.csv` y `data/processed/surging_long.csv`. El procedimiento está en `docs/normalizacion_datos.md`.
 
-La actividad 2.13 también está cerrada, y solo como estudio de selección. El documento es `docs/estudio_modelos_2_13.md`. No se entrenó ningún modelo y no hay un modelo ganador.
+La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
 La siguiente actividad, todavía sin hacer y sin autorización, es:
 

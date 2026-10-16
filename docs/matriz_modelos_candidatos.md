@@ -97,13 +97,14 @@ Las entradas de trabajo son el caudal de líquido en bpd, una variable de gas (Q
 
 ## Lectura de conjunto
 
-La actividad 2.13 no ajustó esta lista. El estudio completo está en `docs/estudio_modelos_2_13.md`. Las tablas de la actividad 2.12 ya existen y siguen separadas.
+La actividad 2.13 no ajustó esta lista. La síntesis está en `docs/estudio_modelos_2_13.md`. Las notas, los pesos y la sensibilidad están calculados en `notebooks/03_seleccion_modelos.ipynb`. La puntuación es idoneidad metodológica, no exactitud.
 
-Decisión metodológica, no un resultado de predicción:
+Decisión de cierre, no un resultado de predicción:
 
-- Pasan a la actividad 2.14, si se autoriza y en este orden: regresión lineal, polinomio con cresta, recta separada por la condición de gas, cociente respecto de la curva de agua solo en mapping, y bosque aleatorio.
-- El boosting de árboles y la regresión de vectores de soporte quedan condicionales, detrás del bosque y del polinomio.
-- El modelo híbrido, la red densa, el modelo mecanicista como predictor de `dp2_3_psi`, la red informada por ecuaciones y la simulación de fluidos quedan pospuestos.
-- Sigue descartado unir mapping con surging y repartir al azar los puntos de una misma curva.
+- Predictivos para la 2.14, en los dos protocolos: regresión lineal, polinomio de grado 2 con cresta, recta por la condición de gas y bosque aleatorio poco profundo.
+- Referencia semiempírica solo en mapping: cociente respecto de la curva de agua. No es el Np de Zhu et al. (2018).
+- No hay candidato principal único. Con los pesos propuestos, la recta por condición saca 3,40 y el polinomio 3,25. La regla pedía una diferencia mayor que 0,15. Al pesar más la validación, el primer elegible es la recta global.
+- Pospuestos: boosting, vectores de soporte, modelo aditivo, proceso gaussiano, red densa, otra variante de árboles, mecanicista como predictor de psi, híbrido, red informada y CFD.
+- Descartados en esta etapa: unir mapping con surging, repartir al azar los puntos de una curva y usar las leyes de afinidad como modelo del gas. La afinidad solo se usó como diagnóstico de las curvas de agua.
 
-No hay modelo ganador. La actividad 2.14 no está iniciada.
+La actividad 2.14 no está iniciada.

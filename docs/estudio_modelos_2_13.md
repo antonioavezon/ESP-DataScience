@@ -13,7 +13,7 @@ Las frases se marcan así:
 
 El problema es predecir el incremento de presión de la etapa 3 de una ESP TE-2700 cuando circulan agua y aire, en la serie sin isopropanol. La magnitud de trabajo es `dp2_3_psi`. Mapping y surging no describen el mismo experimento: el primero fija un caudal de gas adimensional y varía el líquido; el segundo fija una fracción del caudal de mejor eficiencia y registra la fracción de gas de admisión. Por eso no comparten un solo modelo.
 
-Se revisaron familias estadísticas, de curvas de bomba, mecanicistas, de aprendizaje automático y híbridas. Con 30 curvas de mapping y 18 de surging, y sin la geometría de la etapa en los Excel, el conjunto que pasa a la actividad 2.14 es corto: regresión lineal, polinomio con penalización de cresta, un modelo lineal separado por la condición de gas, el cociente entre la presión bifásica y la curva de agua de la misma hoja y velocidad, y un bosque aleatorio. El modelo mecanicista de Zhu et al. (2019), el híbrido física–aprendizaje automático, las redes informadas por ecuaciones y la simulación numérica quedan pospuestos. No hay un ganador.
+Se revisaron familias estadísticas, de curvas de bomba, mecanicistas, de aprendizaje automático y híbridas. El cuaderno `notebooks/03_seleccion_modelos.ipynb` exploró los CSV sin entrenar. Con 30 curvas de mapping y 18 de surging, y sin la geometría de la etapa en los Excel, pasan a la actividad 2.14 cuatro predictivos: regresión lineal, polinomio de grado 2 con cresta, recta por la condición de gas y un bosque aleatorio poco profundo. En mapping se añade el cociente respecto de la curva de agua, como referencia semiempírica y no como Np. El mecanicista de Zhu et al. (2019), el híbrido, las redes y la simulación numérica quedan pospuestos. No hay un candidato principal único ni un ganador de exactitud.
 
 ## 2. Introducción
 
@@ -127,6 +127,17 @@ QBEP a 3500 rpm es 2700 bpd en la tesis y 0,005 m³/s en Zhu et al. (2018). Qmax
 - La geometría, la temperatura de cada fila, la densidad de la mezcla y el caudal de fuga no están en los Excel.
 - La velocidad de dos hojas de mapping no es una medición de la celda.
 - El rótulo `DP2-3` y el sufijo de `GVF0` no aparecen en la tesis.
+
+### Lo que el cuaderno 03 midió
+
+**Comprobado en esa ejecución**, sin ajustar modelos. Las huellas de los Excel y de los CSV coincidieron con las publicadas. Siguen siendo 570 y 387 filas, 30 y 18 curvas, y 186 pares en mapping/`50psig`.
+
+- Las 6 curvas de agua bajan al aumentar el caudal: pendiente local mediana negativa y ningún cambio de signo.
+- De las 24 curvas de mapping con gas, 23 tienen pendiente mediana negativa y las 24 cambian de signo al menos una vez. El cambio de signo no se etiqueta como régimen.
+- En las 18 curvas de surging, el punto de mayor `GVF0` tiene menos presión que el de menor `GVF0`. Nueve curvas cambian de signo.
+- Con una tolerancia fijada de antemano, 80 bpd o el 15 % del caudal, se emparejaron 434 puntos con gas con agua de la misma hoja y velocidad. En 422 pares, el 97,2 %, la presión con gas es menor. La mediana de la diferencia es −2,15 psi: −1,01 psi a 1800 rpm y −3,28 psi a 3500 rpm. No es la presión normalizada de Zhu et al. (2018).
+- En 52 pares de agua con caudal aproximadamente semejante, la mediana de la razón de presiones 1800/3500 es 0,268, frente a $(1800/3500)^2 = 0,264$. Es un diagnóstico de semejanza del líquido. En dos hojas la velocidad es asignación del diseño. No se extiende al gas.
+- Qgd = 0,005 y 0,015 solo están en el diseño de 1800 rpm. Varias curvas de agua a 3500 rpm empiezan por encima de 1000 bpd, así que el emparejamiento no cubre el caudal más bajo.
 
 ## 7. Fundamentos de las familias de modelos
 
@@ -264,15 +275,17 @@ Si nadie cumple la primera condición, la regresión lineal sigue siendo la refe
 
 ## 10. Resultados de la selección metodológica
 
-No hay resultados de predicción. El resultado de esta actividad es la lista y el orden.
+No hay resultados de predicción. El cuaderno 03 puntúa idoneidad metodológica, no exactitud. Los pesos iniciales son 25 % compatibilidad, 25 % fundamento físico, 20 % forma observada, 15 % validación, 10 % interpretabilidad y 5 % simplicidad de cómputo. Una compatibilidad 0 excluye al modelo aunque el resto sea alto. La escala va de 0 a 4.
 
-Orden propuesto para la actividad 2.14, en cada protocolo por separado:
+Con esos pesos, entre los cuatro predictivos que pasan la barra de forma y de validación, la recta por condición obtiene 3,40 y el polinomio de grado 2 con cresta 3,25. La diferencia es 0,15 y la regla pedía más de 0,15 para nombrar un principal. Al subir el peso de la validación, el primer elegible pasa a ser la recta global. Con los otros pesos, el primer elegible es el cociente de agua, que es otra clase de objeto. **Decisión:** no hay candidato predictivo principal único.
 
-1. Regresión lineal múltiple. Es el piso.
-2. Polinomio con cresta. Pregunta si la curvatura, sin un quiebre explícito, basta.
-3. Regresión lineal separada por la condición de gas ya escrita. Pregunta si el quiebre que la literatura asocia al régimen aparece como un cambio de recta entre condiciones.
-4. En mapping, el cociente respecto de la curva de agua de la misma hoja y velocidad. Es la referencia semiempírica que estos archivos sí permiten. No usa la densidad.
-5. Bosque aleatorio. Entra último para que su error se compare con los cuatro anteriores y no los reemplace de antemano.
+Pasan a la actividad 2.14, si se autoriza. El orden de implementación empieza por la referencia, no por la nota:
+
+1. Regresión lineal múltiple. Es el piso que los demás tienen que mejorar.
+2. Polinomio de grado 2 con cresta. El grado queda fijado antes de ver un error.
+3. Regresión lineal separada por la condición de gas ya escrita.
+4. En mapping, el cociente respecto de la curva de agua de la misma hoja y velocidad. No usa la densidad y no se llama con el símbolo de 2018.
+5. Bosque aleatorio poco profundo. Es el único flexible de esta ronda. Entra para comprobar si los cambios de signo aportan predicción.
 
 Durante esas pruebas, un candidato se deja de lado si su error por curvas no mejora el de la regresión lineal, si el sesgo cambia de manera sistemática con la velocidad o la presión, o si la mejora desaparece al quitar las filas de velocidad asignada por el diseño. Esas reglas no se han aplicado: no hay ajustes.
 
@@ -291,7 +304,7 @@ La velocidad asignada por el diseño es la decisión más frágil de mapping. El
 ## 12. Limitaciones
 
 - No se entrenó ningún modelo. Las métricas de la sección 8 están definidas y no calculadas.
-- No se revisó de forma sistemática la literatura posterior a 2019. Las familias generales se apoyan en sus artículos fundacionales, no en un censo de aplicaciones a ESP.
+- No se revisó de forma sistemática la literatura posterior a 2019. El cierre añadió fichas verificadas: Roberts et al. (2017), Varma y Simon (2006), Cawley y Talbot (2010), el resumen de Zhu y Zhang (2018) y el resumen de Zhu, H. et al. (2025). No se copiaron sus errores ni sus ecuaciones de ajuste.
 - No se releyeron las correlaciones numéricas de Lea y Bearden (1982) ni de Zhou y Sachdeva (2010). Solo se usó el lugar que Zhu et al. (2019) les da como antecedentes.
 - La certeza media de `dp2_3_psi` y de `gvf0_porcentaje` limita cualquier modelo que se ajuste después. Un error pequeño no convierte el rótulo en una cita de la tesis.
 - El cociente respecto de la curva de agua requiere emparejar caudales. Cómo se interpola esa curva es una decisión de la 2.14, no un resultado de esta.
@@ -299,7 +312,7 @@ La velocidad asignada por el diseño es la decisión más frágil de mapping. El
 
 ## 13. Conclusiones
 
-El objeto de predicción es el incremento de presión de la etapa 3, en psi, con la certeza media ya declarada. Mapping y surging se modelan por separado. La actividad 2.14, si se autoriza, debe empezar por la regresión lineal, seguir con el polinomio penalizado y con la recta por condición de gas, añadir en mapping el cociente respecto de la curva de agua y solo después probar un bosque aleatorio. El modelo mecanicista, el híbrido, la red informada por ecuaciones y la simulación de fluidos no forman parte de esa primera comparación. No hay modelo ganador.
+El objeto de predicción es el incremento de presión de la etapa 3, en psi, con la certeza media ya declarada. Mapping y surging se modelan por separado. La exploración muestra curvas de agua monótonas a la baja, una caída de la presión con gas respecto del agua cercana en caudal, y cambios de signo que no se identifican con un régimen. La actividad 2.14, si se autoriza, implementa la recta, el polinomio de grado 2 con cresta, la recta por condición y un bosque poco profundo; en mapping añade el cociente respecto del agua. No hay candidato principal único. El mecanicista, el híbrido, las redes y la simulación de fluidos no entran en esa comparación. No hay modelo ganador. El registro reproducible es `notebooks/03_seleccion_modelos.ipynb`.
 
 ## 14. Recomendaciones para la fase experimental
 
@@ -353,12 +366,20 @@ Zhou, D. y Sachdeva, R. (2010). Simple model of electric submersible pump in gas
 
 Zhu, J. (2017). *Experiments, CFD Simulation and Modeling of ESP Performance under Gassy Conditions*. Tesis doctoral, The University of Tulsa. Archivo local: `ProjectESP/Papers/Thesis/Two-phase/Zhu 2017 (PhD thesis).pdf`.
 
-Zhu, J. y Zhang, H.-Q. (2018). A review of experiments and modeling of gas-liquid flow in electrical submersible pumps. *Energies*, 11, 180.
+Zhu, J. y Zhang, H.-Q. (2018). A review of experiments and modeling of gas-liquid flow in electrical submersible pumps. *Energies*, 11(1), 180. https://doi.org/10.3390/en11010180. Durante el cierre se leyó el resumen en la página del editor.
 
 Zhu, J., Zhu, H., Wang, Z., Zhang, J., Cuamatzi-Melendez, R., Martinez Farfan, J. A. y Zhang, H.-Q. (2018). Surfactant effect on air/water flow in a multistage electrical submersible pump (ESP). *Experimental Thermal and Fluid Science*, 98, 95–111. Archivo local: `ProjectESP/Papers/Zhu 2018b.pdf`.
 
 Zhu, J., Zhu, H., Zhang, J. y Zhang, H.-Q. (2019). A numerical study on flow patterns inside an electrical submersible pump (ESP) and comparison with visualization experiments. *Journal of Petroleum Science and Engineering*, 173, 339–350.
 
 Zhu, J., Zhang, J., Cao, G., Zhao, Q., Peng, J., Zhu, H. y Zhang, H.-Q. (2019). Modeling flow pattern transitions in electrical submersible pump under gassy flow conditions. *Journal of Petroleum Science and Engineering*, 180, 471–484. https://doi.org/10.1016/j.petrol.2019.05.059. Archivo local: `docs/esp_gassy_flow_paper.pdf`.
+
+Cawley, G. C. y Talbot, N. L. C. (2010). On over-fitting in model selection and subsequent selection bias in performance evaluation. *Journal of Machine Learning Research*, 11, 2079–2107. http://jmlr.org/papers/v11/cawley10a.html. Se leyó el resumen de la ficha.
+
+Roberts, D. R., Bahn, V., Ciuti, S., Boyce, M. S., Elith, J., Guillera-Arroita, G., Hauenstein, S., Lahoz-Monfort, J. J., Schröder, B., Thuiller, W., Warton, D. I., Wintle, B. A., Hartig, F. y Dormann, C. F. (2017). Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure. *Ecography*, 40(8), 913–929. https://doi.org/10.1111/ecog.02881. Se leyó el resumen.
+
+Varma, S. y Simon, R. (2006). Bias in error estimation when using cross-validation for model selection. *BMC Bioinformatics*, 7, 91. https://doi.org/10.1186/1471-2105-7-91. Se leyó el resumen.
+
+Zhu, H., Yu, H., Sun, Q., Wang, Q., Jing, H. y Abdikadyrov, R. (2025). Deep learning-based performance prediction of electric submersible pumps under viscous and gas–liquid flow conditions. *Machines*, 13(2), 135. https://doi.org/10.3390/machines13020135. Se leyeron la página del editor y el resumen. No usa estos CSV.
 
 Zhu, J. (2019). Datos asociados. *Data for: Modeling Flow Pattern Transitions in Electrical Submersible Pump under Gassy Flow Conditions*. Mendeley Data, versión 1. https://doi.org/10.17632/fk2b4r69bs.1. Licencia CC BY 4.0.

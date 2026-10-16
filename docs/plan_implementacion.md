@@ -1,6 +1,6 @@
 # Plan de las etapas siguientes
 
-La actividad 2.11 queda cerrada. El diccionario está en `docs/diccionario_variables.md`. La actividad 2.12 también queda cerrada: las tablas están en `data/processed/` y el procedimiento en `docs/normalizacion_datos.md`. La actividad 2.13 queda cerrada como estudio de selección, en `docs/estudio_modelos_2_13.md`. No hay modelos entrenados.
+La actividad 2.11 queda cerrada. El diccionario está en `docs/diccionario_variables.md`. La actividad 2.12 también queda cerrada: las tablas están en `data/processed/` y el procedimiento en `docs/normalizacion_datos.md`. La actividad 2.13 queda cerrada como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md` y la exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No hay modelos entrenados.
 
 ## 2.12 — Tabla larga, en dos archivos
 
@@ -10,8 +10,10 @@ Las mismas funciones quedaron copiadas en `src/esp_datascience/`. El cuaderno no
 
 ## 2.13 — Estudio científico y selección de modelos
 
-Hecho, sin entrenamiento. El documento es `docs/estudio_modelos_2_13.md`. Mapping y surging siguen separados. La lista que pasaría a una fase experimental, en orden, es la regresión lineal, el polinomio con cresta, la recta por condición de gas, el cociente respecto de la curva de agua en mapping y el bosque aleatorio. No se declaró un modelo superior. El híbrido física–aprendizaje automático queda pospuesto.
+Hecho, sin entrenamiento. El cuaderno 03 comprobó las huellas, las 30 y 18 curvas, la forma de las curvas y una matriz de idoneidad con pesos y sensibilidad. No hay candidato predictivo principal único.
+
+Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de grado 2 con cresta, recta por la condición de gas y bosque aleatorio poco profundo. En mapping se añade el cociente respecto de la curva de agua, sin llamarlo con el símbolo normalizado de 2018. Quedan pospuestos el boosting, los vectores de soporte, el modelo aditivo, el proceso gaussiano, las redes, el mecanicista como predictor de psi, el híbrido y la simulación de fluidos.
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-No está iniciada. Solo empieza con autorización expresa. Comprende implementar, ajustar y comparar los modelos ya elegidos, con validación por curvas completas, y recién entonces decir si alguno es más adecuado. No forma parte de lo ya hecho.
+No está iniciada. Solo empieza con autorización expresa. Implementaría únicamente la lista anterior, con validación por curvas completas, MAE en psi como métrica principal y la repetición de mapping sin la velocidad asignada por el diseño. Recién entonces se puede decir si alguno es más exacto. Si ninguno supera a la recta con la regla del cuaderno 03, la recta sigue siendo el informe.
