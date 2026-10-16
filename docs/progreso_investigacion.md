@@ -100,7 +100,7 @@ Inspección de las columnas **[0, 13, 14, 16, 17]**:
 - La columna 16 contiene el rótulo intermedio `Qgd=0.05`, el nombre `Flow rate` y después valores numéricos.
 - La columna 17 contiene el nombre `DP2-3` y después valores numéricos.
 
-Las unidades de 1800 y 3500 no se asignan aquí. Dependen de la actividad 2.11.
+Esta actividad no asigna la unidad. La actividad 2.11, ya cerrada, la fija en rpm.
 
 ## 2.7 — Estructura vertical
 
