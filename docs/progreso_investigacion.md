@@ -205,7 +205,7 @@ Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado
 
 ### 2.14 — Desarrollo y evaluación experimental de modelos
 
-Fase A en cierre metodológico, sin entrenamiento y sin resultados predictivos. El protocolo `2.14-A` está en `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` y en `src/esp_datascience/protocolo.py`. Hay 30 curvas de mapping y 18 de surging, en tres pliegues cada una, sin partir una curva. La fase B no está iniciada.
+Fase A congelada en `2.14-A` y fase B ejecutada solo para la recta y el polinomio de grado 2 con cresta. El protocolo sigue en `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` y en `src/esp_datascience/protocolo.py`. Hay 30 curvas de mapping y 18 de surging, sin partir una curva. El MAE por curva de la recta es 3,999 psi en mapping y 2,312 psi en surging; el del polinomio es 1,364 psi y 1,114 psi. No hay ganador. La fase C no está iniciada. El detalle está en `docs/resultados_modelos_2_14.md`.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

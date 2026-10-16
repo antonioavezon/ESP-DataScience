@@ -16,8 +16,8 @@ Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de g
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-Autorizada. La fase A está en cierre metodológico. No hay modelos entrenados.
+Autorizada. La fase A sigue congelada en `2.14-A`. La fase B ya estimó la recta y el polinomio de grado 2 con cresta, sin cambiar los pliegues. No hay un ganador de la actividad.
 
-El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` fija tres pliegues por curvas completas, con anillo interno. Mapping reserva 10 curvas por pliegue y surging reserva 6. Cada pliegue conserva las dos velocidades, las tres presiones y las condiciones del protocolo en entrenamiento y en prueba. La versión congelada es `2.14-A`: alcance, métrica principal (MAE en psi con igual peso por curva), RMSE, sesgo, comparación pareada y el tratamiento de Qgd ausente. Un cambio posterior es una modificación metodológica.
+El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` conserva los tres pliegues por curvas completas. Mapping reserva 10 curvas por pliegue y surging reserva 6. El informe numérico es `docs/resultados_modelos_2_14.md`. En estas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging. El resultado es provisional: el sesgo aún cambia de signo, no se repitió la velocidad de diseño y faltan los otros modelos.
 
-La fase B no está iniciada. Cuando se autorice, estimará la recta y el polinomio de grado 2 con cresta sobre esos cortes, sin cambiarlos. Si ningún modelo supera a la recta con la regla del cuaderno 03, la recta sigue siendo el informe.
+La fase C no está iniciada. Corresponden a ella la recta por condición, el bosque poco profundo y, en mapping, el cociente respecto del agua.
