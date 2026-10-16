@@ -114,8 +114,9 @@ Orden recomendado:
 
 1. `notebooks/00_validacion_entorno.ipynb`
 2. `notebooks/01_exploracion_inicial.ipynb`
+3. `notebooks/02_normalizacion.ipynb`
 
-Ejecute las celdas de arriba hacia abajo. El segundo cuaderno busca `data/raw/mapping.xlsx` y `data/raw/surging.xlsx` subiendo desde el directorio de trabajo hasta la raíz del laboratorio.
+Cada cuaderno nuevo se agrega al final de esta lista, con el número siguiente. Ejecute las celdas de arriba hacia abajo. Los cuadernos `01` y `02` buscan `data/raw/mapping.xlsx` y `data/raw/surging.xlsx` subiendo desde el directorio de trabajo hasta la raíz del laboratorio.
 
 El primer cuaderno dibuja un gráfico de práctica. Esos puntos son ficticios y lo dicen el título y los ejes.
 
