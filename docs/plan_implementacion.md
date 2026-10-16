@@ -16,12 +16,16 @@ Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de g
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-Autorizada y no cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: las 26 pruebas de esa fase terminaron correctamente y el cuaderno se ejecutó completo con nbconvert. No se cambiaron los pliegues ni la métrica. En esas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging.
+Cerrada el 16 de octubre de 2026, con las fases A, B, C, D y E completadas y verificadas. La fase A permanece congelada en `2.14-A`. La fase B está cerrada: las 26 pruebas de esa fase terminaron correctamente y el cuaderno se ejecutó completo con nbconvert. No se cambiaron los pliegues ni la métrica. En esas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging.
 
 La fase C está desarrollada. Estimó la recta por condición (M3), el bosque con profundidad y hoja mínima elegidas por el MAE interno (M4) y el cociente respecto del agua de entrenamiento (M5). M5 solo cubre 5 de las 30 curvas de mapping.
 
 Las fases A a D están cerradas. La fase D comparó M1–M4 en todas las curvas y M5 solo en su subconjunto. El intervalo bootstrap, con 10.000 réplicas y la semilla 214, describe el remuestreo de estas curvas. M4 tiene menor MAE. M1 y M3 conservan la caída del agua. La regla de 2.13 no nombra un superior.
 
-La fase E está desarrollada y queda para revisión de cierre de la actividad. No reentrena. El informe autónomo es `docs/informe_final_actividad_2_14.md`. No hay ganador único ni modelo híbrido. La actividad 2.14 no se declara cerrada.
+La fase E está desarrollada. No reentrena. El informe autónomo es `docs/informe_final_actividad_2_14.md`. No hay ganador único ni modelo híbrido. La actividad 2.14 está cerrada.
 
 El cuaderno fuente es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. La ejecución de la fase C está en `resultados/04_ejecucion_fase_c.ipynb` y la de la fase D, de la A a la D, en `resultados/04_ejecucion_fase_d.ipynb`. El informe acumulado es `docs/resultados_modelos_2_14.md`.
+
+## 2.15 — Comparación con el conocimiento publicado por Zhu
+
+Abierta el 16 de octubre de 2026 y en desarrollo. No modifica los resultados de la 2.14. El cuaderno es `notebooks/05_comparacion_cientifica_zhu.ipynb`. El informe es `docs/estudio_comparativo_zhu_2_15.md`. La matriz es `docs/matriz_evidencias_2_15.csv`. No se declara terminada.

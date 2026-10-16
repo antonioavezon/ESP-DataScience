@@ -20,7 +20,7 @@ Objetivos de aprendizaje:
 - Contar observaciones completas y distinguirlas de un resultado físico ya validado.
 - Dejar el trabajo en Git para continuarlo desde otro equipo Fedora.
 
-El laboratorio empezó por la hoja `50psig` de mapping y por el diccionario. La actividad 2.11 está cerrada, la 2.12 también, y la 2.13 quedó cerrada como selección, sin entrenamiento. La fase A de la 2.14 está congelada. La fase B está cerrada. La fase C estimó M3, M4 y la referencia parcial M5. La fase D los comparó sin nombrar un ganador. La actividad 2.14 no está cerrada. La línea más amplia sigue siendo el modelado híbrido de ESP, que aquí todavía no se implementa.
+El laboratorio empezó por la hoja `50psig` de mapping y por el diccionario. La actividad 2.11 está cerrada, la 2.12 también, y la 2.13 quedó cerrada como selección, sin entrenamiento. La fase A de la 2.14 está congelada. La fase B está cerrada. La fase C estimó M3, M4 y la referencia parcial M5. La fase D los comparó sin nombrar un ganador. La actividad 2.14 está formalmente cerrada el 16 de octubre de 2026. La actividad 2.15 está abierta y compara esos resultados con los textos de Zhu, sin implementar todavía el modelado híbrido.
 
 ## Tecnologías
 
@@ -53,6 +53,7 @@ ESP-DataScience/
 - notebooks/02_normalizacion.ipynb
 - notebooks/03_seleccion_modelos.ipynb
 - notebooks/04_entrenamiento_evaluacion_modelos.ipynb
+- notebooks/05_comparacion_cientifica_zhu.ipynb
 - src/esp_datascience/      funciones de normalización, particiones y entrenamiento de M1 y M2
 - tests/                    pruebas de esa copia, con unittest
 - results/figures/          reservado
@@ -119,6 +120,7 @@ Orden recomendado:
 3. `notebooks/02_normalizacion.ipynb`
 4. `notebooks/03_seleccion_modelos.ipynb`
 5. `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`
+6. `notebooks/05_comparacion_cientifica_zhu.ipynb`
 
 Cada cuaderno nuevo se agrega al final de esta lista, con el número siguiente. Ejecute las celdas de arriba hacia abajo. Los cuadernos `01` y `02` buscan `data/raw/mapping.xlsx` y `data/raw/surging.xlsx` subiendo desde el directorio de trabajo hasta la raíz del laboratorio.
 
@@ -152,7 +154,8 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 | `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
-| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14: fases A a E, sin ganador único |
+| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14, cerrada: fases A a E, sin ganador único |
+| `05_comparacion_cientifica_zhu.ipynb` | Actividad 2.15, abierta: comparación con Zhu |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -180,7 +183,7 @@ La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping
 
 La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
-La actividad 2.14 está autorizada y no está cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó con nbconvert. La fase C estimó la recta por condición, el bosque de profundidad limitada y, en mapping, el cociente respecto del agua donde esa referencia no usa una curva de prueba. Las fases A a D están cerradas. La fase D comparó los modelos con intervalos por curva y no nombró un ganador. La fase E reúne esa evidencia en `docs/informe_final_actividad_2_14.md` y en el capítulo 19 de `docs/resultados_modelos_2_14.md`. La actividad 2.14 queda preparada para revisión de cierre y no se declara cerrada.
+La actividad 2.14 está formalmente cerrada, con las fases A, B, C, D y E completadas y verificadas, el 16 de octubre de 2026. La fase A permanece en `2.14-A`. No hay ganador único. M4 conserva el menor MAE observado. M1 sigue como referencia interpretable, M2 como referencia no lineal y M5 como referencia parcial. El informe es `docs/informe_final_actividad_2_14.md` y el detalle, `docs/resultados_modelos_2_14.md`.
 
 **2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 
@@ -204,3 +207,14 @@ Laboratorio y cuadernos de exploración: antonioavezon (`antonio.avezon@gmail.co
 Datos experimentales: Jianjun Zhu, Mendeley Data, DOI 10.17632/fk2b4r69bs.1, licencia CC BY 4.0. El autor de este laboratorio no es el autor de esas mediciones.
 
 Artículo de referencia, no redistribuido aquí: DOI 10.1016/j.petrol.2019.05.059.
+
+
+## Actividad 2.15
+
+Abierta y en desarrollo desde el 16 de octubre de 2026. No modifica los resultados de la 2.14.
+
+- Cuaderno: `notebooks/05_comparacion_cientifica_zhu.ipynb`
+- Informe: `docs/estudio_comparativo_zhu_2_15.md`
+- Matriz: `docs/matriz_evidencias_2_15.csv`
+
+No está terminada. No implementa un modelo híbrido.

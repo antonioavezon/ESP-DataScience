@@ -1,6 +1,6 @@
 # Resultados de la actividad 2.14
 
-Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. El capítulo 18 es la fase D. El capítulo 19 es la fase E. No hay un ganador único. La actividad 2.14 queda preparada para revisión de cierre y todavía no se declara cerrada.
+Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. El capítulo 18 es la fase D. El capítulo 19 es la fase E. No hay un ganador único. La actividad 2.14 está formalmente cerrada, con las fases A, B, C, D y E completadas y verificadas, el 16 de octubre de 2026. Este cierre es documental: no cambia las cifras ni los pliegues.
 
 La fase A permanece en la versión `2.14-A`. Una segunda ejecución de `evaluar_protocolo`, sobre los CSV originales, reprodujo la tabla ya publicada. No se cambió la métrica, la rejilla de alpha, el grado ni un pliegue. El registro ejecutable es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Las funciones están en `src/esp_datascience/entrenamiento.py`.
 
@@ -439,7 +439,7 @@ M1 y M3 conservan la caída punto a punto de las seis curvas de agua. M2 y M4 no
 
 No es defendible seleccionar un ganador único. Precisión, consistencia con las curvas medidas, lectura matemática, validez de un mecanismo y generalización siguen siendo preguntas distintas.
 
-La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. La fase E no está iniciada. La actividad 2.14 no está cerrada.
+La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. Ese párrafo correspondía al cierre de la fase D. La fase E se añadió después. La actividad 2.14 está formalmente cerrada el 16 de octubre de 2026.
 
 ## 19. Fase E — Síntesis científica y conclusiones
 
@@ -524,4 +524,4 @@ Mantener M1, M2 y M4 como referencias distintas. Repetir una referencia de agua 
 
 ### E.13. Alcance del cierre de la actividad 2.14
 
-Las fases A, B, C y D quedan cerradas en el sentido de que sus reglas y sus cifras no se reabren. La fase E está desarrollada. La actividad 2.14 queda preparada para una revisión científica de cierre y no se declara cerrada en este capítulo. No se inició otra actividad.
+Las fases A, B, C y D quedan cerradas en el sentido de que sus reglas y sus cifras no se reabren. La fase E está desarrollada. La actividad 2.14 está formalmente cerrada, con las fases A, B, C, D y E completadas y verificadas, el 16 de octubre de 2026. La actividad 2.15 queda fuera de este capítulo.

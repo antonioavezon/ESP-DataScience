@@ -2,7 +2,7 @@
 
 Predicción del incremento de presión de una bomba electrosumergible en ensayos de agua y de agua con aire.
 
-Este texto resume la actividad 2.14. No es el informe integral del proyecto de un modelo híbrido de física e inteligencia artificial. No implementa ese modelo ni abre la actividad siguiente.
+Este texto resume la actividad 2.14. No es el informe integral del proyecto de un modelo híbrido de física e inteligencia artificial. No implementa ese modelo. La actividad 2.14 está formalmente cerrada, con las fases A, B, C, D y E completadas y verificadas, el 16 de octubre de 2026. El cierre no modifica las conclusiones ni las cifras de este informe. La actividad 2.15 queda fuera de este texto.
 
 ## 1. Título y propósito
 

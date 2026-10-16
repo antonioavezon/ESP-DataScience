@@ -213,7 +213,9 @@ Antes de la fase D se cerraron los libros Excel de `tests/test_normalizacion.py`
 
 Fases A, B, C y D cerradas, sin reajustar M1–M5. El intervalo del 95 % por curvas, con 10.000 réplicas y semilla 214, deja a M4 por debajo de M2 y deja a M3 frente a M1 cruzando el cero. Ese intervalo no se lee como generalización. La regla de superioridad de 2.13 no se cumple. No hay ganador único.
 
-Fase E desarrollada. Sintetiza la precisión de M4, la referencia interpretable M1, la referencia no lineal M2 y la referencia parcial M5, sin pesos nuevos y sin un modelo híbrido. El informe autónomo es `docs/informe_final_actividad_2_14.md`. La actividad 2.14 queda preparada para revisión de cierre y no se declara cerrada. No se inició otra actividad.
+Fase E desarrollada. Sintetiza la precisión de M4, la referencia interpretable M1, la referencia no lineal M2 y la referencia parcial M5, sin pesos nuevos y sin un modelo híbrido. El informe autónomo es `docs/informe_final_actividad_2_14.md`. La actividad 2.14 está formalmente cerrada, con las fases A, B, C, D y E completadas y verificadas, el 16 de octubre de 2026.
+
+La actividad 2.15 está abierta y en desarrollo. Compara, sin reentrenar, el conocimiento publicado por Zhu con los resultados de la 2.14. El cuaderno es `notebooks/05_comparacion_cientifica_zhu.ipynb`. El informe es `docs/estudio_comparativo_zhu_2_15.md`. La matriz es `docs/matriz_evidencias_2_15.csv`. No está terminada.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10
