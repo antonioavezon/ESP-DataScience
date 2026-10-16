@@ -52,6 +52,7 @@ ESP-DataScience/
 - notebooks/01_exploracion_inicial.ipynb
 - notebooks/02_normalizacion.ipynb
 - notebooks/03_seleccion_modelos.ipynb
+- notebooks/04_entrenamiento_evaluacion_modelos.ipynb
 - src/esp_datascience/      copia reutilizable de las funciones de normalización
 - tests/                    pruebas de esa copia, con unittest
 - results/figures/          reservado
@@ -117,6 +118,7 @@ Orden recomendado:
 2. `notebooks/01_exploracion_inicial.ipynb`
 3. `notebooks/02_normalizacion.ipynb`
 4. `notebooks/03_seleccion_modelos.ipynb`
+5. `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`
 
 Cada cuaderno nuevo se agrega al final de esta lista, con el número siguiente. Ejecute las celdas de arriba hacia abajo. Los cuadernos `01` y `02` buscan `data/raw/mapping.xlsx` y `data/raw/surging.xlsx` subiendo desde el directorio de trabajo hasta la raíz del laboratorio.
 
@@ -150,6 +152,7 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 | `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
+| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14, fase A: particiones por curvas, sin entrenamiento |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -179,7 +182,7 @@ La actividad 2.13 también está cerrada, y solo como selección metodológica. 
 
 La siguiente actividad, todavía sin hacer y sin autorización, es:
 
-**2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
+**2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.** La fase A, de particiones, está en el cuaderno 04 y todavía no entrena modelos.
 
 El plan está en `docs/plan_implementacion.md`. Este repositorio no incluye modelos entrenados.
 

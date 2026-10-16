@@ -205,7 +205,7 @@ Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado
 
 ### 2.14 — Desarrollo y evaluación experimental de modelos
 
-No está autorizada. Empieza solo después de revisar la actividad 2.13. Incluiría el ajuste, la validación por curvas completas, el análisis de error y, si corresponde, la elección del modelo con mejor desempeño. No se inicia con esta bitácora.
+Fase A preparada, sin entrenamiento y sin resultados predictivos. El cuaderno es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Hay 30 curvas de mapping y 18 de surging, en tres pliegues cada una, sin partir una curva. Las fases de ajuste no están hechas.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

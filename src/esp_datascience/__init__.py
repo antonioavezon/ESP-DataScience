@@ -1,7 +1,8 @@
-"""Copia reutilizable de las funciones del cuaderno de normalización.
+"""Funciones reutilizables del laboratorio.
 
-Los cuadernos siguen teniendo su propio código. Estos módulos no sustituyen
-esa lectura. Sirven para pruebas y para un uso posterior fuera del cuaderno.
+Los cuadernos siguen mostrando su propio código. Estos módulos no sustituyen
+esa lectura. La normalización reproduce la actividad 2.12. Las particiones
+de la actividad 2.14 no entrenan modelos.
 """
 
 from esp_datascience.lectura import es_numero, filas_de_franja_mapping, psep_de_hoja
@@ -13,6 +14,8 @@ from esp_datascience.normalizacion import (
     velocidad_segun_diseno,
 )
 from esp_datascience.rutas import encontrar_raiz_laboratorio, huella_sha256
+from esp_datascience.metricas import error_absoluto_medio
+from esp_datascience.particiones import SEMILLA, marcar_pliegues
 from esp_datascience.validacion import comprobar_conteos_publicados, pares_por_hoja
 
 __all__ = [
@@ -25,6 +28,9 @@ __all__ = [
     "huella_sha256",
     "normalizar_mapping",
     "normalizar_surging",
+    "SEMILLA",
+    "error_absoluto_medio",
+    "marcar_pliegues",
     "pares_por_hoja",
     "psep_de_hoja",
     "velocidad_segun_diseno",
