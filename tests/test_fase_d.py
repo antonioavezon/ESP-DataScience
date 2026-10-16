@@ -18,13 +18,19 @@ from esp_datascience.entrenamiento import evaluar_protocolo
 from esp_datascience.fase_d import (
     N_REPLICAS,
     SEMILLA_BOOTSTRAP,
+    bonferroni_posterior,
     bootstrap_conglomerados,
     bootstrap_media,
     delta_mae,
+    detalle_de_ponderacion,
+    diagnostico_sin_un_conglomerado,
     mae_por_curva,
     monotonía_de_agua,
+    notas_de_agua_bajo_umbrales,
     origen_de_velocidad,
+    pesos_efectivos,
     primeros_por_ponderacion,
+    puntuacion_de_agua,
     puntuacion_por_spearman,
     puntuacion_por_subidas_de_gas,
     resumen_delta,
@@ -134,8 +140,58 @@ class SinteticosDeLaFaseD(unittest.TestCase):
         self.assertEqual(puntuacion_por_subidas_de_gas(0), 3)
         self.assertEqual(puntuacion_por_subidas_de_gas(1), 2)
         self.assertEqual(puntuacion_por_subidas_de_gas(4), 0)
+        self.assertEqual(puntuacion_por_subidas_de_gas(1, modo="binario"), 0)
         self.assertEqual(puntuacion_por_spearman(-1.0), 3)
         self.assertEqual(puntuacion_por_spearman(-0.97), 2)
+        self.assertEqual(puntuacion_por_spearman(-0.97, cortes=(-0.999, -0.99, -0.95)), 1)
+
+    def test_retirar_un_conglomerado_no_parte_curvas(self):
+        delta = _serie([1.0, 3.0, 10.0], ["a", "b", "c"])
+        grupo = pd.Series(["g1", "g1", "g2"], index=delta.index)
+        salida = diagnostico_sin_un_conglomerado(delta, grupo).set_index("conglomerado_retirado")
+        self.assertEqual(int(salida.loc["g1", "n_curvas_retiradas"]), 2)
+        self.assertEqual(int(salida.loc["g1", "n_curvas_restantes"]), 1)
+        self.assertAlmostEqual(float(salida.loc["g1", "media_restante_psi"]), 10.0)
+        self.assertIn("posterior", salida.loc["g1", "caracter"])
+        aviso = bootstrap_conglomerados(delta, grupo, n_replicas=1000, semilla=7)
+        self.assertTrue(aviso["base_limitada"])
+
+    def test_un_umbral_posterior_cambia_la_nota_sin_cambiar_el_paso(self):
+        agua = pd.DataFrame(
+            {
+                "subidas_M2": [2],
+                "mayor_subida_M2": [5.5],
+                "subidas_M4": [4],
+                "mayor_subida_M4": [11.0],
+            }
+        )
+        self.assertEqual(puntuacion_de_agua(agua, "M2"), 1)
+        self.assertEqual(puntuacion_de_agua(agua, "M4"), 0)
+        notas = notas_de_agua_bajo_umbrales(agua).set_index(["escenario", "modelo"])
+        self.assertEqual(int(notas.loc[("mas_estricto", "M2"), "nota"]), 0)
+        self.assertEqual(int(notas.loc[("mas_holgado", "M4"), "nota"]), 1)
+        self.assertEqual(int(notas.loc[("publicado", "M4"), "nota"]), 0)
+        self.assertTrue(notas["caracter"].str.contains("posterior").all())
+
+    def test_un_criterio_ausente_se_omite_y_reescala(self):
+        notas = pd.DataFrame({"precision": [0.0, 3.0], "agua": [3.0, 0.0]}, index=["legible", "flexible"])
+        info = pesos_efectivos({"precision": 1, "agua": 3, "gas": 9}, notas.columns)
+        self.assertEqual(info["omitidos"], ["gas"])
+        self.assertAlmostEqual(info["pesos_renormalizados"]["precision"], 0.25)
+        self.assertAlmostEqual(info["pesos_renormalizados"]["agua"], 0.75)
+        self.assertTrue(info["renormaliza"])
+        detalle = detalle_de_ponderacion(notas)
+        self.assertTrue(detalle["criterios_omitidos"].str.contains("gas").all())
+        self.assertFalse(detalle["criterios_omitidos"].str.contains("agua").any())
+        self.assertGreater(detalle["ponderacion"].nunique(), 1)
+
+    def test_bonferroni_no_sustituye_el_original_y_no_pasa_de_uno(self):
+        originales = [0.01, 0.2]
+        ajustados = bonferroni_posterior(originales)
+        self.assertEqual(originales, [0.01, 0.2])
+        self.assertAlmostEqual(ajustados[0], 0.02)
+        self.assertAlmostEqual(ajustados[1], 0.4)
+        self.assertEqual(bonferroni_posterior([0.6, 0.6]), [1.0, 1.0])
 
 
 class IntegridadSinReajustar(unittest.TestCase):

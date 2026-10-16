@@ -305,9 +305,13 @@ Antes de esta comparación se cerró un `pd.ExcelFile` que las pruebas de normal
 
 La fase D no reajusta M1–M5 ni mueve el protocolo `2.14-A`. La unidad es la curva. La diferencia pareada es el MAE del candidato menos el de la referencia.
 
-El intervalo principal es un percentil del 95 % de la media de esas diferencias, con 10.000 réplicas y semilla 214, fijadas antes de leer el intervalo. Cada réplica extrae curvas con reemplazo. Una sensibilidad remuestrea los seis conglomerados de hoja y velocidad. El valor p de Wilcoxon se informa como exploración sobre doce contrastes. No se fijó una corrección por multiplicidad y no se usa como prueba de mecanismo.
+El intervalo principal es un percentil del 95 % de la media de esas diferencias, con 10.000 réplicas y semilla 214, fijadas antes de leer el intervalo. Cada réplica extrae curvas con reemplazo y conserva el emparejamiento. Mapping y surging no se mezclan.
 
-La regla de superioridad de la actividad 2.13 sigue siendo la que se escribió antes de ver el error. Los pesos de idoneidad de esa actividad no se recalculan con el MAE.
+Ese intervalo describe la incertidumbre de remuestrear las curvas disponibles. No demuestra independencia completa entre curvas, generalización a otras bombas o condiciones, un mecanismo físico, ni que la selección interna de hiperparámetros haya sido inocua.
+
+Hay tres variabilidades distintas. Dentro de una curva, los puntos comparten el mismo ensayo. Entre curvas cambia la condición, aunque pueden compartir hoja, velocidad y banco. Entre condiciones, la hoja y la velocidad agrupan varias curvas. El bootstrap principal mira la segunda. El de conglomerados mira la tercera y, con seis grupos, es una base limitada.
+
+La regla de superioridad de la actividad 2.13 sigue siendo la que se escribió antes de ver el error. Los pesos de idoneidad de esa actividad, 25 % compatibilidad, 25 % fundamento físico, 20 % forma observada, 15 % validación, 10 % interpretabilidad y 5 % simplicidad, no se recalculan con el MAE. La matriz de notas de esta fase es otra cosa: se construyó después de ver los errores.
 
 ### 18.3 Precisión
 
@@ -341,7 +345,18 @@ Media de ΔMAE e intervalo del 95 % por curvas.
 | Surging | M4 menos M2 | −0,360 | [−0,588, −0,124] | 15/18 | 0,012 |
 | Surging | M4 menos M3 | −1,287 | [−1,805, −0,822] | 17/18 | muy pequeño |
 
+
 M3 frente a M2 queda por encima de cero en los dos protocolos: la recta por condición tiene más error que el polinomio. El intervalo de M4 frente a M2 también queda bajo cero en la sensibilidad por conglomerados. Seis conglomerados son pocos. El resultado dice que, en este reparto, la media pareada no se apoya en una sola hoja. No dice que las curvas sean independientes ni que el bosque entienda la bomba.
+
+### 18.4.1 Alcance inferencial y multiplicidad de comparaciones
+
+Las doce pruebas de Wilcoxon son exploratorias. La unidad es la curva. El contraste supone simetría de las diferencias pareadas alrededor de cero y excluye las diferencias nulas. Las curvas comparten banco, velocidad y procedimiento, así que el valor p no es la probabilidad de un experimento independiente. No había una corrección de multiplicidad en el protocolo. Un Bonferroni posterior, que multiplica cada valor p por 12 y lo corta en 1, no sustituye los originales y no se usa para elegir un modelo.
+
+En M4 frente a M2 el valor p original es 0,013 en mapping y 0,012 en surging. Multiplicados por 12 quedan en 0,154 y 0,144. El intervalo por curvas de esa misma diferencia queda bajo cero. Las dos cuentas responden preguntas distintas. Los contrastes de M2 y de M4 frente a M1 siguen con valores p muy pequeños aun después de multiplicar por 12. M3 frente a M1 no se separa de cero.
+
+**Seis conglomerados constituyen una base limitada para estimar incertidumbre de nivel superior.** En mapping, cada grupo de 1800 rpm tiene 4 curvas y cada grupo de 3500 rpm tiene 6. La media del remuestreo por conglomerados pondera más a 3500 rpm, porque promedia curvas y no grupos. En surging cada grupo tiene 3 curvas. No se dividieron condiciones para estrechar el intervalo.
+
+Retirar un conglomerado completo es un diagnóstico posterior. No reajusta M1–M5. La media de M4 menos M2 sigue negativa en los seis retiros de cada protocolo. En mapping, la más cercana a cero es −0,232 psi, al quitar `100psig|3500`. En surging es −0,272 psi, al quitar `50psig|1800`.
 
 ### 18.5 Estabilidad
 
@@ -384,12 +399,44 @@ El contraste entre procedencias es el contraste entre 50 psig y las otras dos pr
 
 En las cinco curvas completas, el MAE por curva es 3,080 psi para M1, 1,048 psi para M2, 3,381 psi para M3, 1,206 psi para M4 y 2,078 psi para M5. No se compara con el MAE de las treinta curvas.
 
-### 18.9 Propuesta de ponderaciones
+### 18.9 Dos matrices, no una
 
-No sustituye a la matriz de 2.13. En mapping, la ponderación equilibrada, la de tendencia observada y la de lectura ponen primero a M1. La que da más peso a la precisión pone primero a M4. En surging no hay nota de agua. Ahí la equilibrada, la de precisión y la de tendencia ponen primero a M4, y la de lectura pone primero a M1. Como el primer puesto cambia, la propuesta no selecciona un modelo.
+La matriz de 2.13 es anterior al entrenamiento. Puntúa idoneidad metodológica. Con sus pesos no hubo un candidato predictivo principal único. No se rellena con el MAE de la 2.14.
+
+La matriz de la fase D es posterior. Cada nota discretiza una cifra continua. Los cortes de 1 psi y 10 psi para las subidas del agua, y los de −1 psi y −5 psi para las predicciones negativas, no son límites físicos. No hay en este estudio una referencia independiente que los fije. El corte de 10 psi queda entre el paso mayor de M2 (5,248 psi) y el de M4 (11,291 psi). Esa separación es una decisión del investigador después de ver los pasos.
+
+| Criterio | Cifra continua | Nota | Cuándo se fijó la nota |
+|---|---|---|---|
+| Precisión | MAE por curva, en psi | Puesto de 3 a 0 | Después del error |
+| Robustez | Fracción de curvas mejores que M1 | Esa fracción por 3 | Después del error |
+| Agua | Pasos y mayor subida, en psi | 0, 1, 2 o 3 según 1 psi y 10 psi | Después de ver los pasos |
+| Negativas | Conteo y mínimo, en psi | 0, 1, 2 o 3 según −5 psi y −1 psi | Después de ver los mínimos |
+| Gas | Pasos al subir Qgd, o el peor Spearman | 0 a 3 | Después de ver las series |
+| Lectura y simplicidad | Forma del estimador | M1: 3. M3: 2. M2: 1. M4: 0 | Por la definición del modelo, sin usar el MAE |
+
+Los pesos escritos, no los de 2.13, son estos.
+
+| Escenario | Precisión | Robustez | Agua | Negativas | Gas | Lectura | Simplicidad | Sentido |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| Equilibrado | 1 | 1 | 1 | 1 | 1 | 1 | 1 | Cada criterio presente pesa igual |
+| Precisión | 4 | 2 | 1 | 1 | 1 | 1 | 1 | Prioriza el MAE y la fracción de curvas |
+| Tendencia observada | 1 | 1 | 4 | 2 | 3 | 1 | 1 | Prioriza agua, gas y predicciones negativas |
+| Lectura y simplicidad | 1 | 1 | 1 | 1 | 1 | 4 | 4 | Prioriza la forma del modelo |
+
+En surging no hay columna de agua. Ese peso se omite y el resto se divide por la suma que queda. En el escenario de tendencia, el agua pesa 4 de 13 en mapping. En surging la suma restante es 9, y el gas pasa de 3/13 a 3/9. La ponderación efectiva no es la misma. No se inventa una nota de agua para evitar ese reescalado.
+
+Con las notas publicadas, en mapping el equilibrado, la tendencia y la lectura ponen primero a M1, y la precisión pone primero a M4. En surging, el equilibrado, la precisión y la tendencia ponen primero a M4, y la lectura pone primero a M1.
+
+Al mover solo los cortes del agua, el primer puesto de mapping no cambia: con 5 psi, M2 y M4 reciben 0; con 15 psi, los dos reciben 1. Cambia el segundo puesto del escenario de tendencia, de M3 a M4, cuando el corte holgado sube la nota de agua de M4. El modo binario del gas, en el que cualquier subida anula la nota alta, deja primero a M1 en el equilibrado de mapping y segundo a M2, en lugar de M4.
+
+Un corte holgado de las predicciones negativas, −10 psi y −5 psi, no se adopta. En surging, M1 y M2 pasan de la peor nota a la intermedia. La suma equilibrada de M2 queda igual a la de M4, y la de tendencia también. No aparece un ganador nuevo: es un empate de la nota discreta. La precisión sigue poniendo primero a M4 y la lectura sigue poniendo primero a M1. Las cifras que se conservan son el MAE, el paso en psi y el mínimo en psi.
 
 ### 18.10 Lectura de la fase
 
-M4 tiene el mejor desempeño predictivo de este experimento, con un intervalo de la ventaja frente a M2 que queda bajo cero en estas curvas. M1 y M3 siguen mejor la caída local del agua. Ningún modelo cumple la regla completa de superioridad de 2.13. No hay un candidato científicamente definitivo.
+M4 tiene el mejor desempeño predictivo externo de este experimento. Su ventaja media frente a M2 queda bajo cero al remuestrear estas curvas, y también al retirar cualquier conglomerado de hoja y velocidad. Esa ventaja no es una ley de la bomba ni una prueba de mecanismo. El ajuste posterior de los doce valores p deja el contraste de M4 frente a M2 por encima de 0,05.
 
-La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. La fase E no está iniciada.
+M1 y M3 conservan la caída punto a punto de las seis curvas de agua. M2 y M4 no. M2 tiene mejor MAE que M1 y que M3, y su mayor subida local en agua es menor que la de M4. M5 no cubre las treinta curvas. La matriz posterior no nombra un ganador: el primer puesto cambia con el peso. En surging, el corte holgado de las predicciones negativas empata a M2 con M4 en los escenarios equilibrado y de tendencia. La regla de 2.13 sigue sin cumplirse.
+
+No es defendible seleccionar un ganador único. Precisión, consistencia con las curvas medidas, lectura matemática, validez de un mecanismo y generalización siguen siendo preguntas distintas.
+
+La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. La fase E no está iniciada. La actividad 2.14 no está cerrada.

@@ -211,7 +211,7 @@ Fase C cerrada en su desarrollo, sin reabrirla. M3 cubre las 30 y las 18 curvas,
 
 Antes de la fase D se cerraron los libros Excel de `tests/test_normalizacion.py` con un administrador de contexto. La normalización y las huellas no cambiaron. Las fases A, B y C no se reabren con ese mantenimiento.
 
-Fase D desarrollada. El intervalo del 95 % de la media pareada, con 10.000 réplicas y semilla 214, deja a M4 por debajo de M2 en los dos protocolos y deja a M3 frente a M1 cruzando el cero. La regla de superioridad de 2.13 no se cumple: el sesgo cambia de signo y la repetición sin la velocidad de diseño no es evaluable, porque esas filas son las de 100 y 150 psig. Una propuesta de ponderaciones cambia el primer puesto según el peso. No hay modelo definitivo. La fase E no está iniciada. El detalle está en `docs/resultados_modelos_2_14.md`.
+Fase D desarrollada y revisada en su lectura, sin reajustar M1–M5. El intervalo del 95 % por curvas, con 10.000 réplicas y semilla 214, deja a M4 por debajo de M2 y deja a M3 frente a M1 cruzando el cero. Ese intervalo no se lee como generalización ni como mecanismo. Seis conglomerados son una base limitada; retirar cualquiera mantiene el signo de M4 menos M2. Los doce valores p siguen siendo exploratorios. La matriz de notas es posterior a los errores y no es la de 2.13: el primer puesto cambia con el peso. En surging, un corte holgado de las predicciones negativas empata a M2 con M4 y no nombra otro ganador. La regla de superioridad de 2.13 no se cumple. No hay ganador único. La fase E no está iniciada y la actividad 2.14 no está cerrada. El detalle está en `docs/resultados_modelos_2_14.md`.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

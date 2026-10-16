@@ -180,7 +180,7 @@ La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping
 
 La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
-La actividad 2.14 está autorizada y no está cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó con nbconvert. La fase C estimó la recta por condición, el bosque de profundidad limitada y, en mapping, el cociente respecto del agua donde esa referencia no usa una curva de prueba. La fase D comparó esos modelos con intervalos por curva y no nombró un ganador. El informe es `docs/resultados_modelos_2_14.md`. La fase E no está iniciada.
+La actividad 2.14 está autorizada y no está cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó con nbconvert. La fase C estimó la recta por condición, el bosque de profundidad limitada y, en mapping, el cociente respecto del agua donde esa referencia no usa una curva de prueba. La fase D comparó esos modelos con intervalos por curva, dejó explícito el alcance del remuestreo y no nombró un ganador. El informe es `docs/resultados_modelos_2_14.md`. La fase E no está iniciada.
 
 **2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 

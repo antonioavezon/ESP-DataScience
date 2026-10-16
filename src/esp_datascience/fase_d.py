@@ -23,9 +23,33 @@ N_REPLICAS = 10_000
 NIVEL = 0.95
 UMBRAL_SUBIDA_NOTABLE_PSI = 1.0
 UMBRAL_SUBIDA_GRANDE_PSI = 10.0
+UMBRAL_NEGATIVA_GRAVE_PSI = -5.0
+UMBRAL_NEGATIVA_MODERADA_PSI = -1.0
+# Estos cortes no son leyes de la bomba. Se escribieron en la fase D, después de ver los errores.
+# El de 10 psi queda entre el paso mayor observado de M2 y el de M4. Por eso se contrastan otros cortes.
+CARACTER_DE_LOS_UMBRALES = "análisis posterior; no es un límite físico ni un protocolo preestablecido"
+ESCENARIOS_SUBIDA_AGUA = (
+    {"nombre": "publicado", "notable": 1.0, "grande": 10.0},
+    {"nombre": "mas_estricto", "notable": 0.5, "grande": 5.0},
+    {"nombre": "mas_holgado", "notable": 2.0, "grande": 15.0},
+)
+ESCENARIOS_NEGATIVAS = (
+    {"nombre": "publicado", "grave": -5.0, "moderado": -1.0},
+    {"nombre": "mas_estricto", "grave": -2.0, "moderado": -0.5},
+    {"nombre": "mas_holgado", "grave": -10.0, "moderado": -5.0},
+)
 # Lectura fijada por la forma del modelo, no por el MAE observado.
 LECTURA_A_PRIORI = {"M1": 3, "M3": 2, "M2": 1, "M4": 0, "M5": 1}
 COMPLEJIDAD_INVERTIDA = {"M1": 3, "M3": 2, "M2": 1, "M4": 0, "M5": 1}
+CARACTER_DE_LA_PONDERACION = (
+    "Propuesta posterior de la fase D. No es la matriz de 2.13 y no cierra la selección."
+)
+SENTIDO_DE_LAS_PONDERACIONES = {
+    "equilibrado": "Cada criterio presente pesa igual.",
+    "precision": "Prioriza el puesto por MAE y, en menor grado, la fracción de curvas que mejoran a M1.",
+    "tendencia_observada": "Prioriza el agua, el gas y las predicciones negativas de las curvas medidas.",
+    "lectura_y_simplicidad": "Prioriza la lectura y la simplicidad de la forma del modelo, sin usar el MAE.",
+}
 PESOS_SENSIBILIDAD = {
     "equilibrado": {
         "precision": 1, "robustez": 1, "agua": 1, "negativas": 1, "gas": 1, "lectura": 1, "simplicidad": 1,
@@ -123,7 +147,13 @@ def bootstrap_conglomerados(
     semilla: int = SEMILLA_BOOTSTRAP,
     nivel: float = NIVEL,
 ) -> dict:
-    """Remuestrea grupos de curvas. Es una sensibilidad, no el intervalo principal."""
+    """Remuestrea grupos enteros de curvas. Es una sensibilidad, no otra validación.
+
+    Cada extracción toma conglomerados con reemplazo. Las curvas de un conglomerado
+    permanecen juntas. La media es la de las curvas de los conglomerados extraídos:
+    un conglomerado repetido cuenta dos veces. Con seis grupos o menos, el intervalo
+    es una base limitada y no demuestra generalización.
+    """
     _exigir_indice_de_curvas(delta)
     grupos = conglomerado.loc[delta.index]
     if grupos.isna().any():
@@ -153,24 +183,82 @@ def bootstrap_conglomerados(
         "semilla": int(semilla),
         "nivel": nivel,
         "unidad": "conglomerado de curvas",
+        "base_limitada": bool(len(unicos) <= 6),
     }
 
 
 def wilcoxon_exploratorio(delta: pd.Series) -> dict:
-    """Prueba de rangos con signo sobre las curvas. No es una prueba de mecanismo."""
+    """Prueba de rangos con signo sobre las curvas. No es una prueba de mecanismo.
+
+    Las diferencias iguales a cero se excluyen, que es el método `wilcox` de SciPy.
+    Doce contrastes de este tipo no tienen una corrección de multiplicidad fijada de antemano.
+    """
     _exigir_indice_de_curvas(delta)
     valores = delta.to_numpy(dtype=float)
+    ceros = int(np.sum(valores == 0))
     no_nulos = valores[valores != 0]
     if len(no_nulos) < 5:
-        return {"aplicable": False, "n_no_nulos": int(len(no_nulos)), "p": float("nan"), "estadistico": float("nan")}
+        return {
+            "aplicable": False,
+            "n_no_nulos": int(len(no_nulos)),
+            "ceros_excluidos": ceros,
+            "p": float("nan"),
+            "estadistico": float("nan"),
+        }
     resultado = wilcoxon(no_nulos, zero_method="wilcox", alternative="two-sided", method="auto")
     return {
         "aplicable": True,
         "n_no_nulos": int(len(no_nulos)),
+        "ceros_excluidos": ceros,
         "estadistico": float(resultado.statistic),
         "p": float(resultado.pvalue),
         "supuesto": "La unidad es la curva. Las curvas comparten hoja, velocidad y procedimiento, así que el valor p no es una probabilidad de un experimento independiente.",
     }
+
+
+def bonferroni_posterior(valores_p: list[float]) -> list[float]:
+    """Multiplica cada valor p por el tamaño de la familia y lo corta en 1.
+
+    Es una sensibilidad posterior. No sustituye los valores p originales ni confirma un ganador.
+    """
+    if len(valores_p) == 0:
+        raise ValueError("La familia de comparaciones está vacía.")
+    corregidos = []
+    for valor in valores_p:
+        numero = float(valor)
+        if not np.isfinite(numero) or numero < 0:
+            raise ValueError("Hay un valor p que no se puede ajustar.")
+        corregidos.append(float(min(1.0, numero * len(valores_p))))
+    return corregidos
+
+
+def diagnostico_sin_un_conglomerado(delta: pd.Series, conglomerado: pd.Series) -> pd.DataFrame:
+    """Media de ΔMAE al retirar cada conglomerado completo.
+
+    Diagnóstico posterior. No reajusta modelos ni abre una validación externa nueva.
+    """
+    _exigir_indice_de_curvas(delta)
+    grupos = conglomerado.loc[delta.index]
+    if grupos.isna().any() or not grupos.index.equals(delta.index):
+        raise ValueError("El conglomerado no está alineado con las curvas.")
+    media_todas = float(delta.mean())
+    filas = []
+    for etiqueta in pd.unique(grupos.to_numpy()):
+        resto = delta.loc[~grupos.eq(etiqueta)]
+        if resto.empty:
+            raise ValueError("Retirar el único conglomerado no deja curvas.")
+        media = float(resto.mean())
+        filas.append(
+            {
+                "conglomerado_retirado": etiqueta,
+                "n_curvas_retiradas": int(grupos.eq(etiqueta).sum()),
+                "n_curvas_restantes": int(len(resto)),
+                "media_restante_psi": media,
+                "mismo_signo": bool(media * media_todas > 0),
+                "caracter": "diagnóstico posterior; no es una validación externa nueva",
+            }
+        )
+    return pd.DataFrame(filas)
 
 
 def meta_de_curvas(predicciones: pd.DataFrame) -> pd.DataFrame:
@@ -246,29 +334,125 @@ def monotonía_de_agua(predicciones: pd.DataFrame, columnas: dict[str, str]) -> 
     return pd.DataFrame(filas)
 
 
-def puntuacion_de_agua(monotonia: pd.DataFrame, modelo: str) -> int:
+def puntuacion_de_agua(
+    monotonia: pd.DataFrame,
+    modelo: str,
+    umbral_notable: float = UMBRAL_SUBIDA_NOTABLE_PSI,
+    umbral_grande: float = UMBRAL_SUBIDA_GRANDE_PSI,
+) -> int:
+    """Nota discreta. Los umbrales por defecto no son límites físicos."""
+    if umbral_grande < umbral_notable:
+        raise ValueError("El corte grande tiene que ser al menos el corte notable.")
     subidas = monotonia[f"subidas_{modelo}"].to_numpy(dtype=float)
     mayores = monotonia[f"mayor_subida_{modelo}"].to_numpy(dtype=float)
     if np.isnan(subidas).any():
         return 0
     if int(np.sum(subidas)) == 0:
         return 3
-    if float(np.nanmax(mayores)) >= UMBRAL_SUBIDA_GRANDE_PSI:
+    if float(np.nanmax(mayores)) >= umbral_grande:
         return 0
-    if float(np.nanmax(mayores)) >= UMBRAL_SUBIDA_NOTABLE_PSI:
+    if float(np.nanmax(mayores)) >= umbral_notable:
         return 1
     return 2
 
 
-def puntuacion_de_negativas(resumen: dict) -> int:
+def puntuacion_de_negativas(
+    resumen: dict,
+    umbral_grave: float = UMBRAL_NEGATIVA_GRAVE_PSI,
+    umbral_moderado: float = UMBRAL_NEGATIVA_MODERADA_PSI,
+) -> int:
+    """Nota discreta del mínimo. Cero predicciones negativas sigue valiendo 3."""
+    if umbral_grave > umbral_moderado or umbral_moderado >= 0:
+        raise ValueError("Los cortes de una predicción negativa tienen que ser negativos y estar ordenados.")
     if resumen["n_predicciones"] == 0:
         return 3
     minimo = resumen["minimo_psi"]
-    if minimo <= -5.0:
+    if minimo <= umbral_grave:
         return 0
-    if minimo <= -1.0:
+    if minimo <= umbral_moderado:
         return 1
     return 2
+
+
+def notas_de_agua_bajo_umbrales(monotonia: pd.DataFrame, escenarios=ESCENARIOS_SUBIDA_AGUA) -> pd.DataFrame:
+    """Repite la nota de agua con cortes redondos. No elige el corte que favorece a un modelo."""
+    modelos = [
+        columna.removeprefix("subidas_")
+        for columna in monotonia.columns
+        if columna.startswith("subidas_") and columna != "subidas_medicion"
+    ]
+    filas = []
+    for escenario in escenarios:
+        for modelo in modelos:
+            filas.append(
+                {
+                    "escenario": escenario["nombre"],
+                    "notable_psi": escenario["notable"],
+                    "grande_psi": escenario["grande"],
+                    "modelo": modelo,
+                    "nota": puntuacion_de_agua(
+                        monotonia, modelo, escenario["notable"], escenario["grande"]
+                    ),
+                    "caracter": CARACTER_DE_LOS_UMBRALES,
+                }
+            )
+    return pd.DataFrame(filas)
+
+
+def notas_de_negativas_bajo_umbrales(resumenes: list[dict], escenarios=ESCENARIOS_NEGATIVAS) -> pd.DataFrame:
+    filas = []
+    for escenario in escenarios:
+        for resumen in resumenes:
+            filas.append(
+                {
+                    "escenario": escenario["nombre"],
+                    "grave_psi": escenario["grave"],
+                    "moderado_psi": escenario["moderado"],
+                    "modelo": resumen["modelo"],
+                    "nota": puntuacion_de_negativas(resumen, escenario["grave"], escenario["moderado"]),
+                    "caracter": CARACTER_DE_LOS_UMBRALES,
+                }
+            )
+    return pd.DataFrame(filas)
+
+
+def pesos_efectivos(pesos: dict[str, float], columnas) -> dict:
+    """Muestra qué criterios se omiten y cómo queda el resto al reescalar.
+
+    Surging no tiene curvas de agua. Omitir ese criterio cambia la suma de los otros.
+    """
+    if any(valor < 0 for valor in pesos.values()):
+        raise ValueError("Un peso negativo invertiría el criterio.")
+    presentes = {criterio: peso for criterio, peso in pesos.items() if criterio in columnas and peso > 0}
+    if not presentes:
+        raise ValueError("Ningún peso coincide con las columnas.")
+    total = float(sum(presentes.values()))
+    omitidos = [criterio for criterio in pesos if criterio not in presentes]
+    return {
+        "pesos_renormalizados": {criterio: peso / total for criterio, peso in presentes.items()},
+        "omitidos": omitidos,
+        "renormaliza": bool(omitidos),
+    }
+
+
+def detalle_de_ponderacion(puntuaciones: pd.DataFrame) -> pd.DataFrame:
+    """Puestos completos de cada escenario. No declara un ganador."""
+    filas = []
+    for nombre, pesos in PESOS_SENSIBILIDAD.items():
+        info = pesos_efectivos(pesos, puntuaciones.columns)
+        orden = ranking_con_pesos(puntuaciones, pesos)
+        for puesto, (modelo, nota) in enumerate(orden.items(), start=1):
+            filas.append(
+                {
+                    "ponderacion": nombre,
+                    "modelo": modelo,
+                    "puesto": puesto,
+                    "puntuacion": float(nota),
+                    "criterios_omitidos": ",".join(info["omitidos"]),
+                    "caracter": CARACTER_DE_LA_PONDERACION,
+                }
+            )
+    return pd.DataFrame(filas)
 
 
 def ranking_con_pesos(puntuaciones: pd.DataFrame, pesos: dict[str, float]) -> pd.Series:
@@ -302,9 +486,13 @@ def primeros_por_ponderacion(puntuaciones: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(filas)
 
 
-def puntuacion_por_subidas_de_gas(n_grupos_que_suben: int) -> int:
+def puntuacion_por_subidas_de_gas(n_grupos_que_suben: int, modo: str = "escalonado") -> int:
     if n_grupos_que_suben < 0:
         raise ValueError(n_grupos_que_suben)
+    if modo == "binario":
+        return 3 if n_grupos_que_suben == 0 else 0
+    if modo != "escalonado":
+        raise ValueError(modo)
     if n_grupos_que_suben == 0:
         return 3
     if n_grupos_que_suben == 1:
@@ -314,13 +502,15 @@ def puntuacion_por_subidas_de_gas(n_grupos_que_suben: int) -> int:
     return 0
 
 
-def puntuacion_por_spearman(peor_spearman: float) -> int:
+def puntuacion_por_spearman(peor_spearman: float, cortes: tuple[float, float, float] = (-0.999, -0.95, -0.90)) -> int:
     """`peor_spearman` es el valor menos negativo: el que más se aleja de una caída estricta."""
-    if peor_spearman <= -0.999:
+    if not (cortes[0] < cortes[1] < cortes[2] < 0):
+        raise ValueError("Los cortes de Spearman tienen que ir de más estricto a menos estricto.")
+    if peor_spearman <= cortes[0]:
         return 3
-    if peor_spearman <= -0.95:
+    if peor_spearman <= cortes[1]:
         return 2
-    if peor_spearman <= -0.90:
+    if peor_spearman <= cortes[2]:
         return 1
     return 0
 
