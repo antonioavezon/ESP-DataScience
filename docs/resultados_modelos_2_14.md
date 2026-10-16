@@ -1,6 +1,6 @@
 # Resultados de la actividad 2.14
 
-Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. El capítulo 18 es la fase D. No hay un modelo definitivo y la actividad 2.14 sigue abierta. La fase E no está iniciada.
+Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. El capítulo 18 es la fase D. El capítulo 19 es la fase E. No hay un ganador único. La actividad 2.14 queda preparada para revisión de cierre y todavía no se declara cerrada.
 
 La fase A permanece en la versión `2.14-A`. Una segunda ejecución de `evaluar_protocolo`, sobre los CSV originales, reprodujo la tabla ya publicada. No se cambió la métrica, la rejilla de alpha, el grado ni un pliegue. El registro ejecutable es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Las funciones están en `src/esp_datascience/entrenamiento.py`.
 
@@ -440,3 +440,88 @@ M1 y M3 conservan la caída punto a punto de las seis curvas de agua. M2 y M4 no
 No es defendible seleccionar un ganador único. Precisión, consistencia con las curvas medidas, lectura matemática, validez de un mecanismo y generalización siguen siendo preguntas distintas.
 
 La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. La fase E no está iniciada. La actividad 2.14 no está cerrada.
+
+## 19. Fase E — Síntesis científica y conclusiones
+
+### E.1. Propósito del cierre
+
+Esta fase no estima otro modelo. Reúne lo que las fases A a D ya calcularon y escribe qué puede sostenerse. El detalle numérico de la incertidumbre sigue en el capítulo 18. El texto autónomo está en `docs/informe_final_actividad_2_14.md`.
+
+### E.2. Pregunta de investigación
+
+¿Qué capacidad tienen los modelos evaluados para reproducir el incremento de presión de una bomba electrosumergible en las condiciones monofásicas y bifásicas de estos ensayos, y qué les falta para servir de base a un modelo híbrido de física e inteligencia artificial?
+
+La respuesta se limita a `dp2_3_psi`, en psi, con la certeza media del diccionario. No es la presión de un pozo.
+
+### E.3. Resumen metodológico
+
+El protocolo sigue siendo `2.14-A`. La unidad es la curva. El MAE da el mismo peso a cada curva. Mapping y surging no se mezclan. No se reeligieron hiperparámetros ni se inventaron pesos para nombrar un ganador. `fase_e.py` solo lee el MAE ya obtenido: marca al de menor error, conserva a M1 como piso y a M2 como polinomio declarado, y rechaza comparar el MAE de M5 con las 30 curvas.
+
+### E.4. Resultados predictivos consolidados
+
+| Protocolo | Modelo | MAE (psi) | RMSE (psi) | Sesgo (psi) | R² | Curvas | Negativas |
+|---|---|---:|---:|---:|---:|---|---:|
+| Mapping | M1 | 3,999 | 4,865 | 0,043 | 0,543 | 30/30 | 1 |
+| Mapping | M2 | 1,364 | 1,707 | 0,025 | 0,940 | 30/30 | 22 |
+| Mapping | M3 | 3,783 | 4,488 | −0,153 | 0,591 | 30/30 | 4 |
+| Mapping | M4 | 1,044 | 1,546 | −0,007 | 0,937 | 30/30 | 0 |
+| Surging | M1 | 2,312 | 2,734 | 0,136 | 0,894 | 18/18 | 34 |
+| Surging | M2 | 1,114 | 1,353 | 0,146 | 0,962 | 18/18 | 12 |
+| Surging | M3 | 2,041 | 2,486 | 0,350 | 0,895 | 18/18 | 27 |
+| Surging | M4 | 0,754 | 0,963 | 0,041 | 0,972 | 18/18 | 0 |
+
+En mapping el MAE sube de 1800 rpm a 3500 rpm en los cuatro modelos. En surging, qué velocidad es más difícil cambia con el modelo. M2 mejora a M4 en las tres curvas de Qgd = 0,05.
+
+### E.5. Resultados de incertidumbre
+
+La media de M4 menos M2 es −0,321 psi en mapping, con intervalo [−0,562, −0,081] psi, y −0,360 psi en surging, con intervalo [−0,588, −0,124] psi. Son percentiles del remuestreo de las curvas disponibles, con 10.000 réplicas y semilla 214. No generalizan a otra bomba. Seis conglomerados son una base limitada. Retirar cualquiera conserva el signo negativo. Los valores p originales de ese par son 0,013 y 0,012. Multiplicados por las doce comparaciones quedan en 0,154 y 0,144. El bootstrap de la media y Wilcoxon no estiman lo mismo. El intervalo de M3 menos M1 incluye el cero.
+
+### E.6. Coherencia física
+
+M1 y M3 no suben en ningún tramo de las seis curvas de agua. M2 y M4 sí. El paso mayor es 5,248 psi y 11,291 psi. M4 no predice negativos porque promedia valores positivos; eso no lo convierte en un modelo hidráulico. A caudal común, la medición, M1 y M2 no suben con Qgd. M3 sube en cinco de seis grupos y M4 en uno. El sesgo cambia de signo entre velocidades o presiones. La diferencia entre 1800 rpm y 3500 rpm no se lee como ley de afinidad.
+
+### E.7. Papel del modelo semiempírico
+
+M5 no usa el agua de prueba. Solo cinco curvas de 50 psig entran completas en su MAE: 2,078 psi, entre M1 (3,080 psi) y M2 (1,048 psi) en ese mismo subconjunto. M4 queda en 1,206 psi ahí. La pendiente del cociente respecto de Qgd fue negativa. Describe el ajuste, no el mecanismo. Hace falta agua de entrenamiento cuyo rango de caudal cubra el gas en más de una presión para volver a evaluar la idea. No se descarta el concepto por la cobertura de esta fórmula, ni se lo presenta como validado.
+
+### E.8. Comparación entre candidatos
+
+| Papel | Modelo | Por qué, sin un peso nuevo |
+|---|---|---|
+| Mejor precisión en este experimento | M4 | Menor MAE por curva en los dos protocolos |
+| Referencia interpretable | M1 | Piso fijado en 2.13, antes del error |
+| Referencia no lineal escrita de antemano | M2 | Grado 2 y cresta declarados antes de la prueba |
+| Referencia semiempírica exploratoria | M5 | Solo en su subconjunto de cinco curvas |
+| Ganador único | Ninguno | La regla de 2.13 no se cumple junta |
+
+M4 también se conserva como referencia de precisión para una comparación futura. No sustituye a M1 ni a M2.
+
+### E.9. Conclusiones principales
+
+1. Los cuatro modelos con cobertura completa predicen `dp2_3_psi` dentro de estas curvas. M4 es el de menor MAE. Eso no optimiza la bomba.
+2. La ventaja de M4 frente a M2 es una diferencia de medias en estas curvas, con un intervalo bajo cero y sin confirmación por el ajuste posterior de los doce valores p.
+3. La forma decreciente del agua la conservan M1 y M3. El menor error no la garantiza.
+4. M5 muestra que una referencia de agua puede calcularse sin fuga y, a la vez, que esta fórmula no cubre el protocolo.
+5. No hay base, en estos archivos, para estimar presiones de fondo ni para detectar anomalías.
+
+### E.10. Limitaciones generales
+
+Una sola bomba experimental; dos velocidades y tres presiones; mapping distinto de surging; certeza media de `dp2_3_psi`; velocidad de diseño confundida con la hoja; curvas dependientes; sin otra bomba ni datos de campo; sin extrapolación defendible; sin balance físico cerrado; M5 parcial; sin otras variables de fondo; sin detector de anomalías.
+
+### E.11. Implicaciones para Física–IA
+
+El proyecto más amplio apunta a un modelo híbrido para monitoreo sin sensores de fondo y detección de anomalías. Esta actividad no lo construye.
+
+Una restricción de monotonía tiene sustento en las seis curvas de agua medidas, no en todo el flujo con gas. Una ley de afinidad no queda demostrada por reproducir la diferencia entre 1800 rpm y 3500 rpm. Cualquiera de las dos exigiría otra comprobación antes de imponerse al entrenamiento.
+
+En otra actividad podrían estudiarse, sin que estén demostradas aquí, una corrección residual sobre una curva de referencia, un estimador condicionado por esa referencia, o la predicción de la degradación relativa. Hacen falta corriente, potencia, frecuencia, presión de cabeza, temperatura y caudal de producción si el objetivo pasa a ser una variable no medida. Esos objetivos no están en estos CSV.
+
+No se fabrican etiquetas de falla. Interferencia de gas, operación fuera del caudal de mejor eficiencia y cambios de régimen quedan como preguntas posteriores, no como clases ya observadas.
+
+### E.12. Recomendaciones de investigación futura
+
+Mantener M1, M2 y M4 como referencias distintas. Repetir una referencia de agua solo con cobertura suficiente. No abrir otra familia sobre las mismas curvas de prueba. No declarar cerrado el proyecto híbrido con este resultado.
+
+### E.13. Alcance del cierre de la actividad 2.14
+
+Las fases A, B, C y D quedan cerradas en el sentido de que sus reglas y sus cifras no se reabren. La fase E está desarrollada. La actividad 2.14 queda preparada para una revisión científica de cierre y no se declara cerrada en este capítulo. No se inició otra actividad.

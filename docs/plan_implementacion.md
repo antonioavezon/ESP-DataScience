@@ -20,6 +20,8 @@ Autorizada y no cerrada. La fase A está congelada en `2.14-A`. La fase B está 
 
 La fase C está desarrollada. Estimó la recta por condición (M3), el bosque con profundidad y hoja mínima elegidas por el MAE interno (M4) y el cociente respecto del agua de entrenamiento (M5). M5 solo cubre 5 de las 30 curvas de mapping.
 
-La fase D está desarrollada y queda para revisión de cierre. Compara M1–M4 en todas las curvas y M5 solo en su subconjunto. El intervalo bootstrap de la media pareada usa 10.000 réplicas y la semilla 214. Describe el remuestreo de estas curvas, no una generalización. M4 tiene menor MAE que M2 y el intervalo queda bajo cero; M1 y M3 conservan la caída del agua. La matriz de notas es posterior y sensible a los pesos. La regla de 2.13 no nombra un superior. La actividad no está cerrada. La fase E no está iniciada.
+Las fases A a D están cerradas. La fase D comparó M1–M4 en todas las curvas y M5 solo en su subconjunto. El intervalo bootstrap, con 10.000 réplicas y la semilla 214, describe el remuestreo de estas curvas. M4 tiene menor MAE. M1 y M3 conservan la caída del agua. La regla de 2.13 no nombra un superior.
 
-El cuaderno fuente es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. La ejecución de la fase C está en `resultados/04_ejecucion_fase_c.ipynb` y la de la fase D, de la A a la D, en `resultados/04_ejecucion_fase_d.ipynb`. El informe es `docs/resultados_modelos_2_14.md`.
+La fase E está desarrollada y queda para revisión de cierre de la actividad. No reentrena. El informe autónomo es `docs/informe_final_actividad_2_14.md`. No hay ganador único ni modelo híbrido. La actividad 2.14 no se declara cerrada.
+
+El cuaderno fuente es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. La ejecución de la fase C está en `resultados/04_ejecucion_fase_c.ipynb` y la de la fase D, de la A a la D, en `resultados/04_ejecucion_fase_d.ipynb`. El informe acumulado es `docs/resultados_modelos_2_14.md`.
