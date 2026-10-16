@@ -187,7 +187,14 @@ Mapping/`50psig` repite 186 pares, 10 condiciones, 62 a 1800 rpm y 124 a 3500 rp
 
 La velocidad de Mapping/`100psig` y Mapping/`150psig` no estaba en la celda. En la tabla queda con origen `diseño_experimental`. `GVF0` sigue en porcentaje y `DP2-3` en psi. El detalle está en `docs/normalizacion_datos.md`.
 
+## Reorganización del código
+
+Después de publicar la actividad 2.12 se copiaron sus funciones a `src/esp_datascience/`. Los cuadernos `01_exploracion_inicial.ipynb` y `02_normalizacion.ipynb` conservan su texto, su código y sus resultados. Esta reorganización no es una actividad científica nueva y no inicia la 2.13.
+
+`tests/test_normalizacion.py` ejecutó 4 pruebas con `unittest`. Todas pasaron. La copia en `src/` reproduce el texto de los dos CSV. Sus huellas siguen siendo `ff68e36703d3d3901b8bd964008c49b062afa9d89a817b9d66e7849f9b400648` para mapping y `f58e8e2cac74acdf2081479ec8769422f39c4e4665f5b3ff472df4a70b15bd96` para surging. Los Excel de `data/raw` tampoco cambiaron.
+
 ## Pendiente
+
 
 ### 2.13 — Primer modelo, solo si se autoriza
 

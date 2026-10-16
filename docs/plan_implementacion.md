@@ -6,6 +6,8 @@ La actividad 2.11 queda cerrada. El diccionario está en `docs/diccionario_varia
 
 Hecho. `mapping_long.csv` tiene 570 filas y `surging_long.csv` tiene 387. Mapping/`50psig` conserva los 186 pares. La velocidad que no estaba en la celda quedó marcada como `diseño_experimental`. No se apilaron los protocolos, no se imputaron mediciones y no se calcularon QG ni el caudal de surging en bpd.
 
+Las mismas funciones quedaron copiadas en `src/esp_datascience/`. El cuaderno no se reemplazó por llamadas a ese paquete. Las tablas no se volvieron a escribir.
+
 ## 2.13 — Recién entonces, un modelo
 
 El primer ajuste, si se autoriza, sería el más simple de `docs/matriz_modelos_candidatos.md`, sobre una sola tabla y con validación por curvas completas. El objetivo sería `dp2_3_psi`. El modelo híbrido espera a que exista una predicción física calculable. No forma parte de lo ya hecho.

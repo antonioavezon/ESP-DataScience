@@ -48,14 +48,34 @@ ESP-DataScience/
 - data/raw/                 Excel de trabajo
 - data/processed/           tablas largas de la actividad 2.12
 - docs/                     bitácora, diccionario, normalización y guía de sincronización
-- notebooks/                cuadernos
+- notebooks/00_validacion_entorno.ipynb
+- notebooks/01_exploracion_inicial.ipynb
+- notebooks/02_normalizacion.ipynb
+- src/esp_datascience/      copia reutilizable de las funciones de normalización
+- tests/                    pruebas de esa copia, con unittest
 - results/figures/          reservado
 - results/models/           reservado; Git ignora los modelos generados
-- src/                      reservado
 - requirements-direct.txt   paquetes que el laboratorio pide instalar
 - requirements.txt          versiones completas usadas en el equipo de trabajo
 - .venv/                    entorno local; no está en Git
 ```
+
+Los cuadernos conservan el código, las explicaciones y los resultados. `src/esp_datascience/` repite las funciones de lectura, normalización y validación para poder usarlas fuera del cuaderno. No sustituye al cuaderno.
+
+| Módulo | Funciones |
+|---|---|
+| `rutas.py` | `encontrar_raiz_laboratorio`, `huella_sha256` |
+| `lectura.py` | `es_numero`, `filas_de_franja_mapping`, `psep_de_hoja` |
+| `normalizacion.py` | `velocidad_segun_diseno`, `columnas_separadoras_vacias`, `normalizar_mapping`, `filas_de_franja_surging`, `normalizar_surging` |
+| `validacion.py` | `pares_por_hoja`, `comprobar_conteos_publicados` |
+
+Desde la raíz del laboratorio, con el entorno ya creado:
+
+```bash
+.venv/bin/python -m unittest tests.test_normalizacion -v
+```
+
+`unittest` pertenece a la biblioteca estándar de Python. No hace falta instalar otro paquete.
 
 ## Instalación en Fedora
 
@@ -124,9 +144,10 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | Cuaderno | Contenido |
 |---|---|
 | `00_validacion_entorno.ipynb` | Intérprete, versiones y un gráfico con datos ficticios |
-| `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.10 |
+| `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
+| `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 
-El análisis detallado usa solo `mapping.xlsx`, hoja `50psig`. Las otras hojas se nombraron y se midieron, y no se les copió esta estructura.
+Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
 Resultados verificados en esa hoja:
 
