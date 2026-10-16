@@ -20,7 +20,7 @@ Objetivos de aprendizaje:
 - Contar observaciones completas y distinguirlas de un resultado físico ya validado.
 - Dejar el trabajo en Git para continuarlo desde otro equipo Fedora.
 
-El laboratorio empezó por la hoja `50psig` de mapping y por el diccionario. La actividad 2.11 está cerrada, la 2.12 también, y la 2.13 quedó cerrada como selección, sin entrenamiento. La fase A de la 2.14 está congelada. La fase B está cerrada. La fase C estimó M3, M4 y la referencia parcial M5. La actividad 2.14 no está cerrada y no tiene un modelo ganador. La línea más amplia sigue siendo el modelado híbrido de ESP, que aquí todavía no se implementa.
+El laboratorio empezó por la hoja `50psig` de mapping y por el diccionario. La actividad 2.11 está cerrada, la 2.12 también, y la 2.13 quedó cerrada como selección, sin entrenamiento. La fase A de la 2.14 está congelada. La fase B está cerrada. La fase C estimó M3, M4 y la referencia parcial M5. La fase D los comparó sin nombrar un ganador. La actividad 2.14 no está cerrada. La línea más amplia sigue siendo el modelado híbrido de ESP, que aquí todavía no se implementa.
 
 ## Tecnologías
 
@@ -152,7 +152,7 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 | `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
-| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14: fase A congelada, fase B cerrada y fase C de M3, M4 y M5, sin ganador |
+| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14: fases A a D, sin ganador y sin fase E |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -180,7 +180,7 @@ La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping
 
 La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
-La actividad 2.14 está autorizada y no está cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó con nbconvert. La fase C estimó la recta por condición, el bosque de profundidad limitada y, en mapping, el cociente respecto del agua donde esa referencia no usa una curva de prueba. El informe es `docs/resultados_modelos_2_14.md`. No hay un ganador ni un modelo definitivo. La fase D no está iniciada.
+La actividad 2.14 está autorizada y no está cerrada. La fase A está congelada en `2.14-A`. La fase B está cerrada: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó con nbconvert. La fase C estimó la recta por condición, el bosque de profundidad limitada y, en mapping, el cociente respecto del agua donde esa referencia no usa una curva de prueba. La fase D comparó esos modelos con intervalos por curva y no nombró un ganador. El informe es `docs/resultados_modelos_2_14.md`. La fase E no está iniciada.
 
 **2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 

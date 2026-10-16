@@ -2,7 +2,7 @@
 
 Los cuadernos siguen mostrando su propio código. Estos módulos no sustituyen
 esa lectura. La normalización reproduce la actividad 2.12. Las particiones
-de la actividad 2.14 quedan congeladas. El módulo de entrenamiento estima solo M1 y M2. La fase C está en `fase_c.py` y no cambia esas reglas.
+de la actividad 2.14 quedan congeladas. El módulo de entrenamiento estima solo M1 y M2. La fase C está en `fase_c.py` y no cambia esas reglas. La fase D, en `fase_d.py`, compara esas predicciones y no las reajusta.
 """
 
 from esp_datascience.lectura import es_numero, filas_de_franja_mapping, psep_de_hoja

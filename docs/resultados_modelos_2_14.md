@@ -1,6 +1,6 @@
 # Resultados de la actividad 2.14
 
-Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. No hay un modelo definitivo y la actividad 2.14 sigue abierta.
+Los capítulos 1 a 16 conservan el informe de la fase B, con sus cifras originales. Esa fase quedó cerrada después de 26 pruebas automatizadas correctas y de la ejecución completa del cuaderno con nbconvert. El capítulo 17 es la fase C. El capítulo 18 es la fase D. No hay un modelo definitivo y la actividad 2.14 sigue abierta. La fase E no está iniciada.
 
 La fase A permanece en la versión `2.14-A`. Una segunda ejecución de `evaluar_protocolo`, sobre los CSV originales, reprodujo la tabla ya publicada. No se cambió la métrica, la rejilla de alpha, el grado ni un pliegue. El registro ejecutable es `notebooks/04_entrenamiento_evaluacion_modelos.ipynb`. Las funciones están en `src/esp_datascience/entrenamiento.py`.
 
@@ -294,3 +294,102 @@ La ejecución usó el entorno `.venv` del laboratorio: Python 3.14.8, NumPy 2.5.
 ### 17.11 Conclusión de la fase
 
 M3, M4 y M5 quedaron estimados con el protocolo congelado. M3 y M4 cubren todas las curvas externas. M5 cubre cinco. Las predicciones negativas de M3 están listadas. Las curvas de agua y el sesgo están desglosados. M1 y M2 conservan sus cifras. No hay un modelo definitivo.
+
+## 18. Fase D — Comparación científica e incertidumbre
+
+### 18.1 Mantenimiento previo
+
+Antes de esta comparación se cerró un `pd.ExcelFile` que las pruebas de normalización dejaban abierto. El cambio está solo en `tests/test_normalizacion.py`: los dos libros entran en un `with`, con las mismas hojas, `header=None` y las mismas funciones de normalización. `src/` no abre esos libros. Los cuadernos históricos no se reescribieron. Con las advertencias de recurso convertidas en error, las cuatro pruebas de normalización pasan. La batería completa deja de mostrar el archivo sin cerrar. Las huellas de los Excel y de los CSV no cambian. Este mantenimiento no reabre las fases A, B ni C.
+
+### 18.2 Método
+
+La fase D no reajusta M1–M5 ni mueve el protocolo `2.14-A`. La unidad es la curva. La diferencia pareada es el MAE del candidato menos el de la referencia.
+
+El intervalo principal es un percentil del 95 % de la media de esas diferencias, con 10.000 réplicas y semilla 214, fijadas antes de leer el intervalo. Cada réplica extrae curvas con reemplazo. Una sensibilidad remuestrea los seis conglomerados de hoja y velocidad. El valor p de Wilcoxon se informa como exploración sobre doce contrastes. No se fijó una corrección por multiplicidad y no se usa como prueba de mecanismo.
+
+La regla de superioridad de la actividad 2.13 sigue siendo la que se escribió antes de ver el error. Los pesos de idoneidad de esa actividad no se recalculan con el MAE.
+
+### 18.3 Precisión
+
+| Protocolo | Modelo | MAE por curva (psi) | RMSE por curva (psi) | Cobertura |
+|---|---|---:|---:|---|
+| Mapping | M1 | 3,999 | 4,865 | 30/30 |
+| Mapping | M2 | 1,364 | 1,707 | 30/30 |
+| Mapping | M3 | 3,783 | 4,488 | 30/30 |
+| Mapping | M4 | 1,044 | 1,546 | 30/30 |
+| Surging | M1 | 2,312 | 2,734 | 18/18 |
+| Surging | M2 | 1,114 | 1,353 | 18/18 |
+| Surging | M3 | 2,041 | 2,486 | 18/18 |
+| Surging | M4 | 0,754 | 0,963 | 18/18 |
+
+Quitar la peor curva no cambia el orden de esas medias. En mapping la peor de M4 y de M2 es la misma agua, `50psig|3500|Single Phase`, con 4,023 psi y 3,221 psi.
+
+### 18.4 Intervalos
+
+Media de ΔMAE e intervalo del 95 % por curvas.
+
+| Protocolo | Comparación | Media (psi) | Intervalo (psi) | Curvas que mejoran | Wilcoxon, p |
+|---|---|---:|---|---:|---:|
+| Mapping | M2 menos M1 | −2,634 | [−3,254, −2,015] | 29/30 | muy pequeño |
+| Mapping | M3 menos M1 | −0,215 | [−0,676, 0,168] | 12/30 | 0,72 |
+| Mapping | M4 menos M1 | −2,955 | [−3,694, −2,234] | 30/30 | muy pequeño |
+| Mapping | M4 menos M2 | −0,321 | [−0,562, −0,081] | 21/30 | 0,013 |
+| Mapping | M4 menos M3 | −2,740 | [−3,513, −1,977] | 29/30 | muy pequeño |
+| Surging | M2 menos M1 | −1,199 | [−1,683, −0,768] | 17/18 | muy pequeño |
+| Surging | M3 menos M1 | −0,271 | [−0,712, 0,103] | 9/18 | 0,42 |
+| Surging | M4 menos M1 | −1,559 | [−2,120, −1,035] | 17/18 | muy pequeño |
+| Surging | M4 menos M2 | −0,360 | [−0,588, −0,124] | 15/18 | 0,012 |
+| Surging | M4 menos M3 | −1,287 | [−1,805, −0,822] | 17/18 | muy pequeño |
+
+M3 frente a M2 queda por encima de cero en los dos protocolos: la recta por condición tiene más error que el polinomio. El intervalo de M4 frente a M2 también queda bajo cero en la sensibilidad por conglomerados. Seis conglomerados son pocos. El resultado dice que, en este reparto, la media pareada no se apoya en una sola hoja. No dice que las curvas sean independientes ni que el bosque entienda la bomba.
+
+### 18.5 Estabilidad
+
+En mapping el MAE crece de 1800 a 3500 rpm en los cuatro modelos: M1 pasa de 1,430 psi a 5,711 psi, M2 de 0,636 psi a 1,850 psi, M3 de 1,527 psi a 5,288 psi y M4 de 0,436 psi a 1,449 psi. En surging el orden de las velocidades cambia: M1 y M3 tienen más error a 1800 rpm, y M2 y M4 a 3500 rpm.
+
+M2 tiene menor MAE que M4 en todas las curvas de Qgd = 0,05 y en parte de Qgd = 0,015 y Qgd = 0,04. En surging, cada fracción tiene una curva de las seis en la que M2 es menor. El puesto global no es el puesto de cada condición.
+
+### 18.6 Física
+
+| Protocolo | Modelo | Predicciones negativas | Curvas | Mínimo (psi) |
+|---|---|---:|---:|---:|
+| Mapping | M1 | 1 | 1 | −0,207 |
+| Mapping | M2 | 22 | 21 | −7,292 |
+| Mapping | M3 | 4 | 3 | −1,897 |
+| Mapping | M4 | 0 | 0 | 0,451 |
+| Surging | M1 | 34 | 8 | −8,184 |
+| Surging | M2 | 12 | 5 | −6,230 |
+| Surging | M3 | 27 | 8 | −13,993 |
+| Surging | M4 | 0 | 0 | 1,227 |
+
+M4 no predice valores negativos porque promedia mediciones positivas. Tampoco llega al máximo medido de mapping ni al mínimo medido de surging.
+
+En las seis curvas de agua, la medición, M1 y M3 no tienen pasos ascendentes. M2 y M4 sí, en las seis. El paso mayor de M4 es 11,291 psi en `50psig|3500|Single Phase`. El de M2, en la misma curva, es 5,248 psi.
+
+En el caudal común, la medición, M1 y M2 no suben al aumentar Qgd. M4 sube en 1 de 6 grupos. M3 sube en 5 de 6. En surging, el Spearman de GVF0 con la presión es −1 en todas las curvas de M1, M2 y M3. En M4, tres curvas quedan por encima de −0,99; la menos negativa está cerca de −0,977.
+
+El sesgo cambia de signo entre velocidades en mapping para M1, M2 y M4, y entre presiones para los cuatro. En surging el signo de la velocidad se mantiene positivo y el de la presión no.
+
+### 18.7 Procedencia de la velocidad
+
+| Hoja | Procedencia | Presión (psig) | Filas | Curvas |
+|---|---|---:|---:|---:|
+| 50psig | celda | 50 | 186 | 10 |
+| 100psig | diseño experimental | 100 | 192 | 10 |
+| 150psig | diseño experimental | 150 | 192 | 10 |
+
+El contraste entre procedencias es el contraste entre 50 psig y las otras dos presiones. No se reajustó un modelo solo con la velocidad leída en la celda. Hacerlo dejaría fuera 100 y 150 psig y saldría del protocolo. La condición de 2.13 que pide repetir mapping sin esas filas queda no evaluable dentro de `2.14-A`.
+
+### 18.8 M5
+
+En las cinco curvas completas, el MAE por curva es 3,080 psi para M1, 1,048 psi para M2, 3,381 psi para M3, 1,206 psi para M4 y 2,078 psi para M5. No se compara con el MAE de las treinta curvas.
+
+### 18.9 Propuesta de ponderaciones
+
+No sustituye a la matriz de 2.13. En mapping, la ponderación equilibrada, la de tendencia observada y la de lectura ponen primero a M1. La que da más peso a la precisión pone primero a M4. En surging no hay nota de agua. Ahí la equilibrada, la de precisión y la de tendencia ponen primero a M4, y la de lectura pone primero a M1. Como el primer puesto cambia, la propuesta no selecciona un modelo.
+
+### 18.10 Lectura de la fase
+
+M4 tiene el mejor desempeño predictivo de este experimento, con un intervalo de la ventaja frente a M2 que queda bajo cero en estas curvas. M1 y M3 siguen mejor la caída local del agua. Ningún modelo cumple la regla completa de superioridad de 2.13. No hay un candidato científicamente definitivo.
+
+La ejecución completa del cuaderno, de la fase A a la D, está en `resultados/04_ejecucion_fase_d.ipynb`. Los intervalos también están en `docs/derivados/intervalos_bootstrap_fase_d.csv`. La fase E no está iniciada.

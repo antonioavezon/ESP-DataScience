@@ -61,16 +61,18 @@ def _texto_csv(tabla: pd.DataFrame, columna_extra: str) -> str:
 
 def _construir(raiz: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     hojas = ("50psig", "100psig", "150psig")
-    mapping = pd.ExcelFile(raiz / "data" / "raw" / "mapping.xlsx")
-    surging = pd.ExcelFile(raiz / "data" / "raw" / "surging.xlsx")
     partes_mapping = []
-    for hoja in hojas:
-        parte, _huecos = normalizar_mapping(pd.read_excel(mapping, sheet_name=hoja, header=None), hoja)
-        partes_mapping.append(parte)
     partes_surging = []
-    for hoja in hojas:
-        parte, _huecos = normalizar_surging(pd.read_excel(surging, sheet_name=hoja, header=None), hoja)
-        partes_surging.append(parte)
+    with (
+        pd.ExcelFile(raiz / "data" / "raw" / "mapping.xlsx") as mapping,
+        pd.ExcelFile(raiz / "data" / "raw" / "surging.xlsx") as surging,
+    ):
+        for hoja in hojas:
+            parte, _huecos = normalizar_mapping(pd.read_excel(mapping, sheet_name=hoja, header=None), hoja)
+            partes_mapping.append(parte)
+        for hoja in hojas:
+            parte, _huecos = normalizar_surging(pd.read_excel(surging, sheet_name=hoja, header=None), hoja)
+            partes_surging.append(parte)
     return pd.concat(partes_mapping, ignore_index=True), pd.concat(partes_surging, ignore_index=True)
 
 

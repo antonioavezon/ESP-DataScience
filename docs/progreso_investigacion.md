@@ -207,7 +207,11 @@ Pasan a la actividad 2.14, si se autoriza: regresión lineal, polinomio de grado
 
 Fase A cerrada y congelada en `2.14-A`. Fase B cerrada para la recta y el polinomio de grado 2 con cresta: 26 pruebas automatizadas terminaron correctamente y el cuaderno se ejecutó completo con nbconvert. Una ejecución reprodujo el MAE por curva: 3,999 psi y 1,364 psi en mapping, 2,312 psi y 1,114 psi en surging. Ese cierre no cierra la actividad.
 
-Fase C desarrollada, sin iniciar la fase D. M3, la recta por condición, cubre las 30 y las 18 curvas y tiene MAE por curva de 3,783 psi en mapping y 2,041 psi en surging. En la mayoría de las curvas no mejora al polinomio. M4, el bosque de 100 árboles, quedó con profundidad 7 y hoja mínima 3 en mapping, y con profundidad 5 o 7 y hoja mínima 3 en surging. Su MAE por curva es 1,044 psi y 0,754 psi. No tiene predicciones negativas y sí tiene subidas locales en las seis curvas de agua; la mayor, en agua a 50 psig y 3500 rpm, es de 11,291 psi. M5 solo entra en el MAE de 5 curvas de mapping, todas a 50 psig, con 2,078 psi. No usa el agua reservada para la prueba. No hay ganador. El detalle está en `docs/resultados_modelos_2_14.md`.
+Fase C cerrada en su desarrollo, sin reabrirla. M3 cubre las 30 y las 18 curvas, con MAE por curva de 3,783 psi y 2,041 psi. M4 queda en 1,044 psi y 0,754 psi. M5 entra solo en cinco curvas de 50 psig, con 2,078 psi.
+
+Antes de la fase D se cerraron los libros Excel de `tests/test_normalizacion.py` con un administrador de contexto. La normalización y las huellas no cambiaron. Las fases A, B y C no se reabren con ese mantenimiento.
+
+Fase D desarrollada. El intervalo del 95 % de la media pareada, con 10.000 réplicas y semilla 214, deja a M4 por debajo de M2 en los dos protocolos y deja a M3 frente a M1 cruzando el cero. La regla de superioridad de 2.13 no se cumple: el sesgo cambia de signo y la repetición sin la velocidad de diseño no es evaluable, porque esas filas son las de 100 y 150 psig. Una propuesta de ponderaciones cambia el primer puesto según el peso. No hay modelo definitivo. La fase E no está iniciada. El detalle está en `docs/resultados_modelos_2_14.md`.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

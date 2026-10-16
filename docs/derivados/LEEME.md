@@ -9,3 +9,5 @@ No sustituyen a `data/processed/mapping_long.csv` ni a `data/processed/surging_l
 ## Fase C
 
 `predicciones_negativas_fase_c.csv` lista las predicciones negativas de M3. M4 no aportó filas a ese archivo. `es_medicion` es falsa en todas las filas. No son mediciones y no sustituyen a los CSV de `data/processed/`.
+
+`intervalos_bootstrap_fase_d.csv` guarda las medias pareadas y los intervalos del 95 %. No son mediciones.
