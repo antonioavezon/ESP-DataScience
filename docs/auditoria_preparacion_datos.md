@@ -51,7 +51,7 @@ Disponibles, con la lectura del diccionario:
 - Psep, por el nombre de la hoja: 50, 100 y 150 psig.
 - Qmax de la TE-2700 a 3500 rpm: 4900 bpd. QBEP a 3500 rpm: 2700 bpd.
 
-No se derivan todavía, porque esta actividad no arma la tabla:
+No se derivan en la actividad 2.11 ni en la 2.12:
 
 - QG = Qgd × Qmax. Qmax está dado a 3500 rpm. A 1800 rpm la tesis no escribe otro número.
 - La fracción entre 0 y 1 a partir de `GVF0`. Si la columna está en porcentaje, habría que dividir por 100. El sufijo 0 no está definido y no se hace esa división aquí.
@@ -66,9 +66,9 @@ Siguen fuera de un dataset único:
 
 No se combinan filas de mapping con filas de surging. El primero fija el gas, en forma de Qgd, y varía el caudal líquido. El segundo fija un caudal líquido relativo a Qbep y registra `GVF0`. Las columnas no tienen el mismo significado confirmado.
 
-Tampoco se combinan las hojas de mapping entre sí mientras la velocidad falte en dos de ellas. Unirlas obligaría a inventar N.
+Las tres hojas de mapping pueden reunirse si la velocidad ausente en la celda queda marcada como asignación del diseño experimental. Guardar ese número como si la celda lo trajera seguiría siendo incorrecto.
 
-Dentro de una misma hoja, los bloques comparten el nombre de las columnas `Flow rate` y `DP2-3`, o `GVF0` y `DP2-3`. Eso permite, más adelante, una tabla larga por archivo, siempre que cada fila conserve la hoja, la velocidad si existe y la condición. Esta actividad no construye esa tabla.
+Dentro de una misma hoja, los bloques comparten el nombre de las columnas `Flow rate` y `DP2-3`, o `GVF0` y `DP2-3`. La actividad 2.12 construye una tabla larga por archivo. Cada fila conserva la hoja, la velocidad y la condición. Donde la celda de velocidad estaba vacía, el origen queda en `diseño_experimental`.
 
 ## Inconsistencias y datos faltantes
 
@@ -76,7 +76,7 @@ Dentro de una misma hoja, los bloques comparten el nombre de las columnas `Flow 
 - La segunda franja de mapping no repite `Qgd=0.005` y sí agrega `Qgd=0.02` hasta `Qgd=0.05`. Es el diseño de 3500 rpm frente al de 1800 rpm, no un error de copia.
 - `GVF0` supera 1. Se lee como porcentaje, que es la escala de las figuras, y no como fracción de 0 a 1.
 - El artículo de 2019 lista ΔP en Pa y Q en m³/s. La tesis de los mismos ensayos usa psi y bpd. Los Excel siguen a la tesis.
-- Hay celdas vacías dentro de las columnas con datos. El par incompleto ya se excluyó del conteo en la actividad 2.9 para Mapping/`50psig`. Sigue en el archivo.
+- Hay celdas vacías dentro de las columnas con datos. En las seis hojas, esas posiciones tienen las dos mediciones vacías a la vez. No apareció un par con una sola celda numérica. La actividad 2.12 no convierte esos huecos en filas.
 
 ## Riesgo de fuga entre entrenamiento y validación
 
@@ -90,3 +90,7 @@ Todavía no hay modelo. Estos riesgos quedan registrados para cuando exista una 
 - Calcular QG desde Qgd y desde el mismo caudal que luego se usa como entrada repetiría información.
 
 La validación futura tiene que separar curvas o condiciones completas, no filas sueltas de una misma curva. Esta actividad no elige todavía el esquema concreto.
+
+## Cierre en la actividad 2.12
+
+Los conteos de pares completos de esta auditoría se reprodujeron sin discrepancia al escribir `data/processed/mapping_long.csv` y `data/processed/surging_long.csv`. El procedimiento está en `docs/normalizacion_datos.md`.

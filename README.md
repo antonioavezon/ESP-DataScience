@@ -46,8 +46,8 @@ El kernel es el proceso de Python que ejecuta las celdas del cuaderno. Cada comp
 ESP-DataScience/
 - archive/                  el ZIP original se guarda aquí solo en cada equipo
 - data/raw/                 Excel de trabajo
-- data/processed/           reservado
-- docs/                     bitácora, diccionario 2.11 y guía de sincronización
+- data/processed/           tablas largas de la actividad 2.12
+- docs/                     bitácora, diccionario, normalización y guía de sincronización
 - notebooks/                cuadernos
 - results/figures/          reservado
 - results/models/           reservado; Git ignora los modelos generados
@@ -148,9 +148,11 @@ El detalle está en `docs/progreso_investigacion.md`.
 
 La actividad 2.11 está cerrada. El diccionario está en `docs/diccionario_variables.md`. Qmax de la TE-2700 a 3500 rpm es 4900 bpd. `Flow rate` se lee en bpd, `DP2-3` en psi y `GVF0` en porcentaje.
 
+La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping_long.csv` y `data/processed/surging_long.csv`. El procedimiento está en `docs/normalizacion_datos.md`.
+
 La siguiente actividad, todavía sin hacer, es:
 
-**2.12 — Tabla larga de mapping y tabla larga de surging, por separado.**
+**2.13 — Primer modelo, solo si se autoriza.**
 
 El plan está en `docs/plan_implementacion.md`. Este repositorio no incluye modelos entrenados.
 

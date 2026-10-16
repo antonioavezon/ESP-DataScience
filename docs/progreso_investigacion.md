@@ -179,11 +179,19 @@ Lectura de trabajo:
 - Psep de las hojas: 50, 100 y 150 psig.
 - A 1800 rpm el mapping usa Qgd = 0,005, 0,01 y 0,015. A 3500 rpm usa Qgd = 0,01, 0,02, 0,03, 0,04 y 0,05. Esa regla asigna la velocidad de Mapping/`100psig` y Mapping/`150psig`, cuyas celdas están vacías.
 
+## 2.12 — Normalización de los datos experimentales
+
+Quedó cerrada en `notebooks/02_normalizacion.ipynb`. Se escribieron `data/processed/mapping_long.csv` (570 filas) y `data/processed/surging_long.csv` (387 filas). Los Excel de `data/raw` conservan su SHA-256. No se entrenaron modelos y no se apilaron los dos protocolos.
+
+Mapping/`50psig` repite 186 pares, 10 condiciones, 62 a 1800 rpm y 124 a 3500 rpm. Las otras hojas repiten los totales de la auditoría: 192, 192, 119, 129 y 139. No hubo discrepancia.
+
+La velocidad de Mapping/`100psig` y Mapping/`150psig` no estaba en la celda. En la tabla queda con origen `diseño_experimental`. `GVF0` sigue en porcentaje y `DP2-3` en psi. El detalle está en `docs/normalizacion_datos.md`.
+
 ## Pendiente
 
-### 2.12 — Tabla larga, en dos archivos
+### 2.13 — Primer modelo, solo si se autoriza
 
-Armar la tabla de mapping y la de surging por separado, con las unidades del diccionario. No se apilan, no se entrenan modelos y no se modifica `data/raw`. El detalle está en `docs/plan_implementacion.md`.
+El ajuste no forma parte de la actividad 2.12. Haría falta elegir una sola tabla y validar por curvas completas. El modelo híbrido espera una predicción física calculable.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10

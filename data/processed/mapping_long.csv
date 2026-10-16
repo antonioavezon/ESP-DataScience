@@ -1,0 +1,571 @@
+archivo,hoja,psep_psig,psep_unidad,certeza_psep,fila,columna_condicion,columna_caudal,columna_dp,condicion,qgd,velocidad_rpm,velocidad_unidad,origen_velocidad,fila_celda_velocidad,columna_celda_velocidad,valor_celda_velocidad,certeza_velocidad,ql_bpd,ql_unidad,certeza_ql,dp2_3_psi,dp2_3_unidad,certeza_dp
+mapping.xlsx,50psig,50,psig,Alta,2,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,424.62110435238674,bpd,"Alta, como interpretación",8.38932958333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,3,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,606.3800149337804,bpd,"Alta, como interpretación",8.24228425,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,4,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,900.3731880776468,bpd,"Alta, como interpretación",7.771301499999994,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,5,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,1137.588485539214,bpd,"Alta, como interpretación",7.172060250000003,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,6,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,1326.8377345973981,bpd,"Alta, como interpretación",6.571054749999999,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,7,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,1522.9411127051208,bpd,"Alta, como interpretación",5.624306083333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,8,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,1732.7328366851712,bpd,"Alta, como interpretación",4.545451,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,9,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,1918.1256540987727,bpd,"Alta, como interpretación",3.4992855000000014,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,10,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,2115.5344128183438,bpd,"Alta, como interpretación",2.2746691666666674,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,11,1,1,2,Single Phase,,1800,rpm,celda,2,0,1800,Alta,2360.1051437547494,bpd,"Alta, como interpretación",0.47710391666666685,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,2,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,2351.75021571697,bpd,"Alta, como interpretación",0.395417,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,3,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,2251.8750028768377,bpd,"Alta, como interpretación",1.1485309166666662,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,4,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,2036.5831595551865,bpd,"Alta, como interpretación",2.5851319999999998,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,5,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1911.3822418297038,bpd,"Alta, como interpretación",3.3791715833333322,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,6,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1797.2177787455707,bpd,"Alta, como interpretación",3.9852276666666677,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,7,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1716.1755420165405,bpd,"Alta, como interpretación",4.544299916666665,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,8,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1599.3038942892542,bpd,"Alta, como interpretación",5.107234999999998,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,9,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1512.6311359731887,bpd,"Alta, como interpretación",5.550768000000004,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,10,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1409.3435175371274,bpd,"Alta, como interpretación",6.00393325,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,11,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1308.715328307194,bpd,"Alta, como interpretación",6.308933499999999,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,12,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1202.7261917785133,bpd,"Alta, como interpretación",6.736438166666669,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,13,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,1105.759104555595,bpd,"Alta, como interpretación",6.806358500000004,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,14,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,999.238934889835,bpd,"Alta, como interpretación",6.280375,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,15,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,925.621696966492,bpd,"Alta, como interpretación",6.6368081666666665,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,16,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,800.7534260396372,bpd,"Alta, como interpretación",5.223444666666669,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,17,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,705.5192094581334,bpd,"Alta, como interpretación",6.2798119166666675,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,18,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,699.8366232589154,bpd,"Alta, como interpretación",5.311095499999999,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,19,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,530.3094529435517,bpd,"Alta, como interpretación",3.0787781666666674,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,20,4,4,5,Qgd=0.005,0.005,1800,rpm,celda,2,0,1800,Alta,134.2241498098758,bpd,"Alta, como interpretación",0.34601766666666706,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,2,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,2316.3741062748422,bpd,"Alta, como interpretación",0.4209446666666663,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,3,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,2195.8420041142585,bpd,"Alta, como interpretación",1.2677443333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,4,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,2027.3753516359013,bpd,"Alta, como interpretación",2.4631275833333337,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,5,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1903.9204757592856,bpd,"Alta, como interpretación",3.1405435833333337,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,6,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1802.9313572616272,bpd,"Alta, como interpretación",3.784445333333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,7,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1695.5813538641164,bpd,"Alta, como interpretación",4.3316022499999995,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,8,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1607.6378244809625,bpd,"Alta, como interpretación",4.670272583333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,9,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1506.017730409574,bpd,"Alta, como interpretación",5.281398583333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,10,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1400.3781534061995,bpd,"Alta, como interpretación",5.658465833333338,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,11,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1308.5182122840722,bpd,"Alta, como interpretación",6.09352475,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,12,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1213.419312366185,bpd,"Alta, como interpretación",5.8094920000000005,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,13,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1087.6885470307407,bpd,"Alta, como interpretación",5.584664583333327,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,14,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,1017.9837818657596,bpd,"Alta, como interpretación",5.61481875,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,15,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,900.6169069551144,bpd,"Alta, como interpretación",4.321200666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,16,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,784.7661544927261,bpd,"Alta, como interpretación",3.910519166666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,17,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,720.8289598625654,bpd,"Alta, como interpretación",4.31615566666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,18,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,589.9852745710948,bpd,"Alta, como interpretación",3.3450432500000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,19,7,7,8,Qgd=0.01,0.01,1800,rpm,celda,2,0,1800,Alta,495.3431160316084,bpd,"Alta, como interpretación",3.0177755833333326,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,2,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,2278.3175472916805,bpd,"Alta, como interpretación",0.46785975,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,3,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,2144.048732867409,bpd,"Alta, como interpretación",1.2814255,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,4,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1983.6976409914578,bpd,"Alta, como interpretación",1.887017916666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,5,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1945.3910958211627,bpd,"Alta, como interpretación",2.2355655000000008,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,6,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1820.7552120588534,bpd,"Alta, como interpretación",2.816368083333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,7,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1710.3925278770157,bpd,"Alta, como interpretación",3.555644416666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,8,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1601.5426889747087,bpd,"Alta, como interpretación",3.8532030833333346,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,9,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1497.7052740152985,bpd,"Alta, como interpretación",4.32257775,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,10,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1413.8547483642903,bpd,"Alta, como interpretación",4.657974666666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,11,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1302.7645156122383,bpd,"Alta, como interpretación",5.4094554166666695,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,12,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1221.2870172168164,bpd,"Alta, como interpretación",5.249912583333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,13,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1195.665462106168,bpd,"Alta, como interpretación",4.695964750000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,14,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,1053.2848703200525,bpd,"Alta, como interpretación",4.209197333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,15,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,977.8246999014021,bpd,"Alta, como interpretación",4.09316925,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,16,10,10,11,Qgd=0.015,0.015,1800,rpm,celda,2,0,1800,Alta,719.3835758225028,bpd,"Alta, como interpretación",2.8602281666666682,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,288.7837199409525,bpd,"Alta, como interpretación",31.209657833333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,717.054185593702,bpd,"Alta, como interpretación",31.146445833333345,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,926.0468545284464,bpd,"Alta, como interpretación",30.923790166666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,1095.0605502840842,bpd,"Alta, como interpretación",30.574136333333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,1286.7724398996493,bpd,"Alta, como interpretación",30.23497216666668,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,1493.5347093154817,bpd,"Alta, como interpretación",29.631781000000007,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,1703.65527637099,bpd,"Alta, como interpretación",29.033121833333325,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,1898.389196605813,bpd,"Alta, como interpretación",28.412183583333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,2097.7988390685773,bpd,"Alta, como interpretación",27.57153075000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,2299.0568904973834,bpd,"Alta, como interpretación",26.67758025000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,2499.8102764025007,bpd,"Alta, como interpretación",25.21746458333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,2699.470813646564,bpd,"Alta, como interpretación",23.869615999999997,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,2899.396116854738,bpd,"Alta, como interpretación",22.337984416666664,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,3099.0098306025557,bpd,"Alta, como interpretación",20.567919416666655,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,3299.7206452754535,bpd,"Alta, como interpretación",18.637052999999998,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,39,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,3499.1112806547894,bpd,"Alta, como interpretación",16.535219750000003,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,40,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,3700.0993901536185,bpd,"Alta, como interpretación",14.270489250000006,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,41,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,3901.356684567136,bpd,"Alta, como interpretación",11.877369833333328,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,42,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,4099.060272134275,bpd,"Alta, como interpretación",9.407645833333328,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,43,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,4402.579134637948,bpd,"Alta, como interpretación",5.183621000000003,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,44,1,1,2,Single Phase,,3500,rpm,celda,24,0,3500,Alta,4702.522256658226,bpd,"Alta, como interpretación",0.6562805833333327,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,4567.759727694455,bpd,"Alta, como interpretación",0.9164995833333329,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,4361.273619495858,bpd,"Alta, como interpretación",4.042337250000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,4064.2177442678335,bpd,"Alta, como interpretación",8.183366333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3911.044406660323,bpd,"Alta, como interpretación",10.173357333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3768.7884390131894,bpd,"Alta, como interpretación",11.901884250000005,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3650.8340356189506,bpd,"Alta, como interpretación",13.255215416666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3472.3142065398038,bpd,"Alta, como interpretación",15.295638666666665,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3249.0825195248417,bpd,"Alta, como interpretación",17.649165916666675,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3177.721158296053,bpd,"Alta, como interpretación",18.41752683333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,3039.1839218384957,bpd,"Alta, como interpretación",19.78634100000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2979.5311272572017,bpd,"Alta, como interpretación",20.328923166666673,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2848.1494077327384,bpd,"Alta, como interpretación",21.755416499999992,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2778.286400536673,bpd,"Alta, como interpretación",22.332946333333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2614.913830714811,bpd,"Alta, como interpretación",23.90804366666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2413.492865567981,bpd,"Alta, como interpretación",25.10658799999999,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,39,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2260.495635579981,bpd,"Alta, como interpretación",26.089937000000006,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,40,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2236.675007101933,bpd,"Alta, como interpretación",26.197208333333332,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,41,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2114.1785656219536,bpd,"Alta, como interpretación",26.919360833333336,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,42,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,2057.810922163464,bpd,"Alta, como interpretación",27.1948325,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,43,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,1717.8891934021158,bpd,"Alta, como interpretación",28.42950091666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,44,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,1423.8145612306264,bpd,"Alta, como interpretación",28.904158000000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,45,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,1307.6929481051645,bpd,"Alta, como interpretación",29.035875666666673,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,46,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,901.0324737119716,bpd,"Alta, como interpretación",31.056334166666684,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,47,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,717.7952946770829,bpd,"Alta, como interpretación",17.454079500000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,48,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,337.8836709823696,bpd,"Alta, como interpretación",3.5513506666666665,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,49,4,4,5,Qgd=0.01,0.01,3500,rpm,celda,24,0,3500,Alta,1.3529877894381905,bpd,"Alta, como interpretación",0.27426439024390253,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,4494.9434770682155,bpd,"Alta, como interpretación",0.7064236666666663,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,4337.4620398198185,bpd,"Alta, como interpretación",3.272205333333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,4038.46762269103,bpd,"Alta, como interpretación",7.7410714999999986,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,3812.9889222855495,bpd,"Alta, como interpretación",10.421097666666663,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,3522.1240268634297,bpd,"Alta, como interpretación",14.012672833333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,3515.742449314837,bpd,"Alta, como interpretación",14.031211,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,3338.427269992531,bpd,"Alta, como interpretación",16.0392025,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,3101.005172825357,bpd,"Alta, como interpretación",18.69446883333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2932.1063358416777,bpd,"Alta, como interpretación",20.55977666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2744.9207695964924,bpd,"Alta, como interpretación",22.173640833333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2555.655610163277,bpd,"Alta, como interpretación",23.80656666666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2409.1429384959624,bpd,"Alta, como interpretación",24.917792000000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2321.272778393164,bpd,"Alta, como interpretación",25.40377050000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2225.703629466507,bpd,"Alta, como interpretación",25.658118833333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,2112.1403371045853,bpd,"Alta, como interpretación",26.539828,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,39,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,1939.589860843243,bpd,"Alta, como interpretación",27.158476666666665,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,40,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,1725.7407850952634,bpd,"Alta, como interpretación",27.430575000000008,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,41,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,1586.120787714058,bpd,"Alta, como interpretación",27.51232433333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,42,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,1479.252814321466,bpd,"Alta, como interpretación",25.446196916666672,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,43,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,1233.7027577862414,bpd,"Alta, como interpretación",25.842133833333342,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,44,7,7,8,Qgd=0.02,0.02,3500,rpm,celda,24,0,3500,Alta,783.3178522407633,bpd,"Alta, como interpretación",10.783131666666664,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,4396.837899209814,bpd,"Alta, como interpretación",0.5961730000000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,4161.97754570687,bpd,"Alta, como interpretación",4.616372666666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3991.039730957923,bpd,"Alta, como interpretación",7.282380166666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3777.140283778708,bpd,"Alta, como interpretación",9.997654500000003,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3482.0320371610323,bpd,"Alta, como interpretación",13.520911000000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3305.642168641752,bpd,"Alta, como interpretación",15.227239499999994,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3161.570738709034,bpd,"Alta, como interpretación",16.50362666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,3051.495485127677,bpd,"Alta, como interpretación",18.153364333333336,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2906.575050321637,bpd,"Alta, como interpretación",19.180260166666674,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2775.1223679049353,bpd,"Alta, como interpretación",20.908755333333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2577.7218893040563,bpd,"Alta, como interpretación",19.463498166666675,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2452.275212522936,bpd,"Alta, como interpretación",19.26829283333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2367.499411148617,bpd,"Alta, como interpretación",17.880189833333336,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2204.963886893843,bpd,"Alta, como interpretación",24.86568283333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,2063.7974069738116,bpd,"Alta, como interpretación",25.55860716666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,39,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,1841.4319259265906,bpd,"Alta, como interpretación",22.318902333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,40,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,1901.7704137080746,bpd,"Alta, como interpretación",24.420209166666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,41,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,1605.4008185047771,bpd,"Alta, como interpretación",21.494984999999996,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,42,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,1132.471656964915,bpd,"Alta, como interpretación",8.830565833333337,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,43,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,651.8345392560219,bpd,"Alta, como interpretación",9.086254666666672,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,44,10,10,11,Qgd=0.03,0.03,3500,rpm,celda,24,0,3500,Alta,63.87182639215154,bpd,"Alta, como interpretación",0.3299456666666664,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,4263.686967969283,bpd,"Alta, como interpretación",0.47015049999999997,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,4179.539194688038,bpd,"Alta, como interpretación",2.175902666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,4078.9636376372646,bpd,"Alta, como interpretación",3.8756083333333327,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,3936.6261478298297,bpd,"Alta, como interpretación",6.5365201666666675,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,3702.050330523026,bpd,"Alta, como interpretación",9.133117833333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,3506.26723941042,bpd,"Alta, como interpretación",10.471391666666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,3299.3557486267823,bpd,"Alta, como interpretación",12.516658333333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,3099.80106748847,bpd,"Alta, como interpretación",14.928829833333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2789.1253097641315,bpd,"Alta, como interpretación",14.736259083333328,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2692.120871252887,bpd,"Alta, como interpretación",15.716490916666661,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2639.1537351848983,bpd,"Alta, como interpretación",16.84744791666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2447.5735824914177,bpd,"Alta, como interpretación",17.46952625000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2416.234361482914,bpd,"Alta, como interpretación",18.261675249999996,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2357.151253318793,bpd,"Alta, como interpretación",18.19020908333334,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2260.6833344366137,bpd,"Alta, como interpretación",17.667435249999997,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,39,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,2079.0740109891026,bpd,"Alta, como interpretación",17.271905333333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,40,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,1930.5236439519351,bpd,"Alta, como interpretación",17.530734999999993,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,41,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,1993.232852121748,bpd,"Alta, como interpretación",17.690579583333328,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,42,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,1714.8510296122338,bpd,"Alta, como interpretación",15.744716666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,43,13,13,14,Qgd=0.04,0.04,3500,rpm,celda,24,0,3500,Alta,1426.6422322964356,bpd,"Alta, como interpretación",12.171761083333339,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,24,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,4027.9211290748503,bpd,"Alta, como interpretación",0.08009041666666666,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,25,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,3789.964207974314,bpd,"Alta, como interpretación",3.640792750000001,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,26,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,3654.1611470921907,bpd,"Alta, como interpretación",4.855502750000002,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,27,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,3462.3495277381026,bpd,"Alta, como interpretación",6.732032083333335,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,28,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,3270.2973528247708,bpd,"Alta, como interpretación",8.313970083333333,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,29,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,3111.0284779731696,bpd,"Alta, como interpretación",10.755268166666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,30,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2789.3143597467156,bpd,"Alta, como interpretación",11.985805750000004,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,31,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2654.9323662252555,bpd,"Alta, como interpretación",12.912338666666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,32,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2668.811096771807,bpd,"Alta, como interpretación",12.675696249999998,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,33,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2326.2836754258105,bpd,"Alta, como interpretación",15.230293416666667,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,34,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2210.987235588746,bpd,"Alta, como interpretación",14.475376166666669,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,35,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,2059.7823232201463,bpd,"Alta, como interpretación",14.549214999999997,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,36,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,1818.5660641983904,bpd,"Alta, como interpretación",14.437731749999996,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,37,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,1611.0723023751825,bpd,"Alta, como interpretación",13.240251166666662,psi,Media
+mapping.xlsx,50psig,50,psig,Alta,38,16,16,17,Qgd=0.05,0.05,3500,rpm,celda,24,0,3500,Alta,533.4229609134728,bpd,"Alta, como interpretación",1.8620716666666663,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,2,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,701.5114984328628,bpd,"Alta, como interpretación",8.059971833333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,3,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,899.4838694124533,bpd,"Alta, como interpretación",7.790415000000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,4,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1124.3381492986632,bpd,"Alta, como interpretación",7.227731000000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,5,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1320.621390878015,bpd,"Alta, como interpretación",6.631549333333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,6,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1535.2522057494753,bpd,"Alta, como interpretación",5.5351471666666665,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,7,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1757.60056120714,bpd,"Alta, como interpretación",4.3742918333333325,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,8,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1948.6564709521613,bpd,"Alta, como interpretación",3.270002166666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,9,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,2159.9611248946585,bpd,"Alta, como interpretación",1.9315806666666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,10,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,2349.1181670440933,bpd,"Alta, como interpretación",0.5431136666666662,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,2,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,2286.6876876195183,bpd,"Alta, como interpretación",0.622346666666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,3,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,2113.6744425140064,bpd,"Alta, como interpretación",1.8371125000000001,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,4,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1911.735275234081,bpd,"Alta, como interpretación",3.135454999999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,5,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1704.369028889155,bpd,"Alta, como interpretación",4.288523999999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,6,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1501.8270240922043,bpd,"Alta, como interpretación",5.351244833333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,7,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1302.4633619745525,bpd,"Alta, como interpretación",6.419985,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,8,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1101.2366091978126,bpd,"Alta, como interpretación",6.7791023333333325,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,9,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,999.1515763846539,bpd,"Alta, como interpretación",7.019945666666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,10,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,901.7810831093166,bpd,"Alta, como interpretación",5.9233608333333345,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,11,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,798.7072714230737,bpd,"Alta, como interpretación",5.383733083333331,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,12,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,709.1297362950353,bpd,"Alta, como interpretación",5.13096075,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,13,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,601.8626470252062,bpd,"Alta, como interpretación",5.047039916666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,14,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,504.63020865924756,bpd,"Alta, como interpretación",3.4996302500000005,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,15,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,398.80555759080886,bpd,"Alta, como interpretación",3.169977916666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,2,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,2293.526081573962,bpd,"Alta, como interpretación",0.33846991666666704,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,3,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,2101.7585154818207,bpd,"Alta, como interpretación",1.683570666666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,4,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1900.462447172699,bpd,"Alta, como interpretación",2.962956916666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,5,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1699.96951129811,bpd,"Alta, como interpretación",4.116382166666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,6,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1400.058263031557,bpd,"Alta, como interpretación",5.498577750000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,7,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1299.171307804744,bpd,"Alta, como interpretación",5.892267916666668,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,8,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1199.3218696397455,bpd,"Alta, como interpretación",6.096522166666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,9,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1094.1690861392165,bpd,"Alta, como interpretación",5.3009005333333326,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,10,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,995.1209147876253,bpd,"Alta, como interpretación",5.342940700000004,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,11,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,901.9609838453156,bpd,"Alta, como interpretación",4.981084333333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,12,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,822.7173564972601,bpd,"Alta, como interpretación",5.082834266666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,13,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,693.6156100338937,bpd,"Alta, como interpretación",3.938910066666665,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,14,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,601.4746782993103,bpd,"Alta, como interpretación",4.1658912,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,15,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,500.42126816363464,bpd,"Alta, como interpretación",2.968118799999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,16,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,179.93790115541202,bpd,"Alta, como interpretación",0.23915216666666678,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,2,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,2257.299929371806,bpd,"Alta, como interpretación",0.3424188333333337,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,3,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,2002.3365362345946,bpd,"Alta, como interpretación",2.0888832500000003,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,4,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1798.0224592697855,bpd,"Alta, como interpretación",3.2387224166666684,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,5,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1699.9321360803722,bpd,"Alta, como interpretación",3.7047112500000003,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,6,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1601.1914096012852,bpd,"Alta, como interpretación",4.158139750000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,7,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1499.588373674254,bpd,"Alta, como interpretación",4.595413916666668,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,8,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1400.8392631734393,bpd,"Alta, como interpretación",5.165733916666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,9,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1298.0157027615933,bpd,"Alta, como interpretación",5.570607533333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,10,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1201.445544030262,bpd,"Alta, como interpretación",5.886125733333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,11,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1092.373403280788,bpd,"Alta, como interpretación",4.409392733333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,12,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,999.1354555185185,bpd,"Alta, como interpretación",4.307750899999996,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,13,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,902.1746652643889,bpd,"Alta, como interpretación",3.9324412666666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,14,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,800.856998100256,bpd,"Alta, como interpretación",3.6441430333333322,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,15,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,700.9205372222875,bpd,"Alta, como interpretación",2.7960621800947862,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,16,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,595.2720763955974,bpd,"Alta, como interpretación",2.422260266666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,17,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,503.2437855400867,bpd,"Alta, como interpretación",1.828882916666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,18,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,56.809142467872746,bpd,"Alta, como interpretación",0.14689846846846824,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,1095.2251847499815,bpd,"Alta, como interpretación",30.873209333333346,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,1284.2728195967125,bpd,"Alta, como interpretación",30.388806666666675,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,1487.0418296103935,bpd,"Alta, como interpretación",29.711216,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,1701.9116627284936,bpd,"Alta, como interpretación",28.997573333333342,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,1904.3100237313731,bpd,"Alta, como interpretación",28.223199499999996,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,2099.24704102246,bpd,"Alta, como interpretación",27.28824233333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,2302.523071901253,bpd,"Alta, como interpretación",26.176316333333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,2507.5056388388853,bpd,"Alta, como interpretación",24.896637166666657,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,2710.8485816965363,bpd,"Alta, como interpretación",23.617557666666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,2906.3240483730633,bpd,"Alta, como interpretación",21.266320999999994,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,3106.5008440932547,bpd,"Alta, como interpretación",19.394016166666663,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,3306.367831187231,bpd,"Alta, como interpretación",17.397090833333326,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,3509.940963949311,bpd,"Alta, como interpretación",15.201941500000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,3703.7932151261252,bpd,"Alta, como interpretación",13.016995666666674,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,3906.1689035849654,bpd,"Alta, como interpretación",10.647821333333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,4118.042486803282,bpd,"Alta, como interpretación",8.070085333333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,4366.566061883613,bpd,"Alta, como interpretación",4.672075333333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,1,1,2,Single Phase,,3500,rpm,diseño_experimental,22,0,,Alta,4611.235537009804,bpd,"Alta, como interpretación",1.1455894999999998,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,4587.775049863409,bpd,"Alta, como interpretación",0.7651241666666668,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,4368.6509992447445,bpd,"Alta, como interpretación",3.922873916666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,4233.773664662513,bpd,"Alta, como interpretación",5.873261000000001,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,4151.566361176546,bpd,"Alta, como interpretación",6.983764999999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,4074.4634460557995,bpd,"Alta, como interpretación",8.013871166666663,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3993.4849055270242,bpd,"Alta, como interpretación",9.077367833333328,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3867.4975186877605,bpd,"Alta, como interpretación",10.656238500000004,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3797.037876704057,bpd,"Alta, como interpretación",11.55277533333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3714.7730071755827,bpd,"Alta, como interpretación",12.496399916666663,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3593.5009859581937,bpd,"Alta, como interpretación",13.972123583333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3496.424065225626,bpd,"Alta, como interpretación",15.064227666666675,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3396.282865810629,bpd,"Alta, como interpretación",16.11487516666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3285.975613928747,bpd,"Alta, como interpretación",17.328364166666674,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3141.504026549455,bpd,"Alta, como interpretación",18.704288999999992,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,3003.9675135083025,bpd,"Alta, como interpretación",20.100566000000004,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2883.7850813384853,bpd,"Alta, como interpretación",21.12805033333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2747.9272234594387,bpd,"Alta, como interpretación",22.25894449999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2624.353328060861,bpd,"Alta, como interpretación",23.181885416666674,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,40,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2510.093578595524,bpd,"Alta, como interpretación",23.97815866666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,41,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2335.183577189315,bpd,"Alta, como interpretación",25.577695750000007,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,42,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,2172.1915038721013,bpd,"Alta, como interpretación",26.452001916666678,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,43,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,1989.6735169092537,bpd,"Alta, como interpretación",27.47141783333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,44,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,1798.2827957512354,bpd,"Alta, como interpretación",28.043326916666654,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,45,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,1702.0625698700733,bpd,"Alta, como interpretación",28.52052008333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,46,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,1451.6079105717092,bpd,"Alta, como interpretación",28.43846974999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,47,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,1145.9921075867444,bpd,"Alta, como interpretación",27.712386666666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,48,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,971.1432793001499,bpd,"Alta, como interpretación",22.716265583333325,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,49,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,641.7207951534926,bpd,"Alta, como interpretación",7.684986585365852,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,50,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,325.2436604359185,bpd,"Alta, como interpretación",3.2319753333333323,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,51,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,22,0,,Alta,44.68101931519537,bpd,"Alta, como interpretación",0.357734,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,4509.584213726807,bpd,"Alta, como interpretación",0.7397327500000005,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,4349.508406441898,bpd,"Alta, como interpretación",3.184072333333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,4209.924052636864,bpd,"Alta, como interpretación",5.0849606666666665,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,4091.0287630239145,bpd,"Alta, como interpretación",6.764608249999998,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3743.9015404638058,bpd,"Alta, como interpretación",11.264416500000001,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3540.88652572495,bpd,"Alta, como interpretación",13.635743499999997,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3447.8483612952477,bpd,"Alta, como interpretación",14.622165083333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3353.5927416033583,bpd,"Alta, como interpretación",15.806959333333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3239.229848836876,bpd,"Alta, como interpretación",17.07482866666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,3104.8752588509647,bpd,"Alta, como interpretación",18.498970500000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2975.6635018954703,bpd,"Alta, como interpretación",19.72675349999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2849.0285175043086,bpd,"Alta, como interpretación",20.87958391666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2712.3730621700092,bpd,"Alta, como interpretación",22.03318474999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2589.5284831543995,bpd,"Alta, como interpretación",23.010074499999995,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2486.8376884427967,bpd,"Alta, como interpretación",24.07458466666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2359.66067274297,bpd,"Alta, como interpretación",24.94469708333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2262.4933588227595,bpd,"Alta, como interpretación",25.40559783333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,2109.272822323188,bpd,"Alta, como interpretación",26.335216416666672,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,40,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,1863.2083773144088,bpd,"Alta, como interpretación",27.51714533333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,41,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,1707.6475850203135,bpd,"Alta, como interpretación",26.882234833333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,42,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,1306.3289362159867,bpd,"Alta, como interpretación",23.040985833333327,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,43,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,1198.0966182343284,bpd,"Alta, como interpretación",20.629641333333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,44,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,1019.6299951989064,bpd,"Alta, como interpretación",17.979863833333344,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,45,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,856.133536746169,bpd,"Alta, como interpretación",11.952704416666668,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,46,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,22,0,,Alta,811.9609468113586,bpd,"Alta, como interpretación",12.369043750000003,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,4298.124372371903,bpd,"Alta, como interpretación",2.869585500000001,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,4099.7231606116175,bpd,"Alta, como interpretación",5.773836833333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,3901.628447602976,bpd,"Alta, como interpretación",8.399900916666663,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,3701.6290202803575,bpd,"Alta, como interpretación",10.86151358333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,3499.405624640226,bpd,"Alta, como interpretación",13.09435083333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,3298.809414384536,bpd,"Alta, como interpretación",15.324716750000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,3099.115657088794,bpd,"Alta, como interpretación",17.356458750000005,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,2899.490260278768,bpd,"Alta, como interpretación",19.51600783333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,2699.1546806054425,bpd,"Alta, como interpretación",21.293063818181807,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,2501.0707926467785,bpd,"Alta, como interpretación",22.69032466666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,2294.6510901649385,bpd,"Alta, como interpretación",22.827010500000004,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,2101.0961404252853,bpd,"Alta, como interpretación",24.24097516666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1949.0025022011125,bpd,"Alta, como interpretación",21.848907333333322,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1824.2268923917302,bpd,"Alta, como interpretación",19.97126383333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1706.9573572235033,bpd,"Alta, como interpretación",21.914954166666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1497.666305081908,bpd,"Alta, como interpretación",20.56279366666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1301.6535810920996,bpd,"Alta, como interpretación",16.456641999999995,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,1108.2010996291956,bpd,"Alta, como interpretación",10.357160500000003,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,40,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,942.0284595375776,bpd,"Alta, como interpretación",10.325867833333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,41,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,700.6102418168268,bpd,"Alta, como interpretación",5.069263749999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,42,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,501.013152941351,bpd,"Alta, como interpretación",2.308365083333333,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,43,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,22,0,,Alta,171.7684592167566,bpd,"Alta, como interpretación",0.28129141666666624,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,4327.916184703945,bpd,"Alta, como interpretación",1.4502573333333337,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,4122.787302183084,bpd,"Alta, como interpretación",4.304546666666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,3902.3241676880302,bpd,"Alta, como interpretación",7.269751166666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,3705.1612414745955,bpd,"Alta, como interpretación",9.6125255,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,3503.2838672121925,bpd,"Alta, como interpretación",11.919615333333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,3301.060879022297,bpd,"Alta, como interpretación",13.817092833333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,3098.4228153950608,bpd,"Alta, como interpretación",15.832568499999995,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,2901.2402546209237,bpd,"Alta, como interpretación",18.02054433333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,2699.5172452194165,bpd,"Alta, como interpretación",19.041056000000008,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,2491.7244682426876,bpd,"Alta, como interpretación",17.62655711111112,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,2276.3744615439546,bpd,"Alta, como interpretación",18.155648499999998,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,2103.3741545249604,bpd,"Alta, como interpretación",18.97086049999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,1814.7456556009772,bpd,"Alta, como interpretación",17.47840699999999,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,1695.1301734980007,bpd,"Alta, como interpretación",17.677111249999996,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,1447.1026685651336,bpd,"Alta, como interpretación",14.099567083333332,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,1299.9074704260713,bpd,"Alta, como interpretación",11.838954583333335,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,1108.821220234938,bpd,"Alta, como interpretación",8.700043916666669,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,906.3728426854515,bpd,"Alta, como interpretación",6.6384912499999995,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,40,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,700.8304403051746,bpd,"Alta, como interpretación",3.5439350833333316,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,41,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,22,0,,Alta,223.87881676483232,bpd,"Alta, como interpretación",0.32093316666666627,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,22,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,4296.827403986341,bpd,"Alta, como interpretación",0.6114314166666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,23,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,4104.54520514965,bpd,"Alta, como interpretación",3.4790149166666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,24,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3907.081377630641,bpd,"Alta, como interpretación",5.926483499999998,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,25,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3699.172286150711,bpd,"Alta, como interpretación",7.962556666666671,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,26,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3499.1896064704333,bpd,"Alta, como interpretación",9.899212750000006,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,27,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3402.239803316792,bpd,"Alta, como interpretación",11.055567416666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,28,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3301.383824706582,bpd,"Alta, como interpretación",11.542310416666673,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,29,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,3099.3173622120858,bpd,"Alta, como interpretación",13.144494749999994,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,30,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2866.864830373215,bpd,"Alta, como interpretación",12.679262916666671,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,31,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2784.7425481488663,bpd,"Alta, como interpretación",13.932056583333326,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,32,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2680.8821836130337,bpd,"Alta, como interpretación",14.365150583333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,33,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2569.104969592345,bpd,"Alta, como interpretación",14.089116249999995,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,34,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2482.240161714619,bpd,"Alta, como interpretación",14.749627583333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,35,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2268.986861300818,bpd,"Alta, como interpretación",14.331810583333334,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,36,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,2067.2213927672856,bpd,"Alta, como interpretación",14.47294125,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,37,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,1825.0120856816907,bpd,"Alta, como interpretación",13.323246250000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,38,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,1704.0779605167616,bpd,"Alta, como interpretación",14.84246346666667,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,39,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,1456.994295769137,bpd,"Alta, como interpretación",12.875872066666666,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,40,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,1294.3889060357228,bpd,"Alta, como interpretación",9.139086933333331,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,41,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,1105.4685463573937,bpd,"Alta, como interpretación",7.036643166666664,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,42,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,912.6505887688312,bpd,"Alta, como interpretación",4.508213250000002,psi,Media
+mapping.xlsx,100psig,100,psig,Alta,43,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,22,0,,Alta,687.1452437338672,bpd,"Alta, como interpretación",2.9664679166666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,2,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,565.6511818109807,bpd,"Alta, como interpretación",8.265065666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,3,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,763.645558645496,bpd,"Alta, como interpretación",7.9759701666666665,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,4,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,913.509844657905,bpd,"Alta, como interpretación",7.7376305,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,5,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1101.8873230820104,bpd,"Alta, como interpretación",7.262829333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,6,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1317.939997739039,bpd,"Alta, como interpretación",6.527707333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,7,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1503.9837842372085,bpd,"Alta, como interpretación",5.6115889999999995,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,8,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1714.6280646353318,bpd,"Alta, como interpretación",4.5435998333333325,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,9,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,1914.9896968871199,bpd,"Alta, como interpretación",3.347297333333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,10,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,2107.410349638152,bpd,"Alta, como interpretación",2.1009485,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,11,1,1,2,Single Phase,,1800,rpm,diseño_experimental,2,0,,Alta,2350.6537090054044,bpd,"Alta, como interpretación",0.3454666666666669,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,2,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,2308.9250489107335,bpd,"Alta, como interpretación",0.39218166666666704,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,3,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,2112.7476868543768,bpd,"Alta, como interpretación",1.785391666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,4,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,2019.1570792778919,bpd,"Alta, como interpretación",2.378956,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,5,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1910.2340988869992,bpd,"Alta, como interpretación",3.078590333333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,6,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1803.7445726252652,bpd,"Alta, como interpretación",3.7319110000000006,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,7,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1705.7256983137634,bpd,"Alta, como interpretación",4.292454666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,8,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1607.7818852339367,bpd,"Alta, como interpretación",4.846289333333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,9,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1506.5351545399956,bpd,"Alta, como interpretación",5.385453666666669,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,10,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1397.5892958030797,bpd,"Alta, como interpretación",5.861982666666669,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,11,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1307.3749839560119,bpd,"Alta, como interpretación",6.171231333333332,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,12,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1215.4707164696538,bpd,"Alta, como interpretación",6.527144333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,13,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1102.6278014530394,bpd,"Alta, como interpretación",7.072342666666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,14,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,1000.4687196288316,bpd,"Alta, como interpretación",6.999094499999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,15,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,899.8278223630931,bpd,"Alta, como interpretación",6.925278166666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,16,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,800.3398134230061,bpd,"Alta, como interpretación",5.785732866666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,17,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,696.0290832841175,bpd,"Alta, como interpretación",5.663297866666663,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,18,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,601.3583096609829,bpd,"Alta, como interpretación",5.329297266666671,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,19,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,500.8651942188381,bpd,"Alta, como interpretación",4.226454766666664,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,20,4,4,5,Qgd=0.005,0.005,1800,rpm,diseño_experimental,2,0,,Alta,400.6587068755085,bpd,"Alta, como interpretación",3.520781933333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,2,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,2278.7468205918954,bpd,"Alta, como interpretación",0.38493433333333354,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,3,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,2101.7513246805147,bpd,"Alta, como interpretación",1.6274381666666655,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,4,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,2003.9894160006406,bpd,"Alta, como interpretación",2.254146666666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,5,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1895.3938944371896,bpd,"Alta, como interpretación",2.8970920000000002,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,6,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1808.9719699494642,bpd,"Alta, como interpretación",3.4545559999999993,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,7,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1716.7331187332043,bpd,"Alta, como interpretación",4.005010333333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,8,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1599.9545944900642,bpd,"Alta, como interpretación",4.57697,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,9,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1503.3993167341378,bpd,"Alta, como interpretación",5.107823000000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,10,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1402.955667665982,bpd,"Alta, como interpretación",5.561169666666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,11,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1303.7191258751345,bpd,"Alta, como interpretación",5.942017000000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,12,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1200.8383923489143,bpd,"Alta, como interpretación",6.323784666666664,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,13,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1100.673725658591,bpd,"Alta, como interpretación",6.563794666666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,14,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,1002.1352958044865,bpd,"Alta, como interpretación",5.474621133333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,15,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,900.9836445393364,bpd,"Alta, como interpretación",5.389003933333329,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,16,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,807.7051468024225,bpd,"Alta, como interpretación",5.135285933333338,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,17,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,703.9969399786733,bpd,"Alta, como interpretación",4.626112800000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,18,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,601.6600092246708,bpd,"Alta, como interpretación",4.096085866666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,19,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,498.0415273630737,bpd,"Alta, como interpretación",3.4532230833333326,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,20,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,397.1933530598636,bpd,"Alta, como interpretación",2.6244239166666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,21,7,7,8,Qgd=0.01,0.01,1800,rpm,diseño_experimental,2,0,,Alta,98.00361599623842,bpd,"Alta, como interpretación",0.22771658333333336,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,2,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,2247.0799262707087,bpd,"Alta, como interpretación",0.35250133333333356,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,3,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,2131.325106089186,bpd,"Alta, como interpretación",1.1924655000000006,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,4,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,2018.8200881994917,bpd,"Alta, como interpretación",1.9979075000000002,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,5,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1919.6178052519144,bpd,"Alta, como interpretación",2.5606294999999997,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,6,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1807.465905706023,bpd,"Alta, como interpretación",3.2013084999999992,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,7,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1707.3246300482822,bpd,"Alta, como interpretación",3.8171406666666674,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,8,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1599.349453652674,bpd,"Alta, como interpretación",4.246167,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,9,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1503.7351913231323,bpd,"Alta, como interpretación",4.7443246666666665,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,10,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1403.0523303788052,bpd,"Alta, como interpretación",5.201351666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,11,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1302.3757422069089,bpd,"Alta, como interpretación",5.570683166666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,12,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1202.9455530382047,bpd,"Alta, como interpretación",5.7875051666666675,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,13,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1197.8680608920445,bpd,"Alta, como interpretación",5.887166470588234,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,14,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,1098.9522282135272,bpd,"Alta, como interpretación",5.736273083333332,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,15,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,999.7151318304903,bpd,"Alta, como interpretación",5.742250933333337,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,16,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,910.8154340862279,bpd,"Alta, como interpretación",4.525887866666665,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,17,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,802.0084685255492,bpd,"Alta, como interpretación",4.025408633333331,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,18,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,690.0630233529528,bpd,"Alta, como interpretación",3.649643333333339,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,19,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,596.5133782272144,bpd,"Alta, como interpretación",2.77346913333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,20,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,499.022558687978,bpd,"Alta, como interpretación",2.210330666666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,21,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,326.8231841764862,bpd,"Alta, como interpretación",1.6785323853211014,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,22,10,10,11,Qgd=0.015,0.015,1800,rpm,diseño_experimental,2,0,,Alta,111.85522880598226,bpd,"Alta, como interpretación",0.302533083333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1055.2194338150603,bpd,"Alta, como interpretación",31.09771600000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1224.7237160320524,bpd,"Alta, como interpretación",30.875450499999996,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1377.4651341220942,bpd,"Alta, como interpretación",30.466426166666672,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1563.5261787752083,bpd,"Alta, como interpretación",29.943508333333337,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1708.4787985805044,bpd,"Alta, como interpretación",29.47855966666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,1899.4704690694882,bpd,"Alta, como interpretación",28.344659416666673,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,2098.9417534686854,bpd,"Alta, como interpretación",27.627932666666663,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,2300.4897432149482,bpd,"Alta, como interpretación",26.453509166666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,2504.8029653415247,bpd,"Alta, como interpretación",25.18728600000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,2698.6271917018275,bpd,"Alta, como interpretación",23.217672833333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,2898.129441497502,bpd,"Alta, como interpretación",21.582153999999996,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,3100.420512306779,bpd,"Alta, como interpretación",19.722227999999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,3299.7723248399384,bpd,"Alta, como interpretación",17.515877500000006,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,3503.7570853884545,bpd,"Alta, como interpretación",15.279135166666663,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,3700.3811405986457,bpd,"Alta, como interpretación",13.010836666666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,3900.992758622438,bpd,"Alta, como interpretación",10.571804333333331,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,4101.61104912861,bpd,"Alta, como interpretación",8.006736499999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,4296.91420254224,bpd,"Alta, como interpretación",5.308723000000003,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,1,1,2,Single Phase,,3500,rpm,diseño_experimental,32,0,,Alta,4610.313271550583,bpd,"Alta, como interpretación",0.7963601666666665,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,4543.300963798173,bpd,"Alta, como interpretación",0.5870603333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,4293.949435785791,bpd,"Alta, como interpretación",4.143713333333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,4106.633588666492,bpd,"Alta, como interpretación",6.784410333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,3899.854432768715,bpd,"Alta, como interpretación",9.397092833333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,3701.800508284372,bpd,"Alta, como interpretación",11.81082816666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,3497.3756334706864,bpd,"Alta, como interpretación",14.151601499999996,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,3297.908166347246,bpd,"Alta, como interpretación",16.446322999999996,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,3100.346897108331,bpd,"Alta, como interpretación",18.486246333333327,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,2900.7446171816455,bpd,"Alta, como interpretación",20.418032999999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,2699.0861682844716,bpd,"Alta, como interpretación",22.120618333333326,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,2500.7122931280205,bpd,"Alta, como interpretación",23.611161666666664,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,2299.2017298134083,bpd,"Alta, como interpretación",25.201842999999993,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,2112.0733168209263,bpd,"Alta, como interpretación",26.723968500000005,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,1871.0882328021478,bpd,"Alta, como interpretación",28.125814833333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,1565.1863616879,bpd,"Alta, como interpretación",28.462402166666674,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,1204.9485502101772,bpd,"Alta, como interpretación",28.00931916666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,920.1978628544936,bpd,"Alta, como interpretación",15.398612333333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,678.7386712406671,bpd,"Alta, como interpretación",9.161432666666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,392.8651383958732,bpd,"Alta, como interpretación",5.633419333333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,51,4,4,5,Qgd=0.01,0.01,3500,rpm,diseño_experimental,32,0,,Alta,84.23167313186983,bpd,"Alta, como interpretación",0.5735803333333335,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,4490.622974414971,bpd,"Alta, como interpretación",0.5624149999999997,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,4304.235014650692,bpd,"Alta, como interpretación",3.1817189999999997,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,4110.558962538752,bpd,"Alta, como interpretación",5.976038999999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,3907.0315781678228,bpd,"Alta, como interpretación",8.5669545,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,3702.1785172242467,bpd,"Alta, como interpretación",11.15506616666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,3505.559855354281,bpd,"Alta, como interpretación",13.393937166666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,3302.725066560539,bpd,"Alta, como interpretación",15.723607333333332,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,3101.221540561697,bpd,"Alta, como interpretación",17.81855566666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,2902.088023254836,bpd,"Alta, como interpretación",19.73261683333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,2699.07694373361,bpd,"Alta, como interpretación",21.515400333333336,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,2498.3199403884637,bpd,"Alta, como interpretación",23.025158166666664,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,2298.2734320287987,bpd,"Alta, como interpretación",24.89529833333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1935.310607515084,bpd,"Alta, como interpretación",26.949353333333338,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1799.6489582271702,bpd,"Alta, como interpretación",27.129311666666656,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1695.9164832740792,bpd,"Alta, como interpretación",25.76939683333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1504.7004556753338,bpd,"Alta, como interpretación",24.850448999999994,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1298.5301095355444,bpd,"Alta, como interpretación",23.49868366666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,1104.5569865365705,bpd,"Alta, como interpretación",20.0145915,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,920.0176844121788,bpd,"Alta, como interpretación",12.672022083333324,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,51,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,926.7431715006186,bpd,"Alta, como interpretación",12.96795333333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,52,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,796.2599614974262,bpd,"Alta, como interpretación",9.42401141666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,53,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,692.232404778623,bpd,"Alta, como interpretación",7.218538777777774,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,54,7,7,8,Qgd=0.02,0.02,3500,rpm,diseño_experimental,32,0,,Alta,591.182039491878,bpd,"Alta, como interpretación",8.090175583333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,4431.155410840927,bpd,"Alta, como interpretación",0.5669589999999995,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,4105.806487598046,bpd,"Alta, como interpretación",5.1696705,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,3910.2761483686168,bpd,"Alta, como interpretación",7.683894333333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,3709.78154355309,bpd,"Alta, como interpretación",10.181018499999995,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,3504.098004527914,bpd,"Alta, como interpretación",12.549216000000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,3299.3167031766548,bpd,"Alta, como interpretación",14.802355999999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,3102.316441323817,bpd,"Alta, como interpretación",17.0151905,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,2899.578094874736,bpd,"Alta, como interpretación",19.028014500000005,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,2699.8104520235383,bpd,"Alta, como interpretación",20.763093500000004,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,2501.4672274108043,bpd,"Alta, como interpretación",21.91861516666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,2298.3020694736642,bpd,"Alta, como interpretación",23.39952133333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,2099.0060881302975,bpd,"Alta, como interpretación",24.408781083333338,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,1892.0583165807982,bpd,"Alta, como interpretación",22.00281846666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,1684.4310710732314,bpd,"Alta, como interpretación",22.12627326666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,1499.6015190973067,bpd,"Alta, como interpretación",21.44251036666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,1305.3899655171535,bpd,"Alta, como interpretación",17.153042400000007,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,1101.304080975838,bpd,"Alta, como interpretación",12.5722979,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,903.2062377311091,bpd,"Alta, como interpretación",9.702347052631584,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,10,10,11,Qgd=0.03,0.03,3500,rpm,diseño_experimental,32,0,,Alta,708.3349475723523,bpd,"Alta, como interpretación",5.924931333333336,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,4364.083396398143,bpd,"Alta, como interpretación",0.5709011666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,4104.241027325567,bpd,"Alta, como interpretación",4.284081166666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,3901.0388580467147,bpd,"Alta, como interpretación",6.987388499999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,3706.0623294983357,bpd,"Alta, como interpretación",9.144108333333337,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,3499.2109237826394,bpd,"Alta, como interpretación",11.506599166666664,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,3300.1189147388322,bpd,"Alta, como interpretación",13.632289166666663,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,3101.409615626918,bpd,"Alta, como interpretación",15.663073499999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,2901.2356111330546,bpd,"Alta, como interpretación",17.966320166666662,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,2701.1018904086286,bpd,"Alta, como interpretación",19.851116833333336,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,2500.9397993022635,bpd,"Alta, como interpretación",20.79424233333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,2299.5028873197084,bpd,"Alta, como interpretación",19.566091533333328,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,2089.017511300183,bpd,"Alta, como interpretación",18.775184933333342,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,1892.731477508438,bpd,"Alta, como interpretación",18.93848596666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,1673.0380821697636,bpd,"Alta, como interpretación",18.05803863333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,1468.0156834874515,bpd,"Alta, como interpretación",15.841340933333322,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,1302.8683970291593,bpd,"Alta, como interpretación",13.619608733333328,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,1106.4687136233733,bpd,"Alta, como interpretación",10.218654833333328,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,908.1107143146469,bpd,"Alta, como interpretación",7.197609399999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,699.7493290310084,bpd,"Alta, como interpretación",4.872792666666668,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,51,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,498.9886963955469,bpd,"Alta, como interpretación",2.5370223333333346,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,52,13,13,14,Qgd=0.04,0.04,3500,rpm,diseño_experimental,32,0,,Alta,384.28149067521866,bpd,"Alta, como interpretación",0.7363902542372884,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,32,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,4296.420396012627,bpd,"Alta, como interpretación",0.5407098333333332,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,33,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,4095.8612217338464,bpd,"Alta, como interpretación",3.160252666666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,34,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,3893.2866688987433,bpd,"Alta, como interpretación",5.637812500000002,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,35,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,3695.2742929186,bpd,"Alta, como interpretación",7.846867499999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,36,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,3499.3997361742377,bpd,"Alta, como interpretación",9.906405000000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,37,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,3311.4421021192184,bpd,"Alta, como interpretación",11.886445166666665,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,38,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,3100.406895673623,bpd,"Alta, como interpretación",13.504301166666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,39,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,2897.0833592020153,bpd,"Alta, como interpretación",16.52969983333333,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,40,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,2702.6437839990153,bpd,"Alta, como interpretación",17.188453833333334,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,41,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,2484.816426237893,bpd,"Alta, como interpretación",16.343833099999994,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,42,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,2280.8343384461077,bpd,"Alta, como interpretación",16.21569186666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,43,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,2074.673394636447,bpd,"Alta, como interpretación",15.638152600000003,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,44,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,1877.012192332521,bpd,"Alta, como interpretación",15.859688899999998,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,45,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,1701.4018660635065,bpd,"Alta, como interpretación",15.9736001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,46,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,1491.5673152595934,bpd,"Alta, como interpretación",12.82763566666667,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,47,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,1311.1619838702504,bpd,"Alta, como interpretación",11.58001875,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,48,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,1104.6476138082792,bpd,"Alta, como interpretación",6.896163000000001,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,49,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,901.9543162686022,bpd,"Alta, como interpretación",5.908045916666666,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,50,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,703.5043255646135,bpd,"Alta, como interpretación",3.650656249999999,psi,Media
+mapping.xlsx,150psig,150,psig,Alta,51,16,16,17,Qgd=0.05,0.05,3500,rpm,diseño_experimental,32,0,,Alta,512.6998707756401,bpd,"Alta, como interpretación",1.1155831081081082,psi,Media
