@@ -47,7 +47,7 @@ ESP-DataScience/
 - archive/                  el ZIP original se guarda aquí solo en cada equipo
 - data/raw/                 Excel de trabajo
 - data/processed/           tablas largas de la actividad 2.12
-- docs/                     bitácora, diccionario, normalización y guía de sincronización
+- docs/                     bitácora, diccionario, normalización, estudio de modelos y guía de sincronización
 - notebooks/00_validacion_entorno.ipynb
 - notebooks/01_exploracion_inicial.ipynb
 - notebooks/02_normalizacion.ipynb
@@ -172,9 +172,11 @@ La actividad 2.11 está cerrada. El diccionario está en `docs/diccionario_varia
 
 La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping_long.csv` y `data/processed/surging_long.csv`. El procedimiento está en `docs/normalizacion_datos.md`.
 
-La siguiente actividad, todavía sin hacer, es:
+La actividad 2.13 también está cerrada, y solo como estudio de selección. El documento es `docs/estudio_modelos_2_13.md`. No se entrenó ningún modelo y no hay un modelo ganador.
 
-**2.13 — Primer modelo, solo si se autoriza.**
+La siguiente actividad, todavía sin hacer y sin autorización, es:
+
+**2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 
 El plan está en `docs/plan_implementacion.md`. Este repositorio no incluye modelos entrenados.
 

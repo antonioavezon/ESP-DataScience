@@ -97,6 +97,13 @@ Las entradas de trabajo son el caudal de líquido en bpd, una variable de gas (Q
 
 ## Lectura de conjunto
 
-Ningún modelo de esta lista se ajusta en la actividad 2.11. El entorno ya tiene scikit-learn. Falta la tabla larga de la actividad 2.12 y una validación por curvas completas. Entrenar ahora mezclaría mapping con surging y usaría la velocidad de dos hojas como si estuviera escrita en la celda.
+La actividad 2.13 no ajustó esta lista. El estudio completo está en `docs/estudio_modelos_2_13.md`. Las tablas de la actividad 2.12 ya existen y siguen separadas.
 
-El candidato conceptualmente más cercano al artículo es el modelo híbrido, y solo después de separar la predicción de régimen, que Zhu ya planteó, de la predicción del incremento de presión de la etapa 3.
+Decisión metodológica, no un resultado de predicción:
+
+- Pasan a la actividad 2.14, si se autoriza y en este orden: regresión lineal, polinomio con cresta, recta separada por la condición de gas, cociente respecto de la curva de agua solo en mapping, y bosque aleatorio.
+- El boosting de árboles y la regresión de vectores de soporte quedan condicionales, detrás del bosque y del polinomio.
+- El modelo híbrido, la red densa, el modelo mecanicista como predictor de `dp2_3_psi`, la red informada por ecuaciones y la simulación de fluidos quedan pospuestos.
+- Sigue descartado unir mapping con surging y repartir al azar los puntos de una misma curva.
+
+No hay modelo ganador. La actividad 2.14 no está iniciada.

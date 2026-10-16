@@ -55,4 +55,4 @@ La huella SHA-256 de `data/raw/mapping.xlsx` y de `data/raw/surging.xlsx` es la 
 - Los puntos de una misma curva no son ensayos independientes.
 - La velocidad de dos hojas de mapping no fue medida en la celda. Usarla como si lo hubiera sido mezcla una asignación documental con una lectura instrumental.
 - `DP2-3` y `GVF0` siguen sin aparecer con esas letras en la tesis.
-- Estas tablas no están listas para un ajuste. La actividad 2.13 no se ha iniciado.
+- Estas tablas no se usaron para entrenar un modelo. La actividad 2.13 solo eligió candidatos. El ajuste corresponde a la 2.14 y no está iniciado.

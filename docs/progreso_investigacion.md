@@ -193,12 +193,17 @@ Después de publicar la actividad 2.12 se copiaron sus funciones a `src/esp_data
 
 `tests/test_normalizacion.py` ejecutó 4 pruebas con `unittest`. Todas pasaron. La copia en `src/` reproduce el texto de los dos CSV. Sus huellas siguen siendo `ff68e36703d3d3901b8bd964008c49b062afa9d89a817b9d66e7849f9b400648` para mapping y `f58e8e2cac74acdf2081479ec8769422f39c4e4665f5b3ff472df4a70b15bd96` para surging. Los Excel de `data/raw` tampoco cambiaron.
 
+## 2.13 — Estudio científico y selección de modelos
+
+Quedó cerrada como investigación metodológica, sin entrenar modelos y sin resultados de predicción. El documento es `docs/estudio_modelos_2_13.md`. Se usaron el diccionario, la normalización, la matriz previa y los textos locales de Zhu et al. (2019), Zhu et al. (2018) y la tesis de 2017.
+
+Hay 30 curvas en mapping y 18 en surging. No se apilan. Pasan a una fase experimental posterior, en este orden: regresión lineal, polinomio con cresta, recta por condición de gas, cociente respecto de la curva de agua solo en mapping, y bosque aleatorio. El modelo mecanicista de fronteras, el híbrido, las redes y la simulación de fluidos quedan pospuestos. No hay modelo ganador. Los Excel y los CSV no se modificaron.
+
 ## Pendiente
 
+### 2.14 — Desarrollo y evaluación experimental de modelos
 
-### 2.13 — Primer modelo, solo si se autoriza
-
-El ajuste no forma parte de la actividad 2.12. Haría falta elegir una sola tabla y validar por curvas completas. El modelo híbrido espera una predicción física calculable.
+No está autorizada. Empieza solo después de revisar la actividad 2.13. Incluiría el ajuste, la validación por curvas completas, el análisis de error y, si corresponde, la elección del modelo con mejor desempeño. No se inicia con esta bitácora.
 
 
 ## Procedencia de los archivos usados en 2.1 a 2.10
