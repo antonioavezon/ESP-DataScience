@@ -16,13 +16,22 @@ from esp_datascience.entrenamiento import (
     GRADO_POLINOMIO,
     HUELLAS_PLIEGUES,
     ORDEN_M2,
+    ColumnasEstructurales,
+    PrepararEntradas,
     elegir_alpha,
     evaluar_protocolo,
+    filas_con_prediccion_negativa,
+    guardar_derivado,
     matriz_entradas,
     pipeline_m1,
     pipeline_m2,
 )
-from esp_datascience.metricas import error_absoluto_medio, media_por_curva
+from esp_datascience.metricas import (
+    coeficiente_determinacion,
+    error_absoluto_medio,
+    media_por_curva,
+    raiz_error_cuadratico_medio,
+)
 from esp_datascience.particiones import marcar_pliegues
 from esp_datascience.protocolo import VERSION, huella_pliegues
 from esp_datascience.rutas import huella_sha256
@@ -68,16 +77,21 @@ class EntrenamientoFaseB(unittest.TestCase):
             )
         )
         self.assertTrue(self.resultado_mapping["alphas"]["alpha"].equals(otra["alphas"]["alpha"]))
-        esperados = {
-            ("mapping", "M1"): 3.998654558642768,
-            ("mapping", "M2"): 1.364197299900999,
-            ("surging", "M1"): 2.31240277528348,
-            ("surging", "M2"): 1.1137313367403104,
-        }
+        publicados = {("mapping", "M1"): 3.999, ("mapping", "M2"): 1.364, ("surging", "M1"): 2.312, ("surging", "M2"): 1.114}
         for resultado in (self.resultado_mapping, self.resultado_surging):
-            for _, fila in resultado["externo"].iterrows():
-                clave = (fila["protocolo"], fila["modelo"])
-                self.assertAlmostEqual(fila["mae_curva"], esperados[clave], places=6)
+            pred = resultado["predicciones"]
+            for modelo, columna in (("M1", "prediccion_m1"), ("M2", "prediccion_m2")):
+                fila = resultado["externo"].set_index("modelo").loc[modelo]
+                mae = media_por_curva(pred["medicion"], pred[columna], pred["curva_id"], error_absoluto_medio)
+                rmse = media_por_curva(pred["medicion"], pred[columna], pred["curva_id"], raiz_error_cuadratico_medio)
+                rmse_global = raiz_error_cuadratico_medio(pred["medicion"], pred[columna])
+                r2 = coeficiente_determinacion(pred["medicion"], pred[columna])
+                self.assertAlmostEqual(fila["mae_curva"], mae)
+                self.assertAlmostEqual(fila["rmse_curva"], rmse)
+                self.assertAlmostEqual(fila["rmse_fila"], rmse_global)
+                self.assertAlmostEqual(fila["r2_observaciones"], r2)
+                self.assertNotAlmostEqual(rmse, rmse_global, places=3)
+                self.assertEqual(round(mae, 3), publicados[(resultado["protocolo"], modelo)])
 
     def test_una_prediccion_externa_por_fila(self):
         for tabla, resultado in (
@@ -149,6 +163,72 @@ class EntrenamientoFaseB(unittest.TestCase):
         self.assertTrue(np.allclose(diferencias["delta_mae"], diferencias["mae_m2"] - diferencias["mae_m1"]))
         self.assertEqual(int((diferencias["delta_mae"] < 0).sum()), 29)
         self.assertEqual(int((self.resultado_surging["diferencias"]["delta_mae"] < 0).sum()), 17)
+
+    def test_negativas_y_agua_sin_cambiar_el_ajuste(self):
+        negativas = filas_con_prediccion_negativa(self.resultado_mapping["predicciones"], "mapping")
+        self.assertEqual(int((negativas["modelo"] == "M1").sum()), 1)
+        self.assertEqual(int((negativas["modelo"] == "M2").sum()), 22)
+        self.assertTrue(negativas.loc[negativas["modelo"].eq("M2"), "en_el_extremo_de_la_curva"].all())
+        self.assertTrue((~negativas["es_medicion"]).all())
+        self.assertLess(float(negativas["prediccion_psi"].min()), -7.0)
+        surging = filas_con_prediccion_negativa(self.resultado_surging["predicciones"], "surging")
+        self.assertEqual(int((surging["modelo"] == "M1").sum()), 34)
+        self.assertEqual(int((surging["modelo"] == "M2").sum()), 12)
+        agua = self.resultado_mapping["fisico"]["agua"].set_index("curva_id")
+        self.assertEqual(int(agua["subidas_medicion"].sum()), 0)
+        self.assertEqual(int(agua["subidas_M1"].sum()), 0)
+        self.assertGreater(int(agua.loc["50psig|3500|Single Phase", "subidas_M2"]), 0)
+        self.assertLess(float(agua.loc["50psig|3500|Single Phase", "spearman_M2"]), 0.0)
+
+    def test_la_columna_quitada_es_el_producto_estructural(self):
+        marcada = marcar_pliegues(self.mapping, "mapping")
+        entrena = marcada["pliegue"] != 0
+        modelo = pipeline_m2("mapping", 0.1)
+        modelo.fit(matriz_entradas(marcada.loc[entrena], "mapping"), marcada.loc[entrena, "dp2_3_psi"])
+        nombres = modelo.named_steps["polinomio"].get_feature_names_out(
+            modelo.named_steps["preparar"].nombres_salida_
+        )
+        soporte = modelo.named_steps["columnas_estructurales"].soporte_
+        quitadas = [nombres[i] for i, queda in enumerate(soporte) if not queda]
+        self.assertEqual(quitadas, ["es_monofasica qgd_tecnico"])
+        self.assertIn("es_monofasica^2", list(nombres))
+        self.assertEqual(int(self.mapping["qgd"].isna().sum()), 87)
+
+
+class PruebasUnitariasSinteticas(unittest.TestCase):
+    """No usan los CSV de la bomba. Sirven para el software, no como evidencia física."""
+
+    def test_qgd_tecnico_en_una_matriz_inventada(self):
+        marco = pd.DataFrame(
+            {
+                "condicion": ["Single Phase", "Qgd=0.01", "Qgd=0.01"],
+                "ql_bpd": [100.0, 110.0, 120.0],
+                "qgd": [np.nan, 0.01, 0.01],
+                "velocidad_rpm": [1800, 1800, 1800],
+                "psep_psig": [50.0, 50.0, 50.0],
+            }
+        )
+        preparar = PrepararEntradas("mapping")
+        preparar.fit(marco)
+        salida = preparar.transform(marco)
+        self.assertEqual(salida[0, 2], 0.0)
+        self.assertTrue(np.isnan(marco.loc[0, "qgd"]))
+        self.assertEqual(list(preparar.nombres_salida_), ["ql_bpd", "es_monofasica", "qgd_tecnico", "velocidad_rpm", "psep_psig"])
+
+    def test_la_mascara_de_ceros_no_se_reajusta(self):
+        entrenamiento = np.array([[0.0, 1.0], [0.0, 2.0], [0.0, 4.0]])
+        paso = ColumnasEstructurales().fit(entrenamiento)
+        self.assertEqual(list(paso.soporte_), [False, True])
+        prueba = np.array([[5.0, 9.0], [6.0, 8.0]])
+        transformada = paso.transform(prueba)
+        self.assertEqual(transformada.shape, (2, 1))
+        self.assertTrue(np.allclose(transformada[:, 0], [9.0, 8.0]))
+        self.assertEqual(list(paso.soporte_), [False, True])
+
+    def test_un_derivado_no_pisa_los_csv(self):
+        with self.assertRaises(RuntimeError):
+            guardar_derivado(pd.DataFrame({"a": [1]}), RAIZ / "data" / "processed" / "mapping_long.csv")
+
 
 
 if __name__ == "__main__":

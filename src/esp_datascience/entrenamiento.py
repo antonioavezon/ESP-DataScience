@@ -476,21 +476,30 @@ def _pasos_de_gas(predicciones: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(filas)
 
 
+def _pasos_sucesivos(abscisa, valores) -> tuple[int, float]:
+    """Subidas de un punto al siguiente, ya ordenado por la abscisa. No es Spearman."""
+    orden = np.argsort(np.asarray(abscisa, dtype=float), kind="mergesort")
+    serie = np.asarray(valores, dtype=float)[orden]
+    if len(serie) < 2:
+        return 0, float("nan")
+    diferencia = np.diff(serie)
+    return int(np.sum(diferencia > 0)), float(np.max(diferencia))
+
+
 def _monotonia_agua(predicciones: pd.DataFrame) -> pd.DataFrame:
-    """En las curvas de agua, el caudal es la abscisa. La medición baja al subir el caudal."""
+    """Spearman y subidas punto a punto. No son la misma pregunta."""
     from scipy.stats import spearmanr
 
     agua = predicciones[predicciones["condicion"].eq("Single Phase")]
     filas = []
     for curva, grupo in agua.groupby("curva_id", sort=True):
-        filas.append(
-            {
-                "curva_id": curva,
-                "medicion": float(spearmanr(grupo["abscisa"], grupo["medicion"]).statistic),
-                "M1": float(spearmanr(grupo["abscisa"], grupo["prediccion_m1"]).statistic),
-                "M2": float(spearmanr(grupo["abscisa"], grupo["prediccion_m2"]).statistic),
-            }
-        )
+        fila = {"curva_id": curva, "n_puntos": int(len(grupo))}
+        for nombre, columna in (("medicion", "medicion"), ("M1", "prediccion_m1"), ("M2", "prediccion_m2")):
+            fila[f"spearman_{nombre}"] = float(spearmanr(grupo["abscisa"], grupo[columna]).statistic)
+            subidas, mayor = _pasos_sucesivos(grupo["abscisa"], grupo[columna])
+            fila[f"subidas_{nombre}"] = subidas
+            fila[f"mayor_subida_{nombre}"] = mayor
+        filas.append(fila)
     return pd.DataFrame(filas)
 
 
@@ -526,3 +535,125 @@ def repetir_es_identico(tabla: pd.DataFrame, protocolo: str) -> bool:
 def clonar_para_prueba(modelo: Pipeline) -> Pipeline:
     """El clon no hereda la escala ya ajustada."""
     return clone(modelo)
+
+
+def filas_con_prediccion_negativa(predicciones: pd.DataFrame, protocolo: str) -> pd.DataFrame:
+    """Cada fila externa cuya predicción es negativa. No es una medición ni un dato nuevo."""
+    if protocolo not in {"mapping", "surging"}:
+        raise ValueError(protocolo)
+    limites = predicciones.groupby("curva_id")["abscisa"].agg(abscisa_min="min", abscisa_max="max")
+    filas = []
+    for modelo, columna in (("M1", "prediccion_m1"), ("M2", "prediccion_m2")):
+        negativas = predicciones.loc[predicciones[columna] < 0].copy()
+        if negativas.empty:
+            continue
+        negativas = negativas.join(limites, on="curva_id")
+        ancho = (negativas["abscisa_max"] - negativas["abscisa_min"]).replace(0, np.nan)
+        fraccion = (negativas["abscisa"] - negativas["abscisa_min"]) / ancho
+        for indice, fila in negativas.iterrows():
+            fr = float(fraccion.loc[indice])
+            prediccion = float(fila[columna])
+            medicion = float(fila["medicion"])
+            filas.append(
+                {
+                    "protocolo": protocolo,
+                    "modelo": modelo,
+                    "indice_fila": int(indice),
+                    "curva_id": fila["curva_id"],
+                    "pliegue": int(fila["pliegue"]),
+                    "hoja": fila["hoja"],
+                    "velocidad_rpm": int(fila["velocidad_rpm"]),
+                    "psep_psig": float(fila["psep_psig"]),
+                    "condicion": fila["condicion"],
+                    "abscisa_nombre": fila["abscisa_nombre"],
+                    "abscisa": float(fila["abscisa"]),
+                    "fraccion_abscisa_en_la_curva": fr,
+                    "en_el_extremo_de_la_curva": bool(fr <= 0.1 or fr >= 0.9),
+                    "medicion_psi": medicion,
+                    "prediccion_psi": prediccion,
+                    "prediccion_menos_medicion_psi": prediccion - medicion,
+                    "es_medicion": False,
+                }
+            )
+    columnas = [
+        "protocolo", "modelo", "indice_fila", "curva_id", "pliegue", "hoja",
+        "velocidad_rpm", "psep_psig", "condicion", "abscisa_nombre", "abscisa",
+        "fraccion_abscisa_en_la_curva", "en_el_extremo_de_la_curva",
+        "medicion_psi", "prediccion_psi", "prediccion_menos_medicion_psi", "es_medicion",
+    ]
+    return pd.DataFrame(filas, columns=columnas)
+
+
+def comparacion_gas_en_soporte_comun(predicciones: pd.DataFrame) -> pd.DataFrame:
+    """Interpola, solo para describir, en el caudal común de una hoja y una velocidad.
+
+    No crea predicciones del modelo ni se usa para entrenar. No extrapola.
+    """
+    gas = predicciones[predicciones["condicion"].ne("Single Phase")].copy()
+    if gas.empty or not gas["condicion"].astype(str).str.startswith("Qgd=").all():
+        raise ValueError("Esta comparación descriptiva es solo de las curvas con Qgd de mapping.")
+    gas["qgd"] = gas["condicion"].str.replace("Qgd=", "", regex=False).astype(float)
+    filas = []
+    for (hoja, velocidad), grupo in gas.groupby(["hoja", "velocidad_rpm"], sort=True):
+        partes = [cg for _, cg in grupo.groupby("condicion", sort=True)]
+        inferior = max(float(cg["abscisa"].min()) for cg in partes)
+        superior = min(float(cg["abscisa"].max()) for cg in partes)
+        if superior <= inferior:
+            continue
+        caudal = 0.5 * (inferior + superior)
+        for cg in partes:
+            agregado = cg.groupby("abscisa", as_index=False)[["medicion", "prediccion_m1", "prediccion_m2"]].mean()
+            agregado = agregado.sort_values("abscisa")
+            xs = agregado["abscisa"].to_numpy(dtype=float)
+            if caudal < xs[0] or caudal > xs[-1]:
+                continue
+            filas.append(
+                {
+                    "hoja": hoja,
+                    "velocidad_rpm": int(velocidad),
+                    "caudal_comun_bpd": caudal,
+                    "ancho_soporte_bpd": superior - inferior,
+                    "qgd": float(cg["qgd"].iloc[0]),
+                    "medicion_interpolada_psi": float(np.interp(caudal, xs, agregado["medicion"])),
+                    "m1_interpolada_psi": float(np.interp(caudal, xs, agregado["prediccion_m1"])),
+                    "m2_interpolada_psi": float(np.interp(caudal, xs, agregado["prediccion_m2"])),
+                    "es_prediccion_original": False,
+                }
+            )
+    return pd.DataFrame(filas)
+
+
+def resumen_cancelacion_sesgo(predicciones: pd.DataFrame) -> pd.DataFrame:
+    """El sesgo medio puede ser pequeño aunque unas curvas queden altas y otras bajas."""
+    filas = []
+    for modelo, columna in (("M1", "prediccion_m1"), ("M2", "prediccion_m2")):
+        por_curva = predicciones.groupby("curva_id", sort=False).apply(
+            lambda grupo, col=columna: float(np.mean(grupo[col] - grupo["medicion"])),
+            include_groups=False,
+        )
+        positivas = por_curva[por_curva > 0]
+        negativas = por_curva[por_curva < 0]
+        filas.append(
+            {
+                "modelo": modelo,
+                "sesgo_medio_por_curva": float(por_curva.mean()),
+                "curvas_con_sesgo_positivo": int(len(positivas)),
+                "curvas_con_sesgo_negativo": int(len(negativas)),
+                "media_de_los_sesgos_positivos": float(positivas.mean()) if len(positivas) else float("nan"),
+                "media_de_los_sesgos_negativos": float(negativas.mean()) if len(negativas) else float("nan"),
+            }
+        )
+    return pd.DataFrame(filas)
+
+
+def guardar_derivado(tabla: pd.DataFrame, ruta) -> str:
+    """Escribe un resultado calculado. Rechaza las carpetas de los datos originales."""
+    from pathlib import Path
+
+    destino = Path(ruta)
+    partes = set(destino.parts)
+    if "data" in partes and ({"raw", "processed"} & partes):
+        raise RuntimeError("Un derivado no puede escribir data/raw ni data/processed.")
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    tabla.to_csv(destino, index=False)
+    return str(destino)

@@ -3,7 +3,7 @@
 
 Laboratorio para aprender a explorar datos experimentales con Python y, al mismo tiempo, dejar registrada la primera lectura de un conjunto real de ensayos de bombas electrosumergibles.
 
-La ciencia de datos, en este laboratorio, consiste en localizar los archivos, entender cómo están organizados, describir lo que contienen y separar una cuenta numérica de una conclusión física. Todavía no se entrenan modelos.
+La ciencia de datos, en este laboratorio, consiste en localizar los archivos, entender cómo están organizados, describir lo que contienen y separar una cuenta numérica de una conclusión física. Los cuadernos 00 a 03 no ajustan modelos. La fase B de la actividad 2.14 sí estimó la regresión lineal y el polinomio de grado 2 con cresta.
 
 ## Qué es un sistema ESP
 
@@ -20,7 +20,7 @@ Objetivos de aprendizaje:
 - Contar observaciones completas y distinguirlas de un resultado físico ya validado.
 - Dejar el trabajo en Git para continuarlo desde otro equipo Fedora.
 
-Objetivo científico de esta etapa: describir la hoja `50psig` del archivo de mapping y cerrar el diccionario de variables con la tesis y los artículos. La línea de investigación más amplia es el modelado híbrido de ESP, que combina relaciones físicas con análisis de datos. Este laboratorio todavía está en la exploración inicial.
+El laboratorio empezó por la hoja `50psig` de mapping y por el diccionario. La actividad 2.11 está cerrada, la 2.12 también, y la 2.13 quedó cerrada como selección, sin entrenamiento. La fase A de la 2.14 está congelada. La fase B evaluó M1 y M2. La fase C no está iniciada. La línea más amplia sigue siendo el modelado híbrido de ESP, que aquí todavía no se implementa.
 
 ## Tecnologías
 
@@ -34,7 +34,7 @@ Objetivo científico de esta etapa: describir la hoja `50psig` del archivo de ma
 | NumPy | Arreglos numéricos |
 | Matplotlib | Gráficos |
 | SciPy | Biblioteca científica disponible en el entorno |
-| scikit-learn | Biblioteca de aprendizaje automático disponible en el entorno; aún no se entrena ningún modelo |
+| scikit-learn | Regresión lineal y polinomio con cresta de la fase B. Los cuadernos 00 a 03 no ajustan modelos |
 | openpyxl | Motor con el que pandas lee los archivos `.xlsx` |
 | Git y GitHub | Historial y copia compartida entre equipos |
 
@@ -152,7 +152,7 @@ El artículo asociado es *Modeling flow pattern transitions in electrical submer
 | `01_exploracion_inicial.ipynb` | Actividades 2.1 a 2.11 |
 | `02_normalizacion.ipynb` | Actividad 2.12, dos tablas largas |
 | `03_seleccion_modelos.ipynb` | Actividad 2.13, exploración y selección de modelos, sin entrenamiento |
-| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14: protocolo `2.14-A` y fase B de M1 y M2, sin ganador |
+| `04_entrenamiento_evaluacion_modelos.ipynb` | Actividad 2.14: fase A congelada y fase B de M1 y M2, auditada, sin ganador |
 
 Las actividades 2.3 a 2.10 usan solo `mapping.xlsx`, hoja `50psig`. La actividad 2.12 lee las seis hojas y deja el resultado en `data/processed/`.
 
@@ -180,7 +180,7 @@ La actividad 2.12 también está cerrada. Las tablas son `data/processed/mapping
 
 La actividad 2.13 también está cerrada, y solo como selección metodológica. La síntesis es `docs/estudio_modelos_2_13.md`. La exploración reproducible es `notebooks/03_seleccion_modelos.ipynb`. No se entrenó ningún modelo, no hay un candidato principal único y no hay un modelo ganador.
 
-La actividad 2.14 está autorizada. La fase A queda congelada en la versión `2.14-A`. La fase B estimó la regresión lineal y el polinomio de grado 2 con cresta. El informe es `docs/resultados_modelos_2_14.md`. No hay un ganador de la actividad. La fase C no está iniciada.
+La actividad 2.14 está autorizada. La fase A está cerrada y congelada en la versión `2.14-A`. La fase B está desarrollada y evaluada: estimó la regresión lineal y el polinomio de grado 2 con cresta, y la auditoría reprodujo esas cifras. El informe es `docs/resultados_modelos_2_14.md`. No hay un ganador ni un modelo definitivo. La fase C está pendiente y no está iniciada.
 
 **2.14 — Desarrollo y evaluación experimental de los modelos ya elegidos.**
 

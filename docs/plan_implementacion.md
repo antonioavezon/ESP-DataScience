@@ -16,8 +16,8 @@ Pasan a una fase experimental, si se autoriza: regresión lineal, polinomio de g
 
 ## 2.14 — Desarrollo y evaluación experimental
 
-Autorizada. La fase A sigue congelada en `2.14-A`. La fase B ya estimó la recta y el polinomio de grado 2 con cresta, sin cambiar los pliegues. No hay un ganador de la actividad.
+Autorizada. La fase A está cerrada y congelada en `2.14-A`. La fase B está desarrollada, evaluada y preparada para la revisión de cierre. No se cambiaron los pliegues ni la métrica. No hay un ganador de la actividad.
 
-El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` conserva los tres pliegues por curvas completas. Mapping reserva 10 curvas por pliegue y surging reserva 6. El informe numérico es `docs/resultados_modelos_2_14.md`. En estas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging. El resultado es provisional: el sesgo aún cambia de signo, no se repitió la velocidad de diseño y faltan los otros modelos.
+El cuaderno `notebooks/04_entrenamiento_evaluacion_modelos.ipynb` conserva los tres pliegues por curvas completas. Mapping reserva 10 curvas por pliegue y surging reserva 6. El informe es `docs/resultados_modelos_2_14.md`. En estas particiones, el polinomio tiene menor MAE por curva que la recta: 1,364 psi frente a 3,999 psi en mapping, y 1,114 psi frente a 2,312 psi en surging. El sesgo medio es pequeño porque se cancela entre curvas. Hay predicciones negativas y curvas de agua que el polinomio dobla. Esas listas están en `docs/derivados/`. No son mediciones.
 
-La fase C no está iniciada. Corresponden a ella la recta por condición, el bosque poco profundo y, en mapping, el cociente respecto del agua.
+La fase C está pendiente y no está iniciada. Corresponden a ella la recta por condición, el bosque poco profundo y, en mapping, el cociente respecto del agua.
