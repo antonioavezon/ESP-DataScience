@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block titulo %}{{ ficha.identificador }} · HUC{% endblock %}
+{% block contenido %}
+<h1>{{ ficha.identificador }}</h1>
+<p>{{ ficha.descripcion }}</p>
+<p class="nota">Ciclo: {{ ficha.ciclo }}. Estado declarado: {{ ficha.estado_declarado }}</p>
+<form method="post" action="{% url 'seleccionar_dataset' ficha.identificador %}">
+  {% csrf_token %}
+  <button type="submit">Usar este dataset</button>
+</form>
+
+<h2>Archivos de integración</h2>
+<ul>
+  <li>Entrada: {% if ficha.archivos.entrada %}presente, no se modifica{% else %}No disponible{% endif %}</li>
+  <li>Resultados procesados: {% if ficha.archivos.resultados %}presentes{% else %}No disponible{% endif %}</li>
+  <li>Contratos: {% if ficha.archivos.contrato_entrada and ficha.archivos.contrato_salida %}presentes{% else %}No disponible{% endif %}</li>
+  <li>Motor: {% if ficha.archivos.motor %}presente{% else %}No disponible{% endif %}</li>
+</ul>
+{% if manifiesto.version %}
+  <p class="nota">Paquete {{ manifiesto.version }}. Contrato {{ manifiesto.esquema_contrato }}.</p>
+{% endif %}
+{% if not ficha.puede_evaluar %}<p class="aviso">{{ ficha.causa_sin_evaluacion }}</p>{% endif %}
+
+<h2>Pozos</h2>
+{% if pozos %}
+<table>
+  <thead><tr><th>Rótulo</th><th>Hoja</th><th>Bomba</th></tr></thead>
+  <tbody>
+  {% for pozo in pozos %}
+    <tr>
+      <td><a href="{% url 'pozo' ficha.identificador pozo.pozo_rotulo %}">{{ pozo.pozo_rotulo }}</a></td>
+      <td>{{ pozo.hoja }}</td>
+      <td>{{ pozo.bomba_referencia|default:"No disponible" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p>No disponible</p>{% endif %}
+
+<h2>Resultados determinísticos</h2>
+{% if resultados %}
+<table>
+  <thead>
+    <tr><th>Pozo</th><th>PIP ft</th><th>THD ft</th><th>Caudal calculado BFPD</th><th>Caudal medido BFPD</th></tr>
+  </thead>
+  <tbody>
+  {% for fila in resultados %}
+    <tr>
+      <td>{{ fila.pozo }}</td>
+      <td>{{ fila.pip_ft|default:"No disponible" }}</td>
+      <td>{{ fila.thd_total_ft|default:"No disponible" }}</td>
+      <td>{{ fila.caudal_a_producir_bfpd|default:"No disponible" }}</td>
+      <td>{{ fila.caudal_medido_bfpd|default:"No disponible" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="nota">Cifras de la hoja.</p>
+{% else %}<p>No disponible</p>{% endif %}
+
+<h2>Reglas</h2>
+{% if reglas %}
+<table>
+  <thead><tr><th>Id</th><th>Nombre</th></tr></thead>
+  <tbody>
+  {% for regla in reglas %}
+    <tr>
+      <td>{{ regla.id }}</td>
+      <td>{{ regla.nombre }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p>No disponible</p>{% endif %}
+
+<h2>Variables</h2>
+{% if variables %}
+<table>
+  <thead><tr><th>Nombre</th><th>Unidad</th><th>Tipo</th></tr></thead>
+  <tbody>
+  {% for variable in variables %}
+    <tr>
+      <td>{{ variable.nombre }}</td>
+      <td>{{ variable.unidad|default:"No disponible" }}</td>
+      <td>{{ variable.tipo|default:"No disponible" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p>No disponible</p>{% endif %}
+{% endblock %}

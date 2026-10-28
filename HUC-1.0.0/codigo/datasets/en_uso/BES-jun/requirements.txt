@@ -1,0 +1,15 @@
+# Dependencias de este expediente. El entorno es el .venv de la raíz del proyecto.
+# Fedora Linux 43. Python 3.14.8. No incluye un modelo de lenguaje.
+pandas==3.0.6
+numpy==2.5.4
+matplotlib==3.11.2
+openpyxl==3.1.5
+jupyterlab==4.6.4
+ipykernel==7.4.0
+nbformat==5.11.1
+nbconvert==7.17.2
+pytest==9.1.1
+pymupdf==1.28.2
+jsonschema==4.26.0
+# PDF: Google Chrome headless y pandoc, ya presentes en el sistema.
+# Comprobado: Google Chrome 155.0.8059.84 y /usr/bin/pandoc.

@@ -1,0 +1,11 @@
+{% with actual=request.resolver_match.url_name %}
+<nav id="menu-lateral" class="lateral" aria-label="Navegación">
+  <a class="marca" href="{% url 'inicio' %}">HUC</a>
+  <a href="{% url 'inicio' %}" {% if actual == "inicio" %}class="activo"{% endif %}>Consola ESP</a>
+  <a href="{% url 'datasets' %}" {% if actual == "datasets" or actual == "detalle_dataset" or actual == "pozo" %}class="activo"{% endif %}>Datasets</a>
+  <a href="{% url 'asistente' %}" {% if actual == "asistente" or actual == "enviar_consulta" or actual == "borrar_consulta" %}class="activo"{% endif %}>Asistente IA</a>
+  <a href="{% url 'configuracion_ia' %}" {% if actual == "configuracion_ia" %}class="activo"{% endif %}>Configuración de IA</a>
+  <a href="{% url 'acerca' %}" {% if actual == "acerca" %}class="activo"{% endif %}>Acerca</a>
+  {% include "core/_estado_pozos.html" %}
+</nav>
+{% endwith %}

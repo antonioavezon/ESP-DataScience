@@ -1,0 +1,50 @@
+{
+  "nota": "No se procesa otro dataset.",
+  "solicitud": {
+    "dataset_id": "RB-1521",
+    "pozo_id": "QF-084",
+    "version_configuracion": "1.3.0",
+    "variables": []
+  },
+  "resultado": {
+    "dataset_solicitado": "RB-1521",
+    "dataset_evaluado": null,
+    "pozo_solicitado": "QF-084",
+    "pozo_resuelto": null,
+    "version_contrato": "1.3.0",
+    "version_motor": "0.4.2",
+    "version_catalogo_reglas": "1.1.0",
+    "version_software": "0.4.2",
+    "fecha_referencia": null,
+    "incidente_id": null,
+    "estado_evaluacion": "entrada_invalida",
+    "identidad": {
+      "estado": "no_resuelta"
+    },
+    "modelos": [],
+    "reglas": [],
+    "advertencias": [],
+    "mensajes": [
+      {
+        "tipo": "error_dato",
+        "codigo": "DATASET_DESCONOCIDO",
+        "texto": "dataset_id: Este motor solo evalúa BES-jun. No se procesó 'RB-1521'."
+      }
+    ],
+    "errores": [
+      {
+        "campo": "dataset_id",
+        "codigo": "DATASET_DESCONOCIDO",
+        "detalle": "Este motor solo evalúa BES-jun. No se procesó 'RB-1521'.",
+        "mensaje": "Este motor solo evalúa BES-jun. No se procesó 'RB-1521'."
+      }
+    ],
+    "reglas_ejecutadas": 0,
+    "recomendacion_operacional_autorizada": false,
+    "fuera_de_dominio_observado": false,
+    "modo": "operacional",
+    "hipotetico": false,
+    "escenario_id": null,
+    "parametros_modificados": []
+  }
+}

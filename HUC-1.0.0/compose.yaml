@@ -1,0 +1,172 @@
+name: huc
+
+services:
+  huc-mqtt:
+    image: eclipse-mosquitto:2.0.22
+    container_name: huc-mqtt
+    restart: unless-stopped
+    command: ["mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+    volumes:
+      - ./infraestructura/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    networks: [huc]
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "127.0.0.1", "-t", "huc/v1/salud/broker", "-m", "ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+      start_period: 10s
+    logging: &registro
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  huc-ollama:
+    image: ollama/ollama:0.12.6
+    container_name: huc-ollama
+    restart: unless-stopped
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:4b-instruct-2507-q4_K_M}
+    entrypoint: ["/bin/sh", "/entrada/ollama-entrada.sh"]
+    volumes:
+      - ollama:/root/.ollama
+      - ./servicios/ollama-entrada.sh:/entrada/ollama-entrada.sh:ro
+    networks: [huc]
+    mem_limit: 8g
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 20s
+      timeout: 10s
+      retries: 20
+      start_period: 180s
+    logging: *registro
+
+  huc-proceso:
+    build:
+      context: .
+      dockerfile: servicios/Dockerfile
+      target: proceso
+    image: huc-proceso:1.0.0
+    container_name: huc-proceso
+    restart: unless-stopped
+    environment: &entorno
+      HUC_ENTORNO: contenedor
+      HUC_MQTT_HOST: huc-mqtt
+      HUC_MQTT_PORT: "1883"
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://huc-ollama:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:4b-instruct-2507-q4_K_M}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+    depends_on:
+      huc-mqtt:
+        condition: service_healthy
+    networks: [huc]
+    mem_limit: 2g
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,time; t=os.path.getmtime('/tmp/huc-proceso-vivo'); raise SystemExit(0 if time.time()-t<25 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 90s
+    logging: *registro
+
+  huc-ia:
+    build:
+      context: .
+      dockerfile: servicios/Dockerfile
+      target: ia
+    image: huc-ia:1.0.0
+    container_name: huc-ia
+    restart: unless-stopped
+    environment:
+      <<: *entorno
+      HUC_IA_BIND: 0.0.0.0
+      HUC_IA_PORT: "8002"
+    depends_on:
+      huc-ollama:
+        condition: service_started
+    networks: [huc]
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/salud', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    logging: *registro
+
+  huc-visualizacion:
+    build:
+      context: .
+      dockerfile: servicios/Dockerfile
+      target: visualizacion
+    image: huc-visualizacion:1.0.0
+    container_name: huc-visualizacion
+    restart: unless-stopped
+    environment:
+      <<: *entorno
+      HUC_IA_URL: ${HUC_IA_URL:-http://huc-ia:8002}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+      HUC_SQLITE: /datos/visualizacion.sqlite3
+    ports:
+      - "0.0.0.0:8000:8000"
+    volumes:
+      - visualizacion:/datos
+    depends_on:
+      huc-mqtt:
+        condition: service_healthy
+      huc-ia:
+        condition: service_healthy
+    networks: [huc]
+    mem_limit: 1g
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    logging: *registro
+
+  huc-data:
+    build:
+      context: .
+      dockerfile: servicios/Dockerfile
+      target: data
+    image: huc-data:1.0.0
+    container_name: huc-data
+    restart: unless-stopped
+    environment:
+      <<: *entorno
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+      HUC_SQLITE: /datos/simulador.sqlite3
+      HUC_SIM_USUARIO: ${HUC_SIM_USUARIO:-operador}
+      HUC_SIM_CLAVE: ${HUC_SIM_CLAVE}
+    ports:
+      - "0.0.0.0:8001:8001"
+    volumes:
+      - simulador:/datos
+    depends_on:
+      huc-mqtt:
+        condition: service_healthy
+    networks: [huc]
+    mem_limit: 2g
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    logging: *registro
+
+networks:
+  huc:
+    name: huc
+
+volumes:
+  ollama:
+    name: huc-ollama
+  visualizacion:
+    name: huc-visualizacion
+  simulador:
+    name: huc-simulador

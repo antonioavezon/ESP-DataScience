@@ -1,0 +1,460 @@
+{
+  "dataset_id": "BES-jun",
+  "pozos": [
+    {
+      "dataset_id": "BES-jun",
+      "hoja": "QF-554H",
+      "cluster": "QF-554H",
+      "pozo_rotulo": "QF-084",
+      "estado_identidad": "provisional",
+      "motivo_identidad": "El libro no declara si la llave es la hoja, el Cluster o el Pozo.",
+      "bomba_referencia": "S 8000N",
+      "etapas": 53.0,
+      "id_tubing_in": 2.996,
+      "profundidades_ft": {
+        "tvd_descarga": 2644.7774613636366,
+        "tvd_intake": 2653.176659090909,
+        "tvd_sensor": 2678.821959090909,
+        "md_descarga": 2841.51,
+        "md_intake": 2856.1,
+        "md_sensor": 2900.58
+      },
+      "curva_60hz": [
+        {
+          "caudal_bfpd": 0.0,
+          "head_ft": 64.0,
+          "brake_hp": 2.5,
+          "eff_numero": 0.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 2500.0,
+          "head_ft": 62.0,
+          "brake_hp": 2.6,
+          "eff_numero": 4.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 5000.0,
+          "head_ft": 58.0,
+          "brake_hp": 2.6,
+          "eff_numero": 6.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 8000.0,
+          "head_ft": 48.0,
+          "brake_hp": 3.0,
+          "eff_numero": 7.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 10000.0,
+          "head_ft": 36.0,
+          "brake_hp": 3.2,
+          "eff_numero": 7.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 12500.0,
+          "head_ft": 10.0,
+          "brake_hp": 3.5,
+          "eff_numero": 2.4,
+          "eff_unidad_rotulo": "%"
+        }
+      ],
+      "fluido": {
+        "api_deg": 12.0,
+        "bsw_numero": 0.9755,
+        "bsw_unidad_rotulo": "%",
+        "temperatura_c": 65.55555555555556,
+        "densidad_agua_lb_gal": 8.345,
+        "nota": "Si el valor coincide con el de otras hojas, no es una medición independiente comprobada."
+      },
+      "condiciones_registradas": {
+        "frecuencia_hz": 63.0,
+        "caudal_operacion_bfpd": 10301.0,
+        "presion_sensor_psi": 732.0,
+        "thp_psi": 183.0,
+        "limite_minimo_bfpd_a_60hz": 2500.0,
+        "limite_maximo_bfpd_a_60hz": 10000.0,
+        "cono_eficiencia_bfpd": 8000.0
+      },
+      "fuente": "entrada/BES_jun.xlsx",
+      "fecha_medicion": null,
+      "fecha_en_la_hoja": "2026-10-17 00:00:00",
+      "fecha_es_today": true,
+      "fecha_procesamiento": "2026-10-20",
+      "calidad": "punto único; reproducción contra la caché de la misma hoja",
+      "limitaciones": [
+        "Sin fecha de medición comprobada.",
+        "Límites escritos, no de fabricante confirmado.",
+        "Curva de seis puntos, no una curva de catálogo verificada."
+      ]
+    },
+    {
+      "dataset_id": "BES-jun",
+      "hoja": "QF-545H",
+      "cluster": "QF-545H",
+      "pozo_rotulo": "QF-301",
+      "estado_identidad": "provisional",
+      "motivo_identidad": "El libro no declara si la llave es la hoja, el Cluster o el Pozo.",
+      "bomba_referencia": "S 8000N",
+      "etapas": 50.0,
+      "id_tubing_in": 2.996,
+      "profundidades_ft": {
+        "tvd_descarga": 2527.3619868852456,
+        "tvd_intake": 2534.603750819672,
+        "tvd_sensor": 2553.917357377049,
+        "md_descarga": 2978.66,
+        "md_intake": 2994.87,
+        "md_sensor": 3038.12
+      },
+      "curva_60hz": [
+        {
+          "caudal_bfpd": 0.0,
+          "head_ft": 64.0,
+          "brake_hp": 2.5,
+          "eff_numero": 0.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 2500.0,
+          "head_ft": 62.0,
+          "brake_hp": 2.6,
+          "eff_numero": 4.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 5000.0,
+          "head_ft": 58.0,
+          "brake_hp": 2.6,
+          "eff_numero": 6.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 8000.0,
+          "head_ft": 48.0,
+          "brake_hp": 3.0,
+          "eff_numero": 7.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 10000.0,
+          "head_ft": 36.0,
+          "brake_hp": 3.2,
+          "eff_numero": 7.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 12500.0,
+          "head_ft": 10.0,
+          "brake_hp": 3.5,
+          "eff_numero": 2.4,
+          "eff_unidad_rotulo": "%"
+        }
+      ],
+      "fluido": {
+        "api_deg": 12.0,
+        "bsw_numero": 0.9766,
+        "bsw_unidad_rotulo": "%",
+        "temperatura_c": 62.22222222222222,
+        "densidad_agua_lb_gal": 8.345,
+        "nota": "Si el valor coincide con el de otras hojas, no es una medición independiente comprobada."
+      },
+      "condiciones_registradas": {
+        "frecuencia_hz": 57.0,
+        "caudal_operacion_bfpd": 8767.0,
+        "presion_sensor_psi": 667.0,
+        "thp_psi": 210.0,
+        "limite_minimo_bfpd_a_60hz": 2500.0,
+        "limite_maximo_bfpd_a_60hz": 10000.0,
+        "cono_eficiencia_bfpd": 8000.0
+      },
+      "fuente": "entrada/BES_jun.xlsx",
+      "fecha_medicion": null,
+      "fecha_en_la_hoja": "2026-10-17 00:00:00",
+      "fecha_es_today": true,
+      "fecha_procesamiento": "2026-10-20",
+      "calidad": "punto único; reproducción contra la caché de la misma hoja",
+      "limitaciones": [
+        "Sin fecha de medición comprobada.",
+        "Límites escritos, no de fabricante confirmado.",
+        "Curva de seis puntos, no una curva de catálogo verificada."
+      ]
+    },
+    {
+      "dataset_id": "BES-jun",
+      "hoja": "QF-500H",
+      "cluster": "QF-500H",
+      "pozo_rotulo": "QF-147",
+      "estado_identidad": "provisional",
+      "motivo_identidad": "El libro no declara si la llave es la hoja, el Cluster o el Pozo.",
+      "bomba_referencia": "S 8000N",
+      "etapas": 36.0,
+      "id_tubing_in": 2.996,
+      "profundidades_ft": {
+        "tvd_descarga": 2572.4604285714286,
+        "tvd_intake": 2578.9682203125003,
+        "tvd_sensor": 2604.498421875,
+        "md_descarga": 2801.9,
+        "md_intake": 2813.57,
+        "md_sensor": 2859.3
+      },
+      "curva_60hz": [
+        {
+          "caudal_bfpd": 0.0,
+          "head_ft": 64.0,
+          "brake_hp": 2.5,
+          "eff_numero": 0.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 2500.0,
+          "head_ft": 62.0,
+          "brake_hp": 2.6,
+          "eff_numero": 4.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 5000.0,
+          "head_ft": 58.0,
+          "brake_hp": 2.6,
+          "eff_numero": 6.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 8000.0,
+          "head_ft": 48.0,
+          "brake_hp": 3.0,
+          "eff_numero": 7.6,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 10000.0,
+          "head_ft": 36.0,
+          "brake_hp": 3.2,
+          "eff_numero": 7.0,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 12500.0,
+          "head_ft": 10.0,
+          "brake_hp": 3.5,
+          "eff_numero": 2.4,
+          "eff_unidad_rotulo": "%"
+        }
+      ],
+      "fluido": {
+        "api_deg": 12.0,
+        "bsw_numero": 0.9644,
+        "bsw_unidad_rotulo": "%",
+        "temperatura_c": 65.55555555555556,
+        "densidad_agua_lb_gal": 8.345,
+        "nota": "Si el valor coincide con el de otras hojas, no es una medición independiente comprobada."
+      },
+      "condiciones_registradas": {
+        "frecuencia_hz": 56.0,
+        "caudal_operacion_bfpd": 7728.0,
+        "presion_sensor_psi": 821.0,
+        "thp_psi": 194.0,
+        "limite_minimo_bfpd_a_60hz": 2500.0,
+        "limite_maximo_bfpd_a_60hz": 10000.0,
+        "cono_eficiencia_bfpd": 8000.0
+      },
+      "fuente": "entrada/BES_jun.xlsx",
+      "fecha_medicion": null,
+      "fecha_en_la_hoja": "2026-10-17 00:00:00",
+      "fecha_es_today": true,
+      "fecha_procesamiento": "2026-10-20",
+      "calidad": "punto único; reproducción contra la caché de la misma hoja",
+      "limitaciones": [
+        "Sin fecha de medición comprobada.",
+        "Límites escritos, no de fabricante confirmado.",
+        "Curva de seis puntos, no una curva de catálogo verificada."
+      ]
+    },
+    {
+      "dataset_id": "BES-jun",
+      "hoja": "QF-378HST",
+      "cluster": "QF-378HST",
+      "pozo_rotulo": "QF-005",
+      "estado_identidad": "provisional",
+      "motivo_identidad": "El libro no declara si la llave es la hoja, el Cluster o el Pozo.",
+      "bomba_referencia": "S6000N",
+      "etapas": 31.0,
+      "id_tubing_in": 2.996,
+      "profundidades_ft": {
+        "tvd_descarga": 2763.6426454545453,
+        "tvd_intake": 2769.6592545454546,
+        "tvd_sensor": 2790.2826631578946,
+        "md_descarga": 3018.77,
+        "md_intake": 3028.46,
+        "md_sensor": 3061.68
+      },
+      "curva_60hz": [
+        {
+          "caudal_bfpd": 333.0,
+          "head_ft": 68.0,
+          "brake_hp": 1.656,
+          "eff_numero": 1.069,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 2000.0,
+          "head_ft": 63.522,
+          "brake_hp": 2.174,
+          "eff_numero": 4.3,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 4000.0,
+          "head_ft": 59.772,
+          "brake_hp": 2.833,
+          "eff_numero": 6.2,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 6000.0,
+          "head_ft": 52.296,
+          "brake_hp": 3.166,
+          "eff_numero": 7.3,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 8000.0,
+          "head_ft": 29.814,
+          "brake_hp": 3.027,
+          "eff_numero": 6.9,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 10000.0,
+          "head_ft": 1.532,
+          "brake_hp": 2.766,
+          "eff_numero": 0.4082,
+          "eff_unidad_rotulo": "%"
+        }
+      ],
+      "fluido": {
+        "api_deg": 12.0,
+        "bsw_numero": 0.9557,
+        "bsw_unidad_rotulo": "%",
+        "temperatura_c": 65.55555555555556,
+        "densidad_agua_lb_gal": 8.345,
+        "nota": "Si el valor coincide con el de otras hojas, no es una medición independiente comprobada."
+      },
+      "condiciones_registradas": {
+        "frecuencia_hz": 67.0,
+        "caudal_operacion_bfpd": 7116.0,
+        "presion_sensor_psi": 810.0,
+        "thp_psi": 145.0,
+        "limite_minimo_bfpd_a_60hz": 2000.0,
+        "limite_maximo_bfpd_a_60hz": 8000.0,
+        "cono_eficiencia_bfpd": 6000.0
+      },
+      "fuente": "entrada/BES_jun.xlsx",
+      "fecha_medicion": null,
+      "fecha_en_la_hoja": "2026-10-17 00:00:00",
+      "fecha_es_today": true,
+      "fecha_procesamiento": "2026-10-20",
+      "calidad": "punto único; reproducción contra la caché de la misma hoja",
+      "limitaciones": [
+        "Sin fecha de medición comprobada.",
+        "Límites escritos, no de fabricante confirmado.",
+        "Curva de seis puntos, no una curva de catálogo verificada."
+      ]
+    },
+    {
+      "dataset_id": "BES-jun",
+      "hoja": "QF-549HST",
+      "cluster": "QF-549HST",
+      "pozo_rotulo": "QF-306",
+      "estado_identidad": "provisional",
+      "motivo_identidad": "El libro no declara si la llave es la hoja, el Cluster o el Pozo.",
+      "bomba_referencia": "S6000N",
+      "etapas": 31.0,
+      "id_tubing_in": 2.996,
+      "profundidades_ft": {
+        "tvd_descarga": 2608.4579,
+        "tvd_intake": 2614.0637888888887,
+        "tvd_sensor": 2634.6028843749996,
+        "md_descarga": 2787.17,
+        "md_intake": 2796.27,
+        "md_sensor": 2829.66
+      },
+      "curva_60hz": [
+        {
+          "caudal_bfpd": 333.0,
+          "head_ft": 68.0,
+          "brake_hp": 1.656,
+          "eff_numero": 1.069,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 2000.0,
+          "head_ft": 63.522,
+          "brake_hp": 2.174,
+          "eff_numero": 4.3,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 4000.0,
+          "head_ft": 59.772,
+          "brake_hp": 2.833,
+          "eff_numero": 6.2,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 6000.0,
+          "head_ft": 52.296,
+          "brake_hp": 3.166,
+          "eff_numero": 7.3,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 8000.0,
+          "head_ft": 29.814,
+          "brake_hp": 3.027,
+          "eff_numero": 6.9,
+          "eff_unidad_rotulo": "%"
+        },
+        {
+          "caudal_bfpd": 10000.0,
+          "head_ft": 1.532,
+          "brake_hp": 2.766,
+          "eff_numero": 0.4082,
+          "eff_unidad_rotulo": "%"
+        }
+      ],
+      "fluido": {
+        "api_deg": 12.0,
+        "bsw_numero": 0.9557,
+        "bsw_unidad_rotulo": "%",
+        "temperatura_c": 65.55555555555556,
+        "densidad_agua_lb_gal": 8.345,
+        "nota": "Si el valor coincide con el de otras hojas, no es una medición independiente comprobada."
+      },
+      "condiciones_registradas": {
+        "frecuencia_hz": 62.0,
+        "caudal_operacion_bfpd": 5419.0,
+        "presion_sensor_psi": 607.0,
+        "thp_psi": 177.0,
+        "limite_minimo_bfpd_a_60hz": 2000.0,
+        "limite_maximo_bfpd_a_60hz": 8000.0,
+        "cono_eficiencia_bfpd": 6000.0
+      },
+      "fuente": "entrada/BES_jun.xlsx",
+      "fecha_medicion": null,
+      "fecha_en_la_hoja": "2017-09-06 00:00:00",
+      "fecha_es_today": false,
+      "fecha_procesamiento": "2026-10-20",
+      "calidad": "punto único; reproducción contra la caché de la misma hoja",
+      "limitaciones": [
+        "Sin fecha de medición comprobada.",
+        "Límites escritos, no de fabricante confirmado.",
+        "Curva de seis puntos, no una curva de catálogo verificada."
+      ]
+    }
+  ]
+}

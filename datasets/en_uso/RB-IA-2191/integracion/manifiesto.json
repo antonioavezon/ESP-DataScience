@@ -1,0 +1,20 @@
+{
+  "dataset_id": "RB-IA-2191",
+  "version": "0.1.0",
+  "esquema_contrato": "1.0.0",
+  "estado_dataset": "investigacion_en_curso",
+  "estado_reglas": "sin_regla_de_caudal",
+  "archivo_entrada": "entrada/RB-IA-2191-Data.xlsx",
+  "sha256_entrada": "908149f26e7560dc6bce75dc0268560e93a05d88b685218856b738dea39d9f08",
+  "pozos": ["RB-IA-2191"],
+  "modelos": ["M-RBIA2191-BOPD"],
+  "reglas": [],
+  "reglas_aprobadas": [],
+  "limitaciones": [
+    "Solo se implementa BOPD = BFPD − BWPD, fórmula visible en Excel.",
+    "BSW almacenado no reproduce BWPD/BFPD; no se usa como factor.",
+    "Columnas Sum, P_SUT, Pbomba, Eff_b, Porc_Load, Eff_m no tienen fórmula visible.",
+    "Sin regla de caudal tipo RC-BES; rótulo operacional REGISTRO."
+  ],
+  "compatibilidad": {"motor": "0.1.0"}
+}

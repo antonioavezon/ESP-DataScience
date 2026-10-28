@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bes-jun/contrato_entrada",
+  "title": "Solicitud de evaluación BES-jun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataset_id",
+    "pozo_id",
+    "version_configuracion"
+  ],
+  "properties": {
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pozo_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version_configuracion": {
+      "const": "1.3.0"
+    },
+    "fecha_observacion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "modo": {
+      "enum": [
+        "operacional",
+        "simulacion"
+      ]
+    },
+    "escenario_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "configuracion_pozo_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parametros_escenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id_tubing_in": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "in"
+            }
+          }
+        },
+        "etapas": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "1"
+            }
+          }
+        },
+        "tvd_descarga_ft": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "ft"
+            }
+          }
+        },
+        "tvd_intake_ft": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "ft"
+            }
+          }
+        },
+        "tvd_sensor_ft": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "ft"
+            }
+          }
+        },
+        "frecuencia_curva_hz": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "Hz"
+            }
+          }
+        },
+        "limite_minimo_bfpd": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "BFPD"
+            }
+          }
+        },
+        "limite_maximo_bfpd": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "BFPD"
+            }
+          }
+        },
+        "cono_eficiencia_bfpd": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "valor",
+            "unidad"
+          ],
+          "properties": {
+            "valor": {
+              "type": "number"
+            },
+            "unidad": {
+              "const": "BFPD"
+            }
+          }
+        },
+        "bomba_referencia": {
+          "type": "string",
+          "minLength": 1
+        },
+        "curva": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "caudal_bfpd",
+              "head_ft"
+            ],
+            "properties": {
+              "caudal_bfpd": {
+                "type": "number"
+              },
+              "head_ft": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nombre",
+          "valor",
+          "unidad",
+          "procedencia"
+        ],
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "valor": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unidad": {
+            "type": "string",
+            "minLength": 1
+          },
+          "procedencia": {
+            "enum": [
+              "configuracion_del_pozo",
+              "operador",
+              "sensor",
+              "no_declarada"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

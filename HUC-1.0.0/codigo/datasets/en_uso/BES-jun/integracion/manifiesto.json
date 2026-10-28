@@ -1,0 +1,47 @@
+{
+  "dataset_id": "BES-jun",
+  "version": "0.4.2",
+  "esquema_contrato": "1.3.0",
+  "estado_dataset": "validacion_pendiente",
+  "estado_reglas": "pendiente_validacion",
+  "archivo_entrada": "entrada/BES_jun.xlsx",
+  "sha256_entrada": "ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85",
+  "bytes_entrada": 329308,
+  "fecha_construccion": "2026-10-20",
+  "modelos": [
+    "M-BES-FLUIDO",
+    "M-BES-BALANCE",
+    "M-BES-INTERSECCION"
+  ],
+  "reglas": [
+    "RC-BES-01",
+    "RC-BES-02",
+    "RC-BES-03",
+    "RC-BES-04"
+  ],
+  "reglas_aprobadas": [],
+  "pozos": [
+    "QF-084",
+    "QF-301",
+    "QF-147",
+    "QF-005",
+    "QF-306"
+  ],
+  "dependencias": [
+    "Python del entorno del proyecto",
+    "openpyxl",
+    "sin red",
+    "sin modelo de lenguaje"
+  ],
+  "limitaciones": [
+    "La identidad Cluster/Pozo no está confirmada.",
+    "Ninguna regla está aprobada para uso operacional.",
+    "CT-01 a CT-10 siguen abiertas.",
+    "El rango observado de frecuencia no es un límite autorizado."
+  ],
+  "compatibilidad": {
+    "contrato": "1.3.0",
+    "motor": "0.4.2",
+    "catalogo_reglas": "1.1.0"
+  }
+}

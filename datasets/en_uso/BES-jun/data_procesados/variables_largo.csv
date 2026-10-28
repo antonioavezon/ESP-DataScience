@@ -1,0 +1,171 @@
+hoja,variable,rotulo,celda,tipo_celda,formula,valor,unidad_rotulada,rol
+QF-554H,frecuencia_hz,Velocidad,B69,constante,,63.0,Hz,entrada de operación
+QF-554H,caudal_operacion_bfpd,Caudal,B71,constante,,10301.0,BFPD,entrada de operación
+QF-554H,presion_sensor_psi,Presión de Sensor,B73,constante,,732.0,psi,entrada de operación
+QF-554H,thp_psi,THP,B75,constante,,183.0,psi,entrada de operación
+QF-554H,id_tubing_in,ID,B38,constante,,2.996,inch,parámetro mecánico
+QF-554H,etapas,Etapas,B46,constante,,53.0,Nº,parámetro de bomba
+QF-554H,presion_yacimiento_psi,Presión de Yacimiento,G18,constante,,1100.0,psi,parámetro de yacimiento
+QF-554H,presion_burbuja_psi,Presión de Burbuja,G20,constante,,130.0,psi,parámetro de fluido
+QF-554H,presion_prueba_psi,Presión de Prueba,G22,constante,,732.0,psi,dato de prueba
+QF-554H,caudal_prueba_bfpd,Caudal de Prueba,G24,constante,,10301.0,BFPD,dato de prueba
+QF-554H,bsw_numero,BS&W,G26,constante,,0.9755,%,parámetro de fluido
+QF-554H,temperatura_f,Temperatura de fondo,G28,constante,,150.0,ºF,parámetro de fluido
+QF-554H,temperatura_c,Temperatura de fondo,G30,fórmula,=(G28-32)/1.8,65.55555555555556,ºC,calculada en la hoja
+QF-554H,api_deg,API,G32,constante,,12.0,ºAPI,parámetro de fluido
+QF-554H,densidad_agua_lb_gal,Densidad del Agua,G34,constante,,8.345,Lb/gln,parámetro de fluido
+QF-554H,frecuencia_curva_hz,Velocidad,G47,constante,,60.0,Hz,referencia de la curva de bomba
+QF-554H,limite_minimo_bfpd,Limite minimo,G56,constante,,2500.0,BFPD,límite escrito en la hoja
+QF-554H,cono_eficiencia_bfpd,Cono de eficiencia,G57,constante,,8000.0,BFPD,límite escrito en la hoja
+QF-554H,limite_maximo_bfpd,Limite maximo,G58,constante,,10000.0,BFPD,límite escrito en la hoja
+QF-554H,md_descarga_ft,Descarga,B18,constante,,2841.51,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-554H,tvd_descarga_ft,Descarga,C18,fórmula,=+H361,2644.7774613636366,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-554H,md_intake_ft,Intake,B20,constante,,2856.1,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-554H,tvd_intake_ft,Intake,C20,fórmula,=H365,2653.176659090909,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-554H,md_sensor_ft,Sensor,B24,constante,,2900.58,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-554H,tvd_sensor_ft,Sensor,C24,fórmula,=H373,2678.821959090909,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-554H,cache_sg_60,Gravedad Oil @ 60ºF,B96,fórmula,=141.5/(131.5+G32),0.9860627177700348,,resultado de la hoja
+QF-554H,cache_sg_temperatura,Gravedad Oil @ T fondo,B98,fórmula,=B96-((0.00066)*(G30-15.556))+((0.0000003*((G30-15.556)^2))),0.9538129977700941,,resultado de la hoja
+QF-554H,cache_densidad_lb_gal,Densidad de Fluido,B100,fórmula,=8.33*((G26*G34/8.33)+((1-G26)*B98)),8.33520642564991,Lb/Gln,resultado de la hoja
+QF-554H,cache_gradiente_psi_ft,Gradiente de Presión,B102,fórmula,=B100*0.052,0.4334307341337953,psi*ft,resultado de la hoja
+QF-554H,cache_pip_ft,PIP en (ft),G96,fórmula,=(B73-((C20-C24)*B102))/B102,1714.4964643339983,ft,resultado de la hoja
+QF-554H,cache_thp_ft,THP en (ft),G98,fórmula,=B75/B102,422.21279108349967,ft,resultado de la hoja
+QF-554H,cache_friccion_ft,Perdidad por Fricción,G100,fórmula,=(2.083*((100/120)^1.85)*((B71/34.3)^1.85)*(1/(B38)^4.8566))*(C18/1000),730.7231971339377,ft,resultado de la hoja
+QF-554H,cache_thd_ft,THD TOTAL,G102,fórmula,=C18+G100+G98-G96,2083.216985247076,ft,resultado de la hoja
+QF-554H,cache_caudal_producir_bfpd,Caudal a producir,B106,fórmula,=K94,10535.166588487324,BFPD,resultado de la hoja
+QF-545H,frecuencia_hz,Velocidad,B67,constante,,57.0,Hz,entrada de operación
+QF-545H,caudal_operacion_bfpd,Caudal,B69,constante,,8767.0,BFPD,entrada de operación
+QF-545H,presion_sensor_psi,Presión de Sensor,B71,constante,,667.0,psi,entrada de operación
+QF-545H,thp_psi,THP,B73,constante,,210.0,psi,entrada de operación
+QF-545H,id_tubing_in,ID,B37,constante,,2.996,inch,parámetro mecánico
+QF-545H,etapas,Etapas,B45,constante,,50.0,Nº,parámetro de bomba
+QF-545H,presion_yacimiento_psi,Presión de Yacimiento,G17,constante,,1100.0,psi,parámetro de yacimiento
+QF-545H,presion_burbuja_psi,Presión de Burbuja,G19,constante,,130.0,psi,parámetro de fluido
+QF-545H,presion_prueba_psi,Presión de Prueba,G21,constante,,654.0,psi,dato de prueba
+QF-545H,caudal_prueba_bfpd,Caudal de Prueba,G23,constante,,8767.0,BFPD,dato de prueba
+QF-545H,bsw_numero,BS&W,G25,constante,,0.9766,%,parámetro de fluido
+QF-545H,temperatura_f,Temperatura de fondo,G27,constante,,144.0,ºF,parámetro de fluido
+QF-545H,temperatura_c,Temperatura de fondo,G29,fórmula,=(G27-32)/1.8,62.22222222222222,ºC,calculada en la hoja
+QF-545H,api_deg,API,G31,constante,,12.0,ºAPI,parámetro de fluido
+QF-545H,densidad_agua_lb_gal,Densidad del Agua,G33,constante,,8.345,Lb/galn,parámetro de fluido
+QF-545H,frecuencia_curva_hz,Velocidad,G46,constante,,60.0,Hz,referencia de la curva de bomba
+QF-545H,limite_minimo_bfpd,Limite minimo,G55,constante,,2500.0,BFPD,límite escrito en la hoja
+QF-545H,cono_eficiencia_bfpd,Cono de eficiencia,G56,constante,,8000.0,BFPD,límite escrito en la hoja
+QF-545H,limite_maximo_bfpd,Limite maximo,G57,constante,,10000.0,BFPD,límite escrito en la hoja
+QF-545H,md_descarga_ft,Descarga,B17,constante,,2978.66,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-545H,tvd_descarga_ft,Descarga,C17,fórmula,=+H347,2527.3619868852456,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-545H,md_intake_ft,Intake,B19,constante,,2994.87,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-545H,tvd_intake_ft,Intake,C19,fórmula,=H351,2534.603750819672,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-545H,md_sensor_ft,Sensor,B23,constante,,3038.12,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-545H,tvd_sensor_ft,Sensor,C23,fórmula,=H359,2553.917357377049,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-545H,cache_sg_60,Gravedad Oil @ 60ºF,B94,fórmula,=141.5/(131.5+G31),0.9860627177700348,,resultado de la hoja
+QF-545H,cache_sg_temperatura,Gravedad Oil @ T fondo,B96,fórmula,=B94-((0.00066)*(G29-15.556))+((0.0000003*((G29-15.556)^2))),0.9559163319923163,,resultado de la hoja
+QF-545H,cache_densidad_lb_gal,Densidad de Fluido,B98,fórmula,=8.33*((G25*G33/8.33)+((1-G25)*B96)),8.336056123264607,Lb/Gln,resultado de la hoja
+QF-545H,cache_gradiente_psi_ft,Gradiente de Presión,B100,fórmula,=B98*0.052,0.43347491840975955,psi*ft,resultado de la hoja
+QF-545H,cache_pip_ft,PIP en (ft),G94,fórmula,=(B71-((C19-C23)*B100))/B100,1558.0416198111716,ft,resultado de la hoja
+QF-545H,cache_thp_ft,THP en (ft),G96,fórmula,=B73/B100,484.4570956271317,ft,resultado de la hoja
+QF-545H,cache_friccion_ft,Perdidad por Fricción,G98,fórmula,=(2.083*((100/120)^1.85)*((B69/34.3)^1.85)*(1/(B37)^4.8566))*(C17/1000),518.1776823679361,ft,resultado de la hoja
+QF-545H,cache_thd_ft,THD TOTAL,G100,fórmula,=C17+G98+G96-G94,1971.955145069142,ft,resultado de la hoja
+QF-545H,cache_caudal_producir_bfpd,Caudal a producir,B104,fórmula,=K92,8280.859140108274,BFPD,resultado de la hoja
+QF-500H,frecuencia_hz,Velocidad,B68,constante,,56.0,Hz,entrada de operación
+QF-500H,caudal_operacion_bfpd,Caudal,B70,fórmula,=322*24,7728.0,BFPD,entrada de operación
+QF-500H,presion_sensor_psi,Presión de Sensor,B72,constante,,821.0,psi,entrada de operación
+QF-500H,thp_psi,THP,B74,constante,,194.0,psi,entrada de operación
+QF-500H,id_tubing_in,ID,B37,constante,,2.996,inch,parámetro mecánico
+QF-500H,etapas,Etapas,B45,constante,,36.0,Nº,parámetro de bomba
+QF-500H,presion_yacimiento_psi,Presión de Yacimiento,G17,constante,,1100.0,psi,parámetro de yacimiento
+QF-500H,presion_burbuja_psi,Presión de Burbuja,G19,constante,,130.0,psi,parámetro de fluido
+QF-500H,presion_prueba_psi,Presión de Prueba,G21,constante,,821.0,psi,dato de prueba
+QF-500H,caudal_prueba_bfpd,Caudal de Prueba,G23,constante,,7728.0,BFPD,dato de prueba
+QF-500H,bsw_numero,BS&W,G25,constante,,0.9644,%,parámetro de fluido
+QF-500H,temperatura_f,Temperatura de fondo,G27,constante,,150.0,ºF,parámetro de fluido
+QF-500H,temperatura_c,Temperatura de fondo,G29,fórmula,=(G27-32)/1.8,65.55555555555556,ºC,calculada en la hoja
+QF-500H,api_deg,API,G31,constante,,12.0,ºAPI,parámetro de fluido
+QF-500H,densidad_agua_lb_gal,Densidad del Agua,G33,constante,,8.345,Lb/gln,parámetro de fluido
+QF-500H,frecuencia_curva_hz,Velocidad,G46,constante,,60.0,Hz,referencia de la curva de bomba
+QF-500H,limite_minimo_bfpd,Limite minimo,G55,constante,,2500.0,BFPD,límite escrito en la hoja
+QF-500H,cono_eficiencia_bfpd,Cono de eficiencia,G56,constante,,8000.0,BFPD,límite escrito en la hoja
+QF-500H,limite_maximo_bfpd,Limite maximo,G57,constante,,10000.0,BFPD,límite escrito en la hoja
+QF-500H,md_descarga_ft,Descarga,B17,constante,,2801.9,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-500H,tvd_descarga_ft,Descarga,C17,fórmula,=+H319,2572.4604285714286,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-500H,md_intake_ft,Intake,B19,constante,,2813.57,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-500H,tvd_intake_ft,Intake,C19,fórmula,=H323,2578.9682203125003,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-500H,md_sensor_ft,Sensor,B23,constante,,2859.3,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-500H,tvd_sensor_ft,Sensor,C23,fórmula,=H331,2604.498421875,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-500H,cache_sg_60,Gravedad Oil @ 60ºF,B95,fórmula,=141.5/(131.5+G31),0.9860627177700348,,resultado de la hoja
+QF-500H,cache_sg_temperatura,Gravedad Oil @ T fondo,B97,fórmula,=B95-((0.00066)*(G29-15.556))+((0.0000003*((G29-15.556)^2))),0.9538129977700941,,resultado de la hoja
+QF-500H,cache_densidad_lb_gal,Densidad de Fluido,B99,fórmula,=8.33*((G25*G33/8.33)+((1-G25)*B97)),8.330769336862726,Lb/Gln,resultado de la hoja
+QF-500H,cache_gradiente_psi_ft,Gradiente de Presión,B101,fórmula,=B99*0.052,0.4332000055168617,psi*ft,resultado de la hoja
+QF-500H,cache_pip_ft,PIP en (ft),G95,fórmula,=(B72-((C19-C23)*B101))/B101,1920.7287000492308,ft,resultado de la hoja
+QF-500H,cache_thp_ft,THP en (ft),G97,fórmula,=B74/B101,447.83009586653577,ft,resultado de la hoja
+QF-500H,cache_friccion_ft,Perdidad por Fricción,G99,fórmula,=(2.083*((100/120)^1.85)*((B70/34.3)^1.85)*(1/(B37)^4.8566))*(C17/1000),417.64737451803603,ft,resultado de la hoja
+QF-500H,cache_thd_ft,THD TOTAL,G101,fórmula,=C17+G99+G97-G95,1517.2091989067696,ft,resultado de la hoja
+QF-500H,cache_caudal_producir_bfpd,Caudal a producir,B105,fórmula,=K93,7360.155962141938,BFPD,resultado de la hoja
+QF-378HST,frecuencia_hz,Velocidad,B66,constante,,67.0,Hz,entrada de operación
+QF-378HST,caudal_operacion_bfpd,Caudal,B68,fórmula,=296.5*24,7116.0,BFPD,entrada de operación
+QF-378HST,presion_sensor_psi,Presión de Sensor,B70,constante,,810.0,psi,entrada de operación
+QF-378HST,thp_psi,THP,B72,constante,,145.0,psi,entrada de operación
+QF-378HST,id_tubing_in,ID,B37,constante,,2.996,inch,parámetro mecánico
+QF-378HST,etapas,Etapas,B45,constante,,31.0,Nº,parámetro de bomba
+QF-378HST,presion_yacimiento_psi,Presión de Yacimiento,G17,constante,,1100.0,psi,parámetro de yacimiento
+QF-378HST,presion_burbuja_psi,Presión de Burbuja,G19,constante,,130.0,psi,parámetro de fluido
+QF-378HST,presion_prueba_psi,Presión de Prueba,G21,constante,,810.0,psi,dato de prueba
+QF-378HST,caudal_prueba_bfpd,Caudal de Prueba,G23,fórmula,=295.6*24,7094.400000000001,BFPD,dato de prueba
+QF-378HST,bsw_numero,BS&W,G25,constante,,0.9557,%,parámetro de fluido
+QF-378HST,temperatura_f,Temperatura de fondo,G27,constante,,150.0,ºF,parámetro de fluido
+QF-378HST,temperatura_c,Temperatura de fondo,G29,fórmula,=(G27-32)/1.8,65.55555555555556,ºC,calculada en la hoja
+QF-378HST,api_deg,API,G31,constante,,12.0,ºAPI,parámetro de fluido
+QF-378HST,densidad_agua_lb_gal,Densidad del Agua,G33,constante,,8.345,Lb/gln,parámetro de fluido
+QF-378HST,frecuencia_curva_hz,Velocidad,G46,constante,,60.0,Hz,referencia de la curva de bomba
+QF-378HST,limite_minimo_bfpd,Limite minimo,G55,constante,,2000.0,BFPD,límite escrito en la hoja
+QF-378HST,cono_eficiencia_bfpd,Cono de eficiencia,G56,constante,,6000.0,BFPD,límite escrito en la hoja
+QF-378HST,limite_maximo_bfpd,Limite maximo,G57,constante,,8000.0,BFPD,límite escrito en la hoja
+QF-378HST,md_descarga_ft,Descarga,B17,constante,,3018.77,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-378HST,tvd_descarga_ft,Descarga,C17,fórmula,=+H317,2763.6426454545453,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-378HST,md_intake_ft,Intake,B19,constante,,3028.46,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-378HST,tvd_intake_ft,Intake,C19,fórmula,=H321,2769.6592545454546,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-378HST,md_sensor_ft,Sensor,B23,constante,,3061.68,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-378HST,tvd_sensor_ft,Sensor,C23,fórmula,=H329,2790.2826631578946,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-378HST,cache_sg_60,Gravedad Oil @ 60ºF,B93,fórmula,=141.5/(131.5+G31),0.9860627177700348,,resultado de la hoja
+QF-378HST,cache_sg_temperatura,Gravedad Oil @ T fondo,B95,fórmula,=B93-((0.00066)*(G29-15.556))+((0.0000003*((G29-15.556)^2))),0.9538129977700941,,resultado de la hoja
+QF-378HST,cache_densidad_lb_gal,Densidad de Fluido,B97,fórmula,=8.33*((G25*G33/8.33)+((1-G25)*B95)),8.327291618624123,Lb/Gln,resultado de la hoja
+QF-378HST,cache_gradiente_psi_ft,Gradiente de Presión,B99,fórmula,=B97*0.052,0.4330191641684544,psi*ft,resultado de la hoja
+QF-378HST,cache_pip_ft,PIP en (ft),G93,fórmula,=(B70-((C19-C23)*B99))/B99,1891.2103641701194,ft,resultado de la hoja
+QF-378HST,cache_thp_ft,THP en (ft),G95,fórmula,=B72/B99,334.8581587109426,ft,resultado de la hoja
+QF-378HST,cache_friccion_ft,Perdidad por Fricción,G97,fórmula,=(2.083*((100/120)^1.85)*((B68/34.3)^1.85)*(1/(B37)^4.8566))*(C17/1000),385.1724947357197,ft,resultado de la hoja
+QF-378HST,cache_thd_ft,THD TOTAL,G99,fórmula,=C17+G97+G95-G93,1592.4629347310881,ft,resultado de la hoja
+QF-378HST,cache_caudal_producir_bfpd,Caudal a producir,B103,fórmula,=K91,7802.608222185076,BFPD,resultado de la hoja
+QF-549HST,frecuencia_hz,Velocidad,B66,constante,,62.0,Hz,entrada de operación
+QF-549HST,caudal_operacion_bfpd,Caudal,B68,constante,,5419.0,BFPD,entrada de operación
+QF-549HST,presion_sensor_psi,Presión de Sensor,B70,constante,,607.0,psi,entrada de operación
+QF-549HST,thp_psi,THP,B72,constante,,177.0,psi,entrada de operación
+QF-549HST,id_tubing_in,ID,B37,constante,,2.996,inch,parámetro mecánico
+QF-549HST,etapas,Etapas,B45,constante,,31.0,Nº,parámetro de bomba
+QF-549HST,presion_yacimiento_psi,Presión de Yacimiento,G17,constante,,1100.0,psi,parámetro de yacimiento
+QF-549HST,presion_burbuja_psi,Presión de Burbuja,G19,constante,,130.0,psi,parámetro de fluido
+QF-549HST,presion_prueba_psi,Presión de Prueba,G21,constante,,607.0,psi,dato de prueba
+QF-549HST,caudal_prueba_bfpd,Caudal de Prueba,G23,constante,,5419.0,BFPD,dato de prueba
+QF-549HST,bsw_numero,BS&W,G25,constante,,0.9557,%,parámetro de fluido
+QF-549HST,temperatura_f,Temperatura de fondo,G27,constante,,150.0,ºF,parámetro de fluido
+QF-549HST,temperatura_c,Temperatura de fondo,G29,fórmula,=(G27-32)/1.8,65.55555555555556,ºC,calculada en la hoja
+QF-549HST,api_deg,API,G31,constante,,12.0,ºAPI,parámetro de fluido
+QF-549HST,densidad_agua_lb_gal,Densidad del Agua,G33,constante,,8.345,Lb/gln,parámetro de fluido
+QF-549HST,frecuencia_curva_hz,Velocidad,G46,constante,,60.0,Hz,referencia de la curva de bomba
+QF-549HST,limite_minimo_bfpd,Limite minimo,G55,constante,,2000.0,BFPD,límite escrito en la hoja
+QF-549HST,cono_eficiencia_bfpd,Cono de eficiencia,G56,constante,,6000.0,BFPD,límite escrito en la hoja
+QF-549HST,limite_maximo_bfpd,Limite maximo,G57,constante,,8000.0,BFPD,límite escrito en la hoja
+QF-549HST,md_descarga_ft,Descarga,B17,constante,,2787.17,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-549HST,tvd_descarga_ft,Descarga,C17,fórmula,=+H317,2608.4579,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-549HST,md_intake_ft,Intake,B19,constante,,2796.27,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-549HST,tvd_intake_ft,Intake,C19,fórmula,=H321,2614.0637888888887,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-549HST,md_sensor_ft,Sensor,B23,constante,,2829.66,ft (encabezado «MD (ft)»),parámetro mecánico
+QF-549HST,tvd_sensor_ft,Sensor,C23,fórmula,=H329,2634.6028843749996,ft (encabezado «TVD (ft)»),calculada en la hoja
+QF-549HST,cache_sg_60,Gravedad Oil @ 60ºF,B93,fórmula,=141.5/(131.5+G31),0.9860627177700348,,resultado de la hoja
+QF-549HST,cache_sg_temperatura,Gravedad Oil @ T fondo,B95,fórmula,=B93-((0.00066)*(G29-15.556))+((0.0000003*((G29-15.556)^2))),0.9538129977700941,,resultado de la hoja
+QF-549HST,cache_densidad_lb_gal,Densidad de Fluido,B97,fórmula,=8.33*((G25*G33/8.33)+((1-G25)*B95)),8.327291618624123,Lb/Galn,resultado de la hoja
+QF-549HST,cache_gradiente_psi_ft,Gradiente de Presión,B99,fórmula,=B97*0.052,0.4330191641684544,psi*ft,resultado de la hoja
+QF-549HST,cache_pip_ft,PIP en (ft),G93,fórmula,=(B70-((C19-C23)*B99))/B99,1422.3246288484706,ft,resultado de la hoja
+QF-549HST,cache_thp_ft,THP en (ft),G95,fórmula,=B72/B99,408.75789028852995,ft,resultado de la hoja
+QF-549HST,cache_friccion_ft,Perdidad por Fricción,G97,fórmula,=(2.083*((100/120)^1.85)*((B68/34.3)^1.85)*(1/(B37)^4.8566))*(C17/1000),219.6196292303802,ft,resultado de la hoja
+QF-549HST,cache_thd_ft,THD TOTAL,G99,fórmula,=C17+G97+G95-G93,1814.5107906704393,ft,resultado de la hoja
+QF-549HST,cache_caudal_producir_bfpd,Caudal a producir,B103,fórmula,=K91,5503.034359241792,BFPD,resultado de la hoja

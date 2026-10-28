@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bes-jun/contrato_salida",
+  "title": "Resultado de evaluación BES-jun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataset_solicitado",
+    "dataset_evaluado",
+    "pozo_solicitado",
+    "pozo_resuelto",
+    "version_contrato",
+    "version_motor",
+    "version_catalogo_reglas",
+    "version_software",
+    "fecha_referencia",
+    "estado_evaluacion",
+    "identidad",
+    "modelos",
+    "reglas",
+    "advertencias",
+    "mensajes",
+    "errores",
+    "reglas_ejecutadas",
+    "recomendacion_operacional_autorizada",
+    "fuera_de_dominio_observado",
+    "incidente_id",
+    "modo",
+    "hipotetico",
+    "escenario_id",
+    "parametros_modificados"
+  ],
+  "properties": {
+    "dataset_solicitado": {
+      "type": "string"
+    },
+    "dataset_evaluado": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "BES-jun",
+        null
+      ]
+    },
+    "pozo_solicitado": {
+      "type": "string"
+    },
+    "pozo_resuelto": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "version_contrato": {
+      "const": "1.3.0"
+    },
+    "version_motor": {
+      "const": "0.4.2"
+    },
+    "version_catalogo_reglas": {
+      "const": "1.1.0"
+    },
+    "version_software": {
+      "const": "0.4.2"
+    },
+    "fecha_referencia": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "estado_evaluacion": {
+      "enum": [
+        "completada_preliminar",
+        "no_evaluable",
+        "entrada_invalida",
+        "error_interno"
+      ]
+    },
+    "identidad": {
+      "type": "object"
+    },
+    "modelos": {
+      "type": "array"
+    },
+    "reglas": {
+      "type": "array"
+    },
+    "advertencias": {
+      "type": "array"
+    },
+    "mensajes": {
+      "type": "array"
+    },
+    "errores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "campo",
+          "codigo",
+          "detalle"
+        ],
+        "properties": {
+          "campo": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "detalle": {
+            "type": "string"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "tipo_esperado": {
+            "type": "string"
+          },
+          "unidad_esperada": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "incidente_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reglas_ejecutadas": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "recomendacion_operacional_autorizada": {
+      "type": "boolean"
+    },
+    "fuera_de_dominio_observado": {
+      "type": "boolean"
+    },
+    "modo": {
+      "enum": [
+        "operacional",
+        "simulacion"
+      ]
+    },
+    "hipotetico": {
+      "type": "boolean"
+    },
+    "escenario_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parametros_modificados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "estado_evaluacion": {
+            "const": "entrada_invalida"
+          }
+        },
+        "required": [
+          "estado_evaluacion"
+        ]
+      },
+      "then": {
+        "properties": {
+          "dataset_evaluado": {
+            "type": "null"
+          },
+          "reglas_ejecutadas": {
+            "const": 0
+          },
+          "recomendacion_operacional_autorizada": {
+            "const": false
+          },
+          "modelos": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "estado_evaluacion": {
+            "const": "error_interno"
+          }
+        },
+        "required": [
+          "estado_evaluacion"
+        ]
+      },
+      "then": {
+        "properties": {
+          "reglas_ejecutadas": {
+            "const": 0
+          },
+          "recomendacion_operacional_autorizada": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

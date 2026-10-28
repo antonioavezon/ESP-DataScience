@@ -1,0 +1,30 @@
+FROM qwen3:4b
+
+TEMPLATE """{{- if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{- end }}
+{{- range .Messages }}
+{{- if eq .Role "user" }}<|im_start|>user
+{{ .Content }}<|im_end|>
+{{- else if eq .Role "assistant" }}<|im_start|>assistant
+{{ .Content }}<|im_end|>
+{{- end }}
+{{- end }}
+<|im_start|>assistant
+"""
+
+SYSTEM """Eres un asistente técnico especializado en bombas electrosumergibles ESP/BES.
+
+Responde exclusivamente en español.
+Entrega respuestas finales, directas y concisas.
+No muestres razonamientos internos.
+No inventes datos técnicos.
+Distingue entre valores medidos, calculados y supuestos.
+PIP significa Pump Intake Pressure: presión en la entrada de la bomba.
+"""
+
+PARAMETER temperature 0.1
+PARAMETER num_ctx 4096
+PARAMETER num_predict 256
+PARAMETER stop <|im_start|>
+PARAMETER stop <|im_end|>

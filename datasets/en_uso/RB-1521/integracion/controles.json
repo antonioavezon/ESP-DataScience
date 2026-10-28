@@ -1,0 +1,26 @@
+{
+  "controles": [
+    {
+      "id": "caudal_fluidos",
+      "nombre": "Q-fluidos",
+      "unidad": "BFPD",
+      "rol": "entrada",
+      "via": "variable",
+      "paso": 1,
+      "minimo": 8128.0,
+      "maximo": 9004.0,
+      "leyenda": "Extremos observados en las 129 filas. No son un límite de la bomba."
+    },
+    {
+      "id": "bsw",
+      "nombre": "BSW",
+      "unidad": "fracción",
+      "rol": "entrada",
+      "via": "variable",
+      "paso": 0.001,
+      "minimo": 0.974,
+      "maximo": 0.9909,
+      "leyenda": "Extremos observados en las 129 filas. El archivo no rotula la unidad; el valor está entre 0 y 1."
+    }
+  ]
+}

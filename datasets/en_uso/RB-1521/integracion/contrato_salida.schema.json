@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rb1521-salida-1.0.0",
+  "type": "object",
+  "required": ["estado_evaluacion", "recomendacion_operacional_autorizada"],
+  "properties": {
+    "estado_evaluacion": {"type": "string"},
+    "recomendacion_operacional_autorizada": {"const": false}
+  }
+}

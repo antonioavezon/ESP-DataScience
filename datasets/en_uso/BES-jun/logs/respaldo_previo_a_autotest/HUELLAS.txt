@@ -1,0 +1,4 @@
+dc7dafdeeedbd4110094f9c68895eb5c3748ac22ce5e5611f7b6c106cae9d249  src/evaluacion/motor.py
+f4b15961c658c03a684d1575dcef36bb5ee819da19e209e7a22b61458f9a2756  src/evaluacion/contratos.py
+d195397c6f340f78c535e4550ec4221c5e23ac2d4eaaf74a185c02879e4cb7bf  src/reglas/catalogo.py
+ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85  entrada/BES_jun.xlsx

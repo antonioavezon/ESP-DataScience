@@ -1,0 +1,17 @@
+---
+description: Reglas para el motor determinístico de la ESP (física, unidades y pruebas)
+globs: src/asesor_esp/modelo/**,src/asesor_esp/reglas/**,src/asesor_esp/unidades.py,tests/modelo/**,tests/reglas/**,tests/casos_dorados/**,tests/test_unidades.py
+alwaysApply: false
+---
+
+- Implementa solo fórmulas con estado "revisada" o "corregida" en docs/formulas/catalogo.md.
+- SI interno: Pa, m³/s, m, W, kg/m³, Pa·s; g = 9,80665 m/s².
+- Convención de balance: PIP = THP + ρ·g·Δz + ΔP_fricción − ΔP_bomba, con Δz vertical (TVD) entre admisión y superficie, positivo hacia arriba.
+- Trampas conocidas (trabajo.md, Anexo B):
+  - f = 64/Re solo en régimen laminar; en turbulento, Swamee-Jain o Colebrook (H-08).
+  - Con BSW alto, viscosidad efectiva de la mezcla, no la del crudo muerto (H-09, S-06).
+  - La presión de descarga incluye el THP (H-10).
+  - Motor de inducción: N = 120·f/p·(1 − s) (H-20, S-09).
+  - F(Q) = 0 puede tener varias raíces o estar mal condicionada: restringir al rango operativo y reportar la condición numérica (H-19).
+- Guardrails: PIP ≥ 0, Q dentro del rango, 0 ≤ k_g ≤ 0,4, eficiencias entre 0 y 1. Si se violan, marcar el resultado y bajar la confianza; nunca recortar en silencio.
+- Pruebas obligatorias por módulo: casos dorados (R1, X1) cuando existan, ida y vuelta (modelo directo → inverso) en los métodos de estimación, y monotonicidad o propiedades con hypothesis.

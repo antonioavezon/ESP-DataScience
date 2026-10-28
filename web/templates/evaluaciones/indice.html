@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titulo %}Evaluaciones · HUC{% endblock %}
+{% block contenido %}
+<h1>Evaluaciones</h1>
+<p class="nota">Los escenarios se modifican en el simulador.</p>
+
+{% if not seleccion %}
+  <p class="aviso">No hay un dataset seleccionado.</p>
+{% elif not adaptador_listo %}
+  <p class="aviso">{{ seleccion.identificador }}: {{ seleccion.causa_sin_evaluacion }}</p>
+{% else %}
+  <ul>
+    {% for pozo in pozos %}
+      <li>{{ pozo.pozo_rotulo }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %}

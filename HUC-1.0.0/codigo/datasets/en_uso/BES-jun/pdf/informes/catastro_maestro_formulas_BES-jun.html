@@ -1,0 +1,1273 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='utf-8'><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-right { content: "BES-jun · validación pendiente"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", serif; font-size: 11pt; }
+body { margin: 0; line-height: 1.4; text-align: justify; color: #111; }
+h1, h2, h3 { font-family: "Liberation Sans", sans-serif; text-align: left; break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; text-align: left; }
+th, td { border: 1px solid #444; padding: 0.2em 0.35em; vertical-align: top; }
+th { background: #e8edf2; }
+img { max-width: 100%; height: auto; }
+code { font-family: "Liberation Mono", monospace; font-size: 0.9em; }
+pre { white-space: pre-wrap; text-align: left; }
+</style></head><body><h1 id="catastro-maestro-de-fórmulas-bes-jun">Catastro maestro de
+fórmulas · BES-jun</h1>
+<p>Las cantidades salen de
+<code>src/catalogo/catastro_formulas_bes_jun.py</code>. No se copiaron
+de un informe anterior. Una fila puede cumplir más de un indicador.
+Sumar indicadores no da el total.</p>
+<h2 id="resumen">Resumen</h2>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th style="text-align: right;">Cantidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total de fórmulas únicas inventariadas</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td>Fórmulas principales E-01 a E-10</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td>Fórmulas auxiliares adicionales</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Fórmulas realmente utilizadas</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Fórmulas implementadas, pero no utilizadas en resultados</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Fórmulas solamente documentadas</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Fórmulas matemáticamente verificadas</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Fórmulas con consistencia física condicionada</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>Fórmulas con validación física externa suficiente</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Fórmulas pendientes de validación experimental</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Fórmulas con discrepancias identificadas</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Hipótesis alternativas no activas</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<p>No hay conversión de unidades en el motor: una unidad distinta se
+rechaza. El bloque eléctrico de la hoja es un solo ítem documentado, no
+un conjunto de ecuaciones transcritas. HYP-CT03 está implementada y el
+informe la usa para cuantificar la diferencia; no produce PIP, THD ni
+Q*. HYP-PUNTO-FIJO vive en el cuaderno 04b y no es una función del
+motor.</p>
+<p>Discrepancias identificadas: E-05, signo de PIP frente a la
+hidrostática simple; E-07, exponente 4.8566 de la celda frente a 4.8655
+del PDF y longitud igual a la TVD de descarga. El factor 0.052 frente a
+0.051948 queda en la ficha de E-04 como redondeo de la celda, no como
+discrepancia que cambie la fórmula.</p>
+<h2 id="matriz-de-dependencias">Matriz de dependencias</h2>
+<p>Variable de operador o de ficha, ecuación, modelo, resultado, regla y
+pozos. Una regla no hereda el estado «verificada» de la ecuación que
+escala su umbral.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Ecuación</th>
+<th>Modelo</th>
+<th>Resultado</th>
+<th>Regla</th>
+<th>Pozos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_deg, temperatura_c, bsw_numero, densidad del agua</td>
+<td>E-01, E-02, E-03, E-04</td>
+<td>M-BES-FLUIDO</td>
+<td>gradiente psi/ft</td>
+<td>ninguna de forma directa</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>presion_sensor_psi, TVD intake y sensor, gradiente</td>
+<td>E-05</td>
+<td>M-BES-BALANCE</td>
+<td>PIP ft</td>
+<td>ninguna como umbral; CT-03 abierta</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>thp_psi, gradiente</td>
+<td>E-06</td>
+<td>M-BES-BALANCE</td>
+<td>THP ft</td>
+<td>ninguna</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>caudal medido, ID, TVD de descarga</td>
+<td>E-07</td>
+<td>M-BES-BALANCE</td>
+<td>fricción ft</td>
+<td>ninguna como umbral; CT-05 abierta</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>TVD de descarga, fricción, THP ft, PIP ft</td>
+<td>E-08</td>
+<td>M-BES-BALANCE</td>
+<td>THD ft</td>
+<td>ninguna</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>curva, frecuencia, etapas, límites a 60 Hz</td>
+<td>E-09</td>
+<td>M-BES-INTERSECCION y la comparación de reglas</td>
+<td>curva escalada y límites a la frecuencia</td>
+<td>RC-BES-01, RC-BES-02, RC-BES-03, pendientes</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>THD y curva escalada</td>
+<td>E-10</td>
+<td>M-BES-INTERSECCION</td>
+<td>Q*</td>
+<td>ninguna como umbral; CT-06 y CT-09</td>
+<td>las cinco hojas</td>
+</tr>
+<tr>
+<td>cono de eficiencia y columna EFF</td>
+<td>no hay ecuación activa</td>
+<td>ninguno</td>
+<td>no evaluable</td>
+<td>RC-BES-04</td>
+<td>ninguno</td>
+</tr>
+</tbody>
+</table>
+<p>RC-BES-01, RC-BES-02 y RC-BES-03 comparan el caudal medido con
+límites escalados por E-09. Siguen en <code>pendiente_validacion</code>
+aunque E-09 tenga la álgebra comprobada. RC-BES-04 no depende de una
+ecuación activa y sigue <code>no_evaluable</code>.</p>
+<h2 id="resultados-de-las-cinco-hojas">Resultados de las cinco
+hojas</h2>
+<p>Medido, calculado y caché. La diferencia de PIP es celda menos
+hipótesis y no está redondeada en el JSON.</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 8%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pozo</th>
+<th style="text-align: right;">Q medido</th>
+<th style="text-align: right;">Hz</th>
+<th style="text-align: right;">PIP celda ft</th>
+<th style="text-align: right;">Δ PIP ft</th>
+<th style="text-align: right;">THD ft</th>
+<th style="text-align: right;">Q*</th>
+<th>Regla</th>
+<th style="text-align: right;">Máximo a f BFPD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-084</td>
+<td style="text-align: right;">10301</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">1714.496</td>
+<td style="text-align: right;">51.291</td>
+<td style="text-align: right;">2083.217</td>
+<td style="text-align: right;">10535.167</td>
+<td>RC-BES-03</td>
+<td style="text-align: right;">10500</td>
+</tr>
+<tr>
+<td>QF-301</td>
+<td style="text-align: right;">8767</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">1558.042</td>
+<td style="text-align: right;">38.627</td>
+<td style="text-align: right;">1971.955</td>
+<td style="text-align: right;">8280.859</td>
+<td>RC-BES-03</td>
+<td style="text-align: right;">9500</td>
+</tr>
+<tr>
+<td>QF-147</td>
+<td style="text-align: right;">7728</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">1920.729</td>
+<td style="text-align: right;">51.060</td>
+<td style="text-align: right;">1517.209</td>
+<td style="text-align: right;">7360.156</td>
+<td>RC-BES-03</td>
+<td style="text-align: right;">9333</td>
+</tr>
+<tr>
+<td>QF-005</td>
+<td style="text-align: right;">7116</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">1891.210</td>
+<td style="text-align: right;">41.247</td>
+<td style="text-align: right;">1592.463</td>
+<td style="text-align: right;">7802.608</td>
+<td>RC-BES-03</td>
+<td style="text-align: right;">8933</td>
+</tr>
+<tr>
+<td>QF-306</td>
+<td style="text-align: right;">5419</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1422.325</td>
+<td style="text-align: right;">41.078</td>
+<td style="text-align: right;">1814.511</td>
+<td style="text-align: right;">5503.034</td>
+<td>RC-BES-03</td>
+<td style="text-align: right;">8267</td>
+</tr>
+</tbody>
+</table>
+<p>Q* se compara con la caché de Excel en el JSON
+(<code>diferencia_q_estrella_menos_cache_bfpd</code>). Esa diferencia
+mide la transcripción, no la validez física. El caudal medido es otro
+número.</p>
+<h2 id="fichas">Fichas</h2>
+<h3 id="e-01-gravedad-específica-desde-api">E-01 · Gravedad específica
+desde °API</h3>
+<ul>
+<li><strong>fenomeno.</strong> Gravedad específica del petróleo a 60
+°F</li>
+<li><strong>expresion.</strong> sg = 141.5 / (131.5 + API)</li>
+<li><strong>variables.</strong> api_deg</li>
+<li><strong>unidades.</strong> entrada °API; salida adimensional</li>
+<li><strong>origen.</strong> Celda de gravedad del petróleo a 60 °F, por
+ejemplo QF-554H!B96</li>
+<li><strong>fuente_cientifica.</strong> Definición API usada por la
+celda. No hay densidad medida de este crudo en el expediente.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/fluidos_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.fluidos_bes_jun.gravedad_especifica_api</li>
+<li><strong>notebooks.</strong> 02 y 04</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno además del °API</li>
+<li><strong>hipotesis.</strong> El número de la celda es °API y la
+definición API aplica.</li>
+<li><strong>dominio.</strong> API &gt; -131.5 para que el denominador
+sea positivo</li>
+<li><strong>verificacion_analitica.</strong> A 10 °API el cociente es 1.
+La salida es adimensional.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_sg_api</li>
+<li><strong>verificacion_fisica.</strong> Al subir °API, sg baja. No hay
+ensayo de densidad.</li>
+<li><strong>resultados.</strong> En las cinco hojas el °API escrito es
+12. La cadena reproduce la caché del gradiente, que depende de esta
+sg.</li>
+<li><strong>diferencias.</strong> Ninguna frente a la definición. No hay
+un valor de laboratorio para restar.</li>
+<li><strong>tolerancia.</strong> pytest.approx, relativa 1e-6</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> fundamentada bajo la definición API;
+no mide este crudo</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Arrastra densidad,
+gradiente, PIP, THD y Q*.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna compara sg. RC-BES-01
+a 03 solo corren si la cadena es calculable.</li>
+<li><strong>recomendacion_posterior.</strong> Medir densidad del fluido
+a 60 °F.</li>
+<li><strong>prueba.</strong>
+test_e01_definicion_oraculo_y_monotonia</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="e-02-corrección-térmica-de-la-gravedad">E-02 · Corrección
+térmica de la gravedad</h3>
+<ul>
+<li><strong>fenomeno.</strong> Gravedad específica a la temperatura de
+fondo</li>
+<li><strong>expresion.</strong> sg_T = sg_60 - 0.00066<em>(T-15.556) +
+0.0000003</em>(T-15.556)^2</li>
+<li><strong>variables.</strong> sg_60, temperatura_c</li>
+<li><strong>unidades.</strong> T en °C; sg adimensional</li>
+<li><strong>origen.</strong> Celda B98 de cada hoja</li>
+<li><strong>fuente_cientifica.</strong> Solo la celda. Los coeficientes
+0.00066, 0.0000003 y 15.556 no tienen otra fuente en los documentos
+leídos.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/fluidos_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.fluidos_bes_jun.gravedad_oil_a_temperatura</li>
+<li><strong>notebooks.</strong> 02 y 04</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> 0.00066, 0.0000003, 15.556</li>
+<li><strong>hipotesis.</strong> T está en °C y los coeficientes de la
+celda se transcriben sin reinterpretarlos.</li>
+<li><strong>dominio.</strong> Alrededor de la temperatura escrita. Fuera
+de ese entorno el polinomio no está justificado.</li>
+<li><strong>verificacion_analitica.</strong> En T = 15.556 el resultado
+es sg_60. La pendiente central de ±1 °C es -0.00066.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_sg_temperatura</li>
+<li><strong>verificacion_fisica.</strong> No hay ensayo. Reproducir la
+celda no valida los coeficientes.</li>
+<li><strong>resultados.</strong> Entra en la densidad de las cinco
+hojas. La caché del fluido coincide con la transcripción.</li>
+<li><strong>diferencias.</strong> Ninguna frente a la celda. CT-04 pide
+el origen de las constantes.</li>
+<li><strong>tolerancia.</strong> identidad en 15.556; pendiente con
+absoluta 1e-6</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> dependiente de parámetros empíricos
+no validados</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Cambia la densidad y, con
+ella, el gradiente y todo el balance.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta: si el fluido no es
+calculable, no hay clasificación de caudal.</li>
+<li><strong>recomendacion_posterior.</strong> Identificar la correlación
+de donde salieron los tres números.</li>
+<li><strong>prueba.</strong>
+test_e02_coeficientes_de_la_celda_sin_origen_experimental</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-04</li>
+</ul>
+<h3 id="e-03-densidad-de-mezcla">E-03 · Densidad de mezcla</h3>
+<ul>
+<li><strong>fenomeno.</strong> Densidad del fluido como mezcla de agua y
+petróleo</li>
+<li><strong>expresion.</strong> rho = BSW<em>rho_agua +
+(1-BSW)</em>8.33*sg_T</li>
+<li><strong>variables.</strong> bsw_numero, densidad_agua_lb_gal,
+sg_T</li>
+<li><strong>unidades.</strong> lb/gal. El rótulo de BS&amp;W dice % y la
+fórmula no divide por 100.</li>
+<li><strong>origen.</strong> Celda B100</li>
+<li><strong>fuente_cientifica.</strong> Aritmética de la celda. No hay
+un análisis de fluido independiente.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/fluidos_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.fluidos_bes_jun.densidad_lb_por_galon</li>
+<li><strong>notebooks.</strong> 02</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> 8.33, escrito en la celda</li>
+<li><strong>hipotesis.</strong> El número de BS&amp;W ya es fracción.
+Mezcla lineal de las dos densidades.</li>
+<li><strong>dominio.</strong> La función calcula también fuera de 0 a 1
+y deja la advertencia al llamador.</li>
+<li><strong>verificacion_analitica.</strong> BSW = 0 devuelve 8.33*sg.
+BSW = 1 devuelve la densidad del agua.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_densidad</li>
+<li><strong>verificacion_fisica.</strong> Con componentes positivos y
+BSW = 0.4 el resultado queda entre ellos. No se convirtió el
+rótulo.</li>
+<li><strong>resultados.</strong> Densidad de las cinco hojas, usada por
+el gradiente.</li>
+<li><strong>diferencias.</strong> CT-02: unidad del rótulo frente al uso
+aritmético.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> consistente bajo la hipótesis de
+mezcla lineal y de BS&amp;W como fracción</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Un factor 100 en BS&amp;W
+cambiaría el gradiente de forma grande.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta, por la cadena de
+fluido.</li>
+<li><strong>recomendacion_posterior.</strong> Confirmar si el número
+escrito es fracción o porcentaje.</li>
+<li><strong>prueba.</strong>
+test_e03_mezcla_lineal_sin_convertir_el_rotulo_porcentual</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-02</li>
+</ul>
+<h3 id="e-04-gradiente-de-presión">E-04 · Gradiente de presión</h3>
+<ul>
+<li><strong>fenomeno.</strong> Gradiente hidrostático a partir de la
+densidad</li>
+<li><strong>expresion.</strong> grad = rho_lb/gal * 0.052</li>
+<li><strong>variables.</strong> densidad_lb_gal</li>
+<li><strong>unidades.</strong> psi/ft. 8.34 * 0.052 = 0.43368</li>
+<li><strong>origen.</strong> Celda B102. El factor 0.052 está escrito.
+No se usa 0.433/8.34.</li>
+<li><strong>fuente_cientifica.</strong> Factor de campo de la celda. El
+contraste SI del test usa 1 lb = 0.45359237 kg, 1 galón US = 3.785411784
+L, g = 9.80665, 1 ft = 0.3048 m y 1 psi = 6894.757293168 Pa, y obtiene
+0.051948.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/fluidos_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.fluidos_bes_jun.gradiente_psi_por_ft</li>
+<li><strong>notebooks.</strong> 02</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> 0.052</li>
+<li><strong>hipotesis.</strong> Se conserva el factor de la celda. El
+factor SI no lo reemplaza.</li>
+<li><strong>dominio.</strong> Densidad positiva. El rango de las cinco
+hojas no es un límite operacional.</li>
+<li><strong>verificacion_analitica.</strong> Producto escrito 8.34 *
+0.052.</li>
+<li><strong>oraculo.</strong> 8.34 * 0.052 en
+tests/test_verificacion_ecuaciones.py</li>
+<li><strong>verificacion_fisica.</strong> El factor SI 0.051948 difiere
+en menos de 0.0001. La función sigue devolviendo rho*0.052.</li>
+<li><strong>resultados.</strong> Gradiente de las cinco hojas, cerca de
+0.433 psi/ft.</li>
+<li><strong>diferencias.</strong> 0.052 frente a 0.051948. Registrado
+como redondeo de la celda, no sustituido.</li>
+<li><strong>tolerancia.</strong> el factor SI con absoluta 1e-5; la
+función no se compara contra ese factor para aprobarla</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> consistente bajo el factor de campo
+0.052</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Escala PIP, THP en pies, THD
+y Q*.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta, por el
+balance.</li>
+<li><strong>recomendacion_posterior.</strong> Decidir si un modelo
+futuro en SI debe dejar de usar el redondeo 0.052.</li>
+<li><strong>prueba.</strong>
+test_e04_factor_0_052_y_contraste_con_el_sistema_internacional</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="e-05-pip-en-pies">E-05 · PIP en pies</h3>
+<ul>
+<li><strong>fenomeno.</strong> Presión de admisión expresada en pies de
+columna, con el signo de la celda</li>
+<li><strong>expresion.</strong> PIP = (P_sensor - (TVD_intake -
+TVD_sensor)*grad) / grad</li>
+<li><strong>variables.</strong> presion_sensor_psi, tvd_intake_ft,
+tvd_sensor_ft, gradiente_psi_ft</li>
+<li><strong>unidades.</strong> ft</li>
+<li><strong>origen.</strong> Celda G96, «PIP en (ft)»</li>
+<li><strong>fuente_cientifica.</strong> La celda. La hipótesis de
+comparación, no usada por el motor, es P/grad - (TVD_sensor -
+TVD_intake).</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/balance_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.balance_bes_jun.pip_en_ft</li>
+<li><strong>notebooks.</strong> 02, 04 y 05</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno oculto</li>
+<li><strong>hipotesis.</strong> Se transcribe el signo de la celda. No
+se decide que ese signo sea el hidrostático.</li>
+<li><strong>dominio.</strong> Gradiente distinto de cero. En las cinco
+hojas el sensor está más profundo que el intake.</li>
+<li><strong>verificacion_analitica.</strong> La transcripción
+independiente _pip_celda coincide con pip_en_ft. La caché coincide
+dentro de 1e-6 relativo.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_pip_celda y la caché de la
+hoja</li>
+<li><strong>verificacion_fisica.</strong> Con el sensor 100 ft más
+profundo la diferencia algebraica es 200 ft. En los cinco pozos la
+diferencia es 2*(TVD_sensor-TVD_intake).</li>
+<li><strong>resultados.</strong> QF-084 51.3 ft, QF-301 38.6 ft, QF-147
+51.1 ft, QF-005 41.2 ft, QF-306 41.1 ft de diferencia celda menos
+hidrostática.</li>
+<li><strong>diferencias.</strong> Esas cinco diferencias. La caché
+coincide con la celda, no con la hipótesis.</li>
+<li><strong>tolerancia.</strong> la diferencia algebraica es exacta
+dentro de pytest.approx; la caché, relativa 1e-6</li>
+<li><strong>estado_matematico.</strong> reproducción numérica comprobada
+y consistencia algebraica de la celda</li>
+<li><strong>estado_fisico.</strong> discrepancia física confirmada bajo
+la hipótesis hidrostática simple</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> El signo mueve la THD en la
+misma magnitud y Q* en decenas o cientos de BFPD, según el cuaderno
+05.</li>
+<li><strong>reglas_dependientes.</strong> No entra en el umbral de
+RC-BES-01 a 03. Si el balance no calcula, la regla no se clasifica.</li>
+<li><strong>recomendacion_posterior.</strong> Cerrar CT-03 con la
+convención de profundidades. No cambiar el signo en el código antes de
+eso.</li>
+<li><strong>prueba.</strong>
+test_e05_reproduccion_hidrostatica_y_cinco_pozos</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-03</li>
+</ul>
+<h3 id="e-06-thp-en-altura">E-06 · THP en altura</h3>
+<ul>
+<li><strong>fenomeno.</strong> Presión en cabeza de pozo expresada en
+pies de columna</li>
+<li><strong>expresion.</strong> THP_ft = THP_psi / gradiente</li>
+<li><strong>variables.</strong> thp_psi, gradiente_psi_ft</li>
+<li><strong>unidades.</strong> ft</li>
+<li><strong>origen.</strong> Celda G98</li>
+<li><strong>fuente_cientifica.</strong> Equivalencia de la celda. No hay
+una columna medida aparte.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/balance_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.balance_bes_jun.thp_en_ft</li>
+<li><strong>notebooks.</strong> 02 y 04</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> el gradiente de E-04</li>
+<li><strong>hipotesis.</strong> El mismo gradiente de la mezcla
+convierte psi en ft.</li>
+<li><strong>dominio.</strong> Gradiente distinto de cero</li>
+<li><strong>verificacion_analitica.</strong> psi / (psi/ft) = ft.</li>
+<li><strong>oraculo.</strong> 100/0.4 = 250 en
+tests/test_verificacion_ecuaciones.py</li>
+<li><strong>verificacion_fisica.</strong> Duplicar la presión duplica la
+altura. Duplicar el gradiente la reduce a la mitad.</li>
+<li><strong>resultados.</strong> THP en pies de las cinco hojas, dentro
+de la THD.</li>
+<li><strong>diferencias.</strong> Ninguna frente a la identidad. Hereda
+la reserva del gradiente.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> consistente bajo el gradiente de
+E-04</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Suma directa en la THD.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta, por la cadena.</li>
+<li><strong>recomendacion_posterior.</strong> No usar esta altura como
+medición independiente de la presión.</li>
+<li><strong>prueba.</strong>
+test_e06_presion_y_altura_son_inversas_del_gradiente</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="e-07-fricción-de-hazen-williams">E-07 · Fricción de
+Hazen-Williams</h3>
+<ul>
+<li><strong>fenomeno.</strong> Pérdida de carga en el tubing, como la
+escribe la hoja</li>
+<li><strong>expresion.</strong>
+(2.083<em>(100/C)^1.85</em>(Q/34.3)<sup>1.85/ID</sup>4.8566)*(L/1000),
+C=120</li>
+<li><strong>variables.</strong> caudal_bfpd, id_tubing_in,
+longitud_ft</li>
+<li><strong>unidades.</strong> Q en BFPD, ID en in, L en ft, salida en
+ft. L es la TVD de descarga, no una longitud medida.</li>
+<li><strong>origen.</strong> Celda G100. C = 120 está dentro de la
+fórmula.</li>
+<li><strong>fuente_cientifica.</strong> La celda. El PDF 004-ESPdesign
+escribe el exponente 4.8655. No se unificó.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/balance_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.balance_bes_jun.friccion_hazen_williams_ft</li>
+<li><strong>notebooks.</strong> 02, 04 y 04b</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> 2.083, 1.85, 34.3, 4.8566, C=120</li>
+<li><strong>hipotesis.</strong> Se transcriben los exponentes de la
+celda. No se afirma que Hazen-Williams describa esta mezcla.</li>
+<li><strong>dominio.</strong> ID positivo y caudal no negativo, como
+exige evaluar_balance.</li>
+<li><strong>verificacion_analitica.</strong> Lineal en L, Q^1.85,
+ID^-4.8566.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_hazen</li>
+<li><strong>verificacion_fisica.</strong> El mismo caso con exponente
+4.8655 no coincide. No hay pérdida medida.</li>
+<li><strong>resultados.</strong> Fricción de las cinco hojas, con el
+caudal medido.</li>
+<li><strong>diferencias.</strong> Exponente 4.8566 de la celda frente a
+4.8655 del PDF. Longitud = TVD de descarga.</li>
+<li><strong>tolerancia.</strong> los dos exponentes no pasan
+math.isclose con relativa 1e-6</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada respecto de la celda</li>
+<li><strong>estado_fisico.</strong> diferencia de fuente identificada;
+aplicabilidad al fluido sin evidencia suficiente</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Entra en la THD y por eso en
+Q*. El cuaderno 05 la ordena detrás de CT-03.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta. El caudal que
+clasifican las reglas es el medido, no esta pérdida.</li>
+<li><strong>recomendacion_posterior.</strong> No cambiar el exponente ni
+sustituir la TVD por otra longitud sin la fuente del fluido.</li>
+<li><strong>prueba.</strong>
+test_e07_exponentes_de_la_hoja_no_el_pdf</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-05</li>
+</ul>
+<h3 id="e-08-thd-total">E-08 · THD total</h3>
+<ul>
+<li><strong>fenomeno.</strong> Balance de altura que la hoja llama THD
+TOTAL</li>
+<li><strong>expresion.</strong> THD = TVD_descarga + friccion + THP_ft -
+PIP_ft</li>
+<li><strong>variables.</strong> tvd_descarga_ft, friccion_ft, thp_ft,
+pip_ft</li>
+<li><strong>unidades.</strong> ft en los cuatro términos</li>
+<li><strong>origen.</strong> Celda G102</li>
+<li><strong>fuente_cientifica.</strong> Suma de la celda. No se afirma
+que sea el TDH del PDF.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/balance_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.balance_bes_jun.thd_total_ft</li>
+<li><strong>notebooks.</strong> 02 y 04</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno</li>
+<li><strong>hipotesis.</strong> Los cuatro términos ya están en ft y con
+el signo de la hoja.</li>
+<li><strong>dominio.</strong> El de los términos. La identidad no los
+justifica.</li>
+<li><strong>verificacion_analitica.</strong> thd_total_ft(1000, 10, 20,
+30) = 1000.</li>
+<li><strong>oraculo.</strong> la suma escrita en
+tests/test_verificacion_ecuaciones.py</li>
+<li><strong>verificacion_fisica.</strong> Un pie más de TVD, fricción o
+THP suma un pie. Un pie más de PIP resta un pie. Eso es el signo
+algebraico.</li>
+<li><strong>resultados.</strong> THD de las cinco hojas, coincidente con
+la caché por la transcripción de los términos.</li>
+<li><strong>diferencias.</strong> Ninguna en la suma. Hereda CT-03 y
+CT-05.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> identidad algebraica; la física
+queda en los términos</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Q* se interpola contra esta
+THD.</li>
+<li><strong>reglas_dependientes.</strong> Indirecta, por la
+calculabilidad de la cadena.</li>
+<li><strong>recomendacion_posterior.</strong> No presentar la THD como
+un TDH de fabricante.</li>
+<li><strong>prueba.</strong>
+test_e08_el_balance_tiene_los_signos_escritos</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-03, CT-05</li>
+</ul>
+<h3 id="e-09-leyes-de-afinidad-de-la-hoja">E-09 · Leyes de afinidad de
+la hoja</h3>
+<ul>
+<li><strong>fenomeno.</strong> Escalar caudal y head de la curva, y los
+límites de 60 Hz, con la frecuencia</li>
+<li><strong>expresion.</strong> Q = Q60<em>(f/f_curva); H =
+H60</em>(f/f_curva)^2<em>etapas. Los límites usan Q(f) =
+Q(60)</em>(f/f_base).</li>
+<li><strong>variables.</strong> caudal y head tabulados, frecuencia_hz,
+frecuencia_curva_hz, etapas; para límites, limite_minimo_bfpd y
+limite_maximo_bfpd</li>
+<li><strong>unidades.</strong> BFPD, ft, Hz, etapas adimensionales</li>
+<li><strong>origen.</strong> Filas de curva a la velocidad actual y
+celdas de límites a 60 Hz, por ejemplo J85 = J88*(I85/I88)</li>
+<li><strong>fuente_cientifica.</strong> La hoja. No hay curva de banco.
+CT-08.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/interseccion_bes_jun.py y
+src/reglas/candidatas_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.interseccion_bes_jun.curva_a_velocidad</li>
+<li><strong>notebooks.</strong> 03, 04 y 05</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> exponentes 1 y 2; f_base 60 Hz cuando
+la hoja no trae otra</li>
+<li><strong>hipotesis.</strong> Se transcriben los exponentes. No se
+afirma que valgan para estas bombas ni para sus límites.</li>
+<li><strong>dominio.</strong> Frecuencias y etapas positivas. El rango
+56–67 Hz es observado, no autorizado.</li>
+<li><strong>verificacion_analitica.</strong> Razón 1.5, ajena al
+dataset: caudal por 1.5 y head por 2.25 por etapas. La transformación
+inversa recupera el punto.</li>
+<li><strong>oraculo.</strong> el producto escrito en
+test_e09_afinidad_con_una_razon_que_no_sale_del_dataset</li>
+<li><strong>verificacion_fisica.</strong> No hay ensayo. La misma
+relación escala los límites que usan RC-BES-01 a 03.</li>
+<li><strong>resultados.</strong> Curva a la frecuencia de cada hoja y
+límites escalados. En QF-084, 10000 BFPD a 60 Hz pasan a 10500 BFPD a 63
+Hz.</li>
+<li><strong>diferencias.</strong> Ninguna frente a la álgebra. La
+aplicabilidad sigue en CT-08.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> formulación de la hoja; no
+representa por sí sola los límites reales de la bomba</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Cambia la curva contra la
+que se interpola Q* y la clasificación de las tres reglas de
+caudal.</li>
+<li><strong>reglas_dependientes.</strong> RC-BES-01, RC-BES-02 y
+RC-BES-03, por el escalamiento de los límites.</li>
+<li><strong>recomendacion_posterior.</strong> Curva de fabricante a más
+de una frecuencia antes de aprobar el escalamiento.</li>
+<li><strong>prueba.</strong>
+test_e09_afinidad_con_una_razon_que_no_sale_del_dataset</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-08</li>
+</ul>
+<h3 id="e-10-intersección-bomba-sistema">E-10 · Intersección
+bomba-sistema</h3>
+<ul>
+<li><strong>fenomeno.</strong> Caudal en el que el head de la curva
+iguala la THD</li>
+<li><strong>expresion.</strong> MATCH descendente y Q = Qk +
+(THD-Hk)/(Hk+1-Hk)*(Qk+1-Qk)</li>
+<li><strong>variables.</strong> thd_total_ft, curva, frecuencia_hz,
+frecuencia_curva_hz, etapas</li>
+<li><strong>unidades.</strong> ft y BFPD</li>
+<li><strong>origen.</strong> Bloque Descarga, «Caudal a producir»</li>
+<li><strong>fuente_cientifica.</strong> Interpolación de la tabla de
+seis puntos. No es una curva de fabricante (CT-06) ni una predicción
+independiente (CT-09).</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/interseccion_bes_jun.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.interseccion_bes_jun.caudal_a_producir</li>
+<li><strong>notebooks.</strong> 04, 04b y 05</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> sin extrapolación</li>
+<li><strong>hipotesis.</strong> Head estrictamente descendente y caudal
+estrictamente creciente en la representación admitida. La fricción de la
+THD usa el caudal medido.</li>
+<li><strong>dominio.</strong> THD estrictamente entre el primer y el
+último head de la curva ya escalada. Fuera, no_calculable.</li>
+<li><strong>verificacion_analitica.</strong> Tramo (0 BFPD, 100 ft) a
+(100 BFPD, 0 ft), THD = 50 ft, resultado 50 BFPD.</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_interpolar</li>
+<li><strong>verificacion_fisica.</strong> friccion(1000) y
+friccion(2000) difieren, así que la intersección no es un punto fijo. El
+cuaderno 04b explora ese punto fijo y no está en el motor.</li>
+<li><strong>resultados.</strong> Q* de las cinco hojas, comparado con la
+caché por la transcripción, no con una medición independiente.</li>
+<li><strong>diferencias.</strong> Q* menos caudal medido no es un error
+del algoritmo. CT-09 no fija una tolerancia.</li>
+<li><strong>tolerancia.</strong> el caso analítico con pytest.approx;
+fuera de tabla, estado no_calculable</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> interpolación de la tabla; no es
+predicción del caudal del pozo</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Publicar Q* como caudal
+futuro. Las reglas de caudal no usan Q* como umbral.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna lo usa como umbral. La
+cadena tiene que ser calculable para clasificar.</li>
+<li><strong>recomendacion_posterior.</strong> No sustituir el algoritmo
+por el punto fijo del cuaderno 04b.</li>
+<li><strong>prueba.</strong>
+test_e10_interpolacion_analitica_sin_extrapolacion</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-06, CT-09</li>
+</ul>
+<h3 id="aux-elast-elasticidad-relativa-por-diferencia-central">AUX-ELAST
+· Elasticidad relativa por diferencia central</h3>
+<ul>
+<li><strong>fenomeno.</strong> Peso local de una entrada sobre Q*</li>
+<li><strong>expresion.</strong> epsilon = (Q(x<em>(1+d)) -
+Q(x</em>(1-d))) / (2<em>d</em>Q(x)), d = 0.01</li>
+<li><strong>variables.</strong> una entrada de ENTRADAS_RELATIVAS y la
+cadena completa</li>
+<li><strong>unidades.</strong> adimensional; también BFPD por 1 %</li>
+<li><strong>origen.</strong> src/analisis/sensibilidad_local.py</li>
+<li><strong>fuente_cientifica.</strong> Definición numérica. No es una
+ley de la bomba ni una incertidumbre.</li>
+<li><strong>modulo.</strong> src/analisis/sensibilidad_local.py</li>
+<li><strong>funcion.</strong>
+analisis.sensibilidad_local.elasticidad_relativa</li>
+<li><strong>notebooks.</strong> 04 y 04b</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> paso relativo 0.01</li>
+<li><strong>hipotesis.</strong> Q* es calculable en los tres puntos. El
+paso no sale del tramo de la curva.</li>
+<li><strong>dominio.</strong> Entradas distintas de cero, porque el paso
+es relativo.</li>
+<li><strong>verificacion_analitica.</strong> Para una respuesta lineal Q
+= k*x la elasticidad es 1.</li>
+<li><strong>oraculo.</strong> tests/test_catastro_formulas.py, expresión
+(qp-qm)/(2<em>d</em>q0)</li>
+<li><strong>verificacion_fisica.</strong> No aplica como ley. El signo
+observado en las hojas no se toma como causalidad.</li>
+<li><strong>resultados.</strong> El informe publica la elasticidad de
+diez entradas. La mayor en magnitud media es la frecuencia.</li>
+<li><strong>diferencias.</strong> No es una discrepancia física.</li>
+<li><strong>tolerancia.</strong> pytest.approx contra el oráculo que
+llama a q_estrella y combina aparte</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> indicador numérico, no una ley
+física</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Ordenar mal qué entrada pesa
+sobre Q*.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> No usar la elasticidad
+como intervalo de confianza.</li>
+<li><strong>prueba.</strong>
+test_aux_elasticidad_tiene_oraculo_independiente_de_la_combinacion</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="aux-deriv-derivada-de-q-por-pie-de-tvd">AUX-DERIV · Derivada de
+Q* por pie de TVD</h3>
+<ul>
+<li><strong>fenomeno.</strong> Sensibilidad de Q* a una profundidad</li>
+<li><strong>expresion.</strong> dQ/dTVD = (Q(x+paso) - Q(x-paso)) /
+(2*paso), paso = 1 ft</li>
+<li><strong>variables.</strong> tvd_descarga_ft, tvd_intake_ft o
+tvd_sensor_ft</li>
+<li><strong>unidades.</strong> BFPD/ft</li>
+<li><strong>origen.</strong> src/analisis/sensibilidad_local.py</li>
+<li><strong>fuente_cientifica.</strong> Diferencia central. No es un
+límite de asentamiento.</li>
+<li><strong>modulo.</strong> src/analisis/sensibilidad_local.py</li>
+<li><strong>funcion.</strong>
+analisis.sensibilidad_local.derivada_por_pie</li>
+<li><strong>notebooks.</strong> 04 y 04b</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> paso 1 ft</li>
+<li><strong>hipotesis.</strong> La cadena sigue calculable a ±1 ft.</li>
+<li><strong>dominio.</strong> Las tres TVD de la hoja</li>
+<li><strong>verificacion_analitica.</strong> El cociente escrito
+coincide con la función.</li>
+<li><strong>oraculo.</strong> tests/test_catastro_formulas.py</li>
+<li><strong>verificacion_fisica.</strong> No es una ley. Un pie de
+descarga, de intake y de sensor no pesan igual porque entran en términos
+distintos.</li>
+<li><strong>resultados.</strong> El informe publica las tres derivadas
+por pozo.</li>
+<li><strong>diferencias.</strong> Ninguna frente a la definición.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> indicador numérico, no una ley
+física</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Atribuir el mismo efecto a
+las tres profundidades.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> No convertir la derivada
+en una instrucción de mover el equipo.</li>
+<li><strong>prueba.</strong>
+test_aux_derivada_por_pie_tiene_oraculo</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="aux-mc-curvatura-mínima-del-survey">AUX-MC · Curvatura mínima
+del survey</h3>
+<ul>
+<li><strong>fenomeno.</strong> TVD y dogleg a partir de MD, inclinación
+y azimut</li>
+<li><strong>expresion.</strong> beta = arccos(cos(di) -
+sin(i1)<em>sin(i2)</em>(1-cos(da))); factor = (2/beta)<em>tan(beta/2);
+TVD suma (dMD/2)</em>(cos i1 + cos i2)*factor</li>
+<li><strong>variables.</strong> md_ft, inclinacion_deg, azimut_deg</li>
+<li><strong>unidades.</strong> ft y grados; dogleg en °/100 ft</li>
+<li><strong>origen.</strong> src/analisis/calidad.py. Método de
+industria usado como control de las columnas de la hoja.</li>
+<li><strong>fuente_cientifica.</strong> Método de curvatura mínima. En
+este expediente controla la columna Vertical, no diseña la BES.</li>
+<li><strong>modulo.</strong> src/analisis/calidad.py</li>
+<li><strong>funcion.</strong> analisis.calidad.curvatura_minima</li>
+<li><strong>notebooks.</strong> 01</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno de la BES</li>
+<li><strong>hipotesis.</strong> Las estaciones vienen ordenadas por MD y
+los ángulos están en grados.</li>
+<li><strong>dominio.</strong> Survey de cada hoja. Un tramo vertical de
+inclinación nula da dogleg nulo.</li>
+<li><strong>verificacion_analitica.</strong> Pozo vertical sintético:
+TVD = MD y dogleg = 0.</li>
+<li><strong>oraculo.</strong> tests/test_catastro_formulas.py, TVD =
+MD</li>
+<li><strong>verificacion_fisica.</strong> La columna de la hoja coincide
+con el recálculo dentro de la tolerancia de redondeo del test de survey.
+Eso es contraste con la hoja, no un ensayo nuevo.</li>
+<li><strong>resultados.</strong> El cuaderno 01 y
+test_survey_geometria_y_curvatura_minima.</li>
+<li><strong>diferencias.</strong> Las que reporte el test de survey,
+acotadas por su tolerancia.</li>
+<li><strong>tolerancia.</strong> la del test de survey para la hoja; el
+caso vertical es igualdad aproximada</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada en un caso analítico</li>
+<li><strong>estado_fisico.</strong> método geométrico estándar, usado
+aquí como control de la hoja</li>
+<li><strong>estado_experimental.</strong> no aplica a la BES</li>
+<li><strong>consecuencia_de_error.</strong> Dudar de una TVD de equipo
+por un error de survey, no por la bomba.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> No usar este control para
+corregir la TVD escrita del equipo.</li>
+<li><strong>prueba.</strong>
+test_aux_curvatura_minima_en_pozo_vertical</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="aux-tvd-interpolación-lineal-de-tvd">AUX-TVD · Interpolación
+lineal de TVD</h3>
+<ul>
+<li><strong>fenomeno.</strong> TVD a una MD intermedia del survey</li>
+<li><strong>expresion.</strong> TVD = TVD0 +
+(MD-MD0)/(MD1-MD0)*(TVD1-TVD0), sin extrapolar</li>
+<li><strong>variables.</strong> md_ft y vertical_ft de las estaciones,
+MD del equipo</li>
+<li><strong>unidades.</strong> ft</li>
+<li><strong>origen.</strong> src/analisis/calidad.py, np.interp sobre el
+survey</li>
+<li><strong>fuente_cientifica.</strong> Interpolación lineal. No
+sustituye la TVD escrita del equipo.</li>
+<li><strong>modulo.</strong> src/analisis/calidad.py</li>
+<li><strong>funcion.</strong> analisis.calidad.interpolar_tvd</li>
+<li><strong>notebooks.</strong> 01</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno</li>
+<li><strong>hipotesis.</strong> El survey está ordenado por MD.</li>
+<li><strong>dominio.</strong> MD entre la primera y la última estación.
+Fuera, None.</li>
+<li><strong>verificacion_analitica.</strong> Estaciones (0, 0) y (100,
+50): a MD 50 la TVD es 25.</li>
+<li><strong>oraculo.</strong> 25 escrito en
+tests/test_catastro_formulas.py</li>
+<li><strong>verificacion_fisica.</strong> Sirve para comparar, no para
+reemplazar la TVD de descarga, intake o sensor.</li>
+<li><strong>resultados.</strong> verificar_tvd_de_equipos en el cuaderno
+01 y en los tests.</li>
+<li><strong>diferencias.</strong> dif_ft de cada equipo, publicada por
+esa función, no absorbida en la ficha.</li>
+<li><strong>tolerancia.</strong> el caso analítico con
+pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada</li>
+<li><strong>estado_fisico.</strong> herramienta de contraste, no una
+corrección de la ficha</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Tomar la TVD interpolada
+como si reemplazara la de la hoja.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> Mantener la TVD de la hoja
+como entrada del balance.</li>
+<li><strong>prueba.</strong> test_aux_interpolacion_de_tvd</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3
+id="hyp-ct03-pip-si-el-sensor-más-profundo-aumenta-la-columna">HYP-CT03
+· PIP si el sensor más profundo aumenta la columna</h3>
+<ul>
+<li><strong>fenomeno.</strong> Comparación hidrostática, no la celda de
+BES-jun</li>
+<li><strong>expresion.</strong> PIP = P/grad - (TVD_sensor -
+TVD_intake)</li>
+<li><strong>variables.</strong> presion_sensor_psi, tvd_intake_ft,
+tvd_sensor_ft, gradiente</li>
+<li><strong>unidades.</strong> ft</li>
+<li><strong>origen.</strong>
+src/modelo_deterministico/hipotesis_ct03.py</li>
+<li><strong>fuente_cientifica.</strong> Hipótesis de trabajo para CT-03.
+evaluar no la llama.</li>
+<li><strong>modulo.</strong>
+src/modelo_deterministico/hipotesis_ct03.py</li>
+<li><strong>funcion.</strong>
+modelo_deterministico.hipotesis_ct03.pip_ft_si_el_sensor_esta_mas_profundo</li>
+<li><strong>notebooks.</strong> el informe consolidado la cita como
+comparación; los cuadernos usan el intercambio de TVD</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> ninguno</li>
+<li><strong>hipotesis.</strong> La presión de la columna crece hacia
+abajo y el sensor está a otra TVD que el intake.</li>
+<li><strong>dominio.</strong> Gradiente distinto de cero</li>
+<li><strong>verificacion_analitica.</strong> Restada de la celda da
+2*(sensor-intake).</li>
+<li><strong>oraculo.</strong>
+tests/test_verificacion_ecuaciones.py::_pip_hidrostatica</li>
+<li><strong>verificacion_fisica.</strong> Cuantifica la diferencia. No
+elige el signo.</li>
+<li><strong>resultados.</strong> Solo comparación. No entra en Q* ni en
+las reglas.</li>
+<li><strong>diferencias.</strong> Las cinco diferencias de E-05.</li>
+<li><strong>tolerancia.</strong> pytest.approx</li>
+<li><strong>estado_matematico.</strong> consistencia matemática
+comprobada como expresión aislada</li>
+<li><strong>estado_fisico.</strong> hipótesis de comparación, no modelo
+activo</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Sustituir la celda por esta
+expresión sin cerrar CT-03.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> Dejarla fuera del motor
+hasta una decisión externa.</li>
+<li><strong>prueba.</strong>
+test_e05_reproduccion_hidrostatica_y_cinco_pozos</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-03</li>
+</ul>
+<h3 id="hyp-punto-fijo-intersección-autoconsistente">HYP-PUNTO-FIJO ·
+Intersección autoconsistente</h3>
+<ul>
+<li><strong>fenomeno.</strong> Q* tal que la fricción se evalúa en ese
+mismo Q*</li>
+<li><strong>expresion.</strong> iterar Q hasta |Q* - Q| &lt; 0.01 BFPD,
+partiendo del caudal medido</li>
+<li><strong>variables.</strong> la hoja completa, vía q_estrella</li>
+<li><strong>unidades.</strong> BFPD</li>
+<li><strong>origen.</strong> Función punto_fijo escrita en
+src/informes/cuadernos/nb04b.py. No está en el motor.</li>
+<li><strong>fuente_cientifica.</strong> Diagnóstico del cuaderno 04b.
+Converge en las cinco hojas y no se adopta.</li>
+<li><strong>modulo.</strong> src/informes/cuadernos/nb04b.py</li>
+<li><strong>funcion.</strong> None</li>
+<li><strong>notebooks.</strong> 04b</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> tolerancia 0.01 BFPD, máximo 100
+iteraciones</li>
+<li><strong>hipotesis.</strong> Que la fricción deba usar Q* y no el
+caudal medido. No está decidido.</li>
+<li><strong>dominio.</strong> Las cinco hojas del cuaderno. No es el
+dominio del motor.</li>
+<li><strong>verificacion_analitica.</strong> No hay oráculo
+independiente en la suite: el procedimiento vive en el texto del
+cuaderno.</li>
+<li><strong>oraculo.</strong> no hay función importable distinta del
+cuaderno</li>
+<li><strong>verificacion_fisica.</strong> El cuaderno informa que acerca
+Q* al caudal medido y dice que eso no valida el modelo.</li>
+<li><strong>resultados.</strong> El cuaderno 04b publica la brecha antes
+y después. Esos números no alimentan las reglas.</li>
+<li><strong>diferencias.</strong> Q* de la hoja frente al punto fijo. No
+se usa para corregir la hoja.</li>
+<li><strong>tolerancia.</strong> 0.01 BFPD de parada, solo dentro del
+cuaderno</li>
+<li><strong>estado_matematico.</strong> no verificada como función del
+motor</li>
+<li><strong>estado_fisico.</strong> hipótesis de trabajo, no modelo
+activo</li>
+<li><strong>estado_experimental.</strong> pendiente de validación
+externa</li>
+<li><strong>consecuencia_de_error.</strong> Reemplazar E-10 por esta
+iteración.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> Mantenerla en el cuaderno,
+separada del evaluador.</li>
+<li><strong>prueba.</strong> None</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> CT-09</li>
+</ul>
+<h3 id="doc-f02-gradiente-0.433-del-xlsm">DOC-F02 · Gradiente 0.433 del
+XLSM</h3>
+<ul>
+<li><strong>fenomeno.</strong> Gradiente de agua dulce citado en otra
+fuente</li>
+<li><strong>expresion.</strong> 0.433 psi/ft por gravedad específica, no
+transcrito</li>
+<li><strong>variables.</strong> no entra al motor</li>
+<li><strong>unidades.</strong> psi/ft</li>
+<li><strong>origen.</strong> src/analisis/catalogo_bes_jun.py, id
+F-02-F-03, estado fuera del alcance</li>
+<li><strong>fuente_cientifica.</strong> Otra planilla. BES-jun usa
+E-04.</li>
+<li><strong>modulo.</strong> src/analisis/catalogo_bes_jun.py</li>
+<li><strong>funcion.</strong> None</li>
+<li><strong>notebooks.</strong> catálogo de fórmulas</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> 0.433</li>
+<li><strong>hipotesis.</strong> No se aplica a estas hojas.</li>
+<li><strong>dominio.</strong> ninguno en el motor</li>
+<li><strong>verificacion_analitica.</strong> No implementada.</li>
+<li><strong>oraculo.</strong> no hay</li>
+<li><strong>verificacion_fisica.</strong> No evaluable con el flujo de
+BES-jun.</li>
+<li><strong>resultados.</strong> No produce un número del
+expediente.</li>
+<li><strong>diferencias.</strong> No se igualó a 0.052.</li>
+<li><strong>tolerancia.</strong> no aplica</li>
+<li><strong>estado_matematico.</strong> solamente documentada</li>
+<li><strong>estado_fisico.</strong> no evaluable con las fuentes usadas
+por el motor</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Sustituir E-04 por este
+factor.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> No copiarla al motor de
+BES-jun.</li>
+<li><strong>prueba.</strong> None</li>
+<li><strong>pozos.</strong> ninguno</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="doc-potencia-bloque-eléctrico-y-de-potencia">DOC-POTENCIA ·
+Bloque eléctrico y de potencia</h3>
+<ul>
+<li><strong>fenomeno.</strong> Potencia, motor y cable de la hoja, no
+transcritos</li>
+<li><strong>expresion.</strong> varias constantes de la hoja (0.746,
+0.241 y otras) sin desglosar, porque no hay transcripción</li>
+<li><strong>variables.</strong> no entran al motor</li>
+<li><strong>unidades.</strong> no fijadas en el código</li>
+<li><strong>origen.</strong> src/analisis/catalogo_bes_jun.py, id
+Potencia-motor-cable</li>
+<li><strong>fuente_cientifica.</strong> La hoja las contiene. No se
+contaron como fórmulas separadas porque no están identificadas una a una
+en el código.</li>
+<li><strong>modulo.</strong> src/analisis/catalogo_bes_jun.py</li>
+<li><strong>funcion.</strong> None</li>
+<li><strong>notebooks.</strong> no hay transcripción</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> no inventariados uno a uno</li>
+<li><strong>hipotesis.</strong> Quedan fuera hasta conocer el origen de
+las constantes.</li>
+<li><strong>dominio.</strong> ninguno en el motor</li>
+<li><strong>verificacion_analitica.</strong> No implementada. Este ítem
+es un bloque, no una ecuación.</li>
+<li><strong>oraculo.</strong> no hay</li>
+<li><strong>verificacion_fisica.</strong> No evaluable.</li>
+<li><strong>resultados.</strong> Los promedios con #DIV/0! de QF-549HST
+no entran en PIP ni en THD.</li>
+<li><strong>diferencias.</strong> No transcritas.</li>
+<li><strong>tolerancia.</strong> no aplica</li>
+<li><strong>estado_matematico.</strong> solamente documentada</li>
+<li><strong>estado_fisico.</strong> no evaluable con las fuentes usadas
+por el motor</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Contar cada constante no
+leída como una fórmula verificada.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> Inventariar el bloque solo
+cuando se transcriba cada expresión.</li>
+<li><strong>prueba.</strong> None</li>
+<li><strong>pozos.</strong> QF-084, QF-301, QF-147, QF-005, QF-306</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="doc-f36-método-b-y-observador-de-e1">DOC-F36 · Método B y
+observador de E1</h3>
+<ul>
+<li><strong>fenomeno.</strong> Estimación sin sensor, no usada porque la
+hoja trae presión de sensor</li>
+<li><strong>expresion.</strong> no transcrita</li>
+<li><strong>variables.</strong> no entran</li>
+<li><strong>unidades.</strong> no fijadas</li>
+<li><strong>origen.</strong> src/analisis/catalogo_bes_jun.py, id
+F-36-F-40</li>
+<li><strong>fuente_cientifica.</strong> Documento de ecuaciones del
+proyecto, fuera del alcance de esta hoja.</li>
+<li><strong>modulo.</strong> src/analisis/catalogo_bes_jun.py</li>
+<li><strong>funcion.</strong> None</li>
+<li><strong>notebooks.</strong> no transcrito</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> faltan, según el catálogo</li>
+<li><strong>hipotesis.</strong> No se aplica: hay presión de
+sensor.</li>
+<li><strong>dominio.</strong> ninguno</li>
+<li><strong>verificacion_analitica.</strong> No implementada.</li>
+<li><strong>oraculo.</strong> no hay</li>
+<li><strong>verificacion_fisica.</strong> No evaluable.</li>
+<li><strong>resultados.</strong> Ninguno.</li>
+<li><strong>diferencias.</strong> No sustituye a E-05.</li>
+<li><strong>tolerancia.</strong> no aplica</li>
+<li><strong>estado_matematico.</strong> solamente documentada</li>
+<li><strong>estado_fisico.</strong> no evaluable con las fuentes usadas
+por el motor</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Estimar PIP sin el sensor
+que la hoja sí trae.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> No activarla en
+BES-jun.</li>
+<li><strong>prueba.</strong> None</li>
+<li><strong>pozos.</strong> ninguno</li>
+<li><strong>consultas.</strong> ninguna</li>
+</ul>
+<h3 id="doc-f41-cadena-del-xlsm-incluido-j64">DOC-F41 · Cadena del XLSM,
+incluido J64</h3>
+<ul>
+<li><strong>fenomeno.</strong> Otra planilla, con su propio signo de
+PIP</li>
+<li><strong>expresion.</strong> no transcrita en BES-jun</li>
+<li><strong>variables.</strong> no entran</li>
+<li><strong>unidades.</strong> no fijadas aquí</li>
+<li><strong>origen.</strong> src/analisis/catalogo_bes_jun.py, id
+F-41-J64</li>
+<li><strong>fuente_cientifica.</strong> Otro libro. No es la celda
+G96.</li>
+<li><strong>modulo.</strong> src/analisis/catalogo_bes_jun.py</li>
+<li><strong>funcion.</strong> None</li>
+<li><strong>notebooks.</strong> no transcrito</li>
+<li><strong>dataset.</strong> BES-jun</li>
+<li><strong>parametros.</strong> los de ese libro, no los de esta
+hoja</li>
+<li><strong>hipotesis.</strong> No se mezcla con BES-jun.</li>
+<li><strong>dominio.</strong> ninguno en este motor</li>
+<li><strong>verificacion_analitica.</strong> No implementada.</li>
+<li><strong>oraculo.</strong> no hay</li>
+<li><strong>verificacion_fisica.</strong> No evaluable en este
+expediente.</li>
+<li><strong>resultados.</strong> Ninguno.</li>
+<li><strong>diferencias.</strong> No se copió el signo de J64 a
+G96.</li>
+<li><strong>tolerancia.</strong> no aplica</li>
+<li><strong>estado_matematico.</strong> solamente documentada</li>
+<li><strong>estado_fisico.</strong> no evaluable con las fuentes usadas
+por el motor</li>
+<li><strong>estado_experimental.</strong> no aplica</li>
+<li><strong>consecuencia_de_error.</strong> Corregir G96 con el signo de
+otro libro.</li>
+<li><strong>reglas_dependientes.</strong> Ninguna.</li>
+<li><strong>recomendacion_posterior.</strong> Tratarla en su propio
+dataset si se abre.</li>
+<li><strong>prueba.</strong> None</li>
+<li><strong>pozos.</strong> ninguno</li>
+<li><strong>consultas.</strong> CT-03</li>
+</ul>
+</body></html>

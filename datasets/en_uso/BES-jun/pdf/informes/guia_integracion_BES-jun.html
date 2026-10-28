@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='utf-8'><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-right { content: "BES-jun · validación pendiente"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", serif; font-size: 11pt; }
+body { margin: 0; line-height: 1.4; text-align: justify; color: #111; }
+h1, h2, h3 { font-family: "Liberation Sans", sans-serif; text-align: left; break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; text-align: left; }
+th, td { border: 1px solid #444; padding: 0.2em 0.35em; vertical-align: top; }
+th { background: #e8edf2; }
+img { max-width: 100%; height: auto; }
+code { font-family: "Liberation Mono", monospace; font-size: 0.9em; }
+pre { white-space: pre-wrap; text-align: left; }
+</style></head><body><h1
+id="guía-de-integración-del-dataset-bes-jun-con-el-futuro-sistema-asesor-esp">Guía
+de integración del dataset BES-jun con el futuro sistema Asesor ESP</h1>
+<p>Esta guía es para quien vaya a conectar una aplicación con este
+expediente y no participó en el análisis. El cálculo ya está hecho en
+Python. La aplicación no debe reimplementar las ecuaciones.</p>
+<h2 id="qué-contiene-el-dataset">Qué contiene el dataset</h2>
+<p>BES-jun es un libro de cinco hojas. Cada hoja es un punto de
+operación de una bomba electrosumergible: presiones, caudal, frecuencia,
+profundidades, una tabla de bomba de seis puntos a 60 Hz y un survey de
+trayectoria. No es una serie temporal. No es un catálogo de
+fabricante.</p>
+<p>El archivo analizado es Copia de FINAL BES-jun.xlsx. La copia de
+trabajo, de solo cálculo, es <code>entrada/BES_jun.xlsx</code>. Su
+huella está en <code>manifiesto.json</code>.</p>
+<h2 id="qué-pozos-identifica">Qué pozos identifica</h2>
+<p>La identificación es provisional. En cada hoja el rótulo Cluster
+coincide con el nombre de la hoja y el rótulo Pozo es otro código. El
+libro no dice cuál es la llave. Dentro de este archivo cada código
+aparece una sola vez, así que el motor puede resolver la hoja. No debe
+fusionarse con un pozo de otro dataset solo porque el texto coincida,
+hasta que alguien confirme la llave.</p>
+<table>
+<thead>
+<tr>
+<th>Pozo (rótulo)</th>
+<th>Hoja</th>
+<th>Cluster</th>
+<th>Bomba escrita</th>
+<th>Identidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-084</td>
+<td>QF-554H</td>
+<td>QF-554H</td>
+<td>S 8000N</td>
+<td>provisional</td>
+</tr>
+<tr>
+<td>QF-301</td>
+<td>QF-545H</td>
+<td>QF-545H</td>
+<td>S 8000N</td>
+<td>provisional</td>
+</tr>
+<tr>
+<td>QF-147</td>
+<td>QF-500H</td>
+<td>QF-500H</td>
+<td>S 8000N</td>
+<td>provisional</td>
+</tr>
+<tr>
+<td>QF-005</td>
+<td>QF-378HST</td>
+<td>QF-378HST</td>
+<td>S6000N</td>
+<td>provisional</td>
+</tr>
+<tr>
+<td>QF-306</td>
+<td>QF-549HST</td>
+<td>QF-549HST</td>
+<td>S6000N</td>
+<td>provisional</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qué-modelos-hay">Qué modelos hay</h2>
+<p>Tres, versión <code>transcripcion-1</code>, en
+<code>modelos.json</code>:</p>
+<ul>
+<li><code>M-BES-FLUIDO</code>: gravedad, densidad y gradiente, como los
+escribe la hoja.</li>
+<li><code>M-BES-BALANCE</code>: PIP, THP, fricción y THD.</li>
+<li><code>M-BES-INTERSECCION</code>: caudal en el que la altura de la
+bomba iguala la THD.</li>
+</ul>
+<p>Reproducen la caché de la hoja. Eso no aprueba la física. El signo
+del PIP, el exponente de la fricción y la unidad de BS&amp;W tienen
+consultas abiertas.</p>
+<h2 id="qué-reglas-hay-y-cuáles-están-pendientes">Qué reglas hay y
+cuáles están pendientes</h2>
+<p><code>reglas.json</code> trae RC-BES-01, RC-BES-02, RC-BES-03 y
+RC-BES-04.</p>
+<ul>
+<li>RC-BES-01: caudal por encima del máximo escrito, ambos en la misma
+frecuencia.</li>
+<li>RC-BES-02: caudal por debajo del mínimo escrito, en la misma
+frecuencia.</li>
+<li>RC-BES-03: caudal entre esos dos límites, en la misma
+frecuencia.</li>
+<li>RC-BES-04: cercanía a la máxima eficiencia. <strong>No
+evaluable.</strong> No hay curva de fabricante.</li>
+</ul>
+<p>Las tres primeras están en <code>pendiente_validacion</code>. Ninguna
+está aprobada. En las cinco hojas, con los datos registrados, la regla
+que se activa es RC-BES-03. En QF-084 el caudal es 10301 BFPD a 63 Hz y
+el máximo a 60 Hz es 10000 BFPD; escalado, el máximo es 10500 BFPD.
+Comparar el caudal de operación con el máximo de 60 Hz es un artefacto
+de la primera versión y no debe volver a mostrarse como la clasificación
+vigente. El escalamiento no valida el límite ni la afinidad.</p>
+<h2 id="qué-variables-hace-falta">Qué variables hace falta</h2>
+<p><code>variables.json</code> clasifica cada una. Para evaluar el punto
+ya registrado no hay que volver a teclear los parámetros de la hoja:
+están en <code>pozos.json</code>.</p>
+<p>La aplicación pide una variable solo cuando el operador está
+corrigiendo una medición o cuando falta en la configuración. Si la
+envía, declara nombre, valor, unidad y procedencia
+(<code>configuracion_del_pozo</code>, <code>operador</code>,
+<code>sensor</code> o <code>no_declarada</code>).</p>
+<p>En modo operacional el operador puede enviar caudal, frecuencia,
+presiones, temperatura, °API y BS&amp;W, cada uno una sola vez y con su
+unidad canónica: caudal en BFPD, frecuencia en Hz, presiones en psi,
+temperatura en °C, BS&amp;W como fracción, °API en °API. Límites,
+etapas, diámetro, profundidades, frecuencia de la curva, referencia de
+bomba y la tabla de seis puntos salen de la ficha del pozo. Enviarlos
+como medición produce <code>PARAMETRO_PROTEGIDO</code> y no se calcula.
+Una variable repetida, aunque los dos valores coincidan, produce
+<code>VARIABLE_DUPLICADA</code>: no se usa el primero ni el último. Un
+JSON con la misma clave dos veces se rechaza antes de construir el
+diccionario (<code>CLAVE_JSON_DUPLICADA</code>).</p>
+<p>Un escenario hipotético pide <code>modo</code> =
+<code>simulacion</code>, un <code>escenario_id</code> y los cambios en
+<code>parametros_escenario</code>. El resultado lleva
+<code>hipotetico: true</code>, no actualiza la ficha y no autoriza una
+recomendación. La curva del escenario es una lista de al menos dos
+puntos, cada uno solo con <code>caudal_bfpd</code> y
+<code>head_ft</code> numéricos y finitos, en BFPD y ft, sin campos
+extra. En el orden enviado el caudal tiene que ser estrictamente
+creciente y el head estrictamente descendente. Es el contrato de esta
+representación, no una ley de todas las bombas. No se reordena, no se
+redondea para declarar un duplicado y no se elimina ningún punto. Un
+número suelto, un punto incompleto o un campo inesperado se rechazan
+como <code>entrada_invalida</code> y no llegan al cálculo. Un parámetro
+numérico del escenario solo admite <code>valor</code> y
+<code>unidad</code> canónica; no hay conversión.
+<code>fecha_observacion</code> es <code>AAAA-MM-DD</code> o esa fecha
+con hora ISO 8601. Si hay hora, puede llevar <code>Z</code> o
+<code>±HH:MM</code>. No se cambia de zona y no se usa la fecha
+<code>=TODAY()</code> del Excel. Los identificadores van sin espacios
+exteriores.</p>
+<p>El contrato 1.3.0 rechaza la solicitud —estado
+<code>entrada_invalida</code>, <code>dataset_evaluado</code> nulo, cero
+reglas— si falta la versión, falta la unidad, el campo no existe, donde
+va un número llega un texto, el dataset no es BES-jun o se intenta usar
+la ficha de otro pozo. La salida distingue
+<code>dataset_solicitado</code> de <code>dataset_evaluado</code>. Un
+dataset ajeno no queda registrado como si se hubiera procesado.</p>
+<p><code>frecuencia_hz</code> es la frecuencia registrada. El rango
+observado de las cinco hojas no es el rango autorizado. El límite
+autorizado de frecuencia no está en el libro y el catálogo lo deja en
+null.</p>
+<h2 id="cómo-se-invoca-el-motor">Cómo se invoca el motor</h2>
+<p>Desde la raíz del expediente, con el entorno del proyecto:</p>
+<pre><code>PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m evaluacion.motor --dataset BES-jun --pozo QF-084</code></pre>
+<p>En código:</p>
+<pre><code>from evaluacion.motor import evaluar, evaluar_solicitud
+evaluar(&quot;BES-jun&quot;, &quot;QF-084&quot;)
+evaluar_solicitud(solicitud)</code></pre>
+<p>No hace falta Jupyter ni una pantalla. No llama a la red. No llama a
+un modelo de lenguaje.</p>
+<h2 id="cómo-se-lee-el-resultado">Cómo se lee el resultado</h2>
+<p><code>estado_evaluacion</code> vale:</p>
+<ul>
+<li><code>completada_preliminar</code>: se calculó y se aplicó la regla
+candidata. El resultado es preliminar.</li>
+<li><code>no_evaluable</code>: falta un dato de la ficha, el pozo no
+está, la identidad es ambigua, el modelo no calculó o la regla no puede
+ejecutarse. No hay un sí ni un no forzados.</li>
+<li><code>entrada_invalida</code>: la solicitud no pasó el esquema, la
+unidad, el dominio, la unicidad o la protección de la ficha.
+<code>errores</code> lista campo, código y detalle.
+<code>dataset_evaluado</code> es nulo y no se llama a los modelos.</li>
+<li><code>error_interno</code>: la solicitud era válida y el modelo
+falló después. No es una entrada inválida y no es un resultado
+operacional.</li>
+</ul>
+<p>Cada elemento de <code>reglas</code> trae <code>id</code>,
+<code>estado_regla</code>, <code>resultado</code>,
+<code>evaluable</code>, <code>aprobada_para_uso_operacional</code>,
+<code>evidencia</code> y <code>limitaciones</code>. La evidencia
+numérica está en <code>evidencia</code>, no en el texto del mensaje.</p>
+<p><code>recomendacion_operacional_autorizada</code> es falso mientras
+no exista una regla aprobada para ese uso. La aplicación no debe
+convertir una advertencia preliminar en una orden de bajar o subir la
+frecuencia.</p>
+<h2 id="códigos-de-error">Códigos de error</h2>
+<p>Cada elemento de <code>errores</code> trae <code>campo</code>,
+<code>codigo</code>, <code>detalle</code> y <code>mensaje</code>. Si
+aplica, también <code>tipo_esperado</code> y
+<code>unidad_esperada</code>. El valor recibido no se copia a un campo
+de la respuesta que no acepte ese tipo.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Código</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TIPO_INVALIDO</code></td>
+<td>El dato no es del tipo del contrato</td>
+</tr>
+<tr>
+<td><code>UNIDAD_AUSENTE</code> / <code>UNIDAD_INCOMPATIBLE</code></td>
+<td>Falta la unidad o no es la canónica. No hay conversión</td>
+</tr>
+<tr>
+<td><code>VARIABLE_DUPLICADA</code> /
+<code>CLAVE_JSON_DUPLICADA</code></td>
+<td>La misma variable o la misma clave JSON aparece más de una vez</td>
+</tr>
+<tr>
+<td><code>PARAMETRO_PROTEGIDO</code></td>
+<td>Se intenta cambiar la ficha en modo operacional</td>
+</tr>
+<tr>
+<td><code>ENTRADA</code> inválida por <code>LIMITE_TAMANO</code></td>
+<td>El JSON, la profundidad o el número de elementos supera el límite y
+no se recorre</td>
+</tr>
+<tr>
+<td><code>DATASET_DESCONOCIDO</code> /
+<code>VERSION_INCOMPATIBLE</code></td>
+<td>Dataset o contrato que este motor no evalúa</td>
+</tr>
+<tr>
+<td><code>FISICAMENTE_INADMISIBLE</code> /
+<code>VALOR_NO_FINITO</code></td>
+<td>Dominio de la fórmula, no un límite operacional aprobado</td>
+</tr>
+<tr>
+<td><code>ERROR_INTERNO</code></td>
+<td>Fallo imprevisto. <code>incidente_id</code> identifica el registro
+interno. No hay recomendación</td>
+</tr>
+</tbody>
+</table>
+<p>Una regla <code>pendiente_validacion</code> es una observación
+preliminar. <code>no_evaluable</code> significa que falta evidencia, no
+que el pozo esté bien ni mal. No se completa una medición ausente con un
+promedio.</p>
+<p>Las plantillas ejecutables están en
+<code>ejemplos/plantillas/</code>. Cada archivo trae la solicitud y el
+resultado que produjo este motor. Los números de QF-084 son los
+registrados en la hoja, no una recomendación.</p>
+<p>Desde Python, en la raíz del expediente:</p>
+<pre><code>from evaluacion.motor import evaluar_solicitud
+evaluar_solicitud(solicitud)</code></pre>
+<h2 id="errores-y-datos-insuficientes">Errores y datos
+insuficientes</h2>
+<p>Un error de validación y un caso no evaluable no se presentan igual.
+El primero rechaza la solicitud. El segundo acepta la solicitud y dice
+qué falta. Los dos dejan la recomendación operacional en falso.</p>
+<p>La evidencia de la comparación sin escalar viaja dentro de la regla,
+marcada como no vigente, para que se pueda auditar el artefacto sin
+volver a usarlo como resultado.</p>
+<h2 id="qué-puede-hacer-la-aplicación">Qué puede hacer la
+aplicación</h2>
+<p>Puede listar los pozos de <code>pozos.json</code>, mostrar los
+parámetros registrados, enviar una corrección con unidad y pintar el
+JSON de salida campo por campo. Puede guardar la versión del motor y de
+la regla que aparecen en la respuesta.</p>
+<h2 id="qué-no-puede-hacer">Qué no puede hacer</h2>
+<ul>
+<li>Inventar un límite de frecuencia o un límite de fabricante.</li>
+<li>Tratar una regla pendiente como si estuviera aprobada.</li>
+<li>Ordenar un cambio de frecuencia, de etapas o de tubing a partir de
+RC-BES-01, 02 o 03.</li>
+<li>Declarar que el pozo está sano porque el caudal quedó entre los
+números de la hoja.</li>
+<li>Usar <code>=TODAY()</code> como fecha de la medición.</li>
+<li>Usar el nombre de la hoja como identificador global definitivo.</li>
+<li>Llamar a un modelo de lenguaje para que calcule o apruebe.</li>
+<li>Leer <code>reports/figuras/caudal_y_limites.png</code> ni
+<code>head_tabulado.png</code>: son figuras viejas. El linaje está en
+<code>docs/linaje_artefactos.md</code>.</li>
+</ul>
+<h2 id="modelo-de-lenguaje-más-adelante">Modelo de lenguaje, más
+adelante</h2>
+<p><code>capa_linguistica.md</code> dice qué JSON puede recibir y qué no
+puede redactar. Hasta que esa capa exista, la aplicación usa los campos
+<code>mensaje</code> de la respuesta. Esos textos ya distinguen
+observación, advertencia y condición no evaluable.</p>
+<h2 id="qué-probar-antes-de-usarlo">Qué probar antes de usarlo</h2>
+<pre><code>PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m evaluacion.autotest</code></pre>
+<p>Ese comando corre pytest sobre <code>tests/</code> y escribe
+<code>logs/autotest_reporte.json</code> y
+<code>logs/autotest_reporte.md</code>. Tiene que quedar en estado
+<code>aprobado</code>. En particular, con los datos registrados de
+QF-084 el resultado es RC-BES-03 y
+<code>recomendacion_operacional_autorizada</code> es falso.</p>
+<h2 id="cómo-se-regenera-este-paquete">Cómo se regenera este
+paquete</h2>
+<pre><code>PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m integracion.construir_paquete</code></pre>
+<p>Ese comando reescribe los JSON, esta guía, la ficha maestra y el
+catálogo de reglas. No mueve el expediente a
+<code>procesadas</code>.</p>
+</body></html>

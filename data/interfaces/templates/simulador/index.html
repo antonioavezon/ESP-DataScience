@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>Simuladores HUC</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+  <main class="contenido">
+    <h1>Simuladores</h1>
+    <form id="acceso" class="tarjeta" {% if autenticado %}hidden{% endif %}>
+      <label>Usuario <input id="usuario" autocomplete="username" value="operador"></label>
+      <label>Clave <input id="clave" type="password" autocomplete="current-password"></label>
+      <button type="submit">Entrar</button>
+      <p id="acceso-estado" class="leyenda"></p>
+    </form>
+    <section id="panel" class="instrumento" {% if not autenticado %}hidden{% endif %}>
+      <div class="tarjeta fila-pozo">
+        <label for="pozo">Pozo</label>
+        <select id="pozo">
+          {% for pozo in pozos %}
+            <option value="{{ pozo.pozo_id }}" {% if not pozo.evaluable %}disabled{% endif %}>{{ pozo.pozo_id }}{% if not pozo.evaluable %} · no disponible{% endif %}</option>
+          {% endfor %}
+        </select>
+        <button type="button" id="restaurar-todo">Restaurar valores</button>
+      </div>
+      <p id="publicacion" class="leyenda">Sin publicar.</p>
+      <div id="mandos" class="rejilla-mandos" aria-label="Mandos de simulación"></div>
+      <div class="fila-botones">
+        <button type="button" id="aplicar">Aplicar escenario</button>
+      </div>
+      <fieldset>
+        <legend>Simulación automática</legend>
+        <label>Intervalo (s) <input id="intervalo" type="number" min="0.2" step="0.1" value="2"></label>
+        <label>Duración (s) <input id="duracion" type="number" min="1" step="1" value="30"></label>
+        <label>Semilla <input id="semilla" type="number" step="1" value="1"></label>
+        <button type="button" id="auto-iniciar">Iniciar</button>
+        <button type="button" id="auto-pausar">Pausar</button>
+        <button type="button" id="auto-reanudar">Reanudar</button>
+        <button type="button" id="auto-detener">Detener</button>
+        <p id="fase" class="leyenda"></p>
+      </fieldset>
+    </section>
+  </main>
+  <script src="{% static 'js/mandos.js' %}"></script>
+  <script src="{% static 'js/simulador.js' %}"></script>
+</body>
+</html>

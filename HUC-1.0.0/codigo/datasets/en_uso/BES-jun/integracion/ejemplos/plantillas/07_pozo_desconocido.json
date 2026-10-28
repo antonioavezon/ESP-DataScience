@@ -1,0 +1,43 @@
+{
+  "nota": "El identificador no está en las cinco hojas.",
+  "solicitud": {
+    "dataset_id": "BES-jun",
+    "pozo_id": "NO-EXISTE",
+    "version_configuracion": "1.3.0",
+    "variables": []
+  },
+  "resultado": {
+    "dataset_solicitado": "BES-jun",
+    "dataset_evaluado": "BES-jun",
+    "pozo_solicitado": "NO-EXISTE",
+    "pozo_resuelto": null,
+    "version_contrato": "1.3.0",
+    "version_motor": "0.4.2",
+    "version_catalogo_reglas": "1.1.0",
+    "version_software": "0.4.2",
+    "fecha_referencia": null,
+    "incidente_id": null,
+    "estado_evaluacion": "no_evaluable",
+    "identidad": {
+      "estado": "no_resuelta"
+    },
+    "modelos": [],
+    "reglas": [],
+    "advertencias": [],
+    "mensajes": [
+      {
+        "tipo": "condicion_no_evaluable",
+        "codigo": "pozo_desconocido",
+        "texto": "No hay una hoja de este dataset con ese identificador de pozo, de cluster o de hoja."
+      }
+    ],
+    "errores": [],
+    "reglas_ejecutadas": 0,
+    "recomendacion_operacional_autorizada": false,
+    "fuera_de_dominio_observado": false,
+    "modo": "operacional",
+    "hipotetico": false,
+    "escenario_id": null,
+    "parametros_modificados": []
+  }
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Identidades numéricas almacenadas en RB-1521</title><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Identidades numéricas almacenadas en RB-1521"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "RB-1521 · Serie diaria"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+@page ancho { size: Letter landscape; margin: 0.65in 0.6in 0.7in 0.6in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Identidades numéricas almacenadas en RB-1521"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "RB-1521 · Serie diaria"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", "DejaVu Serif", serif; font-size: 10.5pt; }
+body { margin: 0; line-height: 1.38; color: #111; hyphens: manual; }
+.cuaderno { text-align: justify; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", sans-serif; text-align: left; break-after: avoid; page-break-after: avoid; line-height: 1.2; }
+h1 { font-size: 19pt; margin: 0 0 0.5em 0; border-bottom: 2px solid #333; padding-bottom: 0.2em; }
+h2 { font-size: 13.5pt; margin: 1.2em 0 0.4em 0; border-bottom: 1px solid #aaa; padding-bottom: 0.1em; }
+h3 { font-size: 11.5pt; margin: 1em 0 0.3em 0; }
+p { margin: 0.45em 0; orphans: 3; widows: 3; }
+li { margin: 0.15em 0; }
+blockquote { margin: 0.6em 0; padding: 0.3em 0.8em; border-left: 3px solid #999; background: #f6f6f6; text-align: left; }
+.portada { break-after: page; page-break-after: always; }
+.portada h1 { font-size: 21pt; }
+.portada { line-height: 1.3; }
+.portada p, .portada li { font-size: 9.8pt; margin: 0.3em 0; }
+.portada h2 { font-size: 12pt; margin: 0.8em 0 0.3em 0; }
+.portada h1 { margin-bottom: 0.3em; }
+.prompt { display: none; }
+.input, .output_wrapper { margin: 0.5em 0; }
+.input_area { text-align: left; border: 1px solid #c8c8c8; border-left: 4px solid #4c78a8; background: #f7f9fb; padding: 0.3em 0.5em; position: relative; }
+.input_area::before { content: "Código"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #4c78a8; letter-spacing: 0.06em; margin-bottom: 0.2em; }
+.output_area { text-align: left; border-left: 4px solid #8a8a8a; padding: 0.2em 0 0.2em 0.5em; margin-top: 0.3em; }
+.output_area::before { content: "Salida"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #666; letter-spacing: 0.06em; margin-bottom: 0.15em; }
+pre { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 7.4pt; line-height: 1.28; margin: 0;
+      white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+code { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 0.88em; }
+table.tabla, .output_html table, table { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 7.6pt; line-height: 1.22; text-align: left; margin: 0.3em 0 0.5em 0; }
+th, td { border: 1px solid #777; padding: 0.15em 0.3em; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+th { background: #e8edf2; font-family: "Liberation Sans", sans-serif; font-weight: bold; overflow-wrap: break-word; word-break: normal; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.text_cell_render table { font-size: 8.6pt; }
+img { max-width: 100%; height: auto; display: block; margin: 0.4em auto; break-inside: avoid; page-break-inside: avoid; }
+.ancho { page: ancho; }
+.ancho table { font-size: 8pt; }
+math { font-size: 1.05em; }
+math[display="block"] { margin: 0.5em 0; break-inside: avoid; }
+.output_stderr pre { color: #8a1c1c; }
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
+.highlight .c { color: #3D7B7B; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #9C6500 } /* Comment.Preproc */
+.highlight .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #E40000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #008400 } /* Generic.Inserted */
+.highlight .go { color: #717171 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #687822 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #00F; font-weight: bold } /* Name.Class */
+.highlight .no { color: #800 } /* Name.Constant */
+.highlight .nd { color: #A2F } /* Name.Decorator */
+.highlight .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00F } /* Name.Function */
+.highlight .nl { color: #767600 } /* Name.Label */
+.highlight .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666 } /* Literal.Number.Float */
+.highlight .mh { color: #666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #A45A77 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #00F } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666 } /* Literal.Number.Integer.Long */
+</style></head><body><div class="cuaderno"><div class="cell border-box-sizing text_cell rendered" id="cell-id=ac9bacc6"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html portada">
+<h1 id="identidades-numéricas-almacenadas-en-rb-1521">Identidades
+numéricas almacenadas en RB-1521</h1>
+<p><strong>Dataset:</strong> RB-1521 · <strong>Cuaderno:</strong> 03 ·
+<strong>Tema:</strong> qué relaciones cierran con las celdas y cuáles
+no</p>
+<h2 id="introducción">Introducción</h2>
+<p>El <code>.xls</code> guarda valores. <code>xlrd</code> no entrega una
+fórmula en estas celdas: entrega el número que Excel dejó escrito. Una
+identidad útil para HUC es una relación que reproduce esas cifras. Una
+relación que solo se parece en un día no se implementa.</p>
+<p>Se contrastan tres candidatas que el nombre de las columnas sugiere,
+sin traer ecuaciones de BES-jun:</p>
+<ol type="1">
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>a</mi><mi>g</mi><mi>u</mi><mi>a</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mrow><mi>f</mi><mi>l</mi><mi>u</mi><mi>i</mi><mi>d</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>×</mo><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">W</mi></mrow></mrow><annotation encoding="application/x-tex">Q_{agua} = Q_{fluidos}\times \mathrm{BSW}</annotation></semantics></math>
+y
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mrow><mi>p</mi><mi>e</mi><mi>t</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>o</mi></mrow></msub><mo>=</mo><msub><mi>Q</mi><mrow><mi>f</mi><mi>l</mi><mi>u</mi><mi>i</mi><mi>d</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>−</mo><msub><mi>Q</mi><mrow><mi>a</mi><mi>g</mi><mi>u</mi><mi>a</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Q_{petroleo} = Q_{fluidos} - Q_{agua}</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">I</mi><mi mathvariant="normal">P</mi></mrow><mo>=</mo><msub><mi>Q</mi><mrow><mi>f</mi><mi>l</mi><mi>u</mi><mi>i</mi><mi>d</mi><mi>o</mi><mi>s</mi></mrow></msub><mi>/</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>P</mi><mrow><mi>y</mi><mi>a</mi><mi>c</mi></mrow></msub><mo>−</mo><mrow><mi mathvariant="normal">P</mi><mi mathvariant="normal">W</mi><mi mathvariant="normal">f</mi></mrow><mo form="postfix" stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{IP} = Q_{fluidos} / (P_{yac} - \mathrm{PWf})</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi>S</mi><mi>U</mi><mi>T</mi></mrow></msub><mo>=</mo><msqrt><mn>3</mn></msqrt><mspace width="0.167em"></mspace><mi>V</mi><mspace width="0.167em"></mspace><mi>I</mi><mspace width="0.167em"></mspace><mrow><mi mathvariant="normal">F</mi><mi mathvariant="normal">P</mi></mrow><mi>/</mi><mn>1000</mn></mrow><annotation encoding="application/x-tex">P_{SUT} = \sqrt{3}\, V\, I\, \mathrm{FP} / 1000</annotation></semantics></math>
+con factores de potencia 0,80, 0,85, 0,90 y 1.</li>
+</ol>
+<h2 id="objetivos">Objetivos</h2>
+<p>Contar en cuántas filas cada candidata reproduce el archivo, y
+conservar solo la que cierra dentro de una tolerancia de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>9</mn></mrow></msup><annotation encoding="application/x-tex">10^{-9}</annotation></semantics></math>.</p>
+<h2 id="metodología">Metodología</h2>
+<p>La tolerancia absoluta de
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>10</mn><mrow><mi>−</mi><mn>9</mn></mrow></msup><annotation encoding="application/x-tex">10^{-9}</annotation></semantics></math>
+separa el redondeo binario de una discrepancia de caudal. No se ajustan
+coeficientes para reducir el error. Si la diferencia máxima es de
+decenas o cientos, la candidata se rechaza.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f4140c25">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">))</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rb1521_lectura</span><span class="w"> </span><span class="kn">import</span> <span class="n">fecha_iso</span><span class="p">,</span> <span class="n">leer_serie</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rb1521_particion</span><span class="w"> </span><span class="kn">import</span> <span class="n">identidad_exacta</span><span class="p">,</span> <span class="n">particionar</span>
+<span class="n">serie</span> <span class="o">=</span> <span class="n">leer_serie</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"filas"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">serie</span><span class="p">),</span> <span class="s2">"partición exacta"</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">identidad_exacta</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">serie</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">serie</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">identidad_exacta</span><span class="p">(</span><span class="n">fila</span><span class="p">):</span>
+        <span class="n">agua</span><span class="p">,</span> <span class="n">pet</span> <span class="o">=</span> <span class="n">particionar</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="s2">"Q-fluidos"</span><span class="p">],</span> <span class="n">fila</span><span class="p">[</span><span class="s2">"BSW"</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"excepción"</span><span class="p">,</span> <span class="n">fecha_iso</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="s2">"Fecha"</span><span class="p">]),</span> <span class="s2">"Qw archivo"</span><span class="p">,</span> <span class="n">fila</span><span class="p">[</span><span class="s2">"Q-water"</span><span class="p">],</span> <span class="s2">"Qw producto"</span><span class="p">,</span> <span class="n">agua</span><span class="p">)</span>
+<span class="n">errores_ip</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">serie</span><span class="p">:</span>
+    <span class="n">denominador</span> <span class="o">=</span> <span class="n">fila</span><span class="p">[</span><span class="s2">"P-Yac"</span><span class="p">]</span> <span class="o">-</span> <span class="n">fila</span><span class="p">[</span><span class="s2">"PWf"</span><span class="p">]</span>
+    <span class="n">errores_ip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="s2">"IP"</span><span class="p">]</span> <span class="o">-</span> <span class="n">fila</span><span class="p">[</span><span class="s2">"Q-fluidos"</span><span class="p">]</span> <span class="o">/</span> <span class="n">denominador</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"error máximo IP"</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">errores_ip</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">):</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">"P-SUT"</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">3</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="s2">"VOLT"</span><span class="p">]</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="s2">"AMPs"</span><span class="p">]</span> <span class="o">*</span> <span class="n">fp</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">serie</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"error máximo P-SUT con FP"</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>filas 129 partición exacta 128
+excepción 2020-07-09 Qw archivo 8522.984 Qw producto 8717.226
+error máximo IP 1.4881421086895905
+error máximo P-SUT con FP 0.8 102.01067770466658
+error máximo P-SUT con FP 0.85 97.79687086585156
+error máximo P-SUT con FP 0.9 93.58306402703653
+error máximo P-SUT con FP 1.0 85.15545034940646
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6bf63290"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="resultados">Resultados</h2>
+<p>La partición de caudal reproduce Q-water y Q-oil en 128 de 129 filas.
+La única excepción es el 2020-07-09: el archivo guarda Q-water =
+8522,984 y el producto
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8841</mn><mo>×</mo><mn>0</mn><mo>,</mo><mn>986</mn></mrow><annotation encoding="application/x-tex">8841 \times 0{,}986</annotation></semantics></math>
+es 8717,226. No se corrige la celda.</p>
+<p>El índice de productividad definido como caudal dividido por el
+contraste de presiones no reproduce IP. El error máximo supera 1 unidad
+de la columna. La potencia trifásica con los cuatro factores de potencia
+ensayados deja errores de decenas en P-SUT. Esas dos expresiones no
+entran al motor.</p>
+<h2 id="interpretación">Interpretación</h2>
+<p>HUC puede repartir un caudal y un BSW con la misma relación que el
+archivo usa en casi toda la serie. No puede, con este libro, reconstruir
+IP ni P-SUT. Tampoco hay en el archivo una curva de head de la S11000N
+contra la cual clasificar el punto como se clasifica un pozo de
+BES-jun.</p>
+<h2 id="conclusión">Conclusión</h2>
+<p>El cálculo reproducible es la partición. El día 2020-07-09 queda como
+discrepancia registrada, no como un valor a forzar.</p>
+</div>
+</div>
+</div>
+</div></body></html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}Registro · HUC{% endblock %}
+{% block contenido %}
+<h1>Registro del proyecto</h1>
+<p class="nota">Esta página es administrativa. El estado de la bomba está en la consola.</p>
+<p>Herramienta local para consultar expedientes de bombeo electrosumergible, los resultados determinísticos ya calculados y un asistente que solo explica el contexto que se le entrega. No autoriza operaciones sobre un pozo.</p>
+
+<section class="rejilla">
+  <article class="tarjeta"><span>Datasets en el registro</span>{{ cantidad_datasets }}</article>
+  <article class="tarjeta"><span>Pozos identificados</span>{% if hay_pozos_verificables %}{{ cantidad_pozos }} en fichas de integración{% else %}No disponible{% endif %}</article>
+  <article class="tarjeta"><span>Motor determinístico</span>{% if motores %}Disponible para {% for ficha in motores %}{{ ficha.identificador }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}No disponible{% endif %}</article>
+  <article class="tarjeta"><span>Resultados determinísticos</span>{% if hay_resultados %}{{ cantidad_resultados }} filas leídas del CSV existente{% else %}No disponible{% endif %}</article>
+</section>
+
+<h2>Advertencias científicas</h2>
+{% if advertencias %}
+  {% for identificador, texto in advertencias %}
+    <p class="aviso">{{ identificador }}: {{ texto }}</p>
+  {% endfor %}
+{% else %}
+  <p class="nota">No hay limitaciones declaradas en un manifiesto.</p>
+{% endif %}
+<p class="nota">Las reglas candidatas de BES-jun no están aprobadas. Reproducir una hoja de cálculo no valida físicamente el PIP.</p>
+
+<h2>Expedientes</h2>
+<table>
+  <thead><tr><th>Identificador</th><th>Ciclo</th><th>Evaluación</th></tr></thead>
+  <tbody>
+  {% for ficha in fichas %}
+    <tr>
+      <td><a href="{% url 'detalle_dataset' ficha.identificador %}">{{ ficha.identificador }}</a></td>
+      <td>{{ ficha.ciclo }}</td>
+      <td>{% if ficha.puede_evaluar %}Consulta y ejecución sobre el motor existente{% else %}Deshabilitada. {{ ficha.causa_sin_evaluacion }}{% endif %}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="3">No hay datasets en el registro.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

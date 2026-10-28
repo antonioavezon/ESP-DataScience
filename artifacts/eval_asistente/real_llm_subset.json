@@ -1,0 +1,46 @@
+[
+  {
+    "q": "¿Cómo está el pozo?",
+    "lat": 10.8,
+    "ok": true,
+    "contrato": true,
+    "tipo": "well_status",
+    "src": "model",
+    "tokens": 183,
+    "modelo": "qwen3:4b-instruct-2507-q4_K_M",
+    "preview": "Estado de QF-084\n\nEl pozo QF-084 presenta estado NORMAL y opera a 63 Hz con un caudal de operación de 10.301 BFPD, dentro del rango mínimo y máximo establecido "
+  },
+  {
+    "q": "¿Cómo están los pozos?",
+    "lat": 24.16,
+    "ok": true,
+    "contrato": true,
+    "tipo": "wells_summary",
+    "src": "deterministic",
+    "tokens": null,
+    "modelo": "",
+    "preview": "Estado general de los pozos\n\nSe consultaron 6 pozos con resultado disponible (5 en NORMAL, 1 en REGISTRO). Proceden de: BES-jun, RB-1521.\n\nResultados consultabl"
+  },
+  {
+    "q": "¿Qué significa PIP?",
+    "lat": 7.13,
+    "ok": true,
+    "contrato": true,
+    "tipo": "definition",
+    "src": "model",
+    "tokens": 87,
+    "modelo": "qwen3:4b-instruct-2507-q4_K_M",
+    "preview": "La presión de entrada de la bomba (PIP) se expresa en pies de fluido en el dataset BES-jun para todos los pozos.\n\nPIP: PIP = Pump Intake Pressure: presión del f"
+  },
+  {
+    "q": "¿Qué presión tiene?",
+    "lat": 12.32,
+    "ok": true,
+    "contrato": true,
+    "tipo": "pressures",
+    "src": "model",
+    "tokens": 156,
+    "modelo": "qwen3:4b-instruct-2507-q4_K_M",
+    "preview": "Presiones disponibles\n\nLa presión de fondo disponible en el pozo QF-084, según el dataset BES-jun, es de 732 psi en el sensor, con una PIP publicada de 1.714,5 "
+  }
+]

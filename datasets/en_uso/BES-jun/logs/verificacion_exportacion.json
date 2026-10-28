@@ -1,0 +1,602 @@
+[
+  {
+    "cuaderno": "00_inventario_y_fuentes",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 26,
+      "celdas_markdown": 16,
+      "celdas_codigo": 10,
+      "palabras_explicativas": 1668,
+      "html_trozos": {
+        "markdown": 534,
+        "código": 296,
+        "salida": 251
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 19,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 7,
+      "tablas_en_html": 7,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 8,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 15544,
+      "pdf_trozos": {
+        "markdown": 534,
+        "código": 296,
+        "salida": 170
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 3029
+    }
+  },
+  {
+    "cuaderno": "00_inventario_y_trazabilidad",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 24,
+      "celdas_markdown": 15,
+      "celdas_codigo": 9,
+      "palabras_explicativas": 1496,
+      "html_trozos": {
+        "markdown": 500,
+        "código": 351,
+        "salida": 581
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 18,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 8,
+      "tablas_en_html": 8,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 9,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 18429,
+      "pdf_trozos": {
+        "markdown": 500,
+        "código": 351,
+        "salida": 401
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 3291
+    }
+  },
+  {
+    "cuaderno": "01_inspeccion_BES_jun",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 30,
+      "celdas_markdown": 17,
+      "celdas_codigo": 13,
+      "palabras_explicativas": 2031,
+      "html_trozos": {
+        "markdown": 606,
+        "código": 225,
+        "salida": 412
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 19,
+      "imagenes_esperadas": 2,
+      "imagenes_en_html": 2,
+      "tablas_esperadas": 8,
+      "tablas_en_html": 8,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 8,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 15625,
+      "pdf_trozos": {
+        "markdown": 606,
+        "código": 225,
+        "salida": 378
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 2,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 3463
+    }
+  },
+  {
+    "cuaderno": "01_inspeccion_y_calidad_datos",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 39,
+      "celdas_markdown": 23,
+      "celdas_codigo": 16,
+      "palabras_explicativas": 2259,
+      "html_trozos": {
+        "markdown": 687,
+        "código": 410,
+        "salida": 841
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 22,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 15,
+      "tablas_en_html": 15,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 11,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 22644,
+      "pdf_trozos": {
+        "markdown": 687,
+        "código": 410,
+        "salida": 770
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4901
+    }
+  },
+  {
+    "cuaderno": "02_ecuaciones_y_variables",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 24,
+      "celdas_markdown": 17,
+      "celdas_codigo": 7,
+      "palabras_explicativas": 2891,
+      "html_trozos": {
+        "markdown": 898,
+        "código": 410,
+        "salida": 471
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 31,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 6,
+      "tablas_en_html": 6,
+      "ecuaciones_esperadas": 37,
+      "ecuaciones_en_html": 37,
+      "paginas": 11,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 24105,
+      "pdf_trozos": {
+        "markdown": 871,
+        "código": 410,
+        "salida": 376
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 5233
+    }
+  },
+  {
+    "cuaderno": "02_trazabilidad_y_analisis_formulas",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 33,
+      "celdas_markdown": 20,
+      "celdas_codigo": 13,
+      "palabras_explicativas": 2148,
+      "html_trozos": {
+        "markdown": 676,
+        "código": 441,
+        "salida": 686
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 21,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 12,
+      "tablas_en_html": 12,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 11,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 23705,
+      "pdf_trozos": {
+        "markdown": 676,
+        "código": 441,
+        "salida": 483
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 5260
+    }
+  },
+  {
+    "cuaderno": "03_limpieza_y_mapeo",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 36,
+      "celdas_markdown": 23,
+      "celdas_codigo": 13,
+      "palabras_explicativas": 2045,
+      "html_trozos": {
+        "markdown": 621,
+        "código": 345,
+        "salida": 1169
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 22,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 10,
+      "tablas_en_html": 10,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 11,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 23263,
+      "pdf_trozos": {
+        "markdown": 598,
+        "código": 345,
+        "salida": 1006
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4829
+    }
+  },
+  {
+    "cuaderno": "03_mapeo_y_preparacion_BES_jun",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 33,
+      "celdas_markdown": 20,
+      "celdas_codigo": 13,
+      "palabras_explicativas": 2048,
+      "html_trozos": {
+        "markdown": 607,
+        "código": 272,
+        "salida": 480
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 22,
+      "imagenes_esperadas": 1,
+      "imagenes_en_html": 1,
+      "tablas_esperadas": 9,
+      "tablas_en_html": 9,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 9,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 16601,
+      "pdf_trozos": {
+        "markdown": 607,
+        "código": 272,
+        "salida": 453
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 1,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 3659
+    }
+  },
+  {
+    "cuaderno": "04_calculos_deterministicos",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 31,
+      "celdas_markdown": 18,
+      "celdas_codigo": 13,
+      "palabras_explicativas": 1614,
+      "html_trozos": {
+        "markdown": 499,
+        "código": 558,
+        "salida": 582
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 21,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 9,
+      "tablas_en_html": 9,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 11,
+      "paginas_apaisadas": 1,
+      "pdf_caracteres_alfanumericos": 22847,
+      "pdf_trozos": {
+        "markdown": 499,
+        "código": 558,
+        "salida": 412
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4553
+    }
+  },
+  {
+    "cuaderno": "04_modelo_deterministico",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 30,
+      "celdas_markdown": 19,
+      "celdas_codigo": 11,
+      "palabras_explicativas": 2435,
+      "html_trozos": {
+        "markdown": 718,
+        "código": 305,
+        "salida": 437
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 20,
+      "imagenes_esperadas": 1,
+      "imagenes_en_html": 1,
+      "tablas_esperadas": 9,
+      "tablas_en_html": 9,
+      "ecuaciones_esperadas": 31,
+      "ecuaciones_en_html": 31,
+      "paginas": 10,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 19600,
+      "pdf_trozos": {
+        "markdown": 718,
+        "código": 305,
+        "salida": 397
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 1,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4419
+    }
+  },
+  {
+    "cuaderno": "05_evaluacion_por_pozo",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 37,
+      "celdas_markdown": 21,
+      "celdas_codigo": 16,
+      "palabras_explicativas": 2318,
+      "html_trozos": {
+        "markdown": 704,
+        "código": 414,
+        "salida": 545
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 22,
+      "imagenes_esperadas": 3,
+      "imagenes_en_html": 3,
+      "tablas_esperadas": 11,
+      "tablas_en_html": 11,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 12,
+      "paginas_apaisadas": 0,
+      "pdf_caracteres_alfanumericos": 22546,
+      "pdf_trozos": {
+        "markdown": 704,
+        "código": 414,
+        "salida": 439
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 3,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4908
+    }
+  },
+  {
+    "cuaderno": "06_hallazgos_y_reglas_candidatas",
+    "ok": true,
+    "errores": {
+      "contenido": [],
+      "ejecucion": [],
+      "exportacion": [],
+      "paginacion": []
+    },
+    "avisos": [],
+    "metricas": {
+      "celdas": 28,
+      "celdas_markdown": 17,
+      "celdas_codigo": 11,
+      "palabras_explicativas": 1615,
+      "html_trozos": {
+        "markdown": 515,
+        "código": 543,
+        "salida": 559
+      },
+      "html_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "encabezados": 19,
+      "imagenes_esperadas": 0,
+      "imagenes_en_html": 0,
+      "tablas_esperadas": 8,
+      "tablas_en_html": 8,
+      "ecuaciones_esperadas": 0,
+      "ecuaciones_en_html": 0,
+      "paginas": 11,
+      "paginas_apaisadas": 1,
+      "pdf_caracteres_alfanumericos": 22342,
+      "pdf_trozos": {
+        "markdown": 515,
+        "código": 543,
+        "salida": 383
+      },
+      "pdf_trozos_faltantes": {
+        "markdown": 0,
+        "código": 0,
+        "salida": 0
+      },
+      "imagenes_en_pdf": 0,
+      "paginas_con_recortes": 0,
+      "pdf_palabras": 4991
+    }
+  }
+]

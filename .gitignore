@@ -1,0 +1,41 @@
+# Entorno local
+.venv/
+venv/
+
+# Secretos y bases locales
+.env
+.env.*
+!.env.example
+*.sqlite3
+db.sqlite3
+
+# Cachés de Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Django / estáticos generados
+staticfiles/
+**/staticfiles/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporales y salidas locales sensibles
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+~$*
+logs/*.log
+.cache/
+.local/
+
+# Docker / Compose locales
+HUC-1.0.0/.env
+
+# No excluye reports/, docs/ ni data/perfiles/: son evidencia del estudio.

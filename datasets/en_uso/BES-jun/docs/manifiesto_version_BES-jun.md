@@ -1,0 +1,59 @@
+# Manifiesto de versión · BES-jun
+
+Generado por `integracion.manifiesto_version` a partir de los archivos y del último `logs/autotest_reporte.json`.
+Este archivo no entra en la tabla de hashes. El informe de cierre tampoco, para no cerrar un ciclo.
+
+- Dataset: BES-jun · validacion_pendiente · `datasets/en_uso/BES-jun`
+- Software 0.4.2 · contrato 1.3.0 · motor 0.4.2 · catálogo 1.1.0
+- Modelos: M-BES-FLUIDO transcripcion-1, M-BES-BALANCE transcripcion-1, M-BES-INTERSECCION transcripcion-1
+- Fecha: 2026-10-21T17:09:07+00:00
+- Excel SHA-256: `ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85` (329308 bytes)
+- Cuadernos: 12 · HTML: 12 · PDF: 12
+- Reglas: RC-BES-01, RC-BES-02, RC-BES-03, RC-BES-04. Aprobadas: ninguna.
+- AutoTest: 182/182 aprobadas, 0 fallidas, 0 omitidas. Estado: aprobado.
+- Cierre técnico del software: True. Aprobación operacional: False.
+
+## Hashes
+
+| Archivo | SHA-256 |
+|---|---|
+| `entrada/BES_jun.xlsx` | `ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85` |
+| `integracion/contrato_entrada.schema.json` | `f56c8d42515e718b2a4b7284ac219fc1ca32b58431488d8e9cdff7e19e763efa` |
+| `integracion/contrato_salida.schema.json` | `b5470aa5caa4ae906353d0c9e5910fed0444d89a78d3aee9e92cf263ee1a7737` |
+| `integracion/reglas.json` | `e9138f088cc53934583201c40e4f426ae2fee4350555895acee28ce3e1788232` |
+| `integracion/ejemplos/solicitud_qf084.json` | `9fbb9f493284690dd8cf1ec3f7f080cfb24636f0ffb4aae01cbe5c39b2c6c520` |
+| `integracion/ejemplos/resultado_qf084.json` | `3534231957ebbdfec960f1252d7527d19a092d5d6c144e1fa0efe7984bd98655` |
+| `reports/informe_analisis_BES-jun.md` | `6a5f7635bbc0103f4f4c4d44797e9e13f7a1b51b04dcdd313e6df1d46a985b13` |
+| `pdf/informes/informe_analisis_BES-jun.pdf` | `949cec67120050ac1594ab4c5941ad03f8ec8cf193e338d1772876ed9604e8dd` |
+| `docs/ficha_maestra_BES-jun.md` | `37e9ec83b228b796d0807894352504cb0599c8a3f25d459cb1834abccc4dcdf1` |
+| `notebooks/00_inventario_y_fuentes.ipynb` | `af04bb266471bf37f514e0ba969b38e52da3ecd39bef1b26e3ec648b01261d94` |
+| `notebooks/00_inventario_y_trazabilidad.ipynb` | `e9cd7d07445043871bcc402f9565f0ae826dbdbccdd76a588536943789c46d02` |
+| `notebooks/01_inspeccion_BES_jun.ipynb` | `1571e37e2d15e7b2bd05c229214442924f02cb86fea8a78be2881ac5ecb30c14` |
+| `notebooks/01_inspeccion_y_calidad_datos.ipynb` | `122dea9b19270ce2b6e0f23dee2db19e9f8970ef65ee2a5fbf136a2fb5c5d68c` |
+| `notebooks/02_ecuaciones_y_variables.ipynb` | `3a087e20742597d75d0365860234caa041cbfd0546b14314fc0e0514f1d17ac7` |
+| `notebooks/02_trazabilidad_y_analisis_formulas.ipynb` | `cd07d21fed93adb05dca36c8b236a73b2c52fc9edccb15767afbe2e9c60acd3f` |
+| `notebooks/03_limpieza_y_mapeo.ipynb` | `90bbea10d44a4253eff9fa5b4adfc52261ce1a7812c8a1045a9b6dff51f76f12` |
+| `notebooks/03_mapeo_y_preparacion_BES_jun.ipynb` | `879e6ffb08c5dbd84b6e54fdc3d6f130e9f405e28b2e6eef0a81383d97c80e1d` |
+| `notebooks/04_calculos_deterministicos.ipynb` | `e1bd145e92c8216b2be30378af0eed6e0c4e8c35f2c2bc3b1e7edde9c6653b23` |
+| `notebooks/04_modelo_deterministico.ipynb` | `f35ba5321924f487904ee0c74fb2765e3a8915bbf34a516a2abd9ab08a3873af` |
+| `notebooks/05_evaluacion_por_pozo.ipynb` | `74dfaff4480c7d559409b91adc91fa1eb445aaf550dfac9a3c0b43ba5415de5b` |
+| `notebooks/06_hallazgos_y_reglas_candidatas.ipynb` | `393d5926bd233689e5a1927722208cae5f37ddd6149b9f5f5a1ab5b2027cba41` |
+| `pdf/notebooks/00_inventario_y_fuentes.pdf` | `57c499a409399ef162cf77e1579f7d91ac1e9d4aa1242d662616d6ebcc3ea910` |
+| `pdf/notebooks/00_inventario_y_trazabilidad.pdf` | `94ddf121a59a6788c10fdb93bac0b4919068e6dab462792bb48be23c08e2a4f9` |
+| `pdf/notebooks/01_inspeccion_BES_jun.pdf` | `8ef331f2037c12d2314c7ee8645d223d96a7685067c7e9f9e6262d956ac6fc55` |
+| `pdf/notebooks/01_inspeccion_y_calidad_datos.pdf` | `7838a2c6b04bd1b691ffe4e24b271657d9c42537c5635a8cb61e2844140fd762` |
+| `pdf/notebooks/02_ecuaciones_y_variables.pdf` | `1427049936ec0169546fe424d63d6dc2e54ba926e127f202c990ce778aad0222` |
+| `pdf/notebooks/02_trazabilidad_y_analisis_formulas.pdf` | `eb1ea5c4377b7b7865ae0aadf0cdf61232a0c8fe1fb0f6b116e13897af2db6d4` |
+| `pdf/notebooks/03_limpieza_y_mapeo.pdf` | `29c6c76e1186793904cdd12de5a37fe8189c17bf97e8b5285cdd55a0856ad863` |
+| `pdf/notebooks/03_mapeo_y_preparacion_BES_jun.pdf` | `40f67794d7367c838fe04b131e7e2af8f0cd0948db344d7a06c65d010638719a` |
+| `pdf/notebooks/04_calculos_deterministicos.pdf` | `5ab32e2c04b06bfd0805da090da7a3b6bba8109ecd986ce30f63a4f2131814b2` |
+| `pdf/notebooks/04_modelo_deterministico.pdf` | `5160642c81f5c21e9a3d722297de7a9d8b725ba2338f659477d2fb7aba366e54` |
+| `pdf/notebooks/05_evaluacion_por_pozo.pdf` | `3385ebbeeaaec73004a2ef6b59683b3307c3bc280dc7c226e373e604565a325d` |
+| `pdf/notebooks/06_hallazgos_y_reglas_candidatas.pdf` | `0abd049114af0162ace444f194a5c44d2626c7b9f0cd02eebc77cde9080e10c5` |
+
+## Limitaciones
+
+- CT-01 a CT-10 abiertas
+- P-14 abierta
+- Ninguna regla aprobada para uso operacional
+- La reproducción del Excel no es validación física independiente

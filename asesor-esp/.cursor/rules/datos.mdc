@@ -1,0 +1,13 @@
+---
+description: Reglas para ingesta, limpieza y organización de datos
+globs: src/asesor_esp/datos/**,tests/datos/**,data/**,scripts/**
+alwaysApply: false
+---
+
+- Un adaptador por dataset (adaptador_d1.py, adaptador_d2.py, ...). Todos producen el esquema canónico de src/asesor_esp/datos/esquema.py.
+- Salidas en data/interim/<dataset>/. data/raw/ nunca se escribe.
+- No imputar ni borrar filas: marcar con banderas (dia_con_parada, variacion_menor, q_retenido, heredada_d1, volt_nominal, p_sut_congelado, pwf_gradiente_variable).
+- Clasificar cada columna por origen: medida, prueba (retenida), derivada, estática o supuesta. Las derivadas se recalculan con fórmulas revisadas y se comparan con las del archivo.
+- Lectura: .xls con xlrd; .xlsx y .xlsm con openpyxl (para ver fórmulas, data_only=False).
+- Todo reporte de calidad cuantifica cada problema (filas afectadas y magnitud) y cita su hallazgo H-xx.
+- Cada archivo se procesa por separado; nunca mezclar datasets en un mismo DataFrame sin la columna pozo_id.

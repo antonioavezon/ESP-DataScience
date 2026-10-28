@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Cuaderno 06 · Hallazgos y reglas candidatas</title><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 06 · Hallazgos y reglas candidatas"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+@page ancho { size: Letter landscape; margin: 0.65in 0.6in 0.7in 0.6in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 06 · Hallazgos y reglas candidatas"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", "DejaVu Serif", serif; font-size: 10.5pt; }
+body { margin: 0; line-height: 1.38; color: #111; hyphens: manual; }
+.cuaderno { text-align: justify; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", sans-serif; text-align: left; break-after: avoid; page-break-after: avoid; line-height: 1.2; }
+h1 { font-size: 19pt; margin: 0 0 0.5em 0; border-bottom: 2px solid #333; padding-bottom: 0.2em; }
+h2 { font-size: 13.5pt; margin: 1.2em 0 0.4em 0; border-bottom: 1px solid #aaa; padding-bottom: 0.1em; }
+h3 { font-size: 11.5pt; margin: 1em 0 0.3em 0; }
+p { margin: 0.45em 0; orphans: 3; widows: 3; }
+li { margin: 0.15em 0; }
+blockquote { margin: 0.6em 0; padding: 0.3em 0.8em; border-left: 3px solid #999; background: #f6f6f6; text-align: left; }
+.portada { break-after: page; page-break-after: always; }
+.portada h1 { font-size: 21pt; }
+.portada { line-height: 1.3; }
+.portada p, .portada li { font-size: 9.8pt; margin: 0.3em 0; }
+.portada h2 { font-size: 12pt; margin: 0.8em 0 0.3em 0; }
+.portada h1 { margin-bottom: 0.3em; }
+.prompt { display: none; }
+.input, .output_wrapper { margin: 0.5em 0; }
+.input_area { text-align: left; border: 1px solid #c8c8c8; border-left: 4px solid #4c78a8; background: #f7f9fb; padding: 0.3em 0.5em; position: relative; }
+.input_area::before { content: "Código"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #4c78a8; letter-spacing: 0.06em; margin-bottom: 0.2em; }
+.output_area { text-align: left; border-left: 4px solid #8a8a8a; padding: 0.2em 0 0.2em 0.5em; margin-top: 0.3em; }
+.output_area::before { content: "Salida"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #666; letter-spacing: 0.06em; margin-bottom: 0.15em; }
+pre { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 7.4pt; line-height: 1.28; margin: 0;
+      white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+code { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 0.88em; }
+table.tabla, .output_html table, table { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 7.6pt; line-height: 1.22; text-align: left; margin: 0.3em 0 0.5em 0; }
+th, td { border: 1px solid #777; padding: 0.15em 0.3em; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+th { background: #e8edf2; font-family: "Liberation Sans", sans-serif; font-weight: bold; overflow-wrap: break-word; word-break: normal; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.text_cell_render table { font-size: 8.6pt; }
+img { max-width: 100%; height: auto; display: block; margin: 0.4em auto; break-inside: avoid; page-break-inside: avoid; }
+.ancho { page: ancho; }
+.ancho table { font-size: 8pt; }
+math { font-size: 1.05em; }
+math[display="block"] { margin: 0.5em 0; break-inside: avoid; }
+.output_stderr pre { color: #8a1c1c; }
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
+.highlight .c { color: #3D7B7B; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #9C6500 } /* Comment.Preproc */
+.highlight .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #E40000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #008400 } /* Generic.Inserted */
+.highlight .go { color: #717171 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #687822 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #00F; font-weight: bold } /* Name.Class */
+.highlight .no { color: #800 } /* Name.Constant */
+.highlight .nd { color: #A2F } /* Name.Decorator */
+.highlight .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00F } /* Name.Function */
+.highlight .nl { color: #767600 } /* Name.Label */
+.highlight .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666 } /* Literal.Number.Float */
+.highlight .mh { color: #666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #A45A77 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #00F } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666 } /* Literal.Number.Integer.Long */
+</style></head><body><div class="cuaderno"><div class="cell border-box-sizing text_cell rendered" id="cell-id=f145698a"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html portada">
+<h1 id="cuaderno-06-hallazgos-y-reglas-candidatas">Cuaderno 06 ·
+Hallazgos y reglas candidatas</h1>
+<p><strong>Expediente:</strong> BES-jun · <strong>Cuaderno:</strong> 7
+de 7 · <strong>Estado del expediente:</strong> Listo para revisión (no
+Completo)</p>
+<h2 id="introducción-y-contexto-el-problema">1. Introducción y contexto
+(el problema)</h2>
+<p>Seis cuadernos de análisis producen decenas de observaciones. Si
+quedan dispersas, tres cosas se pierden: la <strong>prioridad</strong>
+(¿qué hay que resolver primero?), la <strong>trazabilidad</strong> (¿de
+dónde sale cada afirmación?) y la <strong>frontera</strong> entre lo que
+los datos permiten afirmar y lo que no. Además, una «regla» formulada
+con prisa convierte una observación en una instrucción de operación, que
+es justo lo que este expediente no puede hacer todavía.</p>
+<h2 id="justificación-y-necesidad">2. Justificación y necesidad</h2>
+<p>Un registro único de hallazgos, <strong>calculados desde la
+evidencia</strong> (no escritos a mano), cada uno con su efecto sobre el
+cálculo, su consulta técnica asociada y su prioridad; la especificación
+completa de las reglas candidatas, ejecutadas sobre las cinco hojas; y
+una declaración explícita de lo que se puede y lo que no se puede
+afirmar.</p>
+<h2 id="objetivo-general">3. Objetivo general</h2>
+<p>Consolidar los hallazgos de los cuadernos 00–05, enlazar cada uno con
+una consulta técnica (CT) y con una regla o decisión, ejecutar las
+reglas candidatas y establecer los límites de afirmación del
+expediente.</p>
+<h2 id="dominio-y-alcance">4. Dominio y alcance</h2>
+<p><strong>Incluye:</strong> registro de 13 hallazgos con evidencia
+recalculada; matriz hallazgo → consulta; especificación y ejecución de
+<code>RC-BES-01</code> a <code>RC-BES-04</code>; tabla de afirmaciones
+permitidas y no permitidas.</p>
+<p><strong>No incluye:</strong> aprobar reglas, definir umbrales de
+operación, proponer cambios de frecuencia, usar un modelo de lenguaje,
+ni mezclar con otros datasets. Todo queda <strong>pendiente de revisión
+humana</strong>.</p>
+<h2 id="fuentes-y-datos-entradas-y-salidas">5. Fuentes y datos (entradas
+y salidas)</h2>
+<p><strong>Entradas:</strong> las cinco hojas, las funciones de
+contrato, el módulo de reglas y
+<code>docs/consultas_tecnicas_pendientes.md</code>.
+<strong>Salidas:</strong> tablas de hallazgos y de reglas, matriz de
+consultas y dictamen de afirmaciones.</p>
+<h2 id="objetivos-específicos-y-criterios-de-aceptación">6. Objetivos
+específicos y criterios de aceptación</h2>
+<p><strong>C06-1</strong> cada hallazgo tiene evidencia no vacía y una
+consulta o un motivo para no tenerla · <strong>C06-2</strong> las
+consultas CT-01…CT-10 del registro están cubiertas por al menos un
+hallazgo y viceversa · <strong>C06-3</strong> las reglas dan 5
+<code>RC-BES-03</code> y ninguna <code>RC-BES-01</code> ni
+<code>RC-BES-02</code> en la misma base de frecuencia ·
+<strong>C06-4</strong> todas las reglas están en estado
+<code>pendiente</code> · <strong>C06-5</strong> <code>RC-BES-04</code>
+queda declarada no evaluable · <strong>C06-6</strong> el libro no
+cambió.</p>
+<h2 id="riesgo-si-este-paso-falla">7. Riesgo si este paso falla</h2>
+<p>Que un lector tome una hipótesis como hecho, una regla candidata como
+norma, o pierda de vista que el signo de una corrección (CT-03) pesa más
+que todas las constantes juntas. En un entorno donde un caudal mal
+interpretado puede llevar a modificar la operación de un pozo, la
+diferencia entre «observación» y «decisión» es una barrera de
+seguridad.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5af97c7f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="preparación-del-entorno">Preparación del entorno</h2>
+<p>Se recalcula todo lo necesario desde el libro: el registro de
+hallazgos <strong>no se escribe a mano</strong>; cada cifra de la
+columna «evidencia» sale de un cálculo de esta misma ejecución.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=53b776ad">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">localizar_expediente</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="c1"># Sube desde el directorio actual hasta la carpeta que tiene dataset.md y entrada/.</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"dataset.md"</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entrada"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">p</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Ejecute el cuaderno dentro del expediente (donde están dataset.md y entrada/)."</span><span class="p">)</span>
+
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">localizar_expediente</span><span class="p">()</span>                 <span class="c1"># .../datasets/en_uso/BES-jun</span>
+<span class="n">RAIZ_PROYECTO</span> <span class="o">=</span> <span class="n">RAIZ</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>               <span class="c1"># .../HUC</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">RAIZ</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_colwidth"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.8g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.criterios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Criterios</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.entorno</span><span class="w"> </span><span class="kn">import</span> <span class="n">ficha</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.presentacion</span><span class="w"> </span><span class="kn">import</span> <span class="n">T</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ficha</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"campo"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_a6ae7">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_a6ae7_level0_col0" style="white-space:nowrap">campo</th>
+<th class="col_heading level0 col1" id="T_a6ae7_level0_col1" style="white-space:nowrap">valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_a6ae7_row0_col0">fecha_ejecucion</td>
+<td class="data row0 col1" id="T_a6ae7_row0_col1">2026-10-20T14:26:11-03:00</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_a6ae7_row1_col0" style="white-space:nowrap">python</td>
+<td class="data row1 col1" id="T_a6ae7_row1_col1" style="white-space:nowrap">3.14.8</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_a6ae7_row2_col0" style="white-space:nowrap">sistema</td>
+<td class="data row2 col1" id="T_a6ae7_row2_col1">Linux 7.2.10-100.fc43.x86_64</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_a6ae7_row3_col0" style="white-space:nowrap">pandas</td>
+<td class="data row3 col1" id="T_a6ae7_row3_col1" style="white-space:nowrap">3.0.6</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_a6ae7_row4_col0" style="white-space:nowrap">numpy</td>
+<td class="data row4 col1" id="T_a6ae7_row4_col1" style="white-space:nowrap">2.5.4</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_a6ae7_row5_col0" style="white-space:nowrap">matplotlib</td>
+<td class="data row5 col1" id="T_a6ae7_row5_col1" style="white-space:nowrap">3.11.2</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_a6ae7_row6_col0" style="white-space:nowrap">openpyxl</td>
+<td class="data row6 col1" id="T_a6ae7_row6_col1" style="white-space:nowrap">3.1.5</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_a6ae7_row7_col0" style="white-space:nowrap">expediente</td>
+<td class="data row7 col1" id="T_a6ae7_row7_col1" style="white-space:nowrap">BES-jun</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_a6ae7_row8_col0" style="white-space:nowrap">insumo</td>
+<td class="data row8 col1" id="T_a6ae7_row8_col1">entrada/BES_jun.xlsx</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_a6ae7_row9_col0">insumo_sha256</td>
+<td class="data row9 col1" id="T_a6ae7_row9_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=2fa3097e">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openpyxl</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workbook</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.integridad</span><span class="w"> </span><span class="kn">import</span> <span class="n">huellas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.leer_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">leer_libro</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.estructura_libro</span><span class="w"> </span><span class="kn">import</span> <span class="n">anclas_por_hoja</span><span class="p">,</span> <span class="n">errores_cacheados</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.dependencias</span><span class="w"> </span><span class="kn">import</span> <span class="n">precedentes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.cadena</span><span class="w"> </span><span class="kn">import</span> <span class="n">calcular_hoja</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.sensibilidad</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabla_de_impacto</span><span class="p">,</span> <span class="n">densidad_si_bsw_fuera_de_fraccion</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">reglas.candidatas_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">comparar_caudal_con_limites</span>
+<span class="n">sha_inicial</span> <span class="o">=</span> <span class="n">huellas</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">)[</span><span class="s2">"sha256"</span><span class="p">]</span>
+<span class="n">hojas</span> <span class="o">=</span> <span class="n">leer_libro</span><span class="p">()</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]:</span> <span class="n">calcular_hoja</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">}</span>
+<span class="n">impacto</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tabla_de_impacto</span><span class="p">(</span><span class="n">h</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hojas</span><span class="p">),</span> <span class="s2">"hojas;"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">impacto</span><span class="p">),</span> <span class="s2">"escenarios de sensibilidad"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5 hojas; 15 escenarios de sensibilidad
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=b872bacb"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-1-reunir-la-evidencia-de-cada-hallazgo">Paso 1 · Reunir la
+evidencia de cada hallazgo</h2>
+<p>Cada hallazgo se asocia a un cálculo concreto. Se hace en una celda
+aparte para que la evidencia quede visible antes de redactar el
+registro.</p>
+<ul>
+<li><strong>H-01</strong> comparación sin escalar frente a escalada
+(cuaderno 05).</li>
+<li><strong>H-02</strong> hidrostática del signo de PIP (cuaderno
+02).</li>
+<li><strong>H-03</strong> errores <code>#DIV/0!</code> y su rastreo
+(cuaderno 01).</li>
+<li><strong>H-04…H-13</strong> rótulos, constantes, fechas, tablas
+repetidas y parámetros idénticos (cuadernos 01–03).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9537c554">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ev</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># H-01: efecto de comparar sin escalar</span>
+<span class="n">sin_escalar</span> <span class="o">=</span> <span class="p">[</span><span class="n">comparar_caudal_con_limites</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">escalar</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"id"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">con_escala</span> <span class="o">=</span> <span class="p">[</span><span class="n">comparar_caudal_con_limites</span><span class="p">(</span><span class="n">h</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"id"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-01"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"sin escalar: </span><span class="si">{</span><span class="n">sin_escalar</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'RC-BES-01'</span><span class="p">)</span><span class="si">}</span><span class="s2"> alerta(s) RC-BES-01; escalado: </span><span class="si">{</span><span class="n">con_escala</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'RC-BES-01'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># H-02: PIP de la hoja frente a la presión del sensor</span>
+<span class="n">mayores</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">calc</span><span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]][</span><span class="s2">"fl"</span><span class="p">]</span><span class="o">.</span><span class="n">resultados</span><span class="p">[</span><span class="s2">"gradiente_psi_ft"</span><span class="p">][</span><span class="s2">"valor"</span><span class="p">]</span>
+    <span class="n">mayores</span> <span class="o">+=</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"cache_pip_ft"</span><span class="p">]</span> <span class="o">*</span> <span class="n">g</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">[</span><span class="s2">"presion_sensor_psi"</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"tvd_sensor_ft"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">[</span><span class="s2">"tvd_intake_ft"</span><span class="p">])</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-02"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"PIP de la hoja &gt; P sensor con el sensor más profundo en </span><span class="si">{</span><span class="n">mayores</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hojas</span><span class="p">)</span><span class="si">}</span><span class="s2"> hojas; ΔQ por signo: </span><span class="si">{</span><span class="n">impacto</span><span class="p">[</span><span class="n">impacto</span><span class="o">.</span><span class="n">consulta</span><span class="o">==</span><span class="s1">'CT-03'</span><span class="p">]</span><span class="o">.</span><span class="n">d_q_bfpd</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">impacto</span><span class="p">[</span><span class="n">impacto</span><span class="o">.</span><span class="n">consulta</span><span class="o">==</span><span class="s1">'CT-03'</span><span class="p">]</span><span class="o">.</span><span class="n">d_q_bfpd</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> BFPD"</span>
+
+<span class="c1"># H-03: errores #DIV/0! y rastreo de precedentes</span>
+<span class="n">errores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">errores_cacheados</span><span class="p">())</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">con_error</span> <span class="o">=</span> <span class="n">errores</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"hoja"</span><span class="p">)[</span><span class="s2">"celda"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">contaminadas</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">anclas_por_hoja</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">celda</span> <span class="ow">in</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"G</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">'THD TOTAL'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"B</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">'Caudal a producir'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">precedentes</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]],</span> <span class="n">celda</span><span class="p">)</span>
+        <span class="n">contaminadas</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">((</span><span class="n">p</span><span class="p">[</span><span class="s2">"formulas"</span><span class="p">]</span> <span class="o">|</span> <span class="n">p</span><span class="p">[</span><span class="s2">"constantes"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">con_error</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="nb">set</span><span class="p">()))</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-03"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">errores</span><span class="p">)</span><span class="si">}</span><span class="s2"> celdas con error en </span><span class="si">{</span><span class="n">errores</span><span class="p">[</span><span class="s1">'hoja'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> hoja(s) (</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">errores</span><span class="p">[</span><span class="s1">'hoja'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span><span class="si">}</span><span class="s2">); errores entre precedentes de THD y Q: </span><span class="si">{</span><span class="n">contaminadas</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># H-04: BS&amp;W</span>
+<span class="n">bsw</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"bsw_numero"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">x100</span> <span class="o">=</span> <span class="p">[</span><span class="n">densidad_si_bsw_fuera_de_fraccion</span><span class="p">(</span><span class="n">h</span><span class="p">)[</span><span class="s2">"densidad_si_se_usara_x100_lb_gal"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-04"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"BS&amp;W </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">bsw</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">bsw</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> con rótulo «</span><span class="si">{</span><span class="n">hojas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'bsw_unidad_rotulo'</span><span class="p">]</span><span class="si">}</span><span class="s2">»; ×100 daría </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">x100</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">x100</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> lb/gal (agua: </span><span class="si">{</span><span class="n">hojas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'densidad_agua_lb_gal'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span>
+
+<span class="c1"># H-05 / H-06: constantes y exponente</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-05"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"quitar la corrección de temperatura mueve Q hasta </span><span class="si">{</span><span class="n">impacto</span><span class="p">[</span><span class="n">impacto</span><span class="o">.</span><span class="n">consulta</span><span class="o">==</span><span class="s1">'CT-04'</span><span class="p">]</span><span class="o">.</span><span class="n">d_q_bfpd</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> BFPD"</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-06"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"exponente 4.8655 en vez de 4.8566 mueve Q hasta </span><span class="si">{</span><span class="n">impacto</span><span class="p">[</span><span class="n">impacto</span><span class="o">.</span><span class="n">consulta</span><span class="o">==</span><span class="s1">'CT-05'</span><span class="p">]</span><span class="o">.</span><span class="n">d_q_bfpd</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> BFPD"</span>
+
+<span class="c1"># H-07: fechas</span>
+<span class="n">hoy</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">if</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_es_today"</span><span class="p">]]</span>
+<span class="n">otras</span> <span class="o">=</span> <span class="p">[(</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_cache"</span><span class="p">][:</span><span class="mi">10</span><span class="p">])</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_es_today"</span><span class="p">]]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-07"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hoy</span><span class="p">)</span><span class="si">}</span><span class="s2"> hojas con =TODAY(); fecha escrita: </span><span class="si">{</span><span class="n">otras</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># H-08: factor 24</span>
+<span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">wf</span><span class="p">[</span><span class="s2">"QF-378HST"</span><span class="p">][</span><span class="s2">"G23"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">wf</span><span class="p">[</span><span class="s2">"QF-378HST"</span><span class="p">][</span><span class="s2">"B68"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-08"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"QF-378HST!G23 </span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s2">; QF-378HST!B68 </span><span class="si">{</span><span class="n">f2</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># H-09: tablas de bomba repetidas</span>
+<span class="n">grupos</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">grupos</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="nb">repr</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="s1">'caudal_bfpd'</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s1">'head_ft'</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s1">'brake_hp'</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s1">'eff_numero'</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">h</span><span class="p">[</span><span class="s2">"curva"</span><span class="p">]]),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">h</span><span class="p">[</span><span class="s1">'hoja'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">h</span><span class="p">[</span><span class="s1">'bomba_referencia'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">rep</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grupos</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-09"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">" = "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">)</span> <span class="k">if</span> <span class="n">rep</span> <span class="k">else</span> <span class="s2">"sin tablas repetidas"</span>
+
+<span class="c1"># H-10: EFF</span>
+<span class="n">effmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"eff_numero"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">h</span><span class="p">[</span><span class="s2">"curva"</span><span class="p">])</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-10"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"EFF máx. </span><span class="si">{</span><span class="n">effmax</span><span class="si">}</span><span class="s2"> con rótulo «</span><span class="si">{</span><span class="n">hojas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'curva'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'eff_unidad_rotulo'</span><span class="p">]</span><span class="si">}</span><span class="s2">»"</span>
+
+<span class="c1"># H-11: parámetros idénticos</span>
+<span class="n">ident</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"api_deg"</span><span class="p">,</span> <span class="s2">"presion_yacimiento_psi"</span><span class="p">,</span> <span class="s2">"presion_burbuja_psi"</span><span class="p">,</span> <span class="s2">"densidad_agua_lb_gal"</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">({</span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">})</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-11"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"idénticos en 5 hojas: "</span> <span class="o">+</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">hojas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ident</span><span class="p">)</span>
+
+<span class="c1"># H-12: llave</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-12"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"cluster = hoja en "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"cluster"</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">))</span> <span class="o">+</span> <span class="s2">" de 5; pozo distinto del nombre de hoja en "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"pozo"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">))</span>
+
+<span class="c1"># H-13: calculado vs medido</span>
+<span class="n">dif</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]][</span><span class="s2">"q"</span><span class="p">]</span><span class="o">.</span><span class="n">resultados</span><span class="p">[</span><span class="s2">"caudal_a_producir_bfpd"</span><span class="p">][</span><span class="s2">"valor"</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="s2">"caudal_operacion_bfpd"</span><span class="p">])</span> <span class="o">/</span> <span class="n">calc</span><span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]][</span><span class="s2">"q"</span><span class="p">]</span><span class="o">.</span><span class="n">resultados</span><span class="p">[</span><span class="s2">"caudal_a_producir_bfpd"</span><span class="p">][</span><span class="s2">"valor"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">ev</span><span class="p">[</span><span class="s2">"H-13"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"calculado − medido entre </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">dif</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> % y </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">dif</span><span class="p">)</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> % (n = 5)"</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ev</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>H-01 | sin escalar: 1 alerta(s) RC-BES-01; escalado: 0
+H-02 | PIP de la hoja &gt; P sensor con el sensor más profundo en 5 de 5 hojas; ΔQ por signo: 106 a 456 BFPD
+H-03 | 13 celdas con error en 1 hoja(s) (QF-549HST); errores entre precedentes de THD y Q: 0
+H-04 | BS&amp;W 0.9557–0.9766 con rótulo «%»; ×100 daría 45–47 lb/gal (agua: 8.345)
+H-05 | quitar la corrección de temperatura mueve Q hasta 14.8 BFPD
+H-06 | exponente 4.8655 en vez de 4.8566 mueve Q hasta 36.2 BFPD
+H-07 | 4 hojas con =TODAY(); fecha escrita: [('QF-549HST', '2017-09-06')]
+H-08 | QF-378HST!G23 =295.6*24; QF-378HST!B68 =296.5*24
+H-09 | QF-554H (S 8000N) = QF-545H (S 8000N) = QF-500H (S 8000N); QF-378HST (S6000N) = QF-549HST (S6000N)
+H-10 | EFF máx. 7.6 con rótulo «%»
+H-11 | idénticos en 5 hojas: api_deg = 12.0, presion_yacimiento_psi = 1100.0, presion_burbuja_psi = 130.0, densidad_agua_lb_gal = 8.345
+H-12 | cluster = hoja en 5 de 5; pozo distinto del nombre de hoja en 5
+H-13 | calculado − medido entre -5.9 % y +8.8 % (n = 5)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ffb2bc3d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Qué muestra esta salida.</strong> Una línea por hallazgo, con
+la cifra que lo respalda. Nada está escrito a mano: si el libro
+cambiara, estas líneas cambiarían (y los criterios del final lo
+detectarían si algo dejara de ser cierto). Ya se puede ver que el
+hallazgo H-02 (signo de PIP) tiene un efecto cuantificado sobre el
+caudal, mientras que H-05 y H-06 son efectos de segundo orden.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0fb411cf"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-2-registro-de-hallazgos">Paso 2 · Registro de
+hallazgos</h2>
+<p>Cada hallazgo declara: <strong>qué es</strong> (observación), su
+<strong>efecto en el cálculo</strong>, la <strong>consulta
+técnica</strong> que lo cierra y su <strong>prioridad</strong>. La
+prioridad no es una opinión: sale de dos preguntas, <em>¿mueve el
+resultado?</em> (Paso 1) y <em>¿se puede resolver con los datos
+disponibles?</em> (no).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=be0ee59f">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">registro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"H-01"</span><span class="p">,</span> <span class="s2">"Comparar el caudal con el límite sin escalar mezcla 63 Hz con 60 Hz y genera una alarma falsa"</span><span class="p">,</span> <span class="s2">"Alto si se usara: activaría una regla de operación"</span><span class="p">,</span> <span class="s2">"CT-08"</span><span class="p">,</span> <span class="s2">"Corregido en el código; CT-08 (validez de Q ∝ f) sigue abierta"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-02"</span><span class="p">,</span> <span class="s2">"La corrección de PIP suma en vez de restar la columna hidrostática (sensor más profundo que el intake)"</span><span class="p">,</span> <span class="s2">"Alto: cambia THD y Q"</span><span class="p">,</span> <span class="s2">"CT-03"</span><span class="p">,</span> <span class="s2">"Alta"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-03"</span><span class="p">,</span> <span class="s2">"Hay 13 celdas con #DIV/0! en una hoja, lejos de la cadena de cálculo"</span><span class="p">,</span> <span class="s2">"Ninguno en el cálculo; defecto del libro"</span><span class="p">,</span> <span class="s2">"—"</span><span class="p">,</span> <span class="s2">"Informativa (avisar al responsable)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-04"</span><span class="p">,</span> <span class="s2">"El BS&amp;W está rotulado «%» pero la fórmula lo usa como fracción"</span><span class="p">,</span> <span class="s2">"Ninguno si se respeta; error de lectura posible"</span><span class="p">,</span> <span class="s2">"CT-02"</span><span class="p">,</span> <span class="s2">"Media"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-05"</span><span class="p">,</span> <span class="s2">"La corrección de temperatura usa constantes sin origen documentado"</span><span class="p">,</span> <span class="s2">"Bajo"</span><span class="p">,</span> <span class="s2">"CT-04"</span><span class="p">,</span> <span class="s2">"Baja"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-06"</span><span class="p">,</span> <span class="s2">"El exponente de fricción de la hoja difiere del del PDF"</span><span class="p">,</span> <span class="s2">"Bajo a medio"</span><span class="p">,</span> <span class="s2">"CT-05"</span><span class="p">,</span> <span class="s2">"Media"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-07"</span><span class="p">,</span> <span class="s2">"Cuatro fechas son =TODAY(); una hoja trae fecha escrita sin explicación"</span><span class="p">,</span> <span class="s2">"Impide cualquier eje temporal"</span><span class="p">,</span> <span class="s2">"—"</span><span class="p">,</span> <span class="s2">"Informativa (limita el alcance)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-08"</span><span class="p">,</span> <span class="s2">"Aparece un factor 24 en caudales de una hoja"</span><span class="p">,</span> <span class="s2">"Posible diferencia de definición del caudal"</span><span class="p">,</span> <span class="s2">"CT-07"</span><span class="p">,</span> <span class="s2">"Baja"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-09"</span><span class="p">,</span> <span class="s2">"Tablas de bomba idénticas repetidas entre pozos"</span><span class="p">,</span> <span class="s2">"Curvas posiblemente genéricas, no de cada pozo"</span><span class="p">,</span> <span class="s2">"CT-06"</span><span class="p">,</span> <span class="s2">"Baja"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-10"</span><span class="p">,</span> <span class="s2">"La columna EFF se rotula «%» y llega a un máximo muy bajo"</span><span class="p">,</span> <span class="s2">"Impide hablar de BEP"</span><span class="p">,</span> <span class="s2">"CT-06"</span><span class="p">,</span> <span class="s2">"Baja"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-11"</span><span class="p">,</span> <span class="s2">"°API, presión de yacimiento y de burbuja son idénticos en los cinco pozos"</span><span class="p">,</span> <span class="s2">"Posible dato de plantilla que alimenta el gradiente"</span><span class="p">,</span> <span class="s2">"CT-10"</span><span class="p">,</span> <span class="s2">"Media"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-12"</span><span class="p">,</span> <span class="s2">"No hay una llave única inequívoca: Cluster coincide con el nombre de la hoja y Pozo es otro identificador"</span><span class="p">,</span> <span class="s2">"Ninguno si no se fusiona"</span><span class="p">,</span> <span class="s2">"CT-01"</span><span class="p">,</span> <span class="s2">"Baja"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"H-13"</span><span class="p">,</span> <span class="s2">"El caudal calculado difiere del medido sin tolerancia definida"</span><span class="p">,</span> <span class="s2">"Informativo"</span><span class="p">,</span> <span class="s2">"CT-09"</span><span class="p">,</span> <span class="s2">"Media"</span><span class="p">),</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"hallazgo"</span><span class="p">,</span> <span class="s2">"efecto en el cálculo"</span><span class="p">,</span> <span class="s2">"consulta"</span><span class="p">,</span> <span class="s2">"prioridad"</span><span class="p">])</span>
+<span class="n">registro</span><span class="p">[</span><span class="s2">"evidencia (recalculada)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">registro</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">registro</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_1437f">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_1437f_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_1437f_level0_col1" style="white-space:nowrap">hallazgo</th>
+<th class="col_heading level0 col2" id="T_1437f_level0_col2">efecto en el cálculo</th>
+<th class="col_heading level0 col3" id="T_1437f_level0_col3" style="white-space:nowrap">consulta</th>
+<th class="col_heading level0 col4" id="T_1437f_level0_col4" style="white-space:nowrap">prioridad</th>
+<th class="col_heading level0 col5" id="T_1437f_level0_col5">evidencia (recalculada)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_1437f_row0_col0" style="white-space:nowrap">H-01</td>
+<td class="data row0 col1" id="T_1437f_row0_col1">Comparar el caudal con el límite sin escalar mezcla 63 Hz con 60 Hz y genera una alarma falsa</td>
+<td class="data row0 col2" id="T_1437f_row0_col2">Alto si se usara: activaría una regla de operación</td>
+<td class="data row0 col3" id="T_1437f_row0_col3" style="white-space:nowrap">CT-08</td>
+<td class="data row0 col4" id="T_1437f_row0_col4">Corregido en el código; CT-08 (validez de Q ∝ f) sigue abierta</td>
+<td class="data row0 col5" id="T_1437f_row0_col5">sin escalar: 1 alerta(s) RC-BES-01; escalado: 0</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_1437f_row1_col0" style="white-space:nowrap">H-02</td>
+<td class="data row1 col1" id="T_1437f_row1_col1">La corrección de PIP suma en vez de restar la columna hidrostática (sensor más profundo que el intake)</td>
+<td class="data row1 col2" id="T_1437f_row1_col2">Alto: cambia THD y Q</td>
+<td class="data row1 col3" id="T_1437f_row1_col3" style="white-space:nowrap">CT-03</td>
+<td class="data row1 col4" id="T_1437f_row1_col4" style="white-space:nowrap">Alta</td>
+<td class="data row1 col5" id="T_1437f_row1_col5">PIP de la hoja &gt; P sensor con el sensor más profundo en 5 de 5 hojas; ΔQ por signo: 106 a 456 BFPD</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_1437f_row2_col0" style="white-space:nowrap">H-03</td>
+<td class="data row2 col1" id="T_1437f_row2_col1">Hay 13 celdas con #DIV/0! en una hoja, lejos de la cadena de cálculo</td>
+<td class="data row2 col2" id="T_1437f_row2_col2">Ninguno en el cálculo; defecto del libro</td>
+<td class="data row2 col3" id="T_1437f_row2_col3" style="white-space:nowrap">—</td>
+<td class="data row2 col4" id="T_1437f_row2_col4">Informativa (avisar al responsable)</td>
+<td class="data row2 col5" id="T_1437f_row2_col5">13 celdas con error en 1 hoja(s) (QF-549HST); errores entre precedentes de THD y Q: 0</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_1437f_row3_col0" style="white-space:nowrap">H-04</td>
+<td class="data row3 col1" id="T_1437f_row3_col1">El BS&amp;W está rotulado «%» pero la fórmula lo usa como fracción</td>
+<td class="data row3 col2" id="T_1437f_row3_col2">Ninguno si se respeta; error de lectura posible</td>
+<td class="data row3 col3" id="T_1437f_row3_col3" style="white-space:nowrap">CT-02</td>
+<td class="data row3 col4" id="T_1437f_row3_col4" style="white-space:nowrap">Media</td>
+<td class="data row3 col5" id="T_1437f_row3_col5">BS&amp;W 0.9557–0.9766 con rótulo «%»; ×100 daría 45–47 lb/gal (agua: 8.345)</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_1437f_row4_col0" style="white-space:nowrap">H-05</td>
+<td class="data row4 col1" id="T_1437f_row4_col1">La corrección de temperatura usa constantes sin origen documentado</td>
+<td class="data row4 col2" id="T_1437f_row4_col2" style="white-space:nowrap">Bajo</td>
+<td class="data row4 col3" id="T_1437f_row4_col3" style="white-space:nowrap">CT-04</td>
+<td class="data row4 col4" id="T_1437f_row4_col4" style="white-space:nowrap">Baja</td>
+<td class="data row4 col5" id="T_1437f_row4_col5">quitar la corrección de temperatura mueve Q hasta 14.8 BFPD</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_1437f_row5_col0" style="white-space:nowrap">H-06</td>
+<td class="data row5 col1" id="T_1437f_row5_col1">El exponente de fricción de la hoja difiere del del PDF</td>
+<td class="data row5 col2" id="T_1437f_row5_col2">Bajo a medio</td>
+<td class="data row5 col3" id="T_1437f_row5_col3" style="white-space:nowrap">CT-05</td>
+<td class="data row5 col4" id="T_1437f_row5_col4" style="white-space:nowrap">Media</td>
+<td class="data row5 col5" id="T_1437f_row5_col5">exponente 4.8655 en vez de 4.8566 mueve Q hasta 36.2 BFPD</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_1437f_row6_col0" style="white-space:nowrap">H-07</td>
+<td class="data row6 col1" id="T_1437f_row6_col1">Cuatro fechas son =TODAY(); una hoja trae fecha escrita sin explicación</td>
+<td class="data row6 col2" id="T_1437f_row6_col2">Impide cualquier eje temporal</td>
+<td class="data row6 col3" id="T_1437f_row6_col3" style="white-space:nowrap">—</td>
+<td class="data row6 col4" id="T_1437f_row6_col4">Informativa (limita el alcance)</td>
+<td class="data row6 col5" id="T_1437f_row6_col5">4 hojas con =TODAY(); fecha escrita: [('QF-549HST', '2017-09-06')]</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_1437f_row7_col0" style="white-space:nowrap">H-08</td>
+<td class="data row7 col1" id="T_1437f_row7_col1">Aparece un factor 24 en caudales de una hoja</td>
+<td class="data row7 col2" id="T_1437f_row7_col2">Posible diferencia de definición del caudal</td>
+<td class="data row7 col3" id="T_1437f_row7_col3" style="white-space:nowrap">CT-07</td>
+<td class="data row7 col4" id="T_1437f_row7_col4" style="white-space:nowrap">Baja</td>
+<td class="data row7 col5" id="T_1437f_row7_col5">QF-378HST!G23 =295.6*24; QF-378HST!B68 =296.5*24</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_1437f_row8_col0" style="white-space:nowrap">H-09</td>
+<td class="data row8 col1" id="T_1437f_row8_col1">Tablas de bomba idénticas repetidas entre pozos</td>
+<td class="data row8 col2" id="T_1437f_row8_col2">Curvas posiblemente genéricas, no de cada pozo</td>
+<td class="data row8 col3" id="T_1437f_row8_col3" style="white-space:nowrap">CT-06</td>
+<td class="data row8 col4" id="T_1437f_row8_col4" style="white-space:nowrap">Baja</td>
+<td class="data row8 col5" id="T_1437f_row8_col5">QF-554H (S 8000N) = QF-545H (S 8000N) = QF-500H (S 8000N); QF-378HST (S6000N) = QF-549HST (S6000N)</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_1437f_row9_col0" style="white-space:nowrap">H-10</td>
+<td class="data row9 col1" id="T_1437f_row9_col1">La columna EFF se rotula «%» y llega a un máximo muy bajo</td>
+<td class="data row9 col2" id="T_1437f_row9_col2">Impide hablar de BEP</td>
+<td class="data row9 col3" id="T_1437f_row9_col3" style="white-space:nowrap">CT-06</td>
+<td class="data row9 col4" id="T_1437f_row9_col4" style="white-space:nowrap">Baja</td>
+<td class="data row9 col5" id="T_1437f_row9_col5">EFF máx. 7.6 con rótulo «%»</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_1437f_row10_col0" style="white-space:nowrap">H-11</td>
+<td class="data row10 col1" id="T_1437f_row10_col1">°API, presión de yacimiento y de burbuja son idénticos en los cinco pozos</td>
+<td class="data row10 col2" id="T_1437f_row10_col2">Posible dato de plantilla que alimenta el gradiente</td>
+<td class="data row10 col3" id="T_1437f_row10_col3" style="white-space:nowrap">CT-10</td>
+<td class="data row10 col4" id="T_1437f_row10_col4" style="white-space:nowrap">Media</td>
+<td class="data row10 col5" id="T_1437f_row10_col5">idénticos en 5 hojas: api_deg = 12.0, presion_yacimiento_psi = 1100.0, presion_burbuja_psi = 130.0, densidad_agua_lb_gal = 8.345</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_1437f_row11_col0" style="white-space:nowrap">H-12</td>
+<td class="data row11 col1" id="T_1437f_row11_col1">No hay una llave única inequívoca: Cluster coincide con el nombre de la hoja y Pozo es otro identificador</td>
+<td class="data row11 col2" id="T_1437f_row11_col2">Ninguno si no se fusiona</td>
+<td class="data row11 col3" id="T_1437f_row11_col3" style="white-space:nowrap">CT-01</td>
+<td class="data row11 col4" id="T_1437f_row11_col4" style="white-space:nowrap">Baja</td>
+<td class="data row11 col5" id="T_1437f_row11_col5">cluster = hoja en 5 de 5; pozo distinto del nombre de hoja en 5</td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_1437f_row12_col0" style="white-space:nowrap">H-13</td>
+<td class="data row12 col1" id="T_1437f_row12_col1">El caudal calculado difiere del medido sin tolerancia definida</td>
+<td class="data row12 col2" id="T_1437f_row12_col2" style="white-space:nowrap">Informativo</td>
+<td class="data row12 col3" id="T_1437f_row12_col3" style="white-space:nowrap">CT-09</td>
+<td class="data row12 col4" id="T_1437f_row12_col4" style="white-space:nowrap">Media</td>
+<td class="data row12 col5" id="T_1437f_row12_col5">calculado − medido entre -5.9 % y +8.8 % (n = 5)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=210f728d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> De 13 hallazgos, <strong>solo
+dos</strong> pueden cambiar de verdad un resultado de ingeniería: el que
+ya se corrigió (H-01, un error de <em>nuestro</em> análisis) y H-02, el
+signo de PIP, que es una ambigüedad <strong>del libro</strong> que no
+puede resolverse sin el responsable. El resto son riesgos de lectura
+(H-04, H-10), límites del alcance (H-07, H-11, H-13) o defectos que no
+tocan el cálculo (H-03). Esta jerarquía es la que debería orientar la
+conversación con quien mantiene el libro.</p>
+<p>Un detalle de método: <strong>H-01 es un error propio</strong> y se
+incluye en el registro sin atenuarlo. Un expediente que solo registra
+los errores de los demás pierde credibilidad; este conserva la
+corrección como prueba permanente (criterio <code>C05-3</code>).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a57b3952"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-3-matriz-hallazgo-consulta-técnica">Paso 3 · Matriz
+hallazgo → consulta técnica</h2>
+<p>Esta matriz comprueba la <strong>cobertura en ambos
+sentidos</strong>: cada consulta del registro
+<code>docs/consultas_tecnicas_pendientes.md</code> debe nacer de algún
+hallazgo, y cada hallazgo con consulta debe encontrarse en ese registro.
+Así ninguna pregunta queda huérfana ni ningún hallazgo sin destino.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ee21e31f">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">doc_ct</span> <span class="o">=</span> <span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"docs"</span> <span class="o">/</span> <span class="s2">"consultas_tecnicas_pendientes.md"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">ct_del_doc</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\| (CT-\d+) \|"</span><span class="p">,</span> <span class="n">doc_ct</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)))</span>
+<span class="n">ct_de_hallazgos</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">({</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">registro</span><span class="p">[</span><span class="s2">"consulta"</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"CT-"</span><span class="p">)})</span>
+<span class="n">matriz</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">"consulta"</span><span class="p">:</span> <span class="n">ct</span><span class="p">,</span> <span class="s2">"hallazgos"</span><span class="p">:</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">registro</span><span class="p">[</span><span class="n">registro</span><span class="p">[</span><span class="s2">"consulta"</span><span class="p">]</span> <span class="o">==</span> <span class="n">ct</span><span class="p">][</span><span class="s2">"id"</span><span class="p">])</span> <span class="ow">or</span> <span class="s2">"—"</span><span class="p">}</span> <span class="k">for</span> <span class="n">ct</span> <span class="ow">in</span> <span class="n">ct_del_doc</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Consultas en el registro:"</span><span class="p">,</span> <span class="n">ct_del_doc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sin hallazgo:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ct_del_doc</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">ct_de_hallazgos</span><span class="p">)),</span> <span class="s2">"| hallazgos con consulta inexistente:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ct_de_hallazgos</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">ct_del_doc</span><span class="p">)))</span>
+<span class="n">T</span><span class="p">(</span><span class="n">matriz</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Consultas en el registro: ['CT-01', 'CT-02', 'CT-03', 'CT-04', 'CT-05', 'CT-06', 'CT-07', 'CT-08', 'CT-09', 'CT-10']
+Sin hallazgo: [] | hallazgos con consulta inexistente: []
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_71182">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_71182_level0_col0" style="white-space:nowrap">consulta</th>
+<th class="col_heading level0 col1" id="T_71182_level0_col1" style="white-space:nowrap">hallazgos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_71182_row0_col0" style="white-space:nowrap">CT-01</td>
+<td class="data row0 col1" id="T_71182_row0_col1" style="white-space:nowrap">H-12</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_71182_row1_col0" style="white-space:nowrap">CT-02</td>
+<td class="data row1 col1" id="T_71182_row1_col1" style="white-space:nowrap">H-04</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_71182_row2_col0" style="white-space:nowrap">CT-03</td>
+<td class="data row2 col1" id="T_71182_row2_col1" style="white-space:nowrap">H-02</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_71182_row3_col0" style="white-space:nowrap">CT-04</td>
+<td class="data row3 col1" id="T_71182_row3_col1" style="white-space:nowrap">H-05</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_71182_row4_col0" style="white-space:nowrap">CT-05</td>
+<td class="data row4 col1" id="T_71182_row4_col1" style="white-space:nowrap">H-06</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_71182_row5_col0" style="white-space:nowrap">CT-06</td>
+<td class="data row5 col1" id="T_71182_row5_col1">H-09, H-10</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_71182_row6_col0" style="white-space:nowrap">CT-07</td>
+<td class="data row6 col1" id="T_71182_row6_col1" style="white-space:nowrap">H-08</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_71182_row7_col0" style="white-space:nowrap">CT-08</td>
+<td class="data row7 col1" id="T_71182_row7_col1" style="white-space:nowrap">H-01</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_71182_row8_col0" style="white-space:nowrap">CT-09</td>
+<td class="data row8 col1" id="T_71182_row8_col1" style="white-space:nowrap">H-13</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_71182_row9_col0" style="white-space:nowrap">CT-10</td>
+<td class="data row9 col1" id="T_71182_row9_col1" style="white-space:nowrap">H-11</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e69c7623"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Las consultas CT-01 a CT-10 aparecen
+enlazadas con al menos un hallazgo; <strong>CT-08</strong> (validez de
+las leyes de afinidad) se relaciona con H-01 y es la única consulta cuyo
+hallazgo es una <strong>dependencia del modelo</strong> y no una
+anomalía de una celda. Si la tabla mostrara una consulta «—» o la lista
+«sin hallazgo» no estuviera vacía, el criterio <code>C06-2</code>
+detendría el cuaderno.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c92dea45"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-4-reglas-candidatas-especificación-y-ejecución">Paso 4 ·
+Reglas candidatas: especificación y ejecución</h2>
+<p>Una regla candidata es una <strong>condición legible, con umbral
+escrito en la propia hoja, que genera una observación revisable</strong>
+(no una orden). Cada regla se especifica con todos sus campos
+(condición, variables, umbral, resultado, explicación, verificación,
+confianza, estado y limitaciones) y se <strong>ejecuta</strong> sobre
+las cinco hojas para ver qué diría.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=95e7d5da">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"RC-BES-01"</span><span class="p">,</span> <span class="s2">"condición"</span><span class="p">:</span> <span class="s2">"Q operación &gt; límite máximo escrito, a la misma frecuencia (Q_máx · f/60)"</span><span class="p">,</span> <span class="s2">"umbral"</span><span class="p">:</span> <span class="s2">"celda «Limite maximo» de la hoja"</span><span class="p">,</span> <span class="s2">"resultado"</span><span class="p">:</span> <span class="s2">"advertencia por_encima_del_limite_maximo"</span><span class="p">,</span> <span class="s2">"confianza"</span><span class="p">:</span> <span class="s2">"baja"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">:</span> <span class="s2">"pendiente"</span><span class="p">,</span>
+     <span class="s2">"limitación"</span><span class="p">:</span> <span class="s2">"el máximo es un número de la hoja, no de fabricante (CT-06); depende de Q ∝ f (CT-08)"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"RC-BES-02"</span><span class="p">,</span> <span class="s2">"condición"</span><span class="p">:</span> <span class="s2">"Q operación &lt; límite mínimo escrito, a la misma frecuencia"</span><span class="p">,</span> <span class="s2">"umbral"</span><span class="p">:</span> <span class="s2">"celda «Limite minimo» de la hoja"</span><span class="p">,</span> <span class="s2">"resultado"</span><span class="p">:</span> <span class="s2">"advertencia por_debajo_del_limite_minimo"</span><span class="p">,</span> <span class="s2">"confianza"</span><span class="p">:</span> <span class="s2">"baja"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">:</span> <span class="s2">"pendiente"</span><span class="p">,</span>
+     <span class="s2">"limitación"</span><span class="p">:</span> <span class="s2">"ídem"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"RC-BES-03"</span><span class="p">,</span> <span class="s2">"condición"</span><span class="p">:</span> <span class="s2">"mínimo ≤ Q operación ≤ máximo, a la misma frecuencia"</span><span class="p">,</span> <span class="s2">"umbral"</span><span class="p">:</span> <span class="s2">"ambas celdas"</span><span class="p">,</span> <span class="s2">"resultado"</span><span class="p">:</span> <span class="s2">"dentro_de_los_limites_escritos"</span><span class="p">,</span> <span class="s2">"confianza"</span><span class="p">:</span> <span class="s2">"baja"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">:</span> <span class="s2">"pendiente"</span><span class="p">,</span>
+     <span class="s2">"limitación"</span><span class="p">:</span> <span class="s2">"no autoriza operar; solo dice que la hoja es coherente consigo misma"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"RC-BES-04"</span><span class="p">,</span> <span class="s2">"condición"</span><span class="p">:</span> <span class="s2">"cercanía al BEP (punto de máxima eficiencia)"</span><span class="p">,</span> <span class="s2">"umbral"</span><span class="p">:</span> <span class="s2">"no hay: requiere curva de fabricante"</span><span class="p">,</span> <span class="s2">"resultado"</span><span class="p">:</span> <span class="s2">"no evaluable"</span><span class="p">,</span> <span class="s2">"confianza"</span><span class="p">:</span> <span class="s2">"—"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">:</span> <span class="s2">"no evaluable"</span><span class="p">,</span>
+     <span class="s2">"limitación"</span><span class="p">:</span> <span class="s2">"la curva de EFF es una tabla de la hoja sin respaldo de fabricante (CT-06)"</span><span class="p">},</span>
+<span class="p">]),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<div class="ancho"><table class="tabla tabla-ancha" id="T_51032">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_51032_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_51032_level0_col1" style="white-space:nowrap">condición</th>
+<th class="col_heading level0 col2" id="T_51032_level0_col2" style="white-space:nowrap">umbral</th>
+<th class="col_heading level0 col3" id="T_51032_level0_col3" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col4" id="T_51032_level0_col4" style="white-space:nowrap">confianza</th>
+<th class="col_heading level0 col5" id="T_51032_level0_col5" style="white-space:nowrap">estado</th>
+<th class="col_heading level0 col6" id="T_51032_level0_col6" style="white-space:nowrap">limitación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_51032_row0_col0" style="white-space:nowrap">RC-BES-01</td>
+<td class="data row0 col1" id="T_51032_row0_col1">Q operación &gt; límite máximo escrito, a la misma frecuencia (Q_máx · f/60)</td>
+<td class="data row0 col2" id="T_51032_row0_col2">celda «Limite maximo» de la hoja</td>
+<td class="data row0 col3" id="T_51032_row0_col3">advertencia por_encima_del_limite_maximo</td>
+<td class="data row0 col4" id="T_51032_row0_col4" style="white-space:nowrap">baja</td>
+<td class="data row0 col5" id="T_51032_row0_col5" style="white-space:nowrap">pendiente</td>
+<td class="data row0 col6" id="T_51032_row0_col6">el máximo es un número de la hoja, no de fabricante (CT-06); depende de Q ∝ f (CT-08)</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_51032_row1_col0" style="white-space:nowrap">RC-BES-02</td>
+<td class="data row1 col1" id="T_51032_row1_col1">Q operación &lt; límite mínimo escrito, a la misma frecuencia</td>
+<td class="data row1 col2" id="T_51032_row1_col2">celda «Limite minimo» de la hoja</td>
+<td class="data row1 col3" id="T_51032_row1_col3">advertencia por_debajo_del_limite_minimo</td>
+<td class="data row1 col4" id="T_51032_row1_col4" style="white-space:nowrap">baja</td>
+<td class="data row1 col5" id="T_51032_row1_col5" style="white-space:nowrap">pendiente</td>
+<td class="data row1 col6" id="T_51032_row1_col6" style="white-space:nowrap">ídem</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_51032_row2_col0" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row2 col1" id="T_51032_row2_col1">mínimo ≤ Q operación ≤ máximo, a la misma frecuencia</td>
+<td class="data row2 col2" id="T_51032_row2_col2">ambas celdas</td>
+<td class="data row2 col3" id="T_51032_row2_col3">dentro_de_los_limites_escritos</td>
+<td class="data row2 col4" id="T_51032_row2_col4" style="white-space:nowrap">baja</td>
+<td class="data row2 col5" id="T_51032_row2_col5" style="white-space:nowrap">pendiente</td>
+<td class="data row2 col6" id="T_51032_row2_col6">no autoriza operar; solo dice que la hoja es coherente consigo misma</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_51032_row3_col0" style="white-space:nowrap">RC-BES-04</td>
+<td class="data row3 col1" id="T_51032_row3_col1">cercanía al BEP (punto de máxima eficiencia)</td>
+<td class="data row3 col2" id="T_51032_row3_col2">no hay: requiere curva de fabricante</td>
+<td class="data row3 col3" id="T_51032_row3_col3">no evaluable</td>
+<td class="data row3 col4" id="T_51032_row3_col4" style="white-space:nowrap">—</td>
+<td class="data row3 col5" id="T_51032_row3_col5">no evaluable</td>
+<td class="data row3 col6" id="T_51032_row3_col6">la curva de EFF es una tabla de la hoja sin respaldo de fabricante (CT-06)</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=773eda59">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ejecucion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="o">**</span><span class="n">comparar_caudal_con_limites</span><span class="p">(</span><span class="n">h</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"bomba"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"bomba_referencia"</span><span class="p">]}</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">ejecucion</span><span class="p">[[</span><span class="s2">"hoja"</span><span class="p">,</span> <span class="s2">"pozo"</span><span class="p">,</span> <span class="s2">"bomba"</span><span class="p">,</span> <span class="s2">"frecuencia_operacion_hz"</span><span class="p">,</span> <span class="s2">"caudal_bfpd"</span><span class="p">,</span> <span class="s2">"limite_minimo_bfpd"</span><span class="p">,</span> <span class="s2">"limite_maximo_bfpd"</span><span class="p">,</span> <span class="s2">"uso_del_limite_maximo_pct"</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">,</span> <span class="s2">"resultado"</span><span class="p">,</span> <span class="s2">"estado_revision"</span><span class="p">,</span> <span class="s2">"nivel_confianza"</span><span class="p">]]</span>
+  <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"frecuencia_operacion_hz"</span><span class="p">:</span> <span class="s2">"f (Hz)"</span><span class="p">,</span> <span class="s2">"caudal_bfpd"</span><span class="p">:</span> <span class="s2">"Q (BFPD)"</span><span class="p">,</span> <span class="s2">"limite_minimo_bfpd"</span><span class="p">:</span> <span class="s2">"mín @f"</span><span class="p">,</span> <span class="s2">"limite_maximo_bfpd"</span><span class="p">:</span> <span class="s2">"máx @f"</span><span class="p">,</span> <span class="s2">"uso_del_limite_maximo_pct"</span><span class="p">:</span> <span class="s2">"uso máx (%)"</span><span class="p">}),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_e54fd">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_e54fd_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_e54fd_level0_col1" style="white-space:nowrap">pozo</th>
+<th class="col_heading level0 col2" id="T_e54fd_level0_col2" style="white-space:nowrap">bomba</th>
+<th class="col_heading level0 col3" id="T_e54fd_level0_col3">f (Hz)</th>
+<th class="col_heading level0 col4" id="T_e54fd_level0_col4">Q (BFPD)</th>
+<th class="col_heading level0 col5" id="T_e54fd_level0_col5">mín @f</th>
+<th class="col_heading level0 col6" id="T_e54fd_level0_col6">máx @f</th>
+<th class="col_heading level0 col7" id="T_e54fd_level0_col7">uso máx (%)</th>
+<th class="col_heading level0 col8" id="T_e54fd_level0_col8" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col9" id="T_e54fd_level0_col9" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col10" id="T_e54fd_level0_col10">estado_revision</th>
+<th class="col_heading level0 col11" id="T_e54fd_level0_col11">nivel_confianza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_e54fd_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_e54fd_row0_col1" style="white-space:nowrap">QF-084</td>
+<td class="data row0 col2" id="T_e54fd_row0_col2">S 8000N</td>
+<td class="data row0 col3" id="T_e54fd_row0_col3" style="white-space:nowrap">63</td>
+<td class="data row0 col4" id="T_e54fd_row0_col4" style="white-space:nowrap">10301</td>
+<td class="data row0 col5" id="T_e54fd_row0_col5" style="white-space:nowrap">2625</td>
+<td class="data row0 col6" id="T_e54fd_row0_col6" style="white-space:nowrap">10500</td>
+<td class="data row0 col7" id="T_e54fd_row0_col7" style="white-space:nowrap">98.104762</td>
+<td class="data row0 col8" id="T_e54fd_row0_col8" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row0 col9" id="T_e54fd_row0_col9">dentro_de_los_limites_escritos</td>
+<td class="data row0 col10" id="T_e54fd_row0_col10" style="white-space:nowrap">pendiente</td>
+<td class="data row0 col11" id="T_e54fd_row0_col11" style="white-space:nowrap">bajo</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_e54fd_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_e54fd_row1_col1" style="white-space:nowrap">QF-301</td>
+<td class="data row1 col2" id="T_e54fd_row1_col2">S 8000N</td>
+<td class="data row1 col3" id="T_e54fd_row1_col3" style="white-space:nowrap">57</td>
+<td class="data row1 col4" id="T_e54fd_row1_col4" style="white-space:nowrap">8767</td>
+<td class="data row1 col5" id="T_e54fd_row1_col5" style="white-space:nowrap">2375</td>
+<td class="data row1 col6" id="T_e54fd_row1_col6" style="white-space:nowrap">9500</td>
+<td class="data row1 col7" id="T_e54fd_row1_col7" style="white-space:nowrap">92.284211</td>
+<td class="data row1 col8" id="T_e54fd_row1_col8" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row1 col9" id="T_e54fd_row1_col9">dentro_de_los_limites_escritos</td>
+<td class="data row1 col10" id="T_e54fd_row1_col10" style="white-space:nowrap">pendiente</td>
+<td class="data row1 col11" id="T_e54fd_row1_col11" style="white-space:nowrap">bajo</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_e54fd_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_e54fd_row2_col1" style="white-space:nowrap">QF-147</td>
+<td class="data row2 col2" id="T_e54fd_row2_col2">S 8000N</td>
+<td class="data row2 col3" id="T_e54fd_row2_col3" style="white-space:nowrap">56</td>
+<td class="data row2 col4" id="T_e54fd_row2_col4" style="white-space:nowrap">7728</td>
+<td class="data row2 col5" id="T_e54fd_row2_col5" style="white-space:nowrap">2333.3333</td>
+<td class="data row2 col6" id="T_e54fd_row2_col6" style="white-space:nowrap">9333.3333</td>
+<td class="data row2 col7" id="T_e54fd_row2_col7" style="white-space:nowrap">82.8</td>
+<td class="data row2 col8" id="T_e54fd_row2_col8" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row2 col9" id="T_e54fd_row2_col9">dentro_de_los_limites_escritos</td>
+<td class="data row2 col10" id="T_e54fd_row2_col10" style="white-space:nowrap">pendiente</td>
+<td class="data row2 col11" id="T_e54fd_row2_col11" style="white-space:nowrap">bajo</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_e54fd_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_e54fd_row3_col1" style="white-space:nowrap">QF-005</td>
+<td class="data row3 col2" id="T_e54fd_row3_col2" style="white-space:nowrap">S6000N</td>
+<td class="data row3 col3" id="T_e54fd_row3_col3" style="white-space:nowrap">67</td>
+<td class="data row3 col4" id="T_e54fd_row3_col4" style="white-space:nowrap">7116</td>
+<td class="data row3 col5" id="T_e54fd_row3_col5" style="white-space:nowrap">2233.3333</td>
+<td class="data row3 col6" id="T_e54fd_row3_col6" style="white-space:nowrap">8933.3333</td>
+<td class="data row3 col7" id="T_e54fd_row3_col7" style="white-space:nowrap">79.656716</td>
+<td class="data row3 col8" id="T_e54fd_row3_col8" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row3 col9" id="T_e54fd_row3_col9">dentro_de_los_limites_escritos</td>
+<td class="data row3 col10" id="T_e54fd_row3_col10" style="white-space:nowrap">pendiente</td>
+<td class="data row3 col11" id="T_e54fd_row3_col11" style="white-space:nowrap">bajo</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_e54fd_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_e54fd_row4_col1" style="white-space:nowrap">QF-306</td>
+<td class="data row4 col2" id="T_e54fd_row4_col2" style="white-space:nowrap">S6000N</td>
+<td class="data row4 col3" id="T_e54fd_row4_col3" style="white-space:nowrap">62</td>
+<td class="data row4 col4" id="T_e54fd_row4_col4" style="white-space:nowrap">5419</td>
+<td class="data row4 col5" id="T_e54fd_row4_col5" style="white-space:nowrap">2066.6667</td>
+<td class="data row4 col6" id="T_e54fd_row4_col6" style="white-space:nowrap">8266.6667</td>
+<td class="data row4 col7" id="T_e54fd_row4_col7" style="white-space:nowrap">65.552419</td>
+<td class="data row4 col8" id="T_e54fd_row4_col8" style="white-space:nowrap">RC-BES-03</td>
+<td class="data row4 col9" id="T_e54fd_row4_col9">dentro_de_los_limites_escritos</td>
+<td class="data row4 col10" id="T_e54fd_row4_col10" style="white-space:nowrap">pendiente</td>
+<td class="data row4 col11" id="T_e54fd_row4_col11" style="white-space:nowrap">bajo</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1b328242"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Las cinco hojas dan
+<code>RC-BES-03</code>: están dentro de los límites escritos a su
+frecuencia. <strong>Ninguna regla de advertencia se activa</strong>.
+Esto no es «todo está bien»: es que <strong>la hoja es coherente consigo
+misma en este punto</strong>. Lo que sí merece mirarse es el <em>uso del
+máximo</em>: QF-554H está al 98 % de su máximo a 63 Hz; si el máximo
+escrito fuese un límite real, el margen sería pequeño. Eso es lo que la
+regla <code>RC-BES-03</code> <strong>no</strong> dice, y por eso lleva
+confianza baja y estado pendiente.</p>
+<p>La regla <code>RC-BES-04</code> no se ejecuta, y eso es deliberado. A
+continuación se comprueba <strong>por qué</strong> no es evaluable.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f0efd2fe">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">mejor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"curva"</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"eff_numero"</span><span class="p">])</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"bomba"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"bomba_referencia"</span><span class="p">],</span> <span class="s2">"«Cono de eficiencia» (BFPD)"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"cono_eficiencia_bfpd"</span><span class="p">],</span>
+                  <span class="s2">"Q de mayor EFF tabulada (BFPD)"</span><span class="p">:</span> <span class="n">mejor</span><span class="p">[</span><span class="s2">"caudal_bfpd"</span><span class="p">],</span> <span class="s2">"EFF máx. (rótulo %)"</span><span class="p">:</span> <span class="n">mejor</span><span class="p">[</span><span class="s2">"eff_numero"</span><span class="p">],</span>
+                  <span class="s2">"coinciden"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"cono_eficiencia_bfpd"</span><span class="p">]</span> <span class="o">==</span> <span class="n">mejor</span><span class="p">[</span><span class="s2">"caudal_bfpd"</span><span class="p">]})</span>
+<span class="n">bep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">bep</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_f9be8">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_f9be8_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_f9be8_level0_col1" style="white-space:nowrap">bomba</th>
+<th class="col_heading level0 col2" id="T_f9be8_level0_col2">«Cono de eficiencia» (BFPD)</th>
+<th class="col_heading level0 col3" id="T_f9be8_level0_col3">Q de mayor EFF tabulada (BFPD)</th>
+<th class="col_heading level0 col4" id="T_f9be8_level0_col4">EFF máx. (rótulo %)</th>
+<th class="col_heading level0 col5" id="T_f9be8_level0_col5" style="white-space:nowrap">coinciden</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_f9be8_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_f9be8_row0_col1">S 8000N</td>
+<td class="data row0 col2" id="T_f9be8_row0_col2" style="white-space:nowrap">8000</td>
+<td class="data row0 col3" id="T_f9be8_row0_col3" style="white-space:nowrap">8000</td>
+<td class="data row0 col4" id="T_f9be8_row0_col4" style="white-space:nowrap">7.6</td>
+<td class="data row0 col5" id="T_f9be8_row0_col5" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_f9be8_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_f9be8_row1_col1">S 8000N</td>
+<td class="data row1 col2" id="T_f9be8_row1_col2" style="white-space:nowrap">8000</td>
+<td class="data row1 col3" id="T_f9be8_row1_col3" style="white-space:nowrap">8000</td>
+<td class="data row1 col4" id="T_f9be8_row1_col4" style="white-space:nowrap">7.6</td>
+<td class="data row1 col5" id="T_f9be8_row1_col5" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_f9be8_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_f9be8_row2_col1">S 8000N</td>
+<td class="data row2 col2" id="T_f9be8_row2_col2" style="white-space:nowrap">8000</td>
+<td class="data row2 col3" id="T_f9be8_row2_col3" style="white-space:nowrap">8000</td>
+<td class="data row2 col4" id="T_f9be8_row2_col4" style="white-space:nowrap">7.6</td>
+<td class="data row2 col5" id="T_f9be8_row2_col5" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_f9be8_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_f9be8_row3_col1" style="white-space:nowrap">S6000N</td>
+<td class="data row3 col2" id="T_f9be8_row3_col2" style="white-space:nowrap">6000</td>
+<td class="data row3 col3" id="T_f9be8_row3_col3" style="white-space:nowrap">6000</td>
+<td class="data row3 col4" id="T_f9be8_row3_col4" style="white-space:nowrap">7.3</td>
+<td class="data row3 col5" id="T_f9be8_row3_col5" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_f9be8_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_f9be8_row4_col1" style="white-space:nowrap">S6000N</td>
+<td class="data row4 col2" id="T_f9be8_row4_col2" style="white-space:nowrap">6000</td>
+<td class="data row4 col3" id="T_f9be8_row4_col3" style="white-space:nowrap">6000</td>
+<td class="data row4 col4" id="T_f9be8_row4_col4" style="white-space:nowrap">7.3</td>
+<td class="data row4 col5" id="T_f9be8_row4_col5" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d7851ae5"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> El «Cono de eficiencia» coincide con
+el caudal de mayor EFF de la tabla, pero esa EFF máxima es de apenas
+unos puntos «%» (una cifra baja para una eficiencia de bomba: en general
+una ESP en su mejor punto opera con decenas de puntos porcentuales; es
+conocimiento general, no un dato de las fuentes del expediente). Por
+tanto <strong>no se sabe qué magnitud representa EFF</strong> en la hoja
+y <strong>no puede llamarse BEP</strong> a ese caudal. Convertir esto en
+regla («operar a ±X % del BEP») sería inventar una referencia que el
+libro no avala. Queda como hallazgo (H-10) y consulta (CT-06).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5067a794"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-5-qué-se-puede-y-qué-no-se-puede-afirmar">Paso 5 · Qué se
+puede y qué no se puede afirmar</h2>
+<p>La salida más importante del expediente es esta frontera. Se escribe
+en una tabla para que sea imposible citar una afirmación fuera de su
+lugar.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7e3e3c8e">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">"Las cifras del libro se transcriben sin alteración (ida y vuelta, 170 celdas)"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"cuaderno 03"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"El código reproduce PIP, THD y Q a producir de las cinco hojas (≤ 1e-15)"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"cuadernos 04 y 05"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Las cinco hojas están dentro de los límites escritos a su frecuencia"</span><span class="p">,</span> <span class="s2">"Sí, como coherencia interna"</span><span class="p">,</span> <span class="s2">"este cuaderno"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"El signo de la corrección de PIP es el correcto"</span><span class="p">,</span> <span class="s2">"No: ambigüedad abierta (CT-03)"</span><span class="p">,</span> <span class="s2">"cuaderno 02"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"El modelo predice el caudal de un pozo"</span><span class="p">,</span> <span class="s2">"No: no evaluable"</span><span class="p">,</span> <span class="s2">"cuaderno 05, Paso 6"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"El caudal calculado coincide con el medido"</span><span class="p">,</span> <span class="s2">"No se puede decir «coincide»: difiere entre −5.9 % y +8.8 %, sin tolerancia (CT-09)"</span><span class="p">,</span> <span class="s2">"cuaderno 05"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Un pozo está operando mal"</span><span class="p">,</span> <span class="s2">"No: ninguna regla está aprobada"</span><span class="p">,</span> <span class="s2">"este cuaderno"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Hay que cambiar la frecuencia de un pozo"</span><span class="p">,</span> <span class="s2">"No: fuera del alcance"</span><span class="p">,</span> <span class="s2">"—"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Los límites del libro son de fabricante"</span><span class="p">,</span> <span class="s2">"No se sabe (CT-06)"</span><span class="p">,</span> <span class="s2">"cuaderno 03"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Los parámetros de fluido son de cada pozo"</span><span class="p">,</span> <span class="s2">"No se sabe: idénticos en cinco pozos"</span><span class="p">,</span> <span class="s2">"cuaderno 03"</span><span class="p">),</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"afirmación"</span><span class="p">,</span> <span class="s2">"¿permitida?"</span><span class="p">,</span> <span class="s2">"dónde se sustenta"</span><span class="p">]),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_94c53">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_94c53_level0_col0" style="white-space:nowrap">afirmación</th>
+<th class="col_heading level0 col1" id="T_94c53_level0_col1" style="white-space:nowrap">¿permitida?</th>
+<th class="col_heading level0 col2" id="T_94c53_level0_col2">dónde se sustenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_94c53_row0_col0">Las cifras del libro se transcriben sin alteración (ida y vuelta, 170 celdas)</td>
+<td class="data row0 col1" id="T_94c53_row0_col1" style="white-space:nowrap">Sí</td>
+<td class="data row0 col2" id="T_94c53_row0_col2">cuaderno 03</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_94c53_row1_col0">El código reproduce PIP, THD y Q a producir de las cinco hojas (≤ 1e-15)</td>
+<td class="data row1 col1" id="T_94c53_row1_col1" style="white-space:nowrap">Sí</td>
+<td class="data row1 col2" id="T_94c53_row1_col2">cuadernos 04 y 05</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_94c53_row2_col0">Las cinco hojas están dentro de los límites escritos a su frecuencia</td>
+<td class="data row2 col1" id="T_94c53_row2_col1">Sí, como coherencia interna</td>
+<td class="data row2 col2" id="T_94c53_row2_col2">este cuaderno</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_94c53_row3_col0">El signo de la corrección de PIP es el correcto</td>
+<td class="data row3 col1" id="T_94c53_row3_col1">No: ambigüedad abierta (CT-03)</td>
+<td class="data row3 col2" id="T_94c53_row3_col2">cuaderno 02</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_94c53_row4_col0">El modelo predice el caudal de un pozo</td>
+<td class="data row4 col1" id="T_94c53_row4_col1">No: no evaluable</td>
+<td class="data row4 col2" id="T_94c53_row4_col2">cuaderno 05, Paso 6</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_94c53_row5_col0">El caudal calculado coincide con el medido</td>
+<td class="data row5 col1" id="T_94c53_row5_col1">No se puede decir «coincide»: difiere entre −5.9 % y +8.8 %, sin tolerancia (CT-09)</td>
+<td class="data row5 col2" id="T_94c53_row5_col2">cuaderno 05</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_94c53_row6_col0">Un pozo está operando mal</td>
+<td class="data row6 col1" id="T_94c53_row6_col1">No: ninguna regla está aprobada</td>
+<td class="data row6 col2" id="T_94c53_row6_col2">este cuaderno</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_94c53_row7_col0">Hay que cambiar la frecuencia de un pozo</td>
+<td class="data row7 col1" id="T_94c53_row7_col1">No: fuera del alcance</td>
+<td class="data row7 col2" id="T_94c53_row7_col2" style="white-space:nowrap">—</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_94c53_row8_col0">Los límites del libro son de fabricante</td>
+<td class="data row8 col1" id="T_94c53_row8_col1">No se sabe (CT-06)</td>
+<td class="data row8 col2" id="T_94c53_row8_col2">cuaderno 03</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_94c53_row9_col0">Los parámetros de fluido son de cada pozo</td>
+<td class="data row9 col1" id="T_94c53_row9_col1">No se sabe: idénticos en cinco pozos</td>
+<td class="data row9 col2" id="T_94c53_row9_col2">cuaderno 03</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2c7a1d3f"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-6-criterios-de-aceptación">Paso 6 · Criterios de
+aceptación</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=ba46ff38">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span> <span class="o">=</span> <span class="n">Criterios</span><span class="p">(</span><span class="s2">"06_hallazgos_y_reglas_candidatas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-1"</span><span class="p">,</span> <span class="s2">"Cada hallazgo tiene evidencia y consulta o motivo"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">((</span><span class="n">registro</span><span class="p">[</span><span class="s2">"evidencia (recalculada)"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">((</span><span class="n">registro</span><span class="p">[</span><span class="s2">"consulta"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">registro</span><span class="p">)</span><span class="si">}</span><span class="s2"> hallazgos"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-2"</span><span class="p">,</span> <span class="s2">"CT del registro cubiertas por hallazgos y viceversa"</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">ct_del_doc</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">ct_de_hallazgos</span><span class="p">),</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ct_del_doc</span><span class="p">)</span><span class="si">}</span><span class="s2"> consultas"</span><span class="p">)</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ejecucion</span><span class="p">[</span><span class="s2">"id"</span><span class="p">])</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-3"</span><span class="p">,</span> <span class="s2">"5 RC-BES-03 y ninguna RC-BES-01/02 en la misma base"</span><span class="p">,</span> <span class="n">ids</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"RC-BES-03"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">ids</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"RC-BES-01"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">ids</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"RC-BES-02"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-4"</span><span class="p">,</span> <span class="s2">"Todas las reglas ejecutadas están pendientes"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">((</span><span class="n">ejecucion</span><span class="p">[</span><span class="s2">"estado_revision"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"pendiente"</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span> <span class="s2">"pendiente"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-5"</span><span class="p">,</span> <span class="s2">"RC-BES-04 no evaluable: tablas repetidas entre pozos y cono = caudal de máxima EFF tabulada"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">bep</span><span class="p">[</span><span class="s2">"coinciden"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="si">}</span><span class="s2"> grupos de tablas repetidas; EFF máx. </span><span class="si">{</span><span class="n">effmax</span><span class="si">}</span><span class="s2"> con rótulo %"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C06-6"</span><span class="p">,</span> <span class="s2">"El libro no cambió"</span><span class="p">,</span> <span class="n">huellas</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">)[</span><span class="s2">"sha256"</span><span class="p">]</span> <span class="o">==</span> <span class="n">sha_inicial</span><span class="p">,</span> <span class="n">sha_inicial</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"…"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">crit</span><span class="o">.</span><span class="n">tabla</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_ae050">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_ae050_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_ae050_level0_col1" style="white-space:nowrap">criterio</th>
+<th class="col_heading level0 col2" id="T_ae050_level0_col2" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col3" id="T_ae050_level0_col3" style="white-space:nowrap">evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_ae050_row0_col0" style="white-space:nowrap">C06-1</td>
+<td class="data row0 col1" id="T_ae050_row0_col1">Cada hallazgo tiene evidencia y consulta o motivo</td>
+<td class="data row0 col2" id="T_ae050_row0_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row0 col3" id="T_ae050_row0_col3">13 hallazgos</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_ae050_row1_col0" style="white-space:nowrap">C06-2</td>
+<td class="data row1 col1" id="T_ae050_row1_col1">CT del registro cubiertas por hallazgos y viceversa</td>
+<td class="data row1 col2" id="T_ae050_row1_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row1 col3" id="T_ae050_row1_col3">10 consultas</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_ae050_row2_col0" style="white-space:nowrap">C06-3</td>
+<td class="data row2 col1" id="T_ae050_row2_col1">5 RC-BES-03 y ninguna RC-BES-01/02 en la misma base</td>
+<td class="data row2 col2" id="T_ae050_row2_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row2 col3" id="T_ae050_row2_col3">['RC-BES-03', 'RC-BES-03', 'RC-BES-03', 'RC-BES-03', 'RC-BES-03']</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_ae050_row3_col0" style="white-space:nowrap">C06-4</td>
+<td class="data row3 col1" id="T_ae050_row3_col1">Todas las reglas ejecutadas están pendientes</td>
+<td class="data row3 col2" id="T_ae050_row3_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row3 col3" id="T_ae050_row3_col3" style="white-space:nowrap">pendiente</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_ae050_row4_col0" style="white-space:nowrap">C06-5</td>
+<td class="data row4 col1" id="T_ae050_row4_col1">RC-BES-04 no evaluable: tablas repetidas entre pozos y cono = caudal de máxima EFF tabulada</td>
+<td class="data row4 col2" id="T_ae050_row4_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row4 col3" id="T_ae050_row4_col3">2 grupos de tablas repetidas; EFF máx. 7.6 con rótulo %</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_ae050_row5_col0" style="white-space:nowrap">C06-6</td>
+<td class="data row5 col1" id="T_ae050_row5_col1">El libro no cambió</td>
+<td class="data row5 col2" id="T_ae050_row5_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row5 col3" id="T_ae050_row5_col3">ccb5a738baea1332…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c5d7823a">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span><span class="o">.</span><span class="n">exigir</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Todos los criterios de aceptación del cuaderno 06 se cumplen."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Todos los criterios de aceptación del cuaderno 06 se cumplen.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f9ede1e3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="conclusión-técnica">Conclusión técnica</h2>
+<ul>
+<li><strong>Resultado:</strong> 13 hallazgos con evidencia recalculada,
+cada uno enlazado con su consulta técnica y priorizado; cuatro reglas
+especificadas, tres ejecutadas (todas en estado pendiente) y una
+declarada no evaluable.</li>
+<li><strong>Lo más importante:</strong> la ambigüedad de signo de la
+corrección de PIP (CT-03) es la que más condiciona el caudal calculado;
+el resto son efectos menores o límites del alcance. La corrección de la
+falsa alarma de frecuencia (H-01) es un error propio, registrado como
+tal.</li>
+<li><strong>Qué se puede hacer con esto:</strong> llevar a quien
+mantiene el libro una lista corta y ordenada de diez preguntas, con la
+cifra que motiva cada una.</li>
+<li><strong>Qué no:</strong> aprobar reglas, declarar validado el
+modelo, ni dar una instrucción de operación. Eso exige las respuestas a
+las consultas y revisión humana.</li>
+<li><strong>Estado del expediente:</strong> <strong>Listo para
+revisión</strong>. P-14 sigue pendiente y no se mueve a
+<code>procesadas/</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a2a38302"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="relación-con-el-sistema-de-reglas">Relación con el sistema de
+reglas</h2>
+<p>Es la especificación que <code>reglas.catalogo</code> y
+<code>reglas.candidatas_bes_jun</code> implementan. Estado de las cuatro
+reglas: pendiente o no evaluable. Ninguna aprobada. El motor no añade
+reglas que este cuaderno no haya dejado escritas.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=81916cc8"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="limitaciones">Limitaciones</h2>
+<ul>
+<li>Los hallazgos son los que detectan los controles de los cuadernos
+00–05; no es una auditoría exhaustiva del libro.</li>
+<li>Las reglas candidatas usan umbrales <strong>escritos en la
+hoja</strong>; ninguna está aprobada ni respaldada por fabricante.</li>
+<li>La prioridad de cada hallazgo es un criterio de este expediente
+(efecto en el cálculo y posibilidad de resolverlo con los datos).</li>
+<li>La tabla de afirmaciones es la frontera del expediente: afirmar
+fuera de ella exige resolver las consultas.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=db7135f5"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="referencias">Referencias</h2>
+<p>Solo se listan las fuentes realmente consultadas en este
+cuaderno.</p>
+<ol type="1">
+<li><strong>Libro de trabajo:</strong>
+<code>entrada/BES_jun.xlsx</code>, copia byte a byte de «Copia de FINAL
+BES-jun.xlsx» (SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>).
+Cinco hojas: QF-554H, QF-545H, QF-500H, QF-378HST y QF-549HST.</li>
+<li><strong><code>004-ESPdesign.pdf</code></strong> (en la raíz del
+proyecto): se consultó solo para el exponente de fricción 4.8655 y para
+el significado de TDH (CT-05).</li>
+<li><strong><code>Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx</code></strong>
+(raíz del proyecto): se consultó solo para la analogía de la corrección
+de PIP (F-12) usada en la sensibilidad CT-03. No es la fórmula de la
+hoja.</li>
+<li><strong><code>docs/consultas_tecnicas_pendientes.md</code></strong>
+(expediente): registro CT-01…CT-10 de ambigüedades abiertas.</li>
+<li><strong><code>trabajo.md</code> y <code>trabajo2.md</code></strong>
+(raíz del proyecto): plan de trabajo, reglas de no mezclar libros y
+bloqueo P-14.</li>
+<li><strong>Software:</strong> Python 3.14.8, pandas 3.0.6, numpy 2.5.4,
+matplotlib 3.11.2, openpyxl 3.1.5 (versiones tomadas de la ficha de
+entorno de cada ejecución).</li>
+</ol>
+</div>
+</div>
+</div>
+</div></body></html>

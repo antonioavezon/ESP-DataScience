@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block titulo %}Datasets · HUC{% endblock %}
+{% block contenido %}
+<h1>Datasets</h1>
+<p class="nota">El registro lee <code>en_espera</code>, <code>en_uso</code> y <code>procesadas</code>. No mueve expedientes ni abre los libros que siguen en espera.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Identificador</th><th>Ciclo</th><th>Estado declarado</th><th>Entrada</th><th>Resultados</th><th>Contratos</th><th>Modificado (UTC)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for ficha in fichas %}
+    <tr>
+      <td><a href="{% url 'detalle_dataset' ficha.identificador %}">{{ ficha.identificador }}</a></td>
+      <td>{{ ficha.ciclo }}</td>
+      <td>{{ ficha.estado_declarado }}</td>
+      <td>{% if ficha.archivos.entrada %}Presente{% else %}No disponible{% endif %}</td>
+      <td>{% if ficha.archivos.resultados %}Presentes{% else %}No disponible{% endif %}</td>
+      <td>{% if ficha.archivos.contrato_entrada and ficha.archivos.contrato_salida %}Presentes{% else %}No disponible{% endif %}</td>
+      <td>{% if ficha.modificado %}{{ ficha.modificado|date:"Y-m-d H:i" }}{% else %}No disponible{% endif %}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="7">No hay datasets.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,35 @@
+variable,unidades_rotuladas,n_rotulos_distintos,tipo_de_celda,observación
+frecuencia_hz,Hz,1,constante,
+caudal_operacion_bfpd,BFPD,1,constante | fórmula,
+presion_sensor_psi,psi,1,constante,
+thp_psi,psi,1,constante,
+id_tubing_in,inch,1,constante,
+etapas,Nº,1,constante,Rótulo «Nº»: conteo adimensional.
+presion_yacimiento_psi,psi,1,constante,
+presion_burbuja_psi,psi,1,constante,
+presion_prueba_psi,psi,1,constante,
+caudal_prueba_bfpd,BFPD,1,constante | fórmula,
+bsw_numero,%,1,constante,"Rótulo «%», pero el número es una fracción (0.96–0.98) y la fórmula lo usa como tal. No se convierte (CT-02)."
+temperatura_f,ºF,1,constante,
+temperatura_c,ºC,1,fórmula,
+api_deg,ºAPI,1,constante,
+densidad_agua_lb_gal,Lb/galn | Lb/gln,2,constante,Rótulos «Lb/gln» y «Lb/galn» según la hoja: grafías de lb/gal.
+frecuencia_curva_hz,Hz,1,constante,
+limite_minimo_bfpd,BFPD,1,constante,
+cono_eficiencia_bfpd,BFPD,1,constante,
+limite_maximo_bfpd,BFPD,1,constante,
+md_descarga_ft,ft (encabezado «MD (ft)»),1,constante,
+tvd_descarga_ft,ft (encabezado «TVD (ft)»),1,fórmula,
+md_intake_ft,ft (encabezado «MD (ft)»),1,constante,
+tvd_intake_ft,ft (encabezado «TVD (ft)»),1,fórmula,
+md_sensor_ft,ft (encabezado «MD (ft)»),1,constante,
+tvd_sensor_ft,ft (encabezado «TVD (ft)»),1,fórmula,
+cache_sg_60,—,0,fórmula,"Sin rótulo de unidad: gravedad específica, adimensional."
+cache_sg_temperatura,—,0,fórmula,"Sin rótulo de unidad: gravedad específica, adimensional."
+cache_densidad_lb_gal,Lb/Galn | Lb/Gln,2,fórmula,Rótulos «Lb/Gln» y «Lb/Galn» según la hoja: grafías de lb/gal.
+cache_gradiente_psi_ft,psi*ft,1,fórmula,Rótulo «psi*ft»; por análisis dimensional es psi/ft (cuaderno 02).
+cache_pip_ft,ft,1,fórmula,
+cache_thp_ft,ft,1,fórmula,
+cache_friccion_ft,ft,1,fórmula,
+cache_thd_ft,ft,1,fórmula,
+cache_caudal_producir_bfpd,BFPD,1,fórmula,

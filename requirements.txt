@@ -1,0 +1,18 @@
+# Dependencias directas del análisis local. Entorno: Fedora 43, Python 3.14.8, .venv del proyecto.
+# Instaladas el 2026-10-17. No se instaló PyTorch. scikit-learn queda disponible
+# para un análisis exploratorio posterior; el cálculo determinístico no lo usa.
+pandas==3.0.6
+numpy==2.5.4
+scipy==1.18.1
+matplotlib==3.11.2
+seaborn==0.13.2
+openpyxl==3.1.5
+# xlrd 2.x no lee .xls. La 1.2.0 sí, y se instaló en este Python 3.14.
+xlrd==1.2.0
+jupyterlab==4.6.4
+ipykernel==7.4.0
+python-docx==1.2.0
+pypdf==6.21.1
+pymupdf==1.28.2
+scikit-learn==1.9.1
+pytest==9.1.1

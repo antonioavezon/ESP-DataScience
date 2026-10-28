@@ -1,0 +1,444 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='utf-8'><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-right { content: "BES-jun · validación pendiente"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", serif; font-size: 11pt; }
+body { margin: 0; line-height: 1.4; text-align: justify; color: #111; }
+h1, h2, h3 { font-family: "Liberation Sans", sans-serif; text-align: left; break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; text-align: left; }
+th, td { border: 1px solid #444; padding: 0.2em 0.35em; vertical-align: top; }
+th { background: #e8edf2; }
+img { max-width: 100%; height: auto; }
+code { font-family: "Liberation Mono", monospace; font-size: 0.9em; }
+pre { white-space: pre-wrap; text-align: left; }
+</style></head><body><h1 id="auditoría-física-y-dimensional-del-pip-bes-jun">Auditoría física
+y dimensional del PIP · BES-jun</h1>
+<p>Fecha: 2026-10-21. Fuente primaria:
+<code>fuentes/originales/Copia de FINAL BES-jun.xlsx</code>, SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>.
+La copia de trabajo <code>entrada/BES_jun.xlsx</code> tiene la misma
+huella. No se guardó el libro. No se modificó <code>pip_en_ft</code> ni
+ninguna otra fórmula de producción.</p>
+<h2 id="respuesta">Respuesta</h2>
+<p>La PIP de las cinco hojas está bien transcrita y es dimensionalmente
+coherente si el gradiente se lee como psi/ft. No está respaldada como
+presión de admisión física. En las cinco hojas el sensor está más
+profundo que el intake y la celda suma esa columna en vez de restarla.
+La procedencia de la presión no está confirmada. La confianza
+operacional, como presión real en la aspiración de la bomba, es baja. La
+confianza en la reproducción de la celda es alta.</p>
+<p>Esa conclusión no autoriza cambiar el signo en el código. La
+propuesta queda al final, sin aplicar.</p>
+<h2 id="fórmula-original-y-equivalente">Fórmula original y
+equivalente</h2>
+<p>En QF-554H, G96:</p>
+<p><code>=(B73-((C20-C24)*B102))/B102</code></p>
+<p>con unidad escrita <code>ft</code> en H96.</p>
+<p>Algebra, con profundidad positiva hacia abajo:</p>
+<p><code>H_celda = P_sensor / G + TVD_sensor - TVD_intake</code></p>
+<p>La resta <code>(C20-C24)</code> es intake menos sensor. Como el
+sensor está más abajo, esa diferencia es negativa. Multiplicada por el
+gradiente y restada de la presión, equivale a sumar la columna.</p>
+<p>La hidrostática de una columna estática, si el sensor mide la presión
+en su TVD y la PIP es la presión en el intake, es la opuesta:</p>
+<p><code>P_intake = P_sensor - G * (TVD_sensor - TVD_intake)</code></p>
+<p><code>H_hidro = P_sensor / G - (TVD_sensor - TVD_intake)</code></p>
+<p>La diferencia es exacta:</p>
+<p><code>H_celda - H_hidro = 2 * (TVD_sensor - TVD_intake)</code></p>
+<p>El código productivo implementa la celda, no la hidrostática.
+<code>hipotesis_ct03.py</code> no entra en el motor.</p>
+<h2 id="desarrollo-dimensional">Desarrollo dimensional</h2>
+<ol type="1">
+<li><code>C20 - C24</code> está en ft. Son TVD, no MD.</li>
+<li><code>B102</code> sale de <code>densidad * 0.052</code>. Una
+densidad en lb/gal por 0,052 da psi/ft. El rótulo de las cinco hojas, en
+la columna C de esa fila, dice <code>psi*ft</code>.</li>
+<li>Si se tomara el rótulo al pie de la letra,
+<code>(ft) * (psi*ft)</code> sería psi·ft² y no se podría restar de una
+presión en psi. La resta con B73 solo cierra si B102 es psi/ft. El
+rótulo <code>psi*ft</code> es inconsistente con la aritmética. La
+aritmética, leída como psi/ft, sí cierra.</li>
+<li>El paréntesis queda en psi. Dividir por psi/ft da ft. H96 dice
+<code>ft</code>. Esa unidad del resultado es coherente.</li>
+<li>El equivalente en psi es <code>H_PIP * G</code>. No es una segunda
+medición.</li>
+</ol>
+<p>El factor 0,052 no se sustituyó. Un contraste con constantes del SI
+da 0,051948. La diferencia es de redondeo de campo y no explica el
+signo.</p>
+<h2 id="las-celdas-no-coinciden-entre-hojas">Las celdas no coinciden
+entre hojas</h2>
+<p>La misma álgebra está escrita en otra fila en cada hoja. La TVD no es
+un número tecleado: la columna C dice <code>Calculada</code> y apunta a
+una interpolación del survey (columna H de ese bloque, que indexa la TVD
+del survey a la MD del equipo). La MD, columna B, dice
+<code>introducir</code> y es un número. La fórmula de PIP cita la
+columna C, no la B.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hoja</th>
+<th>Pozo en B10</th>
+<th>Presión</th>
+<th>MD / TVD intake</th>
+<th>MD / TVD sensor</th>
+<th>Gradiente</th>
+<th>PIP</th>
+<th>THD que resta el PIP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td>QF-084</td>
+<td>B73 = 732 psi</td>
+<td>B20 = 2856.10 ft / C20 = 2653.177 ft, <code>=H365</code></td>
+<td>B24 = 2900.58 / C24 = 2678.822, <code>=H373</code></td>
+<td>B102 <code>=B100*0.052</code> = 0.43343073, rótulo
+<code>psi*ft</code></td>
+<td>G96 = 1714.496 ft = 743.115 psi</td>
+<td>G102 <code>=C18+G100+G98-G96</code> = 2083.217 ft</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td>QF-301</td>
+<td>B71 = 667 psi</td>
+<td>B19 = 2994.87 / C19 = 2534.604, <code>=H351</code></td>
+<td>B23 = 3038.12 / C23 = 2553.917, <code>=H359</code></td>
+<td>B100 <code>=B98*0.052</code> = 0.43347492, rótulo
+<code>psi*ft</code></td>
+<td>G94 = 1558.042 ft = 675.372 psi</td>
+<td>G100 <code>=C17+G98+G96-G94</code> = 1971.955 ft</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td>QF-147</td>
+<td>B72 = 821 psi</td>
+<td>B19 = 2813.57 / C19 = 2578.968, <code>=H323</code></td>
+<td>B23 = 2859.30 / C23 = 2604.498, <code>=H331</code></td>
+<td>B101 <code>=B99*0.052</code> = 0.43320001, rótulo
+<code>psi*ft</code></td>
+<td>G95 = 1920.729 ft = 832.060 psi</td>
+<td>G101 <code>=C17+G99+G97-G95</code> = 1517.209 ft</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td>QF-005</td>
+<td>B70 = 810 psi</td>
+<td>B19 = 3028.46 / C19 = 2769.659, <code>=H321</code></td>
+<td>B23 = 3061.68 / C23 = 2790.283, <code>=H329</code></td>
+<td>B99 <code>=B97*0.052</code> = 0.43301916, rótulo
+<code>psi*ft</code></td>
+<td>G93 = 1891.210 ft = 818.930 psi</td>
+<td>G99 <code>=C17+G97+G95-G93</code> = 1592.463 ft</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td>QF-306</td>
+<td>B70 = 607 psi</td>
+<td>B19 = 2796.27 / C19 = 2614.064, <code>=H321</code></td>
+<td>B23 = 2829.66 / C23 = 2634.603, <code>=H329</code></td>
+<td>B99 <code>=B97*0.052</code> = 0.43301916, rótulo
+<code>psi*ft</code></td>
+<td>G93 = 1422.325 ft = 615.894 psi</td>
+<td>G99 <code>=C17+G97+G95-G93</code> = 1814.511 ft</td>
+</tr>
+</tbody>
+</table>
+<p>La fricción no depende del PIP. En QF-554H, G100 usa el caudal B71,
+el diámetro B38 y la TVD de descarga C18. El PIP solo entra, con signo
+menos, en el THD. Un PIP más alto reduce el THD en los mismos pies y,
+aguas abajo, mueve el caudal de intersección.</p>
+<h2 id="comparación-celda-contra-hidrostática">Comparación celda contra
+hidrostática</h2>
+<p>En las cinco hojas <code>TVD_sensor &gt; TVD_intake</code>. La celda
+queda por encima de <code>P/G</code>. La hidrostática queda por
+debajo.</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hoja</th>
+<th style="text-align: right;">ΔTVD sensor−intake ft</th>
+<th style="text-align: right;">H celda ft</th>
+<th style="text-align: right;">H hidrostática ft</th>
+<th style="text-align: right;">Diferencia ft</th>
+<th style="text-align: right;">PIP celda psi</th>
+<th style="text-align: right;">PIP hidrostática psi</th>
+<th style="text-align: right;">Sensor psi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td style="text-align: right;">25.645</td>
+<td style="text-align: right;">1714.496</td>
+<td style="text-align: right;">1663.206</td>
+<td style="text-align: right;">51.291</td>
+<td style="text-align: right;">743.115</td>
+<td style="text-align: right;">720.885</td>
+<td style="text-align: right;">732</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td style="text-align: right;">19.314</td>
+<td style="text-align: right;">1558.042</td>
+<td style="text-align: right;">1519.414</td>
+<td style="text-align: right;">38.627</td>
+<td style="text-align: right;">675.372</td>
+<td style="text-align: right;">658.628</td>
+<td style="text-align: right;">667</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td style="text-align: right;">25.530</td>
+<td style="text-align: right;">1920.729</td>
+<td style="text-align: right;">1869.668</td>
+<td style="text-align: right;">51.060</td>
+<td style="text-align: right;">832.060</td>
+<td style="text-align: right;">809.940</td>
+<td style="text-align: right;">821</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td style="text-align: right;">20.623</td>
+<td style="text-align: right;">1891.210</td>
+<td style="text-align: right;">1849.964</td>
+<td style="text-align: right;">41.247</td>
+<td style="text-align: right;">818.930</td>
+<td style="text-align: right;">801.070</td>
+<td style="text-align: right;">810</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td style="text-align: right;">20.539</td>
+<td style="text-align: right;">1422.325</td>
+<td style="text-align: right;">1381.246</td>
+<td style="text-align: right;">41.078</td>
+<td style="text-align: right;">615.894</td>
+<td style="text-align: right;">598.106</td>
+<td style="text-align: right;">607</td>
+</tr>
+</tbody>
+</table>
+<p>La celda entrega una presión de intake mayor que la del sensor,
+aunque el intake está más somero. Bajo la convención de profundidad
+positiva hacia abajo, eso es inconsistente. La caché de Excel coincide
+con la celda, no con la hidrostática.</p>
+<p>Si el sensor estuviera 100 ft por encima del intake, con 800 psi y
+0,4 psi/ft, la celda daría 1900 ft y la hidrostática 2100 ft. A igual
+TVD las dos dan <code>P/G</code>. Esos dos casos no están en las hojas;
+están en <code>tests/test_auditoria_pip.py</code>.</p>
+<h2 id="md-y-tvd">MD y TVD</h2>
+<p>Usar la MD en la misma álgebra no es intercambiable. La separación
+vertical es menor que la medida a lo largo del pozo.</p>
+<table>
+<thead>
+<tr>
+<th>Hoja</th>
+<th style="text-align: right;">ΔMD ft</th>
+<th style="text-align: right;">ΔTVD ft</th>
+<th style="text-align: right;">Pies de más si se corrigiera con MD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td style="text-align: right;">44.480</td>
+<td style="text-align: right;">25.645</td>
+<td style="text-align: right;">18.835</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td style="text-align: right;">43.250</td>
+<td style="text-align: right;">19.314</td>
+<td style="text-align: right;">23.936</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td style="text-align: right;">45.730</td>
+<td style="text-align: right;">25.530</td>
+<td style="text-align: right;">20.200</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td style="text-align: right;">33.220</td>
+<td style="text-align: right;">20.623</td>
+<td style="text-align: right;">12.597</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td style="text-align: right;">33.390</td>
+<td style="text-align: right;">20.539</td>
+<td style="text-align: right;">12.851</td>
+</tr>
+</tbody>
+</table>
+<p>La hoja ya eligió la TVD. Ese elección es la adecuada para una
+corrección hidrostática. El problema demostrado no es MD contra TVD: es
+el signo con el que se combinan las dos TVD.</p>
+<h2 id="gradiente-densidad-y-gas">Gradiente, densidad y gas</h2>
+<p>La densidad es una mezcla lineal,
+<code>8.33 * ((BS&amp;W * ρ_agua / 8.33) + (1-BS&amp;W) * sg_T)</code>.
+El rótulo de BS&amp;W dice <code>%</code> y el número se multiplica como
+fracción. Es una densidad promedio de líquido, no una densidad in situ
+con gas libre.</p>
+<p>Presión de burbuja: G20, G19 o la celda equivalente, 130 psi en las
+cinco hojas. °API = 12 y presión de yacimiento = 1100 psi también están
+repetidos. No hay evidencia de que sean un PVT medido de cada pozo.</p>
+<p>Aun así, con los números escritos, la presión del sensor (607 a 821
+psi) y las dos PIP en psi (la de la celda y la hidrostática, 598 psi la
+más baja) quedan muy por encima de 130 psi. En estos cinco puntos el
+modelo no muestra gas libre en el sensor ni en el intake. La limitación
+sigue: un gradiente líquido único no describe un flujo multifásico si la
+presión cayera bajo la de burbuja o si el gas ya estuviera libre por
+otra razón. Eso no está soportado por estas celdas. Queda pendiente, no
+confirmado como error de estos cinco cálculos.</p>
+<h2 id="procedencia-de-la-presión">Procedencia de la presión</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hoja</th>
+<th>Celda</th>
+<th>Qué hay en el archivo</th>
+<th>Clasificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td>B73</td>
+<td>Número 732, unidad <code>psi</code>, sin comentario, sin
+fórmula</td>
+<td>No confirmado</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td>B71</td>
+<td>Número 667, unidad <code>psi</code></td>
+<td>No confirmado</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td>B72</td>
+<td>Número 821, unidad <code>psi</code></td>
+<td>No confirmado</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td>B70</td>
+<td>Número 810, unidad <code>psi</code></td>
+<td>No confirmado</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td>B70</td>
+<td>Número 607, unidad <code>psi</code></td>
+<td>No confirmado</td>
+</tr>
+</tbody>
+</table>
+<p>No hay identificador de instrumento, ni fecha de la medición, ni cita
+de un sistema de adquisición. B6 es <code>=TODAY()</code> en cuatro
+hojas. En QF-549HST B6 es la fecha 2017-09-06; eso no demuestra que sea
+el día de la presión. No se clasifica ningún pozo como sensorless. La
+existencia de un número llamado «Presión de Sensor» tampoco demuestra
+que sea una medición de fondo.</p>
+<h2 id="cinco-planos-separados">Cinco planos, separados</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Plano</th>
+<th>Dictamen</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Álgebra</td>
+<td>Confirmado</td>
+<td>G96 y las celdas homólogas equivalen a
+<code>P/G + TVD_sensor - TVD_intake</code>. Python reproduce la
+caché.</td>
+</tr>
+<tr>
+<td>Dimensiones</td>
+<td>Confirmado para la operación psi/ft → ft. Inconsistente el rótulo
+<code>psi*ft</code></td>
+<td>La resta con B73 no cierra si el gradiente fuera un producto psi·ft.
+H96 dice ft.</td>
+</tr>
+<tr>
+<td>Física bajo columna estática y TVD hacia abajo</td>
+<td>Inconsistente</td>
+<td>Las cinco hojas tienen el sensor más profundo y la celda aumenta la
+presión hacia el intake.</td>
+</tr>
+<tr>
+<td>Procedencia de los datos</td>
+<td>No confirmado</td>
+<td>Valores tecleados, sin instrumento. PVT repetido en las cinco
+hojas.</td>
+</tr>
+<tr>
+<td>Multifásico</td>
+<td>Pendiente, sin gas libre visible en estos puntos</td>
+<td>Sensor y ambas PIP en psi están sobre 130 psi. El gradiente es de
+líquido promedio.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pruebas">Pruebas</h2>
+<p><code>tests/test_auditoria_pip.py</code>, diez pruebas, sin tocar la
+fórmula. Cubren las cinco hojas, sensor más abajo, sensor más arriba,
+igual profundidad, gradiente nulo, presión ausente, la unidad
+<code>psi*ft</code> rechazada sin conversión, el rótulo del gradiente,
+MD distinta de TVD, y el menos del THD. El Excel conserva la huella
+citada.</p>
+<h2 id="propuesta-no-aplicada">Propuesta, no aplicada</h2>
+<p>No cambiar el signo en <code>pip_en_ft</code> con esta auditoría
+sola. Falta confirmar que B73, B71, B72 o B70 es la presión sin corregir
+en la TVD del sensor, y no un valor que alguien ya hubiera llevado al
+intake.</p>
+<p>Si esa confirmación llega, el cambio sería sustituir
+<code>(TVD_intake - TVD_sensor)</code> por
+<code>(TVD_sensor - TVD_intake)</code> dentro de la corrección,
+conservar la transcripción actual como referencia de la celda, y
+recalcular THD y Q* sin presentarlos como una orden de operación. Hasta
+entonces CT-03 sigue abierta.</p>
+<p>Sí conviene, cuando se revise el modelo, dejar escrito que la unidad
+física de B102 es psi/ft y que el rótulo <code>psi*ft</code> no se usa.
+No hace falta tocar el 0,052 para explicar el signo.</p>
+<p>No usar la MD en la corrección. No tratar la PIP en ft como si fuera
+psi. No inferir ausencia de sensor.</p>
+</body></html>

@@ -1,0 +1,26 @@
+{
+  "controles": [
+    {
+      "id": "bfpd",
+      "nombre": "BFPD",
+      "unidad": "BFPD",
+      "rol": "entrada",
+      "via": "variable",
+      "paso": 1,
+      "minimo": 5180.0,
+      "maximo": 5180.0,
+      "leyenda": "En las 28 filas el BFPD almacenado es constante 5180. El mando permite simular otro caudal de fluidos; no es un límite de bomba."
+    },
+    {
+      "id": "bwpd",
+      "nombre": "BWPD",
+      "unidad": "BFPD",
+      "rol": "entrada",
+      "via": "variable",
+      "paso": 0.1,
+      "minimo": 5099.4,
+      "maximo": 5099.4,
+      "leyenda": "En las 28 filas el BWPD almacenado es constante 5099.4. BOPD se recalcula como BFPD − BWPD."
+    }
+  ]
+}

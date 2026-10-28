@@ -1,0 +1,20 @@
+{
+  "dataset_id": "BES-jun",
+  "modelos": [
+    {
+      "id": "M-BES-FLUIDO",
+      "version": "transcripcion-1",
+      "funcion": "modelo_deterministico.fluidos_bes_jun.evaluar_fluido"
+    },
+    {
+      "id": "M-BES-BALANCE",
+      "version": "transcripcion-1",
+      "funcion": "modelo_deterministico.balance_bes_jun.evaluar_balance"
+    },
+    {
+      "id": "M-BES-INTERSECCION",
+      "version": "transcripcion-1",
+      "funcion": "modelo_deterministico.interseccion_bes_jun.caudal_a_producir"
+    }
+  ]
+}

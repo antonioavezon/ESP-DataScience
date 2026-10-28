@@ -1,0 +1,596 @@
+pages=6
+
+===== PAGE 1 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 1
+ 
+ 
+ESP . Diseño básico y selección 
+Introducción 
+ 
+A continuación se detallan los pasos básicos a seguir para calcular y analizar las variables de 
+diseño de una instalación de bombeo electrosumergible (ESP):  
+ 
+1. Datos de producción de pozo e instalación actual 
+2. Caudal máximo de extracción(potencial de producción) 
+3. Carga dinámica total(TDH o Total Dynamic Head) 
+4. Selección de bomba 
+5. Dimensiones de la bomba(cálculo de número de etapas) 
+6. Selección del motor(cálculo de potencia) 
+7. Determinación del cable de potencia 
+8. Cálculo de voltaje y potencia en superficie para seleccionar tablero y transformador 
+ 
+(*) Se tomará como ejemplo los datos de un pozo de la Cuenca del Golfo San jorge, Patagonia Argentina 
+ 
+1- Datos del pozo 
+ 
+a) Caudal bruto actual =  80 m3/d 
+ 
+f) Presión de boca de pozo = 10 kg/cm2 
+b) % agua = 95  
+ 
+ 
+ 
+g) Punzado/s = 1750-1755 mbbdp 
+c) ρ fluido(agua) = 1.01 gr/cm3 
+ 
+h) Ø casing = 5 ½ “ 15.5 # 
+d) Nivel dinámico =  700 mbbdp 
+ 
+i) Ø tubing =  27/8” 6.5 # 
+e) Nivel estático =  440 mbbdp 
+         Mbbdp= metros bajo boca de pozo 
+ 
+ 
+2-Caudal máximo de extracción (Indice de productividad) 
+ 
+Se determinará el caudal máximo que extraeremos del pozo, considerando un nivel dinámico 
+por sobre el punzado de 200 m(*) aplicando el concepto del índice de productividad (IP)* 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(*) se considera un fluido monofásico. Para mayor información recurrir al adjunto. 
+ 
+“ Indice de productividad” 
+ 
+El caudal teórico a extraer será: 340 m3/d @ ND= 1550 mbbdp 
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+1100
+1200
+1300
+1400
+1500
+1600
+1700
+1800
+0
+50
+100
+150
+200
+250
+300
+350
+400
+caudal[m3/d]
+nivel[mbbdp]
+Nivel dinámico @ 80 m3/d
+ND= 1550m @ 340 m3/d 
+
+
+===== PAGE 2 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 2
+ 
+ 
+ESP . Diseño básico y selección 
+3-Carga dinámica total(TDH o Total Dynamic Head) 
+ 
+El cálculo del TDH permitirá determinar el Nº de etapas requeridas en la bomba. Este valor 
+representa la diferencia de presión a la que va a estar sometida la bomba expresado en 
+altura de columna de líquido. 
+El mismo está dado por los siguientes términos: 
+ 
+a) Pcf :  
+Pérdida de carga por fricción en los tubings 
+b) Pbdp : Presión de boca de pozo 
+c) P.Nivel: Presión debido a la columna de líquido a elevar 
+ 
+TDH=  Pbdp + Pcf + Nd [m o ft] 
+ 
+ 
+a)- Pcf ( Pérdida de carga por fricción en los tubings) 
+ 
+Para calcular la pérdida de carga por fricción, debido al flujo por el interior de los tbgs se 
+puede usar la Ecuación de Hazen Williams, la cual es aplicable para agua a 20ºC. 
+ 
+ 
+8655
+.4
+85
+.1
+85
+.1
+1
+.
+3.
+34
+.
+100
+.
+083
+.2
+ID
+Q
+C
+F
+
+
+
+
+
+
+
+
+=
+ 
+ 
+ 
+ 
+[
+]
+bpd
+d
+m
+Q
+2140
+340
+3
+≅
+=
+  
+ 
+Para un tubing Ø 27/8” de ID= 2.441 pulg la pérdida de carga es: 
+ 
+ 
+
+
+
+
+=
+
+
+
+
+
+
+
+
+=
+ft
+ft
+F
+1000
+5,
+40
+441
+,2
+1
+.
+3,
+34
+2140
+.
+120
+100
+.
+083
+,2
+8655
+.4
+85
+.1
+85
+.1
+ 
+ 
+Esto significa que la pérdida de carga por fricción en el interior de los tubings es igual a 40.5 
+ft(pies) de columna de líquido por cada 1000 ft de tubings(o 4.047 m/ 100 m de tbgs). 
+ 
+m
+mtbg
+mtbg
+m
+Pcf
+70
+1700
+.
+0404
+,0
+≅
+
+
+
+
+=
+          
+ 
+b)-  Pbdp (Presión de boca de pozo, en m de columna de líquido) 
+ 
+[ ]
+m
+x
+cm
+gr
+cm
+kg
+x
+cm
+gr
+cm
+kg
+presión
+m
+Pbdp
+100
+10
+1
+.
+10
+10
+3
+2
+3
+2
+=
+
+
+
+
+
+
+
+
+=
+
+
+
+
+
+
+
+
+=
+ρ
+ 
+ 
+ 
+c)-  P.Nivel ( Presión debido a la columna de líquido a elevar) 
+ 
+P.Nivel = 1550 m  
+ 
+TDH= 70 m + 100 m + 1550 m = 1720 m 
+F = pérdida de carga en ft/1000 ft 
+Q = caudal [bpd] 
+C =120 
+
+
+===== PAGE 3 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 3
+ 
+ 
+ESP . Diseño básico y selección 
+ 
+ 
+ 
+ 
+ 
+4- Selección de bomba 
+ 
+La selección de la bomba está basada en el caudal que podrá aportar el pozo para una 
+determinada carga dinámica y según las restricciones del tamaño del casing. 
+La opción mas económica normalmente se da eligiendo equipos de series grande(diámetros 
+grandes) las cuales serán restringidas por el Ø del casing 
+La bomba seleccionada deberá ser aquella en que el caudal teórico a extraer se encuentre 
+entre los límites óptimos de trabajo de la misma y cerca de la máxima eficiencia. En caso de 
+tener dos o mas bombas cerca de la máxima eficiencia, la selección final se basará en: 
+a) 
+Comparación de precios 
+b) 
+Potencia requerida( de la cual depende el consumo y el precio del motor) 
+Para este caso seleccionaremos una bomba Serie 400(O.D 4 pulg) para casing de 51/2” de 
+O.D. 
+El modelo es DX-3000 que cumple con las consideraciones antes mencionadas.(ver curva 
+adjunta a continuación) 
+DX: ( Serie 400  OD: 4”) 
+3000: 3000 BPD @ 50 Hz 
+ 
+ 
+ 
+ 
+ 
+ 
+10
+100
+1000
+1000
+10000
+caudal [bpd]
+perdida por fricción[ft/1000 ft de tbg]
+2 3/8" OD (1.995 I.D)
+2 7/8" OD (2.441 I.D)
+3 1/2" OD (2.992 I.D)
+Representación gráfica de la ecuación de Hazen Williams para distintos diámetros de tubings 
+
+
+===== PAGE 4 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 4
+ 
+ 
+ESP . Diseño básico y selección 
+ 
+ 
+ 
+En la curva de performance de la bomba se pueden observar tres curvas características 
+correspondientes al comportamiento de 1(una) etapa de la bomba modelo DX-3000: 
+a. 
+BHP : potencia consumida por la etapa (rojo) 
+b. 
+Head capacity : Capacidad de elevación(azul) 
+c. 
+Eficiencia energética(verde) 
+ 
+A partir de esto podemos determinar la capacidad de elevación(en m de columna de líquido) 
+de la etapa. Como en cualquier curva característica de bombas centrífugas se puede observar 
+como varía el caudal en función de la altura de elevación (es decir respecto a la contrapresión 
+que actúa sobre la etapa). 
+Para un caudal de 340 m3/d :  
+ 
+Epe (elevación por etapa) = 4.4 m/etapa (ver gráfico 1) 
+ 
+Siguiendo el mismo procedimiento podemos determinar la potencia consumida por una 
+etapa: 
+ 
+Hp/etapa = 0.36 Hp/etapa 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+===== PAGE 5 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 5
+ 
+ 
+ESP . Diseño básico y selección 
+5-Dimensiones de la bomba(cálculo de número de etapas) 
+ 
+Una vez calculada la capacidad de elevación de una etapa y sabiendo que la bomba deberá 
+vencer una presión(TDH) equivalente a 1700 m de columna de líquido, podemos determinar 
+el Nº de etapas que necesitaremos: 
+ 
+ 
+[ ]
+[
+]
+[
+]
+[
+]
+etapas
+etapa
+m
+m
+etapa
+m
+epe
+m
+TDH
+etapas
+N
+386
+/
+4.4
+1700
+/
+º
+≅
+=
+=
+       
+ 
+Por catálogo podríamos usar 4 cuerpos de bomba de 96 etapas, dando un total de 384 etapas  
+ 
+6-Selección del motor(cálculo de potencia) 
+ 
+Existe una gran variedad de motores en el mercado, y si bien la selección básica se realiza a 
+través de la potencia requerida, intervienen en la misma el rango de voltaje, la frecuencia, la 
+profundidad(temperatura), aplicaciones especiales para ambiente corrosivos, etc. 
+La potencia requerida por el motor se calcula determinando la potencia que consume cada 
+etapa(por curva) y multiplicándola por el Nº de etapas. 
+ 
+[
+]
+Hp
+etapas
+etapa
+Hp
+requeridos
+Hp
+138
+384
+/
+36
+.0
+_
+≅
+×
+=
+ 
+ 
+Seleccionaremos dos motores Serie 456 de 50Hz con las siguientes características: 
+ 
+ 
+- UT(upper tandem)  
+73 Hp  
+1042 Volt 
+44.5 Amp 
+ 
+ 
+- CT( Center tandem) 
+73 Hp          1042 Volt  
+ 44.5 Amp 
+ 
+7-Determinación del cable de potencia 
+ 
+La selección del mismo se realiza teniendo en cuenta la corriente máxima consumida y que la 
+caida de voltaje sea inferior a aproximadamente 10 volt/100 m . Para una corriente de 44.5 
+amp podríamos elegir un cable #4 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+===== PAGE 6 =====
+Complemento teórico 
+ 
+ 
+www.oilproduction.net by Marcelo Hirschfeldt 
+ 
+- 6
+ 
+ 
+ESP . Diseño básico y selección 
+8 - Seleccionar tablero y transformador 
+ 
+Para determinar el voltaje total necesario debemos considerar además la caida de voltaje en 
+el cable. 
+Por tabla tenemos que para 45 amp, la caída de voltaje es de 21 volt/1000 ft de cable, es 
+decir 7 volt/100 m. 
+Si consideramos que el equipo será instalado en 1700 m de profundidad: 
+ 
+ 
+Volt en cable = 1700 m x 7[volt/m]/ 100 m = 119 Volt 
+ 
+El voltaje requerido en superficie es: 
+ 
+ 
+Volt total= 2x1042 Volt + 119 Volt = 2203 Volt 
+ 
+KVA = (Volts x Amp x 1.732)/1000 
+KVA= (2203 Volt x 45 Amp x 1.732)/1000 
+KVA = 171 KVA 
+Podríamos usar un transformador de 180 KVA 
+ 
+ 
+ 
+Referencias: 
+ 
+• 
+REDA – Basic equipment Selection and Catalog 
+• 
+Centrilift Web Site www.centrilift.com 
+• 
+ESP – Catalog 
+• 
+Petroleum Engineering Handbook. Bradley 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

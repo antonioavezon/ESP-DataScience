@@ -1,0 +1,5 @@
+# Dependencias de la aplicación web. Se instalan en el mismo .venv del
+# repositorio HUC (Fedora 43, Python 3.14). No sustituyen al requirements.txt
+# científico de la raíz.
+Django==6.0.9
+httpx==0.28.1

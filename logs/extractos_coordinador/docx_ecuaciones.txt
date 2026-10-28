@@ -1,0 +1,151 @@
+# Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx
+parrafos=143 tablas=1
+[p1|Normal] Modelo SensorLess 
+[p2|Normal] para inferir PIP en pozos ESP 
+[p3|Normal] TECHNICAL PAPER AZ-2026
+[p4|font-claude-response-body] TECHNICAL FIELD
+[p5|font-claude-response-body] The present disclosure relates to a system and method for inferring pump intake pressure (PIP) in Electric Submersible Pump (ESP) systems operating without dedicated downhole sensing instrumentation, utilizing reliable surface-acquired measurements from a Variable Frequency Drive (VFD) and tubing head pressure (THP) or casing head pressure (CHP). The disclosed system and method are configured to generate a physically traceable and computationally stable estimate of pump intake pressure (PIP) suitable for real-time control and operational optimization applications, including, without limitation, cavitation prevention, free gas interference mitigation, and operational trip avoidance within the Electric Submersible Pump (ESP) system.
+[p6|List Bullet] 2. OPERATIONAL SIGNALS AND CONFIGURATION DATA
+[p7|List Bullet] 2.1 Surface-Acquired Input Signals
+[p8|List Bullet] The following surface-acquired signals constitute the primary input measurements to the sensorless estimation model, all obtained without reliance upon dedicated downhole sensing instrumentation:
+[p9|List Bullet] Real Power Input (P_in): the real power output of the Variable Frequency Drive (VFD), expressed in kilowatts (kW), wherein the directly measured power value is preferred over the commanded power setpoint to ensure estimation accuracy and physical traceability of the hydraulic balance calculation;
+[p10|List Bullet] Rotational Speed or Frequency (N or f): the pump rotational speed expressed in revolutions per minute (rpm) or the operational frequency expressed in hertz (Hz), as acquired from the Variable Frequency Drive (VFD) output signal;
+[p11|List Bullet] Motor Current, Voltage, and Power Factor (I, V, PF) (optional): the motor current expressed in amperes (A), the motor supply voltage expressed in volts (V), and the power factor (PF), utilized as supplementary input signals for cross-validation of primary estimation outputs and for operational diagnostic purposes; and
+[p12|List Bullet] Tubing Head Pressure or Casing Head Pressure (THP or CHP) (strongly recommended): the fluid pressure measured at the wellhead tubing head or casing head, expressed in pounds per square inch absolute (psia) or kilopascals (kPa), utilized to anchor the hydraulic balance equations and provide a physically traceable surface pressure boundary condition for the pump intake pressure (PIP) estimation framework.
+[p14|List Bullet] 2.2 System Configuration Data
+[p15|List Bullet] The following system configuration data parameters are required as fixed or periodically updated inputs to the sensorless estimation model:
+[p16|List Bullet] Pump Base Characteristic Curves at Reference Rotational Speed (N₀): the manufacturer-supplied hydraulic head characteristic curve H₀(Q) and pump operational efficiency characteristic curve η₀(Q), representing hydraulic head and operational efficiency as functions of volumetric flow rate (Q) at the reference rotational speed (N₀), wherein said characteristic curves are converted into polynomial representations for computational efficiency within the processing unit of the Intelligent Controller (IC);
+[p17|List Bullet] Pump Setting Depth and Hydraulic Elevation (Δz): the vertical distance between the pump setting depth and the surface reference datum, expressed in meters (m), utilized as a fixed geometric parameter in the hydraulic balance and fluid column pressure calculations;
+[p18|List Bullet] Production Tubing String Geometry: the internal diameter of the production tubing string (D), the cross-sectional flow area (A), and the hydraulic length of the production tubing string (L), expressed in meters (m) and square meters (m²) respectively, utilized for the computation of friction losses and fluid column pressure distribution within the wellbore; and
+[p19|List Bullet] Effective Fluid Properties and Physical Constants: the effective mixture density of the produced fluid (ρ), expressed in kilograms per cubic meter (kg/m³), representing the density-weighted average of the produced fluid mixture comprising crude oil, formation water, and free gas fractions; and the gravitational acceleration constant (g), fixed at the standard value of 9.80665 m/s², utilized as a fundamental physical constant in all hydraulic balance and pressure gradient calculations.
+[p22|List Bullet] 2.3 Calibration and Adjustment Variables
+[p23|List Bullet] The following calibration and adjustment variables are configurable parameters incorporated within the sensorless estimation model to account for system-specific operational characteristics, installation-dependent losses, and multiphase flow effects that are not fully characterized by the base physical-theoretical model. Said calibration variables are periodically updated in accordance with field operational data and production test results to maintain estimation accuracy over the operational lifespan of the hydrocarbon-producing well:
+[p24|List Bullet] Lumped Tubing Friction Loss Coefficient (k_f): a calibrable scalar coefficient governing the lumped friction loss model within the production tubing string, expressed in accordance with the quadratic friction loss relationship k_f·Q², wherein the total tubing friction loss (FFT) is computed as a function of the lumped friction loss coefficient (k_f) and the square of the estimated volumetric flow rate (Q), thereby accounting for viscous and turbulent friction losses distributed along the hydraulic length of the production tubing string without requiring explicit resolution of the distributed friction loss profile;
+[p25|List Bullet] Free Gas Interference Factor (k_g): a calibrable dimensionless correction factor configured to account for the reduction in hydraulic head and pump operational efficiency induced by the presence of free gas within the pump intake flow stream, wherein the free gas interference factor (k_g) is applied as a multiplicative correction to the manufacturer-supplied hydraulic head characteristic curve H₀(Q) and operational efficiency characteristic curve η₀(Q) to reflect the degraded pumping performance under multiphase flow conditions comprising free gas fractions;
+[p26|List Bullet] Total Electromechanical Efficiency (η_em): a calibrable dimensionless efficiency parameter representing the combined electrical and mechanical energy conversion efficiency of the motor and Variable Frequency Drive (VFD) assembly, wherein the total electromechanical efficiency (η_em) is utilized to convert the surface-measured real power input (P_in) to the net mechanical power delivered to the pump impeller stages, accounting for resistive losses within the motor windings, mechanical friction losses within the motor bearings, and harmonic distortion losses introduced by the Variable Frequency Drive (VFD); and
+[p27|List Bullet] Non-Hydraulic Power Loss Polynomial (P_loss(N)): a calibrable polynomial function of pump rotational speed (N) configured to model the non-hydraulic power losses within the Electric Submersible Pump (ESP) system, including, without limitation, mechanical bearing friction losses, seal friction losses, and residual electrical losses not accounted for by the total electromechanical efficiency parameter (η_em), wherein said polynomial function is expressed as a function of pump rotational speed (N) and is periodically updated based on field operational data to maintain the accuracy of the net hydraulic power estimation throughout the operational lifespan of the pump.
+[p28|Heading 1] 3. Nomenclatura y unidades
+[p30|Heading 1] 4. Set de ecuaciones (Modelo algebraico – MVP)
+[p31|Normal] El modelo algebraico resuelve el caudal Q a partir de la potencia medida P_in y la velocidad N. Luego calcula PIP usando un balance hidráulico hacia superficie (THP). Este enfoque es implementable con búsqueda 1D (bisección/Newton) y suele ser suficiente para un primer despliegue.
+[p32|Heading 2] 4.1 Conversión Hz → rpm (si aplica)
+[p33|No Spacing] N = 120·f / p
+[p34|Heading 2] 4.2 Escalamiento de curvas por afinidad
+[p35|Normal] Definir λ = N / No y el caudal equivalente Q* = Q / λ.
+[p36|No Spacing] λ = N / No
+[p37|No Spacing] Q* = Q / λ
+[p38|Normal] Head ideal y eficiencia base:
+[p39|No Spacing] H_ideal(Q,N) = λ² · Ho(Q*)
+[p40|No Spacing] η_p,base(Q,N) = ηo(Q*)
+[p41|Heading 2] 4.3 Correcciones lumped (gas/viscosidad/desgaste)
+[p42|Normal] Para una versión inicial, usar correcciones multiplicativas simples, calibrables por pozo. Se recomienda mantener pocas 'perillas' para evitar sobre-ajuste.
+[p43|No Spacing] H(Q,N)    = H_ideal(Q,N) · C_H(k_g)
+[p44|No Spacing] η_p(Q,N) = η_p,base(Q,N) · C_η(k_g) · η_shift
+[p46|Normal] Ejemplo mínimo:
+[p47|No Spacing] C_H(k_g) = 1 - k_g   (0 ≤ k_g ≤ 0.4)
+[p48|No Spacing] C_η(k_g)  = 1 - β·k_g   (β ≈ 1)
+[p49|Heading 2] 4.4 Diferencial de presión y potencia hidráulica
+[p50|No Spacing] ΔP_pump = ρ·g·H(Q,N)
+[p51|No Spacing] P_hyd      = ρ·g·Q·H(Q,N)
+[p52|Heading 2] 4.5 Modelo de potencia medida por el VFD (ecuación clave)
+[p53|Normal] Se modela la potencia de entrada como potencia hidráulica ajustada por eficiencias, más pérdidas no hidráulicas.
+[p54|No Spacing] P_in,pred(Q,N) = P_hyd / (η_p(Q,N)·η_em) + P_loss(N)
+[p55|Normal] Forma típica para P_loss(N):
+[p56|No Spacing] P_loss(N) = a0 + a1·N + a2·N²
+[p57|Heading 2] 4.6 Modelo de fricción en tubing (lumped)
+[p58|Normal] Para MVP, se usa un modelo cuadrático en caudal:
+[p59|No Spacing] ΔP_tub(Q) = k_f · Q²
+[p60|Heading 2] 4.7 Cálculo de PIP a partir de THP
+[p61|Normal] Balance de presión desde bomba hasta superficie. Con THP medido, el estimado de PIP queda:
+[p62|No Spacing] PIP = THP + ρ·g·Δz + ΔP_tub(Q) - ΔP_pump(Q,N)
+[p63|Heading 2] 4.8 Resolución numérica del caudal Q (búsqueda 1D)
+[p64|Normal] Resolver Q en cada instante imponiendo que la potencia predicha coincida con la potencia medida:
+[p65|No Spacing] F(Q) = P_in - P_in,pred(Q,N) = 0
+[p66|Normal] Método recomendado: bisección (robusto) en un rango físico [Q_min, Q_max]. Una vez obtenido Q, calcular PIP con la ecuación 4.7.
+[p67|Heading 1] 5. Observador (EKF/MHE) – versión robusta
+[p68|Normal] Para mayor estabilidad ante transitorios (rampas, cambios de choke, gas intermitente) y para adaptación automática de parámetros, se recomienda implementar un observador (EKF/UKF o MHE) con estados físicos interpretables.
+[p69|Heading 2] 5.1 Definición de estados
+[p70|No Spacing] x = [ Q, PIP, k_f, k_g, η_shift ]ᵀ
+[p71|Heading 2] 5.2 Dinámica de estados (random-walk)
+[p72|No Spacing] x_{k+1} = x_k + w_k
+[p73|Normal] donde w_k representa variaciones lentas (cambios de fluido, desgaste, etc.).
+[p74|Heading 2] 5.3 Mediciones y ecuaciones de salida
+[p75|Normal] Vector de mediciones mínimo recomendado:
+[p76|No Spacing] y = [ P_in, THP ]ᵀ
+[p78|Normal] Modelos de medición:
+[p79|No Spacing] P_in,hat = (ρ·g·Q·H(Q,N,k_g)) / (η_p(Q,N,k_g)·η_em) + P_loss(N)
+[p80|No Spacing] THP_hat = (PIP + ρ·g·H(Q,N,k_g)) - ρ·g·Δz - k_f·Q²
+[p82|Heading 1] 6. Calibración y validación (recomendado)
+[p83|Normal] Para llevar el modelo a producción, se recomienda una calibración por familia de bomba y por tipo de pozo:
+[p84|List Number] Seleccionar pozos con PIP gauge (aunque sea temporal) para ajustar η_em y P_loss(N).
+[p85|List Number] Ajustar k_f para que el balance THP_hat siga THP en condiciones estables.
+[p86|List Number] Ajustar sensibilidad de k_g usando eventos de gas (gas interference/gas lock) observados en firmas de kW, I y estabilidad.
+[p87|List Number] Validar error y coherencia física: PIP no debe ser negativa, Q debe ser consistente con límites de bomba, y la respuesta a cambios de Hz debe ser monotónica.
+[p88|Heading 1] 7. Notas de implementación y guardrails
+[p89|List Bullet] Unidades: trabajar internamente en SI (Pa, m³/s, W) para evitar errores; convertir a psi y bpd solo en visualización.
+[p90|List Bullet] Filtro: aplicar filtro de media móvil o exponencial a P_in para reducir ruido (sin retraso excesivo).
+[p91|List Bullet] Histéresis en decisiones: no ajustar setpoints por pequeñas variaciones (evita hunting).
+[p92|List Bullet] Confidence score: si la consistencia P_in vs P_in,pred se degrada, forzar modo conservador (bajar Hz lentamente y mantener).
+[p93|List Bullet] Rangos físicos: imponer límites a Q, k_g y η_shift para evitar soluciones no físicas.
+[p94|Heading 1] 8. Resumen del flujo (MVP)
+[p95|List Number] Leer P_in (kW) y N (rpm o Hz).
+[p96|List Number] Resolver Q con F(Q)=0 usando la ecuación de potencia.
+[p97|List Number] Calcular ΔP_pump(Q,N) = ρ·g·H(Q,N).
+[p98|List Number] Calcular ΔP_tub(Q) = k_f·Q².
+[p99|List Number] Calcular PIP = THP + ρ·g·Δz + ΔP_tub(Q) - ΔP_pump(Q,N).
+[p100|List Number] Aplicar guardrails/confidence antes de usar PIP para control/optimización.
+[p102|Normal] Nota: Este set es deliberadamente compacto para facilitar despliegue. Si se requiere mayor fidelidad, se pueden reemplazar k_f·Q² por Darcy–Weisbach y agregar corrección de viscosidad/gas con correlaciones específicas del fabricante.
+[p103|Normal] Reinvindicaciones  independientes
+[p104|Normal] - Método para estimar la presión de admisión de bomba (PIP) en un sistema de bombeo electrosumergible (ESP) sin sensor de fondo, que comprende:
+[p105|Normal] - medir la potencia real de entrada (P_in) y la velocidad de la bomba (N) desde el variador de frecuencia (VFD);
+[p106|Normal] - resolver el caudal (Q) imponiendo la condición P_in  approx P_in,pred(Q,N), donde P_in,pred se calcula como potencia hidráulica ajustada por eficiencia y pérdidas no hidráulicas;
+[p107|Normal] - calcular el diferencial de presión de bomba Delta P_pump=rho . g .H(Q,N);
+[p108|Normal] - calcular la pérdida de presión en tubing Delta P_tub =kf .Q^2;
+[p109|Normal] - estimar la presión de admisión de bomba como:
+[p110|Normal]  PIP=THP+ rho . g .Delta z + Delta Ptub.(Q) - Delta Ppump.(Q,N)
+[p111|Normal] - donde THP es la presión de cabeza medida en superficie, y Delta z la elevación entre bomba y superficie.
+[p113|Normal] Reivindicaciones dependientes
+[p114|Normal] - El método de la reivindicación 1, en el que la resolución de Q se realiza mediante búsqueda unidimensional (bisección o Newton) en un rango físico [Q_min, Q_max].
+[p115|Normal] - El método de la reivindicación 1, en el que el head y la eficiencia de la bomba se corrigen por un factor de interferencia de gas kg, de manera que:
+[p116|Normal] - H(Q,N)    =Hideal. (Q,N) .(1-kg),
+[p117|Normal] - etap(Q,N)=etabase .(Q,N) .(1-beta .kg).
+[p118|Normal] - El método de la reivindicación 1, en el que las pérdidas no hidráulicas se modelan como polinomio en N:
+[p119|Normal] Ploss(N)=a0+a1 .N+a2. N^2 o por Darcy-Weisback
+[p120|Normal] -- El método de la reivindicación 1, que además comprende aplicar un observador estocástico (EKF, UKF o MHE) con estados físicos interpretables [Q,PIP,kf,kg,etashift] para robustez ante transitorios.
+[p121|Normal] - El método de la reivindicación 1, que incluye un score de confianza calculado a partir de la consistencia entre Pin y Pin,pred, y entre THP y THP_hat, donde si el score cae por debajo de un umbral se activa un modo conservador de control.
+[p122|Normal] - El método de la reivindicación 1, en el que las señales de entrada se filtran mediante un filtro de media móvil o exponencial para reducir ruido sin retraso excesivo.
+[p123|Normal] - El método de la reivindicación 1, en el que se imponen guardrails (barandas) físicos: PIP ≥ 0, Q dentro de límites de bomba, y respuesta monotónica a cambios de N.
+[p124|Normal] - Method for estimating pump inlet pressure (PIP) in an electric submersible pump (ESP) system without a downhole sensor, comprising:
+[p125|Normal] - measuring actual input power (Pin) and pump speed (N) from the variable frequency drive (VFD);
+[p126|Normal] - solving for flow rate (Q) by imposing the condition Pin  es approx Pin,pred(Q,N), where Pin,pred is calculated as hydraulic power adjusted for efficiency and non-hydraulic losses;
+[p127|Normal] - calculating the pump pressure differential Delta Ppump=rho . g .H(Q,N);
+[p128|Normal] - calculate the pressure loss in tubing Delta Ptub =kf .Q^2;
+[p129|Normal] - estimate the pump inlet pressure as:
+[p130|Normal]  PIP=THP+ rho . g .Delta z + Delta Ptub.(Q) - Delta Ppump.(Q,N)
+[p131|Normal] - where THP is the head pressure measured at the surface, and Delta z is the elevation between the pump and the surface.
+[p132|Normal] Dependent claims
+[p133|Normal] - The method of claim 1, wherein the resolution of Q is performed by means of a one-dimensional search (bisection or Newton) in a physical range [Q_min, Q_max].
+[p134|Normal] - The method of claim 1, wherein the head and efficiency of the pump are corrected by a gas interference factor kg, such that:
+[p135|Normal] - H(Q,N)      =Hideal. (Q,N) .(1-kg),
+[p136|Normal] - etap(Q,N) =etabase .(Q,N) .(1-beta .kg).
+[p137|Normal] - The method of claim 1, wherein the non-hydraulic losses are modeled as a polynomial in N:
+[p138|Normal] Ploss(N)=a0+a1 .N + a2. N^2 o Darcy-Weisback
+[p139|Normal] -- The method of claim 1, which further comprises applying a stochastic observer (EKF, UKF, or MHE) with interpretable physical states [Q,PIP,kf,kg,etashift] for robustness against transients.
+[p140|Normal] - The method of claim 1, which includes a confidence score calculated from the consistency between Pin and Pin,pred, and between THP and THP_hat, where if the score falls below a threshold, a conservative control mode is activated.
+[p141|Normal] - The method of claim 1, wherein the input signals are filtered using a moving average or exponential filter to reduce noise without excessive delay.
+[p142|Normal] - The method of claim 1, wherein physical guardrails are imposed: PIP ≥ 0, Q within pump limits, and monotonic response to changes in N.
+
+## TABLA 1 filas=14 cols=4
+T1R1: Símbolo || Descripción || Unidad SI || Comentario
+T1R2: P_in || Potencia real de entrada (VFD) || W || Convertir de kW a W
+T1R3: N || Velocidad || rpm || Si solo hay Hz: N = 120·f/p
+T1R4: f || Frecuencia || Hz || Usar si no hay rpm
+T1R5: Q || Caudal || m³/s || Estado a resolver
+T1R6: H || Head efectivo || m || Incluye correcciones
+T1R7: ΔP_pump || Diferencial de presión bomba || Pa || ΔP = ρ·g·H
+T1R8: THP || Presión de cabeza de tubing || Pa || Ancla de superficie
+T1R9: PIP || Presión de admisión de bomba || Pa || Salida principal
+T1R10: Δz || Elevación entre bomba y superficie || m || Signo positivo hacia arriba
+T1R11: η_p || Eficiencia hidráulica (bomba) || - || Dependiente de Q y N
+T1R12: η_em || Eficiencia eléctrica total || - || Motor + drive
+T1R13: k_f || Coef. fricción lumped || Pa·s²/m⁶ || En ΔP_tub = k_f·Q²
+T1R14: k_g || Interferencia de gas (0–0.4) || - || Reduce H y η

@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='utf-8'><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-right { content: "BES-jun · validación pendiente"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", serif; font-size: 11pt; }
+body { margin: 0; line-height: 1.4; text-align: justify; color: #111; }
+h1, h2, h3 { font-family: "Liberation Sans", sans-serif; text-align: left; break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; text-align: left; }
+th, td { border: 1px solid #444; padding: 0.2em 0.35em; vertical-align: top; }
+th { background: #e8edf2; }
+img { max-width: 100%; height: auto; }
+code { font-family: "Liberation Mono", monospace; font-size: 0.9em; }
+pre { white-space: pre-wrap; text-align: left; }
+</style></head><body><h1 id="ficha-maestra-bes-jun">Ficha Maestra · BES-jun</h1>
+<p>Presentación técnica del primer dataset del proyecto HUC. No declara
+aprobadas las reglas ni cierra el expediente.</p>
+<p><strong>Fecha de esta ficha:</strong> 2026-10-20. <strong>Estado del
+expediente:</strong> validación pendiente, en
+<code>datasets/en_uso/</code>.</p>
+<h2 id="identificador">1. Identificador</h2>
+<p><code>BES-jun</code>. No reutilizar este identificador para otro
+archivo.</p>
+<h2 id="archivo-analizado">2. Archivo analizado</h2>
+<p>Se analizó el archivo <strong>Copia de FINAL BES-jun.xlsx</strong>.
+La copia de trabajo es <code>entrada/BES_jun.xlsx</code>, SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>,
+329308 bytes. La coincidencia de huella con el archivo recibido y con
+<code>fuentes/originales/</code> está documentada en el cuaderno
+<code>00_inventario_y_fuentes</code>. Identidad de bytes no califica las
+mediciones.</p>
+<h2 id="procedencia">3. Procedencia</h2>
+<p>Archivo entregado en la raíz del proyecto, distinto de RB-1521 (D1) y
+de RB-IA-2191 (D2). No se mezcló con esos libros. Esos datasets siguen
+en <code>en_espera</code> y no se abrieron en este cierre.</p>
+<h2 id="huella">4. Huella</h2>
+<p><code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code></p>
+<h2 id="fecha-de-análisis">5. Fecha de análisis</h2>
+<p>Ficha regenerada el 2026-10-20. Las fechas dentro del Excel no son
+fechas de medición comprobadas: cuatro hojas tienen
+<code>=TODAY()</code> y QF-549HST tiene una fecha escrita (2017-09-06)
+sin contraste externo.</p>
+<h2 id="estado">6. Estado</h2>
+<p>Dataset: <code>validacion_pendiente</code>. Reglas:
+<code>pendiente_validacion</code> (RC-BES-04:
+<code>no_evaluable</code>). No está en <code>procesadas</code>. El
+cierre computacional no sustituye la aprobación operacional.</p>
+<h2 id="objetivos">7. Objetivos</h2>
+<p>Transcribir y contrastar la cadena de cálculo de las cinco hojas,
+dejar explícitas las ambigüedades y exponer un evaluador determinístico
+que una aplicación pueda llamar sin un modelo de lenguaje.</p>
+<h2 id="dominios">8. Dominios</h2>
+<p>Hidráulica de una BES (fluido, balance de alturas, intersección con
+una curva tabulada) y calidad de datos de un libro de cálculo. Quedan
+fuera potencia, motor, cable, Método B y cualquier control automático
+del variador.</p>
+<h2 id="alcance">9. Alcance</h2>
+<p>Cinco puntos de operación, uno por hoja. No hay serie temporal. Las
+estaciones de survey no son observaciones independientes de la
+bomba.</p>
+<h2 id="hojas">10. Hojas</h2>
+<p>Cinco hojas visibles. Ninguna oculta.</p>
+<h2 id="pozos">11. Pozos</h2>
+<p>Cinco rótulos de pozo, uno por hoja. La identificación definitiva
+queda condicionada a resolver si la llave es el nombre de la hoja, el
+Cluster o el Pozo.</p>
+<h2 id="identificadores">12. Identificadores</h2>
+<table>
+<thead>
+<tr>
+<th>Hoja</th>
+<th>Cluster</th>
+<th>Pozo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td>QF-554H</td>
+<td>QF-084</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td>QF-545H</td>
+<td>QF-301</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td>QF-500H</td>
+<td>QF-147</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td>QF-378HST</td>
+<td>QF-005</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td>QF-549HST</td>
+<td>QF-306</td>
+</tr>
+</tbody>
+</table>
+<p>Pozos encontrados, con la reserva anterior:</p>
+<ul>
+<li>QF-084 / hoja QF-554H.</li>
+<li>QF-301 / hoja QF-545H.</li>
+<li>QF-147 / hoja QF-500H.</li>
+<li>QF-005 / hoja QF-378HST.</li>
+<li>QF-306 / hoja QF-549HST.</li>
+</ul>
+<h2 id="bombas-de-referencia">13. Bombas de referencia</h2>
+<p>Texto de la hoja, no un modelo de catálogo verificado.</p>
+<table>
+<thead>
+<tr>
+<th>Hoja</th>
+<th>Referencia escrita</th>
+<th style="text-align: right;">Etapas</th>
+<th style="text-align: right;">Frecuencia Hz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td>S 8000N</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">63</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td>S 8000N</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td>S 8000N</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">56</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td>S6000N</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">67</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td>S6000N</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">62</td>
+</tr>
+</tbody>
+</table>
+<h2 id="datos-utilizados">14. Datos utilizados</h2>
+<p>Los que el lector <code>ingesta.leer_bes_jun</code> extrae por
+rótulo: presiones, caudales, profundidades, fluido, curva de seis puntos
+y límites escritos. El catálogo formal está en
+<code>integracion/variables.json</code>.</p>
+<h2 id="diccionario">15. Diccionario</h2>
+<p>El diccionario narrativo sigue en
+<code>docs/diccionario_datos_BES_jun.md</code>. El catálogo que consume
+el software es <code>integracion/variables.json</code>, generado desde
+<code>catalogo.variables_bes_jun</code>. El rango observado no es un
+límite de operación.</p>
+<h2 id="mediciones-registradas">16. Mediciones registradas</h2>
+<p>Por hoja: frecuencia, caudal de operación, presión de sensor y THP.
+Son un punto, no una historia.</p>
+<h2 id="parámetros-asumidos-por-la-hoja">17. Parámetros asumidos por la
+hoja</h2>
+<p>°API, temperatura, BS&amp;W, densidad del agua, presión de yacimiento
+y presión de burbuja aparecen escritos. Varios son idénticos en las
+cinco hojas (CT-10): no se cuentan como cinco mediciones
+independientes.</p>
+<h2 id="ecuaciones">18. Ecuaciones</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Estado</th>
+<th>Consulta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01</td>
+<td>utilizable</td>
+<td>—</td>
+</tr>
+<tr>
+<td>B98-temperatura</td>
+<td>utilizable con reserva</td>
+<td>CT-04</td>
+</tr>
+<tr>
+<td>B100-B102</td>
+<td>utilizable con reserva</td>
+<td>CT-02</td>
+</tr>
+<tr>
+<td>G96-PIP</td>
+<td>utilizable con reserva</td>
+<td>CT-03</td>
+</tr>
+<tr>
+<td>G98-THP</td>
+<td>utilizable</td>
+<td>—</td>
+</tr>
+<tr>
+<td>G100-Hazen</td>
+<td>utilizable con reserva</td>
+<td>CT-05</td>
+</tr>
+<tr>
+<td>G102-THD</td>
+<td>utilizable con reserva</td>
+<td>CT-03, CT-05</td>
+</tr>
+<tr>
+<td>F-26-afinidad</td>
+<td>utilizable con reserva</td>
+<td>CT-08</td>
+</tr>
+<tr>
+<td>Q-interseccion</td>
+<td>utilizable con reserva</td>
+<td>CT-03, CT-08, CT-09</td>
+</tr>
+<tr>
+<td>F-02-F-03</td>
+<td>fuera del alcance actual</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Potencia-motor-cable</td>
+<td>fuera del alcance actual</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F-36-F-40</td>
+<td>fuera del alcance actual</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F-41-J64</td>
+<td>fuera del alcance actual</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Lo «utilizable» significa que el código reproduce la celda. No
+significa que la física esté aprobada.</p>
+<h2 id="modelos">19. Modelos</h2>
+<p><code>M-BES-FLUIDO</code>, <code>M-BES-BALANCE</code> y
+<code>M-BES-INTERSECCION</code>, versión <code>transcripcion-1</code>.
+Orquestados por <code>analisis.cadena.calcular_hoja</code>.</p>
+<h2 id="resultados-calculados">20. Resultados calculados</h2>
+<table>
+<thead>
+<tr>
+<th>Hoja</th>
+<th>Pozo</th>
+<th style="text-align: right;">PIP ft</th>
+<th style="text-align: right;">THD ft</th>
+<th style="text-align: right;">Q medido</th>
+<th style="text-align: right;">Q*</th>
+<th>Regla preliminar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QF-554H</td>
+<td>QF-084</td>
+<td style="text-align: right;">1714.5</td>
+<td style="text-align: right;">2083.2</td>
+<td style="text-align: right;">10301</td>
+<td style="text-align: right;">10535</td>
+<td>RC-BES-03</td>
+</tr>
+<tr>
+<td>QF-545H</td>
+<td>QF-301</td>
+<td style="text-align: right;">1558.0</td>
+<td style="text-align: right;">1972.0</td>
+<td style="text-align: right;">8767</td>
+<td style="text-align: right;">8281</td>
+<td>RC-BES-03</td>
+</tr>
+<tr>
+<td>QF-500H</td>
+<td>QF-147</td>
+<td style="text-align: right;">1920.7</td>
+<td style="text-align: right;">1517.2</td>
+<td style="text-align: right;">7728</td>
+<td style="text-align: right;">7360</td>
+<td>RC-BES-03</td>
+</tr>
+<tr>
+<td>QF-378HST</td>
+<td>QF-005</td>
+<td style="text-align: right;">1891.2</td>
+<td style="text-align: right;">1592.5</td>
+<td style="text-align: right;">7116</td>
+<td style="text-align: right;">7803</td>
+<td>RC-BES-03</td>
+</tr>
+<tr>
+<td>QF-549HST</td>
+<td>QF-306</td>
+<td style="text-align: right;">1422.3</td>
+<td style="text-align: right;">1814.5</td>
+<td style="text-align: right;">5419</td>
+<td style="text-align: right;">5503</td>
+<td>RC-BES-03</td>
+</tr>
+</tbody>
+</table>
+<p>QF-084 opera a 63 Hz con 10301 BFPD. El máximo escrito a 60 Hz es
+10000 BFPD. A la frecuencia de operación el máximo escalado es 10500
+BFPD. La clasificación preliminar es RC-BES-03. RC-BES-01 solo aparece
+si se compara sin escalar, y esa comparación no es la vigente.</p>
+<h2 id="análisis-exploratorio">21. Análisis exploratorio</h2>
+<p>Con un punto por hoja no hay distribución del comportamiento de la
+bomba. El survey tiene muchas estaciones de profundidad; sirven para
+describir la trayectoria escrita, no para estimar una correlación con el
+caudal.</p>
+<h2 id="sensibilidad">22. Sensibilidad</h2>
+<p>El cuaderno <code>04_modelo_deterministico</code> y el informe
+calculan la elasticidad local de Q*. La frecuencia pesa más que el resto
+de las entradas en el entorno del punto. Eso no autoriza a mover la
+frecuencia.</p>
+<h2 id="hallazgos">23. Hallazgos</h2>
+<p>El registro narrativo está en el cuaderno
+<code>06_hallazgos_y_reglas_candidatas</code> (H-01 a H-13). El hallazgo
+que esta ficha fija para el software es H-01: la alerta de caudal de
+QF-084 era un efecto de comparar dos frecuencias.</p>
+<h2 id="reglas-candidatas">24. Reglas candidatas</h2>
+<ul>
+<li><strong>RC-BES-01</strong> (pendiente_validacion): Caudal por encima
+del máximo escrito, en la misma frecuencia.</li>
+<li><strong>RC-BES-02</strong> (pendiente_validacion): Caudal por debajo
+del mínimo escrito, en la misma frecuencia.</li>
+<li><strong>RC-BES-03</strong> (pendiente_validacion): Caudal dentro de
+los límites escritos, en la misma frecuencia.</li>
+<li><strong>RC-BES-04</strong> (no_evaluable): Cercanía al punto de
+máxima eficiencia.</li>
+</ul>
+<p>Reglas aprobadas para uso operacional: ninguna.</p>
+<h2 id="consultas-técnicas">25. Consultas técnicas</h2>
+<p>CT-01 a CT-10, en <code>docs/consultas_tecnicas_pendientes.md</code>.
+P-14 sigue sin respuesta y no se resuelve aquí.</p>
+<h2 id="riesgos">26. Riesgos</h2>
+<p>Un número que reproduce la hoja puede leerse como si el pozo
+estuviera diagnosticado. No lo está. El signo del PIP (CT-03) y la
+fricción (CT-05) cambian el sentido físico aunque el residual contra la
+caché sea nulo.</p>
+<h2 id="límite-estadístico">27. Límite estadístico</h2>
+<p>n = 5 puntos heterogéneos. No hay modelo estadístico ni de
+aprendizaje automático en este expediente, a propósito.</p>
+<h2 id="validación">28. Validación</h2>
+<p>Validado contra la caché de la propia hoja (reproducción). No hay
+validación independiente de PIP ni aprobación de reglas.</p>
+<h2 id="artefactos">29. Artefactos</h2>
+<p>Doce cuadernos con HTML y PDF en <code>pdf/notebooks/</code>. Informe
+en <code>reports/</code> y <code>pdf/informes/</code>. Paquete
+<code>integracion/</code>. Pruebas en <code>tests/</code>. Respaldo
+previo a la auditoría de cuadernos en
+<code>logs/respaldo_previo_a_auditoria/</code>.</p>
+<h2 id="integración">30. Integración</h2>
+<p>Guía: <code>integracion/README.md</code>. Llamada:
+<code>evaluacion.motor.evaluar('BES-jun', 'QF-084')</code>. El resultado
+trae <code>recomendacion_operacional_autorizada: false</code>.</p>
+<p>Ejemplo de esa llamada para QF-084, resumido:</p>
+<ul>
+<li>Estado de la evaluación: <code>completada_preliminar</code>.</li>
+<li>Regla activada: <code>RC-BES-03</code> /
+<code>dentro_de_los_limites_escritos</code>.</li>
+<li>Recomendación operacional autorizada: <code>False</code>.</li>
+</ul>
+</body></html>

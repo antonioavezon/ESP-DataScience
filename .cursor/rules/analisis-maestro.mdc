@@ -1,0 +1,23 @@
+---
+description: Consultar y mantener analisis.md como documento maestro del proyecto HUC antes y después de cambios relevantes.
+alwaysApply: true
+---
+
+# Documento maestro `analisis.md`
+
+`analisis.md`, en la raíz del repositorio, es la referencia técnica y funcional de HUC. Las reglas de `asesor-esp/.cursor/rules/` siguen vigentes para ese subproyecto y no se sustituyen por esta.
+
+La ejecución vigente es Docker Compose, proyecto `huc`, desde `HUC-1.0.0/`. Los módulos siguen en el código fuente: `data/` (simulador, puerto publicado 8001), `proceso/` (motor, sin interfaz ni puerto público), `web/` (visualización, puerto publicado 8000) y `modelos_ia/` (explicación, puerto 8002 solo en la red interna). Mosquitto y Ollama del stack tampoco se publican en la LAN. Las fórmulas siguen en `datasets/en_uso/BES-jun/src`. El arranque está solo en `inicio.md`.
+
+Antes de un cambio relevante de código, datos, arquitectura, infraestructura o dependencias:
+
+1. Leer las secciones de `analisis.md` que correspondan al cambio.
+2. Contrastarlas con el código y la configuración reales. Si discrepan, manda el código y se corrige el documento.
+3. No afirmar en el documento nada que no esté respaldado por archivo, prueba, comando o registro.
+
+Después del cambio:
+
+4. Actualizar la sección afectada, los diagramas y la matriz de migración si el cambio los invalida.
+5. Añadir una fila al registro cronológico de `analisis.md` sin borrar filas anteriores. Si un dato viejo queda inválido, corregir la sección y anotar el motivo en el registro.
+6. No eliminar antecedentes históricos que sigan siendo ciertos como historia.
+7. No copiar secretos, claves ni datos operativos de pozos al documento.

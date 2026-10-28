@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Cuaderno 02 · Trazabilidad y análisis de las fórmulas</title><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 02 · Trazabilidad y análisis de las fórmulas"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+@page ancho { size: Letter landscape; margin: 0.65in 0.6in 0.7in 0.6in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 02 · Trazabilidad y análisis de las fórmulas"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", "DejaVu Serif", serif; font-size: 10.5pt; }
+body { margin: 0; line-height: 1.38; color: #111; hyphens: manual; }
+.cuaderno { text-align: justify; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", sans-serif; text-align: left; break-after: avoid; page-break-after: avoid; line-height: 1.2; }
+h1 { font-size: 19pt; margin: 0 0 0.5em 0; border-bottom: 2px solid #333; padding-bottom: 0.2em; }
+h2 { font-size: 13.5pt; margin: 1.2em 0 0.4em 0; border-bottom: 1px solid #aaa; padding-bottom: 0.1em; }
+h3 { font-size: 11.5pt; margin: 1em 0 0.3em 0; }
+p { margin: 0.45em 0; orphans: 3; widows: 3; }
+li { margin: 0.15em 0; }
+blockquote { margin: 0.6em 0; padding: 0.3em 0.8em; border-left: 3px solid #999; background: #f6f6f6; text-align: left; }
+.portada { break-after: page; page-break-after: always; }
+.portada h1 { font-size: 21pt; }
+.portada { line-height: 1.3; }
+.portada p, .portada li { font-size: 9.8pt; margin: 0.3em 0; }
+.portada h2 { font-size: 12pt; margin: 0.8em 0 0.3em 0; }
+.portada h1 { margin-bottom: 0.3em; }
+.prompt { display: none; }
+.input, .output_wrapper { margin: 0.5em 0; }
+.input_area { text-align: left; border: 1px solid #c8c8c8; border-left: 4px solid #4c78a8; background: #f7f9fb; padding: 0.3em 0.5em; position: relative; }
+.input_area::before { content: "Código"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #4c78a8; letter-spacing: 0.06em; margin-bottom: 0.2em; }
+.output_area { text-align: left; border-left: 4px solid #8a8a8a; padding: 0.2em 0 0.2em 0.5em; margin-top: 0.3em; }
+.output_area::before { content: "Salida"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #666; letter-spacing: 0.06em; margin-bottom: 0.15em; }
+pre { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 7.4pt; line-height: 1.28; margin: 0;
+      white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+code { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 0.88em; }
+table.tabla, .output_html table, table { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 7.6pt; line-height: 1.22; text-align: left; margin: 0.3em 0 0.5em 0; }
+th, td { border: 1px solid #777; padding: 0.15em 0.3em; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+th { background: #e8edf2; font-family: "Liberation Sans", sans-serif; font-weight: bold; overflow-wrap: break-word; word-break: normal; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.text_cell_render table { font-size: 8.6pt; }
+img { max-width: 100%; height: auto; display: block; margin: 0.4em auto; break-inside: avoid; page-break-inside: avoid; }
+.ancho { page: ancho; }
+.ancho table { font-size: 8pt; }
+math { font-size: 1.05em; }
+math[display="block"] { margin: 0.5em 0; break-inside: avoid; }
+.output_stderr pre { color: #8a1c1c; }
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
+.highlight .c { color: #3D7B7B; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #9C6500 } /* Comment.Preproc */
+.highlight .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #E40000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #008400 } /* Generic.Inserted */
+.highlight .go { color: #717171 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #687822 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #00F; font-weight: bold } /* Name.Class */
+.highlight .no { color: #800 } /* Name.Constant */
+.highlight .nd { color: #A2F } /* Name.Decorator */
+.highlight .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00F } /* Name.Function */
+.highlight .nl { color: #767600 } /* Name.Label */
+.highlight .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666 } /* Literal.Number.Float */
+.highlight .mh { color: #666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #A45A77 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #00F } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666 } /* Literal.Number.Integer.Long */
+</style></head><body><div class="cuaderno"><div class="cell border-box-sizing text_cell rendered" id="cell-id=3f483142"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html portada">
+<h1 id="cuaderno-02-trazabilidad-y-análisis-de-las-fórmulas">Cuaderno 02
+· Trazabilidad y análisis de las fórmulas</h1>
+<p><strong>Expediente:</strong> BES-jun · <strong>Cuaderno:</strong> 3
+de 7 · <strong>Estado del expediente:</strong> Listo para revisión (no
+Completo)</p>
+<h2 id="introducción-y-contexto-el-problema">1. Introducción y contexto
+(el problema)</h2>
+<p>La cadena que produce PIP, THD y caudal a producir está escrita
+<strong>dentro de celdas de Excel</strong>, con constantes incrustadas
+en las fórmulas, rótulos de unidad que no siempre corresponden a lo que
+se calcula y diferencias con los documentos de referencia. Si se copia
+una fórmula sin entenderla, se copian también sus errores: un signo
+invertido o un exponente distinto produce números de apariencia normal y
+sentido físico incorrecto.</p>
+<h2 id="justificación-y-necesidad">2. Justificación y necesidad</h2>
+<p>Construir un registro de trazabilidad: para cada fórmula de la
+cadena, <strong>dónde está, qué calcula, con qué constantes, en qué
+unidades y con qué respaldo</strong>. Verificar que la fórmula es la
+misma en las cinco hojas (para poder transcribirla una sola vez), y
+detectar con evidencia numérica las discrepancias que pueden alterar
+resultados.</p>
+<h2 id="objetivo-general">3. Objetivo general</h2>
+<p>Dejar cada fórmula de la cadena clasificada (utilizable / utilizable
+con reserva / fuera de alcance) con su fuente, sus constantes y sus
+reservas enlazadas a consultas técnicas (CT-xx), y cuantificar la
+inconsistencia hidrostática del signo de PIP.</p>
+<h2 id="dominio-y-alcance">4. Dominio y alcance</h2>
+<p><strong>Incluye:</strong> 9 celdas de la cadena (gravedad a 60 °F y a
+temperatura, densidad, gradiente, PIP, THP, fricción, THD, caudal a
+producir); firma estructural entre hojas; inventario de constantes;
+análisis dimensional de rótulos; consistencia hidrostática;
+discrepancias con el PDF 004; catálogo de fórmulas.</p>
+<p><strong>No incluye:</strong> ejecutar las fórmulas (cuaderno 04);
+cuantificar el impacto de cada discrepancia sobre los resultados
+(cuaderno 05); el bloque de potencia, motor y cable (sus constantes no
+tienen origen documentado: quedan fuera de alcance); elegir un signo, un
+exponente o una constante «correctos».</p>
+<h2 id="fuentes-y-datos-entradas-y-salidas">5. Fuentes y datos (entradas
+y salidas)</h2>
+<p><strong>Entradas:</strong> <code>entrada/BES_jun.xlsx</code>;
+<code>docs/trazabilidad_ecuaciones.md</code>;
+<code>docs/consultas_tecnicas_pendientes.md</code>.
+<strong>Salidas:</strong> tablas de celdas, firmas, constantes, rótulos,
+hidrostática, discrepancias y catálogo.</p>
+<h2 id="objetivos-específicos-y-criterios-de-aceptación">6. Objetivos
+específicos y criterios de aceptación</h2>
+<p><strong>C02-1</strong> las 9 fórmulas tienen firma idéntica en las 5
+hojas · <strong>C02-2</strong> toda constante literal está clasificada ·
+<strong>C02-3</strong> el exponente de fricción es el mismo en las 5
+hojas y la diferencia con el PDF está registrada ·
+<strong>C02-4</strong> la consistencia hidrostática del signo de PIP se
+evaluó en las 5 hojas y quedó registrada · <strong>C02-5</strong> cada
+reserva del catálogo remite a una consulta existente.</p>
+<h2 id="riesgo-si-este-paso-falla">7. Riesgo si este paso falla</h2>
+<p>Transcribir mal una fórmula, o transcribirla bien pero sin advertir
+que contradice la física elemental, y presentar el resultado como
+confiable. Un PIP sobrestimado hace parecer que la bomba trabaja con más
+presión de admisión de la real; una decisión basada en ello puede llevar
+a operar fuera de condiciones seguras sin ninguna alarma.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=1764e052"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="preparación-del-entorno">Preparación del entorno</h2>
+<p>Misma celda que en los demás cuadernos: localiza el expediente y
+registra la ficha de reproducibilidad.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b05d3153">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">localizar_expediente</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="c1"># Sube desde el directorio actual hasta la carpeta que tiene dataset.md y entrada/.</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"dataset.md"</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entrada"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">p</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Ejecute el cuaderno dentro del expediente (donde están dataset.md y entrada/)."</span><span class="p">)</span>
+
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">localizar_expediente</span><span class="p">()</span>                 <span class="c1"># .../datasets/en_uso/BES-jun</span>
+<span class="n">RAIZ_PROYECTO</span> <span class="o">=</span> <span class="n">RAIZ</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>               <span class="c1"># .../HUC</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">RAIZ</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_colwidth"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.8g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.criterios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Criterios</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.entorno</span><span class="w"> </span><span class="kn">import</span> <span class="n">ficha</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.presentacion</span><span class="w"> </span><span class="kn">import</span> <span class="n">T</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ficha</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"campo"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_3838e">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_3838e_level0_col0" style="white-space:nowrap">campo</th>
+<th class="col_heading level0 col1" id="T_3838e_level0_col1" style="white-space:nowrap">valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_3838e_row0_col0">fecha_ejecucion</td>
+<td class="data row0 col1" id="T_3838e_row0_col1">2026-10-20T14:25:46-03:00</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_3838e_row1_col0" style="white-space:nowrap">python</td>
+<td class="data row1 col1" id="T_3838e_row1_col1" style="white-space:nowrap">3.14.8</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_3838e_row2_col0" style="white-space:nowrap">sistema</td>
+<td class="data row2 col1" id="T_3838e_row2_col1">Linux 7.2.10-100.fc43.x86_64</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_3838e_row3_col0" style="white-space:nowrap">pandas</td>
+<td class="data row3 col1" id="T_3838e_row3_col1" style="white-space:nowrap">3.0.6</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_3838e_row4_col0" style="white-space:nowrap">numpy</td>
+<td class="data row4 col1" id="T_3838e_row4_col1" style="white-space:nowrap">2.5.4</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_3838e_row5_col0" style="white-space:nowrap">matplotlib</td>
+<td class="data row5 col1" id="T_3838e_row5_col1" style="white-space:nowrap">3.11.2</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_3838e_row6_col0" style="white-space:nowrap">openpyxl</td>
+<td class="data row6 col1" id="T_3838e_row6_col1" style="white-space:nowrap">3.1.5</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_3838e_row7_col0" style="white-space:nowrap">expediente</td>
+<td class="data row7 col1" id="T_3838e_row7_col1" style="white-space:nowrap">BES-jun</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_3838e_row8_col0" style="white-space:nowrap">insumo</td>
+<td class="data row8 col1" id="T_3838e_row8_col1">entrada/BES_jun.xlsx</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_3838e_row9_col0">insumo_sha256</td>
+<td class="data row9 col1" id="T_3838e_row9_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=c5a5cdbb"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-1-localizar-la-cadena-de-cálculo-en-cada-hoja">Paso 1 ·
+Localizar la cadena de cálculo en cada hoja</h2>
+<p><strong>Qué se hace.</strong> Se identifican, por
+<strong>rótulo</strong> (cuaderno 01), las nueve celdas de la cadena en
+cada hoja. Los identificadores (<code>B96</code>, <code>G102</code>...)
+son las direcciones de la hoja de referencia <strong>QF-554H</strong>;
+en las otras hojas la fila cambia pero el concepto es el mismo.
+<strong>Por qué.</strong> Sin una dirección concreta por hoja no se
+puede decir «esta fórmula es la que se transcribió».</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=316f6d9d">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openpyxl</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workbook</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.leer_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">buscar_en_columna</span><span class="p">,</span> <span class="n">leer_libro</span>
+
+<span class="n">hojas</span> <span class="o">=</span> <span class="n">leer_libro</span><span class="p">()</span>
+<span class="c1"># id (dirección en QF-554H), rótulo, columna del rótulo, columna del valor, fila desde la que buscar</span>
+<span class="n">CADENA</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"B96"</span><span class="p">,</span>  <span class="s2">"Gravedad Oil @ 60ºF"</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"B98"</span><span class="p">,</span>  <span class="s2">"Gravedad Oil @ T fondo"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"B100"</span><span class="p">,</span> <span class="s2">"Densidad de Fluido"</span><span class="p">,</span>     <span class="mi">1</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"B102"</span><span class="p">,</span> <span class="s2">"Gradiente de Presión"</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"G96"</span><span class="p">,</span>  <span class="s2">"PIP en (ft)"</span><span class="p">,</span>            <span class="mi">5</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"G98"</span><span class="p">,</span>  <span class="s2">"THP en (ft)"</span><span class="p">,</span>            <span class="mi">5</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"G100"</span><span class="p">,</span> <span class="s2">"Perdidad por Fricción"</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"G102"</span><span class="p">,</span> <span class="s2">"THD TOTAL"</span><span class="p">,</span>              <span class="mi">5</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"B106"</span><span class="p">,</span> <span class="s2">"Caudal a producir"</span><span class="p">,</span>      <span class="mi">1</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">celdas</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">ws</span> <span class="ow">in</span> <span class="n">wf</span><span class="o">.</span><span class="n">worksheets</span><span class="p">:</span>
+    <span class="n">celdas</span><span class="p">[</span><span class="n">ws</span><span class="o">.</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">letra</span><span class="p">,</span> <span class="n">desde</span> <span class="ow">in</span> <span class="n">CADENA</span><span class="p">:</span>
+        <span class="n">fila</span> <span class="o">=</span> <span class="n">buscar_en_columna</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="n">desde</span><span class="o">=</span><span class="n">desde</span><span class="p">)</span>
+        <span class="n">celdas</span><span class="p">[</span><span class="n">ws</span><span class="o">.</span><span class="n">title</span><span class="p">][</span><span class="n">id_</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">letra</span><span class="si">}{</span><span class="n">fila</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">ubicacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">"id (en QF-554H)"</span><span class="p">:</span> <span class="n">id_</span><span class="p">,</span> <span class="s2">"rótulo"</span><span class="p">:</span> <span class="n">rotulo</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">h</span><span class="p">:</span> <span class="n">celdas</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">id_</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">celdas</span><span class="p">}}</span>
+                          <span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">CADENA</span><span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">ubicacion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_62a98">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_62a98_level0_col0">id (en QF-554H)</th>
+<th class="col_heading level0 col1" id="T_62a98_level0_col1" style="white-space:nowrap">rótulo</th>
+<th class="col_heading level0 col2" id="T_62a98_level0_col2" style="white-space:nowrap">QF-554H</th>
+<th class="col_heading level0 col3" id="T_62a98_level0_col3" style="white-space:nowrap">QF-545H</th>
+<th class="col_heading level0 col4" id="T_62a98_level0_col4" style="white-space:nowrap">QF-500H</th>
+<th class="col_heading level0 col5" id="T_62a98_level0_col5" style="white-space:nowrap">QF-378HST</th>
+<th class="col_heading level0 col6" id="T_62a98_level0_col6" style="white-space:nowrap">QF-549HST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_62a98_row0_col0" style="white-space:nowrap">B96</td>
+<td class="data row0 col1" id="T_62a98_row0_col1">Gravedad Oil @ 60ºF</td>
+<td class="data row0 col2" id="T_62a98_row0_col2" style="white-space:nowrap">B96</td>
+<td class="data row0 col3" id="T_62a98_row0_col3" style="white-space:nowrap">B94</td>
+<td class="data row0 col4" id="T_62a98_row0_col4" style="white-space:nowrap">B95</td>
+<td class="data row0 col5" id="T_62a98_row0_col5" style="white-space:nowrap">B93</td>
+<td class="data row0 col6" id="T_62a98_row0_col6" style="white-space:nowrap">B93</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_62a98_row1_col0" style="white-space:nowrap">B98</td>
+<td class="data row1 col1" id="T_62a98_row1_col1">Gravedad Oil @ T fondo</td>
+<td class="data row1 col2" id="T_62a98_row1_col2" style="white-space:nowrap">B98</td>
+<td class="data row1 col3" id="T_62a98_row1_col3" style="white-space:nowrap">B96</td>
+<td class="data row1 col4" id="T_62a98_row1_col4" style="white-space:nowrap">B97</td>
+<td class="data row1 col5" id="T_62a98_row1_col5" style="white-space:nowrap">B95</td>
+<td class="data row1 col6" id="T_62a98_row1_col6" style="white-space:nowrap">B95</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_62a98_row2_col0" style="white-space:nowrap">B100</td>
+<td class="data row2 col1" id="T_62a98_row2_col1">Densidad de Fluido</td>
+<td class="data row2 col2" id="T_62a98_row2_col2" style="white-space:nowrap">B100</td>
+<td class="data row2 col3" id="T_62a98_row2_col3" style="white-space:nowrap">B98</td>
+<td class="data row2 col4" id="T_62a98_row2_col4" style="white-space:nowrap">B99</td>
+<td class="data row2 col5" id="T_62a98_row2_col5" style="white-space:nowrap">B97</td>
+<td class="data row2 col6" id="T_62a98_row2_col6" style="white-space:nowrap">B97</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_62a98_row3_col0" style="white-space:nowrap">B102</td>
+<td class="data row3 col1" id="T_62a98_row3_col1">Gradiente de Presión</td>
+<td class="data row3 col2" id="T_62a98_row3_col2" style="white-space:nowrap">B102</td>
+<td class="data row3 col3" id="T_62a98_row3_col3" style="white-space:nowrap">B100</td>
+<td class="data row3 col4" id="T_62a98_row3_col4" style="white-space:nowrap">B101</td>
+<td class="data row3 col5" id="T_62a98_row3_col5" style="white-space:nowrap">B99</td>
+<td class="data row3 col6" id="T_62a98_row3_col6" style="white-space:nowrap">B99</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_62a98_row4_col0" style="white-space:nowrap">G96</td>
+<td class="data row4 col1" id="T_62a98_row4_col1">PIP en (ft)</td>
+<td class="data row4 col2" id="T_62a98_row4_col2" style="white-space:nowrap">G96</td>
+<td class="data row4 col3" id="T_62a98_row4_col3" style="white-space:nowrap">G94</td>
+<td class="data row4 col4" id="T_62a98_row4_col4" style="white-space:nowrap">G95</td>
+<td class="data row4 col5" id="T_62a98_row4_col5" style="white-space:nowrap">G93</td>
+<td class="data row4 col6" id="T_62a98_row4_col6" style="white-space:nowrap">G93</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_62a98_row5_col0" style="white-space:nowrap">G98</td>
+<td class="data row5 col1" id="T_62a98_row5_col1">THP en (ft)</td>
+<td class="data row5 col2" id="T_62a98_row5_col2" style="white-space:nowrap">G98</td>
+<td class="data row5 col3" id="T_62a98_row5_col3" style="white-space:nowrap">G96</td>
+<td class="data row5 col4" id="T_62a98_row5_col4" style="white-space:nowrap">G97</td>
+<td class="data row5 col5" id="T_62a98_row5_col5" style="white-space:nowrap">G95</td>
+<td class="data row5 col6" id="T_62a98_row5_col6" style="white-space:nowrap">G95</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_62a98_row6_col0" style="white-space:nowrap">G100</td>
+<td class="data row6 col1" id="T_62a98_row6_col1">Perdidad por Fricción</td>
+<td class="data row6 col2" id="T_62a98_row6_col2" style="white-space:nowrap">G100</td>
+<td class="data row6 col3" id="T_62a98_row6_col3" style="white-space:nowrap">G98</td>
+<td class="data row6 col4" id="T_62a98_row6_col4" style="white-space:nowrap">G99</td>
+<td class="data row6 col5" id="T_62a98_row6_col5" style="white-space:nowrap">G97</td>
+<td class="data row6 col6" id="T_62a98_row6_col6" style="white-space:nowrap">G97</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_62a98_row7_col0" style="white-space:nowrap">G102</td>
+<td class="data row7 col1" id="T_62a98_row7_col1">THD TOTAL</td>
+<td class="data row7 col2" id="T_62a98_row7_col2" style="white-space:nowrap">G102</td>
+<td class="data row7 col3" id="T_62a98_row7_col3" style="white-space:nowrap">G100</td>
+<td class="data row7 col4" id="T_62a98_row7_col4" style="white-space:nowrap">G101</td>
+<td class="data row7 col5" id="T_62a98_row7_col5" style="white-space:nowrap">G99</td>
+<td class="data row7 col6" id="T_62a98_row7_col6" style="white-space:nowrap">G99</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_62a98_row8_col0" style="white-space:nowrap">B106</td>
+<td class="data row8 col1" id="T_62a98_row8_col1">Caudal a producir</td>
+<td class="data row8 col2" id="T_62a98_row8_col2" style="white-space:nowrap">B106</td>
+<td class="data row8 col3" id="T_62a98_row8_col3" style="white-space:nowrap">B104</td>
+<td class="data row8 col4" id="T_62a98_row8_col4" style="white-space:nowrap">B105</td>
+<td class="data row8 col5" id="T_62a98_row8_col5" style="white-space:nowrap">B103</td>
+<td class="data row8 col6" id="T_62a98_row8_col6" style="white-space:nowrap">B103</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e2e64c98">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ws_ref</span> <span class="o">=</span> <span class="n">wf</span><span class="p">[</span><span class="s2">"QF-554H"</span><span class="p">]</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">"celda"</span><span class="p">:</span> <span class="n">id_</span><span class="p">,</span> <span class="s2">"rótulo"</span><span class="p">:</span> <span class="n">rotulo</span><span class="p">,</span> <span class="s2">"fórmula escrita en la hoja"</span><span class="p">:</span> <span class="n">ws_ref</span><span class="p">[</span><span class="n">id_</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+                <span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">CADENA</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_628f5">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_628f5_level0_col0" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col1" id="T_628f5_level0_col1" style="white-space:nowrap">rótulo</th>
+<th class="col_heading level0 col2" id="T_628f5_level0_col2">fórmula escrita en la hoja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_628f5_row0_col0" style="white-space:nowrap">B96</td>
+<td class="data row0 col1" id="T_628f5_row0_col1">Gravedad Oil @ 60ºF</td>
+<td class="data row0 col2" id="T_628f5_row0_col2">=141.5/(131.5+G32)</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_628f5_row1_col0" style="white-space:nowrap">B98</td>
+<td class="data row1 col1" id="T_628f5_row1_col1">Gravedad Oil @ T fondo</td>
+<td class="data row1 col2" id="T_628f5_row1_col2">=B96-((0.00066)*(G30-15.556))+((0.0000003*((G30-15.556)^2)))</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_628f5_row2_col0" style="white-space:nowrap">B100</td>
+<td class="data row2 col1" id="T_628f5_row2_col1">Densidad de Fluido</td>
+<td class="data row2 col2" id="T_628f5_row2_col2">=8.33*((G26*G34/8.33)+((1-G26)*B98))</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_628f5_row3_col0" style="white-space:nowrap">B102</td>
+<td class="data row3 col1" id="T_628f5_row3_col1">Gradiente de Presión</td>
+<td class="data row3 col2" id="T_628f5_row3_col2" style="white-space:nowrap">=B100*0.052</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_628f5_row4_col0" style="white-space:nowrap">G96</td>
+<td class="data row4 col1" id="T_628f5_row4_col1">PIP en (ft)</td>
+<td class="data row4 col2" id="T_628f5_row4_col2">=(B73-((C20-C24)*B102))/B102</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_628f5_row5_col0" style="white-space:nowrap">G98</td>
+<td class="data row5 col1" id="T_628f5_row5_col1">THP en (ft)</td>
+<td class="data row5 col2" id="T_628f5_row5_col2" style="white-space:nowrap">=B75/B102</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_628f5_row6_col0" style="white-space:nowrap">G100</td>
+<td class="data row6 col1" id="T_628f5_row6_col1">Perdidad por Fricción</td>
+<td class="data row6 col2" id="T_628f5_row6_col2">=(2.083*((100/120)^1.85)*((B71/34.3)^1.85)*(1/(B38)^4.8566))*(C18/1000)</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_628f5_row7_col0" style="white-space:nowrap">G102</td>
+<td class="data row7 col1" id="T_628f5_row7_col1">THD TOTAL</td>
+<td class="data row7 col2" id="T_628f5_row7_col2">=C18+G100+G98-G96</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_628f5_row8_col0" style="white-space:nowrap">B106</td>
+<td class="data row8 col1" id="T_628f5_row8_col1">Caudal a producir</td>
+<td class="data row8 col2" id="T_628f5_row8_col2" style="white-space:nowrap">=K94</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6266bfa0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Cómo leer las fórmulas.</strong> Las cuatro primeras
+construyen el <strong>gradiente de presión del fluido</strong> a partir
+de °API, temperatura, BS&amp;W y densidad del agua.
+<code>PIP en (ft)</code>, <code>THP en (ft)</code> y
+<code>Perdidad por Fricción</code> (el rótulo de la hoja tiene esa
+errata y se conserva) alimentan <code>THD TOTAL</code>, que es la altura
+que debe vencer la bomba. <code>Caudal a producir</code>
+(<code>=K94</code>) viene de la intersección de esa THD con la curva de
+la bomba; su cálculo está en un bloque de
+<code>MATCH</code>/<code>INDEX</code> que el cuaderno 04 transcribe.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=31303c12"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-2-es-la-misma-fórmula-en-las-cinco-hojas">Paso 2 · ¿Es la
+misma fórmula en las cinco hojas?</h2>
+<p><strong>Por qué importa.</strong> El código transcribe cada fórmula
+<strong>una vez</strong>. Eso solo es legítimo si las cinco hojas
+calculan lo mismo. Comparar texto de fórmula no sirve (las filas
+cambian), así que se usa una <strong>firma estructural</strong>: el
+esqueleto de la fórmula (operadores, funciones y constantes, con cada
+referencia sustituida por <code>@</code>) más, para cada referencia, la
+columna y el <strong>rótulo</strong> de su fila. Dos hojas con la misma
+firma calculan lo mismo con las mismas constantes y leen los mismos
+conceptos.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=0d233968">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">analisis.dependencias</span><span class="w"> </span><span class="kn">import</span> <span class="n">firma_estructural</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">CADENA</span><span class="p">:</span>
+    <span class="n">firmas</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">:</span> <span class="n">firma_estructural</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="n">h</span><span class="p">],</span> <span class="n">celdas</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">id_</span><span class="p">])</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">celdas</span><span class="p">}</span>
+    <span class="n">distintas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">firmas</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">esq</span><span class="p">,</span> <span class="n">refs</span> <span class="o">=</span> <span class="n">firmas</span><span class="p">[</span><span class="s2">"QF-554H"</span><span class="p">]</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"celda"</span><span class="p">:</span> <span class="n">id_</span><span class="p">,</span> <span class="s2">"firmas distintas entre hojas"</span><span class="p">:</span> <span class="n">distintas</span><span class="p">,</span> <span class="s2">"idéntica en 5 hojas"</span><span class="p">:</span> <span class="n">distintas</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>
+                  <span class="s2">"esqueleto"</span><span class="p">:</span> <span class="n">esq</span><span class="p">,</span> <span class="s2">"referencias (columna|rótulo)"</span><span class="p">:</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">refs</span><span class="p">)})</span>
+<span class="n">firmas_tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">firmas_tabla</span><span class="p">[[</span><span class="s2">"celda"</span><span class="p">,</span> <span class="s2">"firmas distintas entre hojas"</span><span class="p">,</span> <span class="s2">"idéntica en 5 hojas"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_9f9e4">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_9f9e4_level0_col0" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col1" id="T_9f9e4_level0_col1">firmas distintas entre hojas</th>
+<th class="col_heading level0 col2" id="T_9f9e4_level0_col2">idéntica en 5 hojas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_9f9e4_row0_col0" style="white-space:nowrap">B96</td>
+<td class="data row0 col1" id="T_9f9e4_row0_col1" style="white-space:nowrap">1</td>
+<td class="data row0 col2" id="T_9f9e4_row0_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_9f9e4_row1_col0" style="white-space:nowrap">B98</td>
+<td class="data row1 col1" id="T_9f9e4_row1_col1" style="white-space:nowrap">1</td>
+<td class="data row1 col2" id="T_9f9e4_row1_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_9f9e4_row2_col0" style="white-space:nowrap">B100</td>
+<td class="data row2 col1" id="T_9f9e4_row2_col1" style="white-space:nowrap">1</td>
+<td class="data row2 col2" id="T_9f9e4_row2_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_9f9e4_row3_col0" style="white-space:nowrap">B102</td>
+<td class="data row3 col1" id="T_9f9e4_row3_col1" style="white-space:nowrap">1</td>
+<td class="data row3 col2" id="T_9f9e4_row3_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_9f9e4_row4_col0" style="white-space:nowrap">G96</td>
+<td class="data row4 col1" id="T_9f9e4_row4_col1" style="white-space:nowrap">1</td>
+<td class="data row4 col2" id="T_9f9e4_row4_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_9f9e4_row5_col0" style="white-space:nowrap">G98</td>
+<td class="data row5 col1" id="T_9f9e4_row5_col1" style="white-space:nowrap">1</td>
+<td class="data row5 col2" id="T_9f9e4_row5_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_9f9e4_row6_col0" style="white-space:nowrap">G100</td>
+<td class="data row6 col1" id="T_9f9e4_row6_col1" style="white-space:nowrap">1</td>
+<td class="data row6 col2" id="T_9f9e4_row6_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_9f9e4_row7_col0" style="white-space:nowrap">G102</td>
+<td class="data row7 col1" id="T_9f9e4_row7_col1" style="white-space:nowrap">1</td>
+<td class="data row7 col2" id="T_9f9e4_row7_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_9f9e4_row8_col0" style="white-space:nowrap">B106</td>
+<td class="data row8 col1" id="T_9f9e4_row8_col1" style="white-space:nowrap">1</td>
+<td class="data row8 col2" id="T_9f9e4_row8_col2" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f24e6a98">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">firmas_tabla</span><span class="p">[[</span><span class="s2">"celda"</span><span class="p">,</span> <span class="s2">"esqueleto"</span><span class="p">,</span> <span class="s2">"referencias (columna|rótulo)"</span><span class="p">]],</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_434fa">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_434fa_level0_col0" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col1" id="T_434fa_level0_col1" style="white-space:nowrap">esqueleto</th>
+<th class="col_heading level0 col2" id="T_434fa_level0_col2">referencias (columna|rótulo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_434fa_row0_col0" style="white-space:nowrap">B96</td>
+<td class="data row0 col1" id="T_434fa_row0_col1">=141.5/(131.5+@)</td>
+<td class="data row0 col2" id="T_434fa_row0_col2" style="white-space:nowrap">G|API</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_434fa_row1_col0" style="white-space:nowrap">B98</td>
+<td class="data row1 col1" id="T_434fa_row1_col1">=@-((0.00066)*(@-15.556))+((0.0000003*((@-15.556)^2)))</td>
+<td class="data row1 col2" id="T_434fa_row1_col2">B|Gravedad Oil @ 60ºF; G|Temperatura de fondo; G|Temperatura de fondo</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_434fa_row2_col0" style="white-space:nowrap">B100</td>
+<td class="data row2 col1" id="T_434fa_row2_col1">=8.33*((@*@/8.33)+((1-@)*@))</td>
+<td class="data row2 col2" id="T_434fa_row2_col2">G|BS&amp;W G|Densidad del Agua; G|BS&amp;W B|Gravedad Oil @ T fondo</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_434fa_row3_col0" style="white-space:nowrap">B102</td>
+<td class="data row3 col1" id="T_434fa_row3_col1" style="white-space:nowrap">=@*0.052</td>
+<td class="data row3 col2" id="T_434fa_row3_col2">B|Densidad de Fluido</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_434fa_row4_col0" style="white-space:nowrap">G96</td>
+<td class="data row4 col1" id="T_434fa_row4_col1">=(@-((@-@)*@))/@</td>
+<td class="data row4 col2" id="T_434fa_row4_col2">B|Presión de Sensor; C|Intake; C|Sensor; B|Gradiente de Presión; B|Gradiente de Presión</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_434fa_row5_col0" style="white-space:nowrap">G98</td>
+<td class="data row5 col1" id="T_434fa_row5_col1" style="white-space:nowrap">=@/@</td>
+<td class="data row5 col2" id="T_434fa_row5_col2">B|THP; B|Gradiente de Presión</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_434fa_row6_col0" style="white-space:nowrap">G100</td>
+<td class="data row6 col1" id="T_434fa_row6_col1">=(2.083*((100/120)^1.85)*((@/34.3)^1.85)*(1/(@)^4.8566))*(@/1000)</td>
+<td class="data row6 col2" id="T_434fa_row6_col2">B|Caudal; B|ID; C|Descarga</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_434fa_row7_col0" style="white-space:nowrap">G102</td>
+<td class="data row7 col1" id="T_434fa_row7_col1" style="white-space:nowrap">=@+@+@-@</td>
+<td class="data row7 col2" id="T_434fa_row7_col2">C|Descarga; G|Perdidad por Fricción; G|THP en (ft); G|PIP en (ft)</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_434fa_row8_col0" style="white-space:nowrap">B106</td>
+<td class="data row8 col1" id="T_434fa_row8_col1" style="white-space:nowrap">=@</td>
+<td class="data row8 col2" id="T_434fa_row8_col2" style="white-space:nowrap">K|Descarga</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fd89b7f1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Las nueve fórmulas tienen
+<strong>una única firma</strong> en las cinco hojas: misma estructura,
+mismas constantes y mismos conceptos de entrada. Transcribirlas una vez
+es legítimo. La segunda tabla es la fórmula <strong>leída en lenguaje de
+rótulos</strong>: por ejemplo <code>PIP en (ft)</code> usa
+<code>B|Presión de Sensor</code>, la diferencia
+<code>C|Intake − C|Sensor</code> y <code>B|Gradiente de Presión</code>
+dos veces. Esa lectura es la que se revisa contra la física en el Paso
+5.</p>
+<p><em>Alcance de la prueba:</em> la igualdad de firma garantiza
+igualdad <strong>de estructura</strong>; no garantiza que los valores de
+entrada sean correctos (cuaderno 01) ni que la fórmula sea físicamente
+adecuada (Pasos 4 y 5).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=63966621"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-3-constantes-escritas-dentro-de-las-fórmulas">Paso 3 ·
+Constantes escritas dentro de las fórmulas</h2>
+<p><strong>Riesgo específico.</strong> Una constante incrustada en una
+fórmula no aparece como dato en ninguna celda: no se puede auditar
+buscando entradas. Se extraen todos los números literales de las nueve
+fórmulas y se clasifica cada uno según lo que <strong>está
+documentado</strong> en <code>docs/trazabilidad_ecuaciones.md</code> y
+en el PDF 004. La categoría «sin origen documentado» <strong>no
+significa que esté mal</strong>: significa que el expediente no puede
+respaldarlo con una fuente.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=e0e0a9e8">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.dependencias</span><span class="w"> </span><span class="kn">import</span> <span class="n">constantes_literales</span>
+
+<span class="n">ORIGEN</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mf">141.5</span><span class="p">:</span> <span class="p">(</span><span class="s2">"F-01 (API → gravedad), X1 J4 y QF-554H!B96"</span><span class="p">,</span> <span class="s2">"documentada"</span><span class="p">),</span>
+    <span class="mf">131.5</span><span class="p">:</span> <span class="p">(</span><span class="s2">"F-01 (API → gravedad), X1 J4 y QF-554H!B96"</span><span class="p">,</span> <span class="s2">"documentada"</span><span class="p">),</span>
+    <span class="mf">0.00066</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Corrección de temperatura de B98"</span><span class="p">,</span> <span class="s2">"sin origen documentado (CT-04)"</span><span class="p">),</span>
+    <span class="mf">3e-07</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Corrección de temperatura de B98"</span><span class="p">,</span> <span class="s2">"sin origen documentado (CT-04)"</span><span class="p">),</span>
+    <span class="mf">15.556</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Corrección de temperatura de B98 (referencia de temperatura en °C)"</span><span class="p">,</span> <span class="s2">"sin origen documentado (CT-04)"</span><span class="p">),</span>
+    <span class="mf">8.33</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Densidad de mezcla de B100; aparece como divisor y como multiplicador"</span><span class="p">,</span> <span class="s2">"sin origen documentado"</span><span class="p">),</span>
+    <span class="mf">0.052</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Gradiente de B102 (densidad × 0.052)"</span><span class="p">,</span> <span class="s2">"escrita en la celda; sin origen documentado fuera de ella"</span><span class="p">),</span>
+    <span class="mf">2.083</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Hazen-Williams, PDF 004 p. 2"</span><span class="p">,</span> <span class="s2">"documentada (PDF)"</span><span class="p">),</span>
+    <span class="mf">100.0</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Hazen-Williams: (100/C)^1.85"</span><span class="p">,</span> <span class="s2">"documentada (PDF)"</span><span class="p">),</span>
+    <span class="mf">120.0</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Hazen-Williams: coeficiente C = 120"</span><span class="p">,</span> <span class="s2">"documentada (PDF, ejemplo)"</span><span class="p">),</span>
+    <span class="mf">1.85</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Hazen-Williams: exponente de (100/C) y de (Q/34.3)"</span><span class="p">,</span> <span class="s2">"documentada (PDF)"</span><span class="p">),</span>
+    <span class="mf">34.3</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Hazen-Williams: normalización de Q"</span><span class="p">,</span> <span class="s2">"documentada (PDF)"</span><span class="p">),</span>
+    <span class="mf">1000.0</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Pérdida en ft por cada 1000 ft de longitud"</span><span class="p">,</span> <span class="s2">"documentada (PDF)"</span><span class="p">),</span>
+    <span class="mf">4.8566</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Exponente del ID en Hazen-Williams"</span><span class="p">,</span> <span class="s2">"la celda dice 4.8566; el PDF dice 4.8655 (CT-05)"</span><span class="p">),</span>
+    <span class="mf">1.0</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Aritmética: 1 − BS&amp;W, 1/ID, J95+1"</span><span class="p">,</span> <span class="s2">"aritmética"</span><span class="p">),</span>
+    <span class="mf">2.0</span><span class="p">:</span> <span class="p">(</span><span class="s2">"Aritmética: cuadrado en la corrección de temperatura"</span><span class="p">,</span> <span class="s2">"aritmética"</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">rotulo</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">CADENA</span><span class="p">:</span>
+    <span class="n">cuentas</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">constantes_literales</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s2">"QF-554H"</span><span class="p">][</span><span class="n">id_</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">valor</span><span class="p">,</span> <span class="n">veces</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cuentas</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">origen</span><span class="p">,</span> <span class="n">estado</span> <span class="o">=</span> <span class="n">ORIGEN</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="p">(</span><span class="s2">"—"</span><span class="p">,</span> <span class="s2">"SIN CLASIFICAR"</span><span class="p">))</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"celda"</span><span class="p">:</span> <span class="n">id_</span><span class="p">,</span> <span class="s2">"constante"</span><span class="p">:</span> <span class="n">valor</span><span class="p">,</span> <span class="s2">"veces"</span><span class="p">:</span> <span class="n">veces</span><span class="p">,</span> <span class="s2">"dónde se usa"</span><span class="p">:</span> <span class="n">origen</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">:</span> <span class="n">estado</span><span class="p">})</span>
+<span class="n">constantes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Constantes literales encontradas:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">constantes</span><span class="p">),</span> <span class="s2">"| sin clasificar:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">constantes</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"SIN CLASIFICAR"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="n">T</span><span class="p">(</span><span class="n">constantes</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Constantes literales encontradas: 17 | sin clasificar: 0
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_a9eb5">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_a9eb5_level0_col0" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col1" id="T_a9eb5_level0_col1" style="white-space:nowrap">constante</th>
+<th class="col_heading level0 col2" id="T_a9eb5_level0_col2" style="white-space:nowrap">veces</th>
+<th class="col_heading level0 col3" id="T_a9eb5_level0_col3">dónde se usa</th>
+<th class="col_heading level0 col4" id="T_a9eb5_level0_col4" style="white-space:nowrap">estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_a9eb5_row0_col0" style="white-space:nowrap">B96</td>
+<td class="data row0 col1" id="T_a9eb5_row0_col1" style="white-space:nowrap">131.5</td>
+<td class="data row0 col2" id="T_a9eb5_row0_col2" style="white-space:nowrap">1</td>
+<td class="data row0 col3" id="T_a9eb5_row0_col3">F-01 (API → gravedad), X1 J4 y QF-554H!B96</td>
+<td class="data row0 col4" id="T_a9eb5_row0_col4" style="white-space:nowrap">documentada</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_a9eb5_row1_col0" style="white-space:nowrap">B96</td>
+<td class="data row1 col1" id="T_a9eb5_row1_col1" style="white-space:nowrap">141.5</td>
+<td class="data row1 col2" id="T_a9eb5_row1_col2" style="white-space:nowrap">1</td>
+<td class="data row1 col3" id="T_a9eb5_row1_col3">F-01 (API → gravedad), X1 J4 y QF-554H!B96</td>
+<td class="data row1 col4" id="T_a9eb5_row1_col4" style="white-space:nowrap">documentada</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_a9eb5_row2_col0" style="white-space:nowrap">B98</td>
+<td class="data row2 col1" id="T_a9eb5_row2_col1" style="white-space:nowrap">3e-07</td>
+<td class="data row2 col2" id="T_a9eb5_row2_col2" style="white-space:nowrap">1</td>
+<td class="data row2 col3" id="T_a9eb5_row2_col3">Corrección de temperatura de B98</td>
+<td class="data row2 col4" id="T_a9eb5_row2_col4">sin origen documentado (CT-04)</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_a9eb5_row3_col0" style="white-space:nowrap">B98</td>
+<td class="data row3 col1" id="T_a9eb5_row3_col1" style="white-space:nowrap">0.00066</td>
+<td class="data row3 col2" id="T_a9eb5_row3_col2" style="white-space:nowrap">1</td>
+<td class="data row3 col3" id="T_a9eb5_row3_col3">Corrección de temperatura de B98</td>
+<td class="data row3 col4" id="T_a9eb5_row3_col4">sin origen documentado (CT-04)</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_a9eb5_row4_col0" style="white-space:nowrap">B98</td>
+<td class="data row4 col1" id="T_a9eb5_row4_col1" style="white-space:nowrap">2</td>
+<td class="data row4 col2" id="T_a9eb5_row4_col2" style="white-space:nowrap">1</td>
+<td class="data row4 col3" id="T_a9eb5_row4_col3">Aritmética: cuadrado en la corrección de temperatura</td>
+<td class="data row4 col4" id="T_a9eb5_row4_col4" style="white-space:nowrap">aritmética</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_a9eb5_row5_col0" style="white-space:nowrap">B98</td>
+<td class="data row5 col1" id="T_a9eb5_row5_col1" style="white-space:nowrap">15.556</td>
+<td class="data row5 col2" id="T_a9eb5_row5_col2" style="white-space:nowrap">2</td>
+<td class="data row5 col3" id="T_a9eb5_row5_col3">Corrección de temperatura de B98 (referencia de temperatura en °C)</td>
+<td class="data row5 col4" id="T_a9eb5_row5_col4">sin origen documentado (CT-04)</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_a9eb5_row6_col0" style="white-space:nowrap">B100</td>
+<td class="data row6 col1" id="T_a9eb5_row6_col1" style="white-space:nowrap">1</td>
+<td class="data row6 col2" id="T_a9eb5_row6_col2" style="white-space:nowrap">1</td>
+<td class="data row6 col3" id="T_a9eb5_row6_col3">Aritmética: 1 − BS&amp;W, 1/ID, J95+1</td>
+<td class="data row6 col4" id="T_a9eb5_row6_col4" style="white-space:nowrap">aritmética</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_a9eb5_row7_col0" style="white-space:nowrap">B100</td>
+<td class="data row7 col1" id="T_a9eb5_row7_col1" style="white-space:nowrap">8.33</td>
+<td class="data row7 col2" id="T_a9eb5_row7_col2" style="white-space:nowrap">2</td>
+<td class="data row7 col3" id="T_a9eb5_row7_col3">Densidad de mezcla de B100; aparece como divisor y como multiplicador</td>
+<td class="data row7 col4" id="T_a9eb5_row7_col4">sin origen documentado</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_a9eb5_row8_col0" style="white-space:nowrap">B102</td>
+<td class="data row8 col1" id="T_a9eb5_row8_col1" style="white-space:nowrap">0.052</td>
+<td class="data row8 col2" id="T_a9eb5_row8_col2" style="white-space:nowrap">1</td>
+<td class="data row8 col3" id="T_a9eb5_row8_col3">Gradiente de B102 (densidad × 0.052)</td>
+<td class="data row8 col4" id="T_a9eb5_row8_col4">escrita en la celda; sin origen documentado fuera de ella</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_a9eb5_row9_col0" style="white-space:nowrap">G100</td>
+<td class="data row9 col1" id="T_a9eb5_row9_col1" style="white-space:nowrap">1</td>
+<td class="data row9 col2" id="T_a9eb5_row9_col2" style="white-space:nowrap">1</td>
+<td class="data row9 col3" id="T_a9eb5_row9_col3">Aritmética: 1 − BS&amp;W, 1/ID, J95+1</td>
+<td class="data row9 col4" id="T_a9eb5_row9_col4" style="white-space:nowrap">aritmética</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_a9eb5_row10_col0" style="white-space:nowrap">G100</td>
+<td class="data row10 col1" id="T_a9eb5_row10_col1" style="white-space:nowrap">1.85</td>
+<td class="data row10 col2" id="T_a9eb5_row10_col2" style="white-space:nowrap">2</td>
+<td class="data row10 col3" id="T_a9eb5_row10_col3">Hazen-Williams: exponente de (100/C) y de (Q/34.3)</td>
+<td class="data row10 col4" id="T_a9eb5_row10_col4">documentada (PDF)</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_a9eb5_row11_col0" style="white-space:nowrap">G100</td>
+<td class="data row11 col1" id="T_a9eb5_row11_col1" style="white-space:nowrap">2.083</td>
+<td class="data row11 col2" id="T_a9eb5_row11_col2" style="white-space:nowrap">1</td>
+<td class="data row11 col3" id="T_a9eb5_row11_col3">Hazen-Williams, PDF 004 p. 2</td>
+<td class="data row11 col4" id="T_a9eb5_row11_col4">documentada (PDF)</td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_a9eb5_row12_col0" style="white-space:nowrap">G100</td>
+<td class="data row12 col1" id="T_a9eb5_row12_col1" style="white-space:nowrap">4.8566</td>
+<td class="data row12 col2" id="T_a9eb5_row12_col2" style="white-space:nowrap">1</td>
+<td class="data row12 col3" id="T_a9eb5_row12_col3">Exponente del ID en Hazen-Williams</td>
+<td class="data row12 col4" id="T_a9eb5_row12_col4">la celda dice 4.8566; el PDF dice 4.8655 (CT-05)</td>
+</tr>
+<tr>
+<td class="data row13 col0" id="T_a9eb5_row13_col0" style="white-space:nowrap">G100</td>
+<td class="data row13 col1" id="T_a9eb5_row13_col1" style="white-space:nowrap">34.3</td>
+<td class="data row13 col2" id="T_a9eb5_row13_col2" style="white-space:nowrap">1</td>
+<td class="data row13 col3" id="T_a9eb5_row13_col3">Hazen-Williams: normalización de Q</td>
+<td class="data row13 col4" id="T_a9eb5_row13_col4">documentada (PDF)</td>
+</tr>
+<tr>
+<td class="data row14 col0" id="T_a9eb5_row14_col0" style="white-space:nowrap">G100</td>
+<td class="data row14 col1" id="T_a9eb5_row14_col1" style="white-space:nowrap">100</td>
+<td class="data row14 col2" id="T_a9eb5_row14_col2" style="white-space:nowrap">1</td>
+<td class="data row14 col3" id="T_a9eb5_row14_col3">Hazen-Williams: (100/C)^1.85</td>
+<td class="data row14 col4" id="T_a9eb5_row14_col4">documentada (PDF)</td>
+</tr>
+<tr>
+<td class="data row15 col0" id="T_a9eb5_row15_col0" style="white-space:nowrap">G100</td>
+<td class="data row15 col1" id="T_a9eb5_row15_col1" style="white-space:nowrap">120</td>
+<td class="data row15 col2" id="T_a9eb5_row15_col2" style="white-space:nowrap">1</td>
+<td class="data row15 col3" id="T_a9eb5_row15_col3">Hazen-Williams: coeficiente C = 120</td>
+<td class="data row15 col4" id="T_a9eb5_row15_col4">documentada (PDF, ejemplo)</td>
+</tr>
+<tr>
+<td class="data row16 col0" id="T_a9eb5_row16_col0" style="white-space:nowrap">G100</td>
+<td class="data row16 col1" id="T_a9eb5_row16_col1" style="white-space:nowrap">1000</td>
+<td class="data row16 col2" id="T_a9eb5_row16_col2" style="white-space:nowrap">1</td>
+<td class="data row16 col3" id="T_a9eb5_row16_col3">Pérdida en ft por cada 1000 ft de longitud</td>
+<td class="data row16 col4" id="T_a9eb5_row16_col4">documentada (PDF)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=eff03ef3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Todas las constantes quedaron
+clasificadas. Tres grupos requieren atención:</p>
+<ol type="1">
+<li><strong>Corrección de temperatura (<code>0.00066</code>,
+<code>0.0000003</code>, <code>15.556</code>).</strong> Sin origen
+documentado. La corrección es pequeña (cuaderno 05 cuantifica su
+efecto), pero se transcribe tal cual y se registra como
+<strong>CT-04</strong>.</li>
+<li><strong><code>8.33</code> y <code>0.052</code>.</strong> Son
+factores de conversión de unidades de uso corriente en campo, pero
+ninguna fuente leída del expediente los define; se transcriben sin
+sustituirlos por <code>0.433</code> ni <code>8.34</code>.</li>
+<li><strong><code>4.8566</code>.</strong> El PDF de diseño escribe
+<strong>4.8655</strong>. Las dos cifras difieren en los últimos dígitos,
+lo que podría ser un error de tipeo en cualquiera de los dos documentos
+(o una diferencia deliberada que no está explicada). Es la discrepancia
+<strong>CT-05</strong>; el código usa el valor de la hoja y el cuaderno
+05 mide cuánto cambia si fuera el otro.</li>
+</ol>
+<p>Además, el PDF indica que Hazen-Williams está planteado para
+<strong>agua a 20 °C</strong>; en estas hojas el fluido es una mezcla
+con °API = 12 y BS&amp;W entre 0.96 y 0.98. La aplicabilidad de la
+ecuación a ese fluido es una reserva adicional de CT-05, no una
+conclusión.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3f5ce429"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-4-análisis-dimensional-de-los-rótulos">Paso 4 · Análisis
+dimensional de los rótulos</h2>
+<p><strong>Qué se hace.</strong> Se compara el rótulo de unidad que la
+hoja escribe junto a cada resultado con la unidad que
+<strong>resulta</strong> de la propia fórmula. <strong>Por qué.</strong>
+Un rótulo equivocado es inofensivo para Excel pero peligroso para quien
+lo lee: ya hay un caso (BS&amp;W) donde el rótulo contradice el uso del
+número.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9fa98075">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rotulo_a_la_derecha</span><span class="p">(</span><span class="n">hoja</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">col_unidad</span><span class="p">):</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">wf</span><span class="p">[</span><span class="n">hoja</span><span class="p">]</span>
+    <span class="n">fila</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">celdas</span><span class="p">[</span><span class="n">hoja</span><span class="p">][</span><span class="n">id_</span><span class="p">]</span> <span class="k">if</span> <span class="n">ch</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">ws</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">fila</span><span class="p">,</span> <span class="n">col_unidad</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">h0</span> <span class="o">=</span> <span class="n">hojas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">analisis_unidades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"BS&amp;W"</span><span class="p">,</span> <span class="s2">"rótulo en la hoja"</span><span class="p">:</span> <span class="n">h0</span><span class="p">[</span><span class="s2">"bsw_unidad_rotulo"</span><span class="p">],</span>
+     <span class="s2">"unidad según la fórmula"</span><span class="p">:</span> <span class="s2">"fracción adimensional (la fórmula usa 1 − BS&amp;W)"</span><span class="p">,</span>
+     <span class="s2">"coherente"</span><span class="p">:</span> <span class="n">h0</span><span class="p">[</span><span class="s2">"bsw_unidad_rotulo"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"%"</span><span class="p">,</span> <span class="s2">"consecuencia"</span><span class="p">:</span> <span class="s2">"no se convierte; consulta CT-02"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Densidad de Fluido (B100)"</span><span class="p">,</span> <span class="s2">"rótulo en la hoja"</span><span class="p">:</span> <span class="n">rotulo_a_la_derecha</span><span class="p">(</span><span class="s2">"QF-554H"</span><span class="p">,</span> <span class="s2">"B100"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+     <span class="s2">"unidad según la fórmula"</span><span class="p">:</span> <span class="s2">"lb/gal (8.33 × adimensional)"</span><span class="p">,</span>
+     <span class="s2">"coherente"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"consecuencia"</span><span class="p">:</span> <span class="s2">"ninguna; el rótulo es una grafía de lb/gal"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Gradiente de Presión (B102)"</span><span class="p">,</span> <span class="s2">"rótulo en la hoja"</span><span class="p">:</span> <span class="n">rotulo_a_la_derecha</span><span class="p">(</span><span class="s2">"QF-554H"</span><span class="p">,</span> <span class="s2">"B102"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+     <span class="s2">"unidad según la fórmula"</span><span class="p">:</span> <span class="s2">"psi/ft (lb/gal × 0.052)"</span><span class="p">,</span>
+     <span class="s2">"coherente"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">"consecuencia"</span><span class="p">:</span> <span class="s2">"«psi*ft» es un producto, no un gradiente; el resultado es psi/ft"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"PIP en (ft)"</span><span class="p">,</span> <span class="s2">"rótulo en la hoja"</span><span class="p">:</span> <span class="n">rotulo_a_la_derecha</span><span class="p">(</span><span class="s2">"QF-554H"</span><span class="p">,</span> <span class="s2">"G96"</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+     <span class="s2">"unidad según la fórmula"</span><span class="p">:</span> <span class="s2">"ft de columna (psi ÷ psi/ft)"</span><span class="p">,</span> <span class="s2">"coherente"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"consecuencia"</span><span class="p">:</span> <span class="s2">"ninguna"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"variable"</span><span class="p">:</span> <span class="s2">"Caudal a producir (B106)"</span><span class="p">,</span> <span class="s2">"rótulo en la hoja"</span><span class="p">:</span> <span class="n">rotulo_a_la_derecha</span><span class="p">(</span><span class="s2">"QF-554H"</span><span class="p">,</span> <span class="s2">"B106"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+     <span class="s2">"unidad según la fórmula"</span><span class="p">:</span> <span class="s2">"BFPD (interpolado de la tabla de caudal)"</span><span class="p">,</span> <span class="s2">"coherente"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"consecuencia"</span><span class="p">:</span> <span class="s2">"ninguna"</span><span class="p">},</span>
+<span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">analisis_unidades</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_22700">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_22700_level0_col0" style="white-space:nowrap">variable</th>
+<th class="col_heading level0 col1" id="T_22700_level0_col1">rótulo en la hoja</th>
+<th class="col_heading level0 col2" id="T_22700_level0_col2">unidad según la fórmula</th>
+<th class="col_heading level0 col3" id="T_22700_level0_col3" style="white-space:nowrap">coherente</th>
+<th class="col_heading level0 col4" id="T_22700_level0_col4" style="white-space:nowrap">consecuencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_22700_row0_col0" style="white-space:nowrap">BS&amp;W</td>
+<td class="data row0 col1" id="T_22700_row0_col1" style="white-space:nowrap">%</td>
+<td class="data row0 col2" id="T_22700_row0_col2">fracción adimensional (la fórmula usa 1 − BS&amp;W)</td>
+<td class="data row0 col3" id="T_22700_row0_col3" style="white-space:nowrap">no</td>
+<td class="data row0 col4" id="T_22700_row0_col4">no se convierte; consulta CT-02</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_22700_row1_col0">Densidad de Fluido (B100)</td>
+<td class="data row1 col1" id="T_22700_row1_col1" style="white-space:nowrap">Lb/Gln</td>
+<td class="data row1 col2" id="T_22700_row1_col2">lb/gal (8.33 × adimensional)</td>
+<td class="data row1 col3" id="T_22700_row1_col3" style="white-space:nowrap">sí</td>
+<td class="data row1 col4" id="T_22700_row1_col4">ninguna; el rótulo es una grafía de lb/gal</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_22700_row2_col0">Gradiente de Presión (B102)</td>
+<td class="data row2 col1" id="T_22700_row2_col1" style="white-space:nowrap">psi*ft</td>
+<td class="data row2 col2" id="T_22700_row2_col2">psi/ft (lb/gal × 0.052)</td>
+<td class="data row2 col3" id="T_22700_row2_col3" style="white-space:nowrap">no</td>
+<td class="data row2 col4" id="T_22700_row2_col4">«psi*ft» es un producto, no un gradiente; el resultado es psi/ft</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_22700_row3_col0">PIP en (ft)</td>
+<td class="data row3 col1" id="T_22700_row3_col1" style="white-space:nowrap">ft</td>
+<td class="data row3 col2" id="T_22700_row3_col2">ft de columna (psi ÷ psi/ft)</td>
+<td class="data row3 col3" id="T_22700_row3_col3" style="white-space:nowrap">sí</td>
+<td class="data row3 col4" id="T_22700_row3_col4" style="white-space:nowrap">ninguna</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_22700_row4_col0">Caudal a producir (B106)</td>
+<td class="data row4 col1" id="T_22700_row4_col1" style="white-space:nowrap">BFPD</td>
+<td class="data row4 col2" id="T_22700_row4_col2">BFPD (interpolado de la tabla de caudal)</td>
+<td class="data row4 col3" id="T_22700_row4_col3" style="white-space:nowrap">sí</td>
+<td class="data row4 col4" id="T_22700_row4_col4" style="white-space:nowrap">ninguna</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=28b0b435"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Dos rótulos son engañosos:
+<strong>BS&amp;W «%»</strong> (el número es una fracción de 0.96–0.98 y
+la fórmula lo usa como tal; si se dividiera entre 100 se obtendría un
+fluido casi sin agua, físicamente distinto) y <strong>gradiente
+«psi*ft»</strong> (es psi/ft). Ninguno cambia el cálculo, pero ambos
+pueden inducir a un error de lectura o de conversión de quien consuma el
+resultado, por eso el código <strong>rotula las unidades
+correctas</strong> en sus salidas y el diccionario de datos documenta el
+rótulo original.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3eb90870"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-5-consistencia-hidrostática-del-signo-de-pip-ct-03">Paso 5
+· Consistencia hidrostática del signo de PIP (CT-03)</h2>
+<p><strong>Premisa física.</strong> En un fluido, la presión
+<strong>aumenta con la profundidad</strong>. Si el sensor está más
+profundo que el intake de la bomba, la presión en el intake debe ser
+<strong>menor</strong> que la medida por el sensor:
+<code>P_intake ≈ P_sensor − gradiente · (TVD_sensor − TVD_intake)</code>.</p>
+<p><strong>Lo que escribe la hoja.</strong>
+<code>PIP en (ft) = (P_sensor − ((TVD_intake − TVD_sensor) · gradiente)) / gradiente</code>.
+Con el sensor más profundo, <code>(TVD_intake − TVD_sensor)</code> es
+negativo y el signo menos lo vuelve <strong>positivo</strong>: la
+fórmula <strong>suma</strong> la corrección. Se convierte el resultado
+de la hoja a psi (<code>PIP_ft × gradiente</code>) y se compara con la
+presión del sensor. El argumento es de <strong>signo</strong>, no de
+magnitud: no se afirma que el valor hidrostático simple sea el
+verdadero, solo que el sentido de la corrección que escribe la hoja es
+opuesto al esperable.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=87bda8cc">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">modelo_deterministico.fluidos_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluar_fluido</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">evaluar_fluido</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"api_deg"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"temperatura_c"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"bsw_numero"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"densidad_agua_lb_gal"</span><span class="p">])</span><span class="o">.</span><span class="n">resultados</span><span class="p">[</span><span class="s2">"gradiente_psi_ft"</span><span class="p">][</span><span class="s2">"valor"</span><span class="p">]</span>
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="s2">"tvd_sensor_ft"</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="s2">"tvd_intake_ft"</span><span class="p">]</span>                 <span class="c1"># &gt; 0: el sensor está más profundo</span>
+    <span class="n">pip_psi_hoja</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="s2">"cache_pip_ft"</span><span class="p">]</span> <span class="o">*</span> <span class="n">g</span>                         <span class="c1"># lo que la celda implica, en psi</span>
+    <span class="n">p_hidrostatica</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="s2">"presion_sensor_psi"</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">dz</span>            <span class="c1"># presión en el intake por hidrostática simple</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"TVD sensor − TVD intake (ft)"</span><span class="p">:</span> <span class="n">dz</span><span class="p">,</span> <span class="s2">"P sensor (psi)"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"presion_sensor_psi"</span><span class="p">],</span>
+                  <span class="s2">"PIP de la hoja en psi"</span><span class="p">:</span> <span class="n">pip_psi_hoja</span><span class="p">,</span> <span class="s2">"P en intake, hidrostática (psi)"</span><span class="p">:</span> <span class="n">p_hidrostatica</span><span class="p">,</span>
+                  <span class="s2">"diferencia hoja − hidrostática (psi)"</span><span class="p">:</span> <span class="n">pip_psi_hoja</span> <span class="o">-</span> <span class="n">p_hidrostatica</span><span class="p">,</span>
+                  <span class="s2">"sensor más profundo"</span><span class="p">:</span> <span class="n">dz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"PIP de la hoja &gt; P sensor"</span><span class="p">:</span> <span class="n">pip_psi_hoja</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">[</span><span class="s2">"presion_sensor_psi"</span><span class="p">]})</span>
+<span class="n">hidro</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">hidro</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_f8f61">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_f8f61_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_f8f61_level0_col1">TVD sensor − TVD intake (ft)</th>
+<th class="col_heading level0 col2" id="T_f8f61_level0_col2">P sensor (psi)</th>
+<th class="col_heading level0 col3" id="T_f8f61_level0_col3">PIP de la hoja en psi</th>
+<th class="col_heading level0 col4" id="T_f8f61_level0_col4">P en intake, hidrostática (psi)</th>
+<th class="col_heading level0 col5" id="T_f8f61_level0_col5">diferencia hoja − hidrostática (psi)</th>
+<th class="col_heading level0 col6" id="T_f8f61_level0_col6">sensor más profundo</th>
+<th class="col_heading level0 col7" id="T_f8f61_level0_col7">PIP de la hoja &gt; P sensor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_f8f61_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_f8f61_row0_col1" style="white-space:nowrap">25.6453</td>
+<td class="data row0 col2" id="T_f8f61_row0_col2" style="white-space:nowrap">732</td>
+<td class="data row0 col3" id="T_f8f61_row0_col3" style="white-space:nowrap">743.11546</td>
+<td class="data row0 col4" id="T_f8f61_row0_col4" style="white-space:nowrap">720.88454</td>
+<td class="data row0 col5" id="T_f8f61_row0_col5" style="white-space:nowrap">22.230922</td>
+<td class="data row0 col6" id="T_f8f61_row0_col6" style="white-space:nowrap">sí</td>
+<td class="data row0 col7" id="T_f8f61_row0_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_f8f61_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_f8f61_row1_col1" style="white-space:nowrap">19.313607</td>
+<td class="data row1 col2" id="T_f8f61_row1_col2" style="white-space:nowrap">667</td>
+<td class="data row1 col3" id="T_f8f61_row1_col3" style="white-space:nowrap">675.37196</td>
+<td class="data row1 col4" id="T_f8f61_row1_col4" style="white-space:nowrap">658.62804</td>
+<td class="data row1 col5" id="T_f8f61_row1_col5" style="white-space:nowrap">16.743928</td>
+<td class="data row1 col6" id="T_f8f61_row1_col6" style="white-space:nowrap">sí</td>
+<td class="data row1 col7" id="T_f8f61_row1_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_f8f61_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_f8f61_row2_col1" style="white-space:nowrap">25.530202</td>
+<td class="data row2 col2" id="T_f8f61_row2_col2" style="white-space:nowrap">821</td>
+<td class="data row2 col3" id="T_f8f61_row2_col3" style="white-space:nowrap">832.05968</td>
+<td class="data row2 col4" id="T_f8f61_row2_col4" style="white-space:nowrap">809.94032</td>
+<td class="data row2 col5" id="T_f8f61_row2_col5" style="white-space:nowrap">22.119367</td>
+<td class="data row2 col6" id="T_f8f61_row2_col6" style="white-space:nowrap">sí</td>
+<td class="data row2 col7" id="T_f8f61_row2_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_f8f61_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_f8f61_row3_col1" style="white-space:nowrap">20.623409</td>
+<td class="data row3 col2" id="T_f8f61_row3_col2" style="white-space:nowrap">810</td>
+<td class="data row3 col3" id="T_f8f61_row3_col3" style="white-space:nowrap">818.93033</td>
+<td class="data row3 col4" id="T_f8f61_row3_col4" style="white-space:nowrap">801.06967</td>
+<td class="data row3 col5" id="T_f8f61_row3_col5" style="white-space:nowrap">17.860662</td>
+<td class="data row3 col6" id="T_f8f61_row3_col6" style="white-space:nowrap">sí</td>
+<td class="data row3 col7" id="T_f8f61_row3_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_f8f61_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_f8f61_row4_col1" style="white-space:nowrap">20.539095</td>
+<td class="data row4 col2" id="T_f8f61_row4_col2" style="white-space:nowrap">607</td>
+<td class="data row4 col3" id="T_f8f61_row4_col3" style="white-space:nowrap">615.89382</td>
+<td class="data row4 col4" id="T_f8f61_row4_col4" style="white-space:nowrap">598.10618</td>
+<td class="data row4 col5" id="T_f8f61_row4_col5" style="white-space:nowrap">17.787644</td>
+<td class="data row4 col6" id="T_f8f61_row4_col6" style="white-space:nowrap">sí</td>
+<td class="data row4 col7" id="T_f8f61_row4_col7" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=238207d9"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> En las <strong>cinco</strong> hojas
+el sensor está más profundo que el intake y, aun así, la celda entrega
+en el intake una presión <strong>mayor</strong> que la del sensor. La
+diferencia entre lo que escribe la hoja y la hidrostática simple es de
+entre 17 y 22 psi según la hoja (≈ <code>2 · gradiente · ΔTVD</code>).
+Esto <strong>no demuestra</strong> que la hoja esté equivocada: podría
+usar una convención que el libro no declara. Pero sí hace de CT-03 la
+<strong>reserva de mayor prioridad</strong> del expediente, porque (a)
+la analogía F-12 del plan escribe la corrección con el signo contrario,
+que es consistente con la hidrostática, y (b) el cuaderno 05 muestra que
+este signo mueve el caudal calculado en una magnitud comparable a la
+diferencia calculado-medido.</p>
+<p><strong>Decisión de trabajo.</strong> El código <strong>conserva el
+signo de la hoja</strong> (se transcribe, no se corrige por criterio
+propio) y toda salida de PIP lleva la advertencia. La consulta técnica
+CT-03 debe resolverse con quien mantiene el libro <strong>antes</strong>
+de usar el PIP para cualquier decisión.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=95daf966"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-6-registro-de-discrepancias-con-evidencia-numérica">Paso 6
+· Registro de discrepancias con evidencia numérica</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=60fb9496">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">exponentes</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">constantes_literales</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">celdas</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="s2">"G100"</span><span class="p">]]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="mi">4</span> <span class="o">&lt;</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">celdas</span><span class="p">}</span>
+<span class="n">temperatura</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">constantes_literales</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="n">celdas</span><span class="p">[</span><span class="n">h</span><span class="p">][</span><span class="s2">"B98"</span><span class="p">]]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.00066</span><span class="p">,</span> <span class="mf">3e-07</span><span class="p">,</span> <span class="mf">15.556</span><span class="p">)))</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">celdas</span><span class="p">}</span>
+<span class="n">discrepancias</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"CT-03"</span><span class="p">,</span> <span class="s2">"discrepancia"</span><span class="p">:</span> <span class="s2">"Signo de la corrección de PIP opuesto a la hidrostática y a F-12"</span><span class="p">,</span>
+     <span class="s2">"evidencia"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">hidro</span><span class="p">[</span><span class="s1">'PIP de la hoja &gt; P sensor'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hidro</span><span class="p">)</span><span class="si">}</span><span class="s2"> hojas con PIP &gt; P sensor y sensor más profundo"</span><span class="p">,</span>
+     <span class="s2">"prioridad"</span><span class="p">:</span> <span class="s2">"alta"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"CT-05"</span><span class="p">,</span> <span class="s2">"discrepancia"</span><span class="p">:</span> <span class="s2">"Exponente del ID en Hazen-Williams: hoja vs PDF 004"</span><span class="p">,</span>
+     <span class="s2">"evidencia"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"hoja: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">({</span><span class="n">v</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">exponentes</span><span class="o">.</span><span class="n">values</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">lista</span><span class="p">})</span><span class="si">}</span><span class="s2">; PDF: [4.8655]; igual en las 5 hojas: </span><span class="si">{</span><span class="nb">len</span><span class="p">({</span><span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">exponentes</span><span class="o">.</span><span class="n">values</span><span class="p">()})</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+     <span class="s2">"prioridad"</span><span class="p">:</span> <span class="s2">"media"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"CT-04"</span><span class="p">,</span> <span class="s2">"discrepancia"</span><span class="p">:</span> <span class="s2">"Constantes de corrección de temperatura sin origen"</span><span class="p">,</span>
+     <span class="s2">"evidencia"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"mismas 3 constantes en las 5 hojas: </span><span class="si">{</span><span class="nb">len</span><span class="p">({</span><span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">temperatura</span><span class="o">.</span><span class="n">values</span><span class="p">()})</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"prioridad"</span><span class="p">:</span> <span class="s2">"baja"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"CT-02"</span><span class="p">,</span> <span class="s2">"discrepancia"</span><span class="p">:</span> <span class="s2">"BS&amp;W rotulado «%» y usado como fracción"</span><span class="p">,</span>
+     <span class="s2">"evidencia"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"rótulos </span><span class="si">{</span><span class="nb">sorted</span><span class="p">({</span><span class="n">h</span><span class="p">[</span><span class="s1">'bsw_unidad_rotulo'</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">hojas</span><span class="p">})</span><span class="si">}</span><span class="s2">; números </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s1">'bsw_numero'</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">hojas</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s1">'bsw_numero'</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">hojas</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+     <span class="s2">"prioridad"</span><span class="p">:</span> <span class="s2">"media"</span><span class="p">},</span>
+<span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">discrepancias</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_636d0">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_636d0_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_636d0_level0_col1" style="white-space:nowrap">discrepancia</th>
+<th class="col_heading level0 col2" id="T_636d0_level0_col2" style="white-space:nowrap">evidencia</th>
+<th class="col_heading level0 col3" id="T_636d0_level0_col3" style="white-space:nowrap">prioridad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_636d0_row0_col0" style="white-space:nowrap">CT-03</td>
+<td class="data row0 col1" id="T_636d0_row0_col1">Signo de la corrección de PIP opuesto a la hidrostática y a F-12</td>
+<td class="data row0 col2" id="T_636d0_row0_col2">5 de 5 hojas con PIP &gt; P sensor y sensor más profundo</td>
+<td class="data row0 col3" id="T_636d0_row0_col3" style="white-space:nowrap">alta</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_636d0_row1_col0" style="white-space:nowrap">CT-05</td>
+<td class="data row1 col1" id="T_636d0_row1_col1">Exponente del ID en Hazen-Williams: hoja vs PDF 004</td>
+<td class="data row1 col2" id="T_636d0_row1_col2">hoja: [4.8566]; PDF: [4.8655]; igual en las 5 hojas: True</td>
+<td class="data row1 col3" id="T_636d0_row1_col3" style="white-space:nowrap">media</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_636d0_row2_col0" style="white-space:nowrap">CT-04</td>
+<td class="data row2 col1" id="T_636d0_row2_col1">Constantes de corrección de temperatura sin origen</td>
+<td class="data row2 col2" id="T_636d0_row2_col2">mismas 3 constantes en las 5 hojas: True</td>
+<td class="data row2 col3" id="T_636d0_row2_col3" style="white-space:nowrap">baja</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_636d0_row3_col0" style="white-space:nowrap">CT-02</td>
+<td class="data row3 col1" id="T_636d0_row3_col1">BS&amp;W rotulado «%» y usado como fracción</td>
+<td class="data row3 col2" id="T_636d0_row3_col2">rótulos ['%']; números 0.9557–0.9766</td>
+<td class="data row3 col3" id="T_636d0_row3_col3" style="white-space:nowrap">media</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2d9fe7d0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La columna <strong>prioridad</strong> es una estimación basada en el
+efecto sobre el resultado que se mide en el cuaderno 05 (alta: mueve el
+caudal calculado más que la propia diferencia calculado-medido; media:
+lo mueve poco pero cambia la interpretación física; baja: efecto menor).
+No sustituye la decisión del responsable técnico.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=fdc73fa4"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-7-catálogo-de-fórmulas-y-decisión-de-uso">Paso 7 · Catálogo
+de fórmulas y decisión de uso</h2>
+<p>El catálogo común clasifica cada fórmula según lo que <strong>se
+puede afirmar con evidencia hoy</strong>. «Utilizable con reserva»
+significa: se transcribe, reproduce la hoja, y hay una consulta abierta
+que puede cambiar su sentido. Ninguna fórmula está aprobada para uso
+operativo: la puerta de fórmulas del plan no se da por satisfecha.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f5501b2e">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">analisis.catalogo_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">ESTADOS_VALIDOS</span><span class="p">,</span> <span class="n">FORMULAS</span>
+<span class="n">catalogo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">FORMULAS</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">catalogo</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"celda"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">,</span> <span class="s2">"consulta"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"celda"</span><span class="p">:</span> <span class="s2">"celda(s) de la hoja"</span><span class="p">,</span> <span class="s2">"consulta"</span><span class="p">:</span> <span class="s2">"reservas"</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_f46ac">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_f46ac_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_f46ac_level0_col1">celda(s) de la hoja</th>
+<th class="col_heading level0 col2" id="T_f46ac_level0_col2" style="white-space:nowrap">estado</th>
+<th class="col_heading level0 col3" id="T_f46ac_level0_col3" style="white-space:nowrap">reservas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_f46ac_row0_col0" style="white-space:nowrap">F-01</td>
+<td class="data row0 col1" id="T_f46ac_row0_col1">Gravedad Oil @ 60ºF</td>
+<td class="data row0 col2" id="T_f46ac_row0_col2" style="white-space:nowrap">utilizable</td>
+<td class="data row0 col3" id="T_f46ac_row0_col3"></td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_f46ac_row1_col0">B98-temperatura</td>
+<td class="data row1 col1" id="T_f46ac_row1_col1">Gravedad Oil @ T fondo</td>
+<td class="data row1 col2" id="T_f46ac_row1_col2">utilizable con reserva</td>
+<td class="data row1 col3" id="T_f46ac_row1_col3" style="white-space:nowrap">CT-04</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_f46ac_row2_col0" style="white-space:nowrap">B100-B102</td>
+<td class="data row2 col1" id="T_f46ac_row2_col1">Densidad de Fluido; Gradiente de Presión</td>
+<td class="data row2 col2" id="T_f46ac_row2_col2">utilizable con reserva</td>
+<td class="data row2 col3" id="T_f46ac_row2_col3" style="white-space:nowrap">CT-02</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_f46ac_row3_col0" style="white-space:nowrap">G96-PIP</td>
+<td class="data row3 col1" id="T_f46ac_row3_col1">PIP en (ft)</td>
+<td class="data row3 col2" id="T_f46ac_row3_col2">utilizable con reserva</td>
+<td class="data row3 col3" id="T_f46ac_row3_col3" style="white-space:nowrap">CT-03</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_f46ac_row4_col0" style="white-space:nowrap">G98-THP</td>
+<td class="data row4 col1" id="T_f46ac_row4_col1">THP en (ft)</td>
+<td class="data row4 col2" id="T_f46ac_row4_col2" style="white-space:nowrap">utilizable</td>
+<td class="data row4 col3" id="T_f46ac_row4_col3"></td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_f46ac_row5_col0" style="white-space:nowrap">G100-Hazen</td>
+<td class="data row5 col1" id="T_f46ac_row5_col1">Perdidad por Fricción</td>
+<td class="data row5 col2" id="T_f46ac_row5_col2">utilizable con reserva</td>
+<td class="data row5 col3" id="T_f46ac_row5_col3" style="white-space:nowrap">CT-05</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_f46ac_row6_col0" style="white-space:nowrap">G102-THD</td>
+<td class="data row6 col1" id="T_f46ac_row6_col1">THD TOTAL</td>
+<td class="data row6 col2" id="T_f46ac_row6_col2">utilizable con reserva</td>
+<td class="data row6 col3" id="T_f46ac_row6_col3">CT-03, CT-05</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_f46ac_row7_col0">F-26-afinidad</td>
+<td class="data row7 col1" id="T_f46ac_row7_col1">Curva de bomba a velocidad actual; límites a otra frecuencia</td>
+<td class="data row7 col2" id="T_f46ac_row7_col2">utilizable con reserva</td>
+<td class="data row7 col3" id="T_f46ac_row7_col3" style="white-space:nowrap">CT-08</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_f46ac_row8_col0">Q-interseccion</td>
+<td class="data row8 col1" id="T_f46ac_row8_col1">Caudal a producir</td>
+<td class="data row8 col2" id="T_f46ac_row8_col2">utilizable con reserva</td>
+<td class="data row8 col3" id="T_f46ac_row8_col3">CT-03, CT-08, CT-09</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_f46ac_row9_col0" style="white-space:nowrap">F-02-F-03</td>
+<td class="data row9 col1" id="T_f46ac_row9_col1" style="white-space:nowrap">—</td>
+<td class="data row9 col2" id="T_f46ac_row9_col2">fuera del alcance actual</td>
+<td class="data row9 col3" id="T_f46ac_row9_col3"></td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_f46ac_row10_col0">Potencia-motor-cable</td>
+<td class="data row10 col1" id="T_f46ac_row10_col1">Potencia a consumir, potencia transferida, eficiencia, bloque de motor y cable</td>
+<td class="data row10 col2" id="T_f46ac_row10_col2">fuera del alcance actual</td>
+<td class="data row10 col3" id="T_f46ac_row10_col3"></td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_f46ac_row11_col0" style="white-space:nowrap">F-36-F-40</td>
+<td class="data row11 col1" id="T_f46ac_row11_col1" style="white-space:nowrap">—</td>
+<td class="data row11 col2" id="T_f46ac_row11_col2">fuera del alcance actual</td>
+<td class="data row11 col3" id="T_f46ac_row11_col3"></td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_f46ac_row12_col0" style="white-space:nowrap">F-41-J64</td>
+<td class="data row12 col1" id="T_f46ac_row12_col1" style="white-space:nowrap">—</td>
+<td class="data row12 col2" id="T_f46ac_row12_col2">fuera del alcance actual</td>
+<td class="data row12 col3" id="T_f46ac_row12_col3"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6ab1ff20">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">catalogo</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"aplica"</span><span class="p">,</span> <span class="s2">"en_excel"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"aplica"</span><span class="p">:</span> <span class="s2">"qué se transcribe"</span><span class="p">,</span> <span class="s2">"en_excel"</span><span class="p">:</span> <span class="s2">"lo que dice el libro"</span><span class="p">}),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_0cc41">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_0cc41_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_0cc41_level0_col1">qué se transcribe</th>
+<th class="col_heading level0 col2" id="T_0cc41_level0_col2">lo que dice el libro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_0cc41_row0_col0" style="white-space:nowrap">F-01</td>
+<td class="data row0 col1" id="T_0cc41_row0_col1">gravedad específica a 60 °F desde API</td>
+<td class="data row0 col2" id="T_0cc41_row0_col2">sí, API = 12 °API</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_0cc41_row1_col0">B98-temperatura</td>
+<td class="data row1 col1" id="T_0cc41_row1_col1">corrección de temperatura de la gravedad; el gradiente de la hoja la usa</td>
+<td class="data row1 col2" id="T_0cc41_row1_col2">sí; constantes 0.00066, 0.0000003 y 15.556 sin definición fuera de la celda</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_0cc41_row2_col0" style="white-space:nowrap">B100-B102</td>
+<td class="data row2 col1" id="T_0cc41_row2_col1">densidad y gradiente tal como los escribe la hoja</td>
+<td class="data row2 col2" id="T_0cc41_row2_col2">sí; BS&amp;W rotulado % y usado como fracción; salida del gradiente rotulada psi*ft</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_0cc41_row3_col0" style="white-space:nowrap">G96-PIP</td>
+<td class="data row3 col1" id="T_0cc41_row3_col1">cálculo directo desde la presión de sensor, no estimación sin sensor</td>
+<td class="data row3 col2" id="T_0cc41_row3_col2">sí; el signo es el de la celda y entrega en el intake una presión mayor que la del sensor aunque el intake esté más somero</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_0cc41_row4_col0" style="white-space:nowrap">G98-THP</td>
+<td class="data row4 col1" id="T_0cc41_row4_col1">THP en psi dividido por el gradiente</td>
+<td class="data row4 col2" id="T_0cc41_row4_col2" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_0cc41_row5_col0" style="white-space:nowrap">G100-Hazen</td>
+<td class="data row5 col1" id="T_0cc41_row5_col1">fricción de la hoja, exponente 4.8566, C = 120 dentro de la fórmula, longitud = TVD de descarga</td>
+<td class="data row5 col2" id="T_0cc41_row5_col2">sí; el PDF usa 4.8655 y no se sustituyó</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_0cc41_row6_col0" style="white-space:nowrap">G102-THD</td>
+<td class="data row6 col1" id="T_0cc41_row6_col1">THD de la hoja = TVD descarga + fricción + THP − PIP</td>
+<td class="data row6 col2" id="T_0cc41_row6_col2">sí; hereda las reservas de PIP y fricción</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_0cc41_row7_col0">F-26-afinidad</td>
+<td class="data row7 col1" id="T_0cc41_row7_col1">la hoja escala Q con f/f_curva, head con (f/f_curva)^2 por etapas, y los límites con f/60</td>
+<td class="data row7 col2" id="T_0cc41_row7_col2">sí; se transcribe, no se verificó que aplique a esta bomba</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_0cc41_row8_col0">Q-interseccion</td>
+<td class="data row8 col1" id="T_0cc41_row8_col1">intersección de la THD con la curva de bomba a velocidad actual (MATCH/INDEX, interpolación lineal)</td>
+<td class="data row8 col2" id="T_0cc41_row8_col2">sí; reproduce las cinco celdas; no es validación independiente</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_0cc41_row9_col0" style="white-space:nowrap">F-02-F-03</td>
+<td class="data row9 col1" id="T_0cc41_row9_col1">gradiente 0.433 del XLSM; la hoja usa 0.052 por densidad</td>
+<td class="data row9 col2" id="T_0cc41_row9_col2">no es la fórmula escrita en BES-jun</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_0cc41_row10_col0">Potencia-motor-cable</td>
+<td class="data row10 col1" id="T_0cc41_row10_col1">cadena eléctrica y de potencia de la hoja, con constantes (0.0000018134, 119.826368, 0.746, 0.241...) sin documentar</td>
+<td class="data row10 col2" id="T_0cc41_row10_col2">sí; no se transcribe hasta tener origen de las constantes</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_0cc41_row11_col0" style="white-space:nowrap">F-36-F-40</td>
+<td class="data row11 col1" id="T_0cc41_row11_col1">Método B y observador de E1</td>
+<td class="data row11 col2" id="T_0cc41_row11_col2">faltan parámetros; la hoja ya trae presión de sensor</td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_0cc41_row12_col0" style="white-space:nowrap">F-41-J64</td>
+<td class="data row12 col1" id="T_0cc41_row12_col1">cadena del XLSM, incluido el signo de J64</td>
+<td class="data row12 col2" id="T_0cc41_row12_col2">no; es otro libro</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a91e25e1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-8-criterios-de-aceptación">Paso 8 · Criterios de
+aceptación</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5caf4e51">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="n">consultas</span> <span class="o">=</span> <span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"docs"</span> <span class="o">/</span> <span class="s2">"consultas_tecnicas_pendientes.md"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">ids_existentes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\| (CT-\d+) \|"</span><span class="p">,</span> <span class="n">consultas</span><span class="p">))</span>
+<span class="n">referidas</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">texto</span> <span class="ow">in</span> <span class="n">catalogo</span><span class="p">[</span><span class="s2">"consulta"</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texto</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+<span class="n">crit</span> <span class="o">=</span> <span class="n">Criterios</span><span class="p">(</span><span class="s2">"02_trazabilidad_y_analisis_formulas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C02-1"</span><span class="p">,</span> <span class="s2">"Las 9 fórmulas tienen firma idéntica en las 5 hojas"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">firmas_tabla</span><span class="p">[</span><span class="s2">"idéntica en 5 hojas"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">firmas_tabla</span><span class="p">)</span><span class="si">}</span><span class="s2"> celdas × </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">celdas</span><span class="p">)</span><span class="si">}</span><span class="s2"> hojas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C02-2"</span><span class="p">,</span> <span class="s2">"Toda constante literal está clasificada"</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">constantes</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"SIN CLASIFICAR"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">constantes</span><span class="p">)</span><span class="si">}</span><span class="s2"> constantes"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C02-3"</span><span class="p">,</span> <span class="s2">"Exponente de fricción igual en las 5 hojas y distinto del PDF (registrado)"</span><span class="p">,</span>
+               <span class="nb">len</span><span class="p">({</span><span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">exponentes</span><span class="o">.</span><span class="n">values</span><span class="p">()})</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">exponentes</span><span class="p">[</span><span class="s2">"QF-554H"</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mf">4.8566</span><span class="p">],</span>
+               <span class="sa">f</span><span class="s2">"hoja </span><span class="si">{</span><span class="n">exponentes</span><span class="p">[</span><span class="s1">'QF-554H'</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs PDF [4.8655]"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C02-4"</span><span class="p">,</span> <span class="s2">"Consistencia hidrostática de PIP evaluada y registrada en 5 hojas"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hidro</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">hidro</span><span class="p">[</span><span class="s2">"sensor más profundo"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="sa">f</span><span class="s2">"PIP &gt; P sensor en </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">hidro</span><span class="p">[</span><span class="s1">'PIP de la hoja &gt; P sensor'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2"> hojas → CT-03"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C02-5"</span><span class="p">,</span> <span class="s2">"Estados válidos y cada reserva remite a una consulta existente"</span><span class="p">,</span>
+               <span class="nb">set</span><span class="p">(</span><span class="n">catalogo</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">ESTADOS_VALIDOS</span> <span class="ow">and</span> <span class="n">referidas</span> <span class="o">&lt;=</span> <span class="n">ids_existentes</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s2">"referidas=</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">referidas</span><span class="p">)</span><span class="si">}</span><span class="s2">; existentes=</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ids_existentes</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">crit</span><span class="o">.</span><span class="n">tabla</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_8d5da">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_8d5da_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_8d5da_level0_col1" style="white-space:nowrap">criterio</th>
+<th class="col_heading level0 col2" id="T_8d5da_level0_col2" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col3" id="T_8d5da_level0_col3" style="white-space:nowrap">evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_8d5da_row0_col0" style="white-space:nowrap">C02-1</td>
+<td class="data row0 col1" id="T_8d5da_row0_col1">Las 9 fórmulas tienen firma idéntica en las 5 hojas</td>
+<td class="data row0 col2" id="T_8d5da_row0_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row0 col3" id="T_8d5da_row0_col3">9 celdas × 5 hojas</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_8d5da_row1_col0" style="white-space:nowrap">C02-2</td>
+<td class="data row1 col1" id="T_8d5da_row1_col1">Toda constante literal está clasificada</td>
+<td class="data row1 col2" id="T_8d5da_row1_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row1 col3" id="T_8d5da_row1_col3">17 constantes</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_8d5da_row2_col0" style="white-space:nowrap">C02-3</td>
+<td class="data row2 col1" id="T_8d5da_row2_col1">Exponente de fricción igual en las 5 hojas y distinto del PDF (registrado)</td>
+<td class="data row2 col2" id="T_8d5da_row2_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row2 col3" id="T_8d5da_row2_col3">hoja [4.8566] vs PDF [4.8655]</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_8d5da_row3_col0" style="white-space:nowrap">C02-4</td>
+<td class="data row3 col1" id="T_8d5da_row3_col1">Consistencia hidrostática de PIP evaluada y registrada en 5 hojas</td>
+<td class="data row3 col2" id="T_8d5da_row3_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row3 col3" id="T_8d5da_row3_col3">PIP &gt; P sensor en 5 hojas → CT-03</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_8d5da_row4_col0" style="white-space:nowrap">C02-5</td>
+<td class="data row4 col1" id="T_8d5da_row4_col1">Estados válidos y cada reserva remite a una consulta existente</td>
+<td class="data row4 col2" id="T_8d5da_row4_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row4 col3" id="T_8d5da_row4_col3">referidas=['CT-02', 'CT-03', 'CT-04', 'CT-05', 'CT-08', 'CT-09']; existentes=['CT-01', 'CT-02', 'CT-03', 'CT-04', 'CT-05', 'CT-06', 'CT-07', 'CT-08', 'CT-09', 'CT-10']</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=fe8e3b7e">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">exigir</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Todos los criterios de aceptación del cuaderno 02 se cumplen."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Todos los criterios de aceptación del cuaderno 02 se cumplen.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ddb8a603"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="conclusión-técnica">Conclusión técnica</h2>
+<ul>
+<li><strong>Resultado:</strong> las nueve fórmulas de la cadena son
+idénticas en estructura en las cinco hojas, y quedaron localizadas,
+leídas en lenguaje de rótulos, con sus constantes clasificadas y sus
+reservas enlazadas a consultas.</li>
+<li><strong>Hallazgo principal:</strong> el signo de la corrección de
+PIP produce, en las cinco hojas, una presión en el intake mayor que la
+del sensor aunque el intake esté más somero. Es <strong>incompatible con
+la hidrostática simple</strong> y es la reserva más importante del
+expediente (CT-03).</li>
+<li><strong>Reservas secundarias:</strong> exponente de Hazen-Williams
+distinto del PDF (CT-05) y con aplicabilidad no verificada a este
+fluido; constantes de temperatura sin origen (CT-04); BS&amp;W rotulado
+en % (CT-02).</li>
+<li><strong>Lo que no se hizo:</strong> no se cambió ningún signo,
+exponente ni constante. Transcribir lo que dice la hoja y
+<strong>señalar</strong> lo dudoso es la conducta correcta cuando no hay
+una fuente que dirima.</li>
+<li><strong>Siguiente paso:</strong> cuaderno 03 (mapeo de variables) y
+cuaderno 04 (ejecución y verificación de la cadena).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=ce43c318"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="relación-con-el-sistema-de-reglas">Relación con el sistema de
+reglas</h2>
+<p>Clasifica cada fórmula como utilizable, utilizable con reserva o
+fuera de alcance, y enlaza la reserva con una CT. El motor puede
+calcular una fórmula «con reserva»; el resultado sigue siendo
+preliminar.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=85c2a96a"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="limitaciones">Limitaciones</h2>
+<ul>
+<li>La firma estructural prueba que las fórmulas son <strong>iguales
+entre hojas</strong>, no que sean correctas.</li>
+<li>El análisis dimensional de rótulos depende de cómo los escribió
+quien armó el libro (hay grafías distintas de la misma unidad).</li>
+<li>El argumento hidrostático sobre CT-03 es de <strong>signo</strong>,
+no de magnitud, y asume fluido de gradiente constante.</li>
+<li>El catálogo de fórmulas es una clasificación de este expediente; no
+es una aprobación (puerta G1).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=cbfc0352"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="referencias">Referencias</h2>
+<p>Solo se listan las fuentes realmente consultadas en este
+cuaderno.</p>
+<ol type="1">
+<li><strong>Libro de trabajo:</strong>
+<code>entrada/BES_jun.xlsx</code>, copia byte a byte de «Copia de FINAL
+BES-jun.xlsx» (SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>).
+Cinco hojas: QF-554H, QF-545H, QF-500H, QF-378HST y QF-549HST.</li>
+<li><strong><code>004-ESPdesign.pdf</code></strong> (en la raíz del
+proyecto): se consultó solo para el exponente de fricción 4.8655 y para
+el significado de TDH (CT-05).</li>
+<li><strong><code>Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx</code></strong>
+(raíz del proyecto): se consultó solo para la analogía de la corrección
+de PIP (F-12) usada en la sensibilidad CT-03. No es la fórmula de la
+hoja.</li>
+<li><strong><code>Copia de Copia de Ecuaciones  _.xlsm</code></strong>
+(raíz del proyecto): fuente de F-01 (gravedad específica) y del
+gradiente 0.433, leída sin ejecutar macros.</li>
+<li><strong><code>docs/consultas_tecnicas_pendientes.md</code></strong>
+(expediente): registro CT-01…CT-10 de ambigüedades abiertas.</li>
+<li><strong>Software:</strong> Python 3.14.8, pandas 3.0.6, numpy 2.5.4,
+matplotlib 3.11.2, openpyxl 3.1.5 (versiones tomadas de la ficha de
+entorno de cada ejecución).</li>
+<li><strong>Métodos de uso general sin cita verificada en las fuentes
+del expediente:</strong> presión hidrostática y análisis dimensional. Se
+aplican como están escritos en la hoja o se describen como método
+estándar, sin atribuirlos a un texto concreto.</li>
+</ol>
+</div>
+</div>
+</div>
+</div></body></html>

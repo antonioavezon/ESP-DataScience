@@ -1,0 +1,678 @@
+{
+  "dataset_id": "BES-jun",
+  "variables": [
+    {
+      "nombre": "hoja",
+      "nombre_original": "nombre de la hoja",
+      "simbolo": null,
+      "descripcion": "Nombre de la pestaña de Excel.",
+      "unidad": null,
+      "unidad_origen": null,
+      "tipo": "texto",
+      "obligatoria": true,
+      "funcion": "identificacion",
+      "procedencia": "estructura del libro",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "única dentro del archivo",
+      "usada_por": [
+        "identidad"
+      ],
+      "estado_aprobacion": "provisional",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "cluster",
+      "nombre_original": "Cluster",
+      "simbolo": null,
+      "descripcion": "Rótulo Cluster (celda B8). En este libro coincide con el nombre de la hoja.",
+      "unidad": null,
+      "unidad_origen": "no declarada",
+      "tipo": "texto",
+      "obligatoria": true,
+      "funcion": "identificacion",
+      "procedencia": "celda B8",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "no es llave global confirmada",
+      "usada_por": [
+        "identidad"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "pozo",
+      "nombre_original": "Pozo",
+      "simbolo": null,
+      "descripcion": "Rótulo Pozo (celda B10). Distinto del nombre de la hoja.",
+      "unidad": null,
+      "unidad_origen": "no declarada",
+      "tipo": "texto",
+      "obligatoria": true,
+      "funcion": "identificacion",
+      "procedencia": "celda B10",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "no es llave global confirmada",
+      "usada_por": [
+        "identidad"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "bomba_referencia",
+      "nombre_original": "Referencia",
+      "simbolo": null,
+      "descripcion": "Texto de bomba escrito en la hoja. No se contrastó con un catálogo de fabricante.",
+      "unidad": null,
+      "unidad_origen": "no declarada",
+      "tipo": "texto",
+      "obligatoria": true,
+      "funcion": "caracteristica_de_bomba",
+      "procedencia": "rótulo Referencia",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "texto no vacío",
+      "usada_por": [
+        "RC-BES-01",
+        "RC-BES-02",
+        "RC-BES-03"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "etapas",
+      "nombre_original": "Etapas",
+      "simbolo": "N",
+      "descripcion": "Número de etapas escrito. Entra en el head por afinidad.",
+      "unidad": "1",
+      "unidad_origen": "Nº",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "caracteristica_de_bomba",
+      "procedencia": "rótulo Etapas",
+      "restriccion_fisica": "debe ser positiva para calcular",
+      "limite_autorizado": null,
+      "validacion": "el modelo rechaza etapas no positivas",
+      "usada_por": [
+        "M-BES-INTERSECCION"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 31.0,
+        "maximo": 53.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "id_tubing_in",
+      "nombre_original": "ID",
+      "simbolo": "ID",
+      "descripcion": "Diámetro interno del tubing usado en la fricción de la hoja.",
+      "unidad": "in",
+      "unidad_origen": "inch",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_fijo_de_instalacion",
+      "procedencia": "rótulo ID",
+      "restriccion_fisica": "debe ser positivo",
+      "limite_autorizado": null,
+      "validacion": "el modelo rechaza ID no positivo",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G100-Hazen"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 2.996,
+        "maximo": 2.996,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "tvd_descarga_ft",
+      "nombre_original": "Descarga (TVD)",
+      "simbolo": "TVD_d",
+      "descripcion": "Profundidad vertical de la descarga. La hoja la usa también como longitud en la fricción.",
+      "unidad": "ft",
+      "unidad_origen": "ft",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_fijo_de_instalacion",
+      "procedencia": "rótulo Descarga",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "número presente",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G100-Hazen",
+        "G102-THD"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 2527.3619868852456,
+        "maximo": 2763.6426454545453,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "tvd_intake_ft",
+      "nombre_original": "Intake (TVD)",
+      "simbolo": "TVD_i",
+      "descripcion": "Profundidad vertical del intake.",
+      "unidad": "ft",
+      "unidad_origen": "ft",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_fijo_de_instalacion",
+      "procedencia": "rótulo Intake",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "número presente",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G96-PIP"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 2534.603750819672,
+        "maximo": 2769.6592545454546,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "tvd_sensor_ft",
+      "nombre_original": "Sensor (TVD)",
+      "simbolo": "TVD_s",
+      "descripcion": "Profundidad vertical del sensor de presión.",
+      "unidad": "ft",
+      "unidad_origen": "ft",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_fijo_de_instalacion",
+      "procedencia": "rótulo Sensor",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "número presente",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G96-PIP"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 2553.917357377049,
+        "maximo": 2790.2826631578946,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "frecuencia_hz",
+      "nombre_original": "Velocidad",
+      "simbolo": "f",
+      "descripcion": "Frecuencia de operación registrada en la hoja. No es un límite autorizado de operación: ese límite no está en el libro.",
+      "unidad": "Hz",
+      "unidad_origen": "Hz",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "medicion_ingresada",
+      "procedencia": "rótulo Velocidad del bloque de operación",
+      "restriccion_fisica": "debe ser positiva para calcular",
+      "limite_autorizado": null,
+      "validacion": "el modelo rechaza frecuencia no positiva; el motor advierte si queda fuera del rango observado del dataset",
+      "usada_por": [
+        "M-BES-INTERSECCION",
+        "RC-BES-01",
+        "RC-BES-02",
+        "RC-BES-03"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 56.0,
+        "maximo": 67.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "caudal_operacion_bfpd",
+      "nombre_original": "Caudal",
+      "simbolo": "Q",
+      "descripcion": "Caudal de operación escrito en la hoja, a la frecuencia de operación.",
+      "unidad": "BFPD",
+      "unidad_origen": "BFPD",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "medicion_ingresada",
+      "procedencia": "rótulo Caudal del bloque de operación",
+      "restriccion_fisica": "el modelo rechaza caudal negativo",
+      "limite_autorizado": null,
+      "validacion": "presente y numérico",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "RC-BES-01",
+        "RC-BES-02",
+        "RC-BES-03"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 5419.0,
+        "maximo": 10301.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "presion_sensor_psi",
+      "nombre_original": "Presión de Sensor",
+      "simbolo": "P_s",
+      "descripcion": "Presión medida por el sensor. El PIP en pies se calcula desde esta entrada; no es una estimación sin sensor.",
+      "unidad": "psi",
+      "unidad_origen": "psi",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "medicion_de_sensor",
+      "procedencia": "rótulo Presión de Sensor",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "el balance la exige",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G96-PIP"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 607.0,
+        "maximo": 821.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "thp_psi",
+      "nombre_original": "THP",
+      "simbolo": "THP",
+      "descripcion": "Presión en cabeza de tubing.",
+      "unidad": "psi",
+      "unidad_origen": "psi",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "medicion_ingresada",
+      "procedencia": "rótulo THP",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "presente para el balance",
+      "usada_por": [
+        "M-BES-BALANCE",
+        "G98-THP"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 145.0,
+        "maximo": 210.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "api_deg",
+      "nombre_original": "API",
+      "simbolo": "°API",
+      "descripcion": "Gravedad API del crudo. En las cinco hojas el valor es el mismo; no se trata como cinco mediciones independientes.",
+      "unidad": "°API",
+      "unidad_origen": "API",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_incierto",
+      "procedencia": "rótulo API",
+      "restriccion_fisica": "el modelo rechaza el valor que anula el denominador de F-01",
+      "limite_autorizado": null,
+      "validacion": "CT-10: idéntico en las cinco hojas",
+      "usada_por": [
+        "M-BES-FLUIDO",
+        "F-01"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 12.0,
+        "maximo": 12.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "bsw_numero",
+      "nombre_original": "BS&W",
+      "simbolo": "BS&W",
+      "descripcion": "Corte de agua y sedimentos. El rótulo dice % y la fórmula lo usa como fracción.",
+      "unidad": "fracción",
+      "unidad_origen": "%",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_incierto",
+      "procedencia": "rótulo BS&W",
+      "restriccion_fisica": "fuera de 0 a 1 el modelo advierte y aun así calcula",
+      "limite_autorizado": null,
+      "validacion": "CT-02",
+      "usada_por": [
+        "M-BES-FLUIDO",
+        "B100-B102"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 0.9557,
+        "maximo": 0.9766,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "temperatura_c",
+      "nombre_original": "Temperatura de fondo",
+      "simbolo": "T",
+      "descripcion": "Temperatura de fondo en la celda en grados Celsius.",
+      "unidad": "°C",
+      "unidad_origen": "°C",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_incierto",
+      "procedencia": "segunda celda Temperatura de fondo",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "CT-04 y CT-10",
+      "usada_por": [
+        "M-BES-FLUIDO",
+        "B98-temperatura"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 62.22222222222222,
+        "maximo": 65.55555555555556,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "densidad_agua_lb_gal",
+      "nombre_original": "Densidad del Agua",
+      "simbolo": "ρ_w",
+      "descripcion": "Densidad del agua escrita en la hoja. Idéntica en las cinco hojas.",
+      "unidad": "lb/gal",
+      "unidad_origen": "lb/gal",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "parametro_incierto",
+      "procedencia": "rótulo Densidad del Agua",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "CT-10",
+      "usada_por": [
+        "M-BES-FLUIDO"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 8.345,
+        "maximo": 8.345,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "frecuencia_curva_hz",
+      "nombre_original": "Velocidad de la curva",
+      "simbolo": "f_c",
+      "descripcion": "Frecuencia a la que está tabulada la curva. En este libro es 60 Hz.",
+      "unidad": "Hz",
+      "unidad_origen": "Hz",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "referencia_tecnica",
+      "procedencia": "bloque de la curva",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "distinta de cero para escalar",
+      "usada_por": [
+        "M-BES-INTERSECCION",
+        "F-26-afinidad"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 60.0,
+        "maximo": 60.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "limite_minimo_bfpd",
+      "nombre_original": "Limite minimo",
+      "simbolo": "Q_min",
+      "descripcion": "Mínimo de caudal escrito en el bloque de 60 Hz. No es un límite de fabricante confirmado.",
+      "unidad": "BFPD",
+      "unidad_origen": "BFPD",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "limite_operacional_no_aprobado",
+      "procedencia": "celda Limite minimo",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "se escala con f/f_base antes de comparar",
+      "usada_por": [
+        "RC-BES-02",
+        "RC-BES-03"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 2000.0,
+        "maximo": 2500.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "limite_maximo_bfpd",
+      "nombre_original": "Limite maximo",
+      "simbolo": "Q_max",
+      "descripcion": "Máximo de caudal escrito en el bloque de 60 Hz. No es un límite de fabricante confirmado.",
+      "unidad": "BFPD",
+      "unidad_origen": "BFPD",
+      "tipo": "numero",
+      "obligatoria": true,
+      "funcion": "limite_operacional_no_aprobado",
+      "procedencia": "celda Limite maximo",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "se escala con f/f_base antes de comparar",
+      "usada_por": [
+        "RC-BES-01",
+        "RC-BES-03"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": {
+        "minimo": 8000.0,
+        "maximo": 10000.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "cono_eficiencia_bfpd",
+      "nombre_original": "Cono de eficiencia",
+      "simbolo": null,
+      "descripcion": "Caudal escrito como cono de eficiencia. Coincide con el caudal de mayor EFF de la tabla. No es un BEP de fabricante.",
+      "unidad": "BFPD",
+      "unidad_origen": "BFPD",
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "referencia_tecnica",
+      "procedencia": "celda Cono de eficiencia",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "no se usa como umbral mientras RC-BES-04 sea no evaluable",
+      "usada_por": [
+        "RC-BES-04"
+      ],
+      "estado_aprobacion": "no_evaluable",
+      "rango_observado": {
+        "minimo": 6000.0,
+        "maximo": 8000.0,
+        "n": 5
+      },
+      "nota_rango": "Rango observado en este archivo. No es un límite de operación ni un rango físicamente válido."
+    },
+    {
+      "nombre": "curva",
+      "nombre_original": "tabla BFPD / Head / Brake / EFF",
+      "simbolo": null,
+      "descripcion": "Seis puntos escritos a la frecuencia de la curva. No son mediciones independientes de la bomba en operación.",
+      "unidad": "BFPD, ft, hp, número",
+      "unidad_origen": "BFPD, ft, hp, %",
+      "tipo": "tabla",
+      "obligatoria": true,
+      "funcion": "caracteristica_de_bomba",
+      "procedencia": "bloque de la curva",
+      "restriccion_fisica": "fuera del tramo el modelo no extrapola",
+      "limite_autorizado": null,
+      "validacion": "al menos dos puntos para interpolar",
+      "usada_por": [
+        "M-BES-INTERSECCION"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "gradiente_psi_ft",
+      "nombre_original": "Gradiente de Presión",
+      "simbolo": "γ",
+      "descripcion": "Resultado del modelo de fluido, en psi por pie.",
+      "unidad": "psi/ft",
+      "unidad_origen": "la hoja rota el rótulo como psi*ft",
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "resultado_del_modelo",
+      "procedencia": "M-BES-FLUIDO",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "reproduce la caché de la hoja",
+      "usada_por": [
+        "M-BES-BALANCE"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "pip_ft",
+      "nombre_original": "PIP en (ft)",
+      "simbolo": "PIP",
+      "descripcion": "Presión de admisión en pies de columna, con el signo de la hoja. No es una estimación independiente del sensor.",
+      "unidad": "ft",
+      "unidad_origen": "ft",
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "resultado_del_modelo",
+      "procedencia": "M-BES-BALANCE",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "CT-03: el signo no está reconciliado con la hidrostática",
+      "usada_por": [
+        "G102-THD"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "thd_total_ft",
+      "nombre_original": "THD TOTAL",
+      "simbolo": "THD",
+      "descripcion": "Altura que la hoja llama THD TOTAL. La fricción usa el caudal medido, no el caudal calculado.",
+      "unidad": "ft",
+      "unidad_origen": "ft",
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "resultado_del_modelo",
+      "procedencia": "M-BES-BALANCE",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "reproduce la caché; no es validación independiente",
+      "usada_por": [
+        "M-BES-INTERSECCION"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "caudal_a_producir_bfpd",
+      "nombre_original": "Caudal a producir",
+      "simbolo": "Q*",
+      "descripcion": "Caudal donde la altura de la bomba a la velocidad actual iguala la THD, por interpolación lineal.",
+      "unidad": "BFPD",
+      "unidad_origen": "BFPD",
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "resultado_del_modelo",
+      "procedencia": "M-BES-INTERSECCION",
+      "restriccion_fisica": "fuera de la curva el estado es no_calculable",
+      "limite_autorizado": null,
+      "validacion": "contraste con el caudal medido, no predicción",
+      "usada_por": [
+        "cuaderno 05"
+      ],
+      "estado_aprobacion": "pendiente",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "fecha_medicion",
+      "nombre_original": "fecha de la prueba",
+      "simbolo": null,
+      "descripcion": "Fecha real de la medición. No está identificada: cuatro hojas usan =TODAY() y una trae una fecha escrita sin comprobar.",
+      "unidad": null,
+      "unidad_origen": null,
+      "tipo": "fecha",
+      "obligatoria": false,
+      "funcion": "variable_no_disponible",
+      "procedencia": "no disponible",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "no usar TODAY() como fecha histórica",
+      "usada_por": [],
+      "estado_aprobacion": "no_disponible",
+      "rango_observado": null,
+      "nota_rango": null
+    },
+    {
+      "nombre": "limite_frecuencia_autorizado_hz",
+      "nombre_original": null,
+      "simbolo": null,
+      "descripcion": "Límites de frecuencia autorizados por el responsable de la operación. No están en el libro y no se inventan.",
+      "unidad": "Hz",
+      "unidad_origen": null,
+      "tipo": "numero",
+      "obligatoria": false,
+      "funcion": "variable_no_disponible",
+      "procedencia": "no disponible",
+      "restriccion_fisica": null,
+      "limite_autorizado": null,
+      "validacion": "ausente: el motor no puede autorizar un cambio de frecuencia",
+      "usada_por": [],
+      "estado_aprobacion": "no_disponible",
+      "rango_observado": null,
+      "nota_rango": null
+    }
+  ]
+}

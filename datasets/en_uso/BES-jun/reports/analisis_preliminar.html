@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Análisis preliminar BES-jun</title>
+  <style>
+    body { font-family: sans-serif; max-width: 920px; margin: 2rem auto; line-height: 1.45; color: #1a1a1a; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+    th, td { border: 1px solid #ccc; padding: 0.35rem 0.45rem; text-align: left; }
+    th { background: #f4f4f4; }
+    img { max-width: 100%; height: auto; }
+    code { background: #f6f6f6; padding: 0.1rem 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>Análisis preliminar · BES-jun</h1>
+  <p>Fecha: 2026-10-17. Libro: <code>Copia de FINAL BES-jun.xlsx</code>. Copia leída: <code>entrada/BES_jun.xlsx</code>. SHA-256 <code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>. Expediente <code>datasets/en_uso/BES-jun</code>. Estado: Listo para revisión.</p>
+  <p>Este informe no valida un modelo. Reproduce cuentas que el propio libro ya guarda y las separa de lo que no se puede afirmar.</p>
+
+  <h2>Resumen</h2>
+  <p>El libro tiene cinco hojas. En cada una, <code>Cluster:</code> coincide con el nombre de la hoja y <code>Pozo:</code> trae otro código: QF-084, QF-301, QF-147, QF-005 y QF-306. El libro no dice cuál de los dos identifica el pozo. No es <code>RB-1521-PY-121120.xls</code> ni <code>RB-IA-2191-Data.xlsx</code>.</p>
+  <p>La cadena de celdas —gravedad, gradiente, PIP en pies desde la presión de sensor, fricción y THD— se rehízo en Python y coincide con el valor cacheado de las cinco hojas. Esa coincidencia comprueba la transcripción.</p>
+  <p>No hay serie de días. No hay pronóstico. El PIP en pies sale de la presión de sensor; no es una estimación sin sensor ni una predicción contrastada con otra medición.</p>
+
+  <h2>Estructura y calidad</h2>
+  <p>Cinco hojas visibles, sin nombres definidos. El archivo se leyó en memoria y no se guardó. En <code>QF-549HST</code> hay 13 cachés <code>#DIV/0!</code> en la columna D, en promedios de celdas vacías del bloque eléctrico. No entran en la cadena de PIP y THD. Las otras cuatro hojas no muestran ese error. Cuatro hojas tienen <code>=TODAY()</code>; el cache 2026-10-17 es la fecha de cálculo, no una fecha de prueba. QF-549HST tiene escrita 2017-09-06.</p>
+  <p>BS&amp;W está rotulado «%» y la fórmula de densidad lo usa como fracción. API 12 °API, presión de yacimiento 1100 psi y presión de burbuja 130 psi se repiten en las cinco hojas; no se tomó eso como un mismo yacimiento.</p>
+  <p>QF-005: caudal de prueba 7094.4 BFPD (<code>295.6*24</code>) y caudal de operación 7116 BFPD (<code>296.5*24</code>). El factor 24 no está definido en otra celda.</p>
+
+  <h2>Pozos</h2>
+  <p>El libro no declara una llave única. <code>Cluster:</code> coincide con el nombre de la hoja. <code>Pozo:</code> trae otro código. Cada hoja se calculó aparte.</p>
+  <table>
+    <thead>
+      <tr><th>Pozo</th><th>Clúster</th><th>Bomba</th><th>Etapas</th><th>Hz</th><th>Caudal BFPD</th><th>Sensor psi</th><th>THP psi</th><th>Límite máx.</th><th>PIP ft</th><th>THD ft</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>QF-084</td><td>QF-554H</td><td>S 8000N</td><td>53</td><td>63</td><td>10301</td><td>732</td><td>183</td><td>10000</td><td>1714.50</td><td>2083.22</td></tr>
+      <tr><td>QF-301</td><td>QF-545H</td><td>S 8000N</td><td>50</td><td>57</td><td>8767</td><td>667</td><td>210</td><td>10000</td><td>1558.04</td><td>1971.96</td></tr>
+      <tr><td>QF-147</td><td>QF-500H</td><td>S 8000N</td><td>36</td><td>56</td><td>7728</td><td>821</td><td>194</td><td>10000</td><td>1920.73</td><td>1517.21</td></tr>
+      <tr><td>QF-005</td><td>QF-378HST</td><td>S6000N</td><td>31</td><td>67</td><td>7116</td><td>810</td><td>145</td><td>8000</td><td>1891.21</td><td>1592.46</td></tr>
+      <tr><td>QF-306</td><td>QF-549HST</td><td>S6000N</td><td>31</td><td>62</td><td>5419</td><td>607</td><td>177</td><td>8000</td><td>1422.32</td><td>1814.51</td></tr>
+    </tbody>
+  </table>
+  <p>PIP y THD son los de la fórmula de la hoja, confirmados por las pruebas. No son una estimación independiente.</p>
+
+  <h2>Variables y ecuaciones</h2>
+  <p>Unidades de rótulo: Hz, BFPD, psi, ft, inch, °API, °F, °C, HP. Pendientes: BS&amp;W, el rótulo <code>psi*ft</code>, un rótulo Kg/Lt sobre densidad en lb/gal, y la columna EFF de la tabla.</p>
+  <p>Se transcribieron F-01 y las celdas de densidad, gradiente, PIP en ft, THP en ft, Hazen-Williams y THD. El modelo de E1 que resuelve el caudal desde la potencia no se aplicó. La mediana de 4,3 % del artículo SensorLess no es un resultado de este libro.</p>
+
+  <h2>Alcance predictivo</h2>
+  <p>No hay pronóstico. Faltarían una variable objetivo, tiempos de operación y una medición de referencia distinta de las entradas. La presión de sensor es entrada del PIP en pies.</p>
+  <p>Como cálculo del libro: el caudal de QF-084 está 301 BFPD por encima del límite máximo escrito en su hoja. Los otros cuatro caudales caen entre el mínimo y el máximo de la suya. Esos límites son celdas del archivo.</p>
+
+  <h2>Figuras</h2>
+  <figure>
+    <img src="figuras/caudal_y_limites.png" alt="Caudal de operación y límites escritos por pozo">
+    <figcaption>Caudal de operación y límites escritos en cada hoja. No explica la causa del caudal.</figcaption>
+  </figure>
+  <figure>
+    <img src="figuras/head_tabulado.png" alt="Puntos de head tabulados en el libro">
+    <figcaption>Puntos de head escritos en el libro a 60 Hz. No es una curva de catálogo externa.</figcaption>
+  </figure>
+
+  <h2>Limitaciones y preguntas</h2>
+  <ul>
+    <li>El signo de PIP en ft se dejó como está en la celda; no se reconcilió con F-12.</li>
+    <li>Hazen-Williams usa exponente 4.8566 en la hoja y 4.8655 en el PDF.</li>
+    <li>La fricción usa la TVD de descarga como longitud.</li>
+    <li>D1 y D2 no entran en estas cifras.</li>
+  </ul>
+  <ol>
+    <li>¿BS&amp;W 0.9755 es fracción o por ciento?</li>
+    <li>¿El signo de PIP en ft es el que se quiere conservar?</li>
+    <li>¿La tabla de 6 puntos es la curva del fabricante?</li>
+    <li>¿BES-jun entra al tablero de asesor-esp antes de D1? (P-14)</li>
+  </ol>
+</body>
+</html>

@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Cuaderno 01 · Inspección de estructura y calidad de datos</title><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 01 · Inspección de estructura y calidad de datos"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+@page ancho { size: Letter landscape; margin: 0.65in 0.6in 0.7in 0.6in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 01 · Inspección de estructura y calidad de datos"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", "DejaVu Serif", serif; font-size: 10.5pt; }
+body { margin: 0; line-height: 1.38; color: #111; hyphens: manual; }
+.cuaderno { text-align: justify; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", sans-serif; text-align: left; break-after: avoid; page-break-after: avoid; line-height: 1.2; }
+h1 { font-size: 19pt; margin: 0 0 0.5em 0; border-bottom: 2px solid #333; padding-bottom: 0.2em; }
+h2 { font-size: 13.5pt; margin: 1.2em 0 0.4em 0; border-bottom: 1px solid #aaa; padding-bottom: 0.1em; }
+h3 { font-size: 11.5pt; margin: 1em 0 0.3em 0; }
+p { margin: 0.45em 0; orphans: 3; widows: 3; }
+li { margin: 0.15em 0; }
+blockquote { margin: 0.6em 0; padding: 0.3em 0.8em; border-left: 3px solid #999; background: #f6f6f6; text-align: left; }
+.portada { break-after: page; page-break-after: always; }
+.portada h1 { font-size: 21pt; }
+.portada { line-height: 1.3; }
+.portada p, .portada li { font-size: 9.8pt; margin: 0.3em 0; }
+.portada h2 { font-size: 12pt; margin: 0.8em 0 0.3em 0; }
+.portada h1 { margin-bottom: 0.3em; }
+.prompt { display: none; }
+.input, .output_wrapper { margin: 0.5em 0; }
+.input_area { text-align: left; border: 1px solid #c8c8c8; border-left: 4px solid #4c78a8; background: #f7f9fb; padding: 0.3em 0.5em; position: relative; }
+.input_area::before { content: "Código"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #4c78a8; letter-spacing: 0.06em; margin-bottom: 0.2em; }
+.output_area { text-align: left; border-left: 4px solid #8a8a8a; padding: 0.2em 0 0.2em 0.5em; margin-top: 0.3em; }
+.output_area::before { content: "Salida"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #666; letter-spacing: 0.06em; margin-bottom: 0.15em; }
+pre { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 7.4pt; line-height: 1.28; margin: 0;
+      white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+code { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 0.88em; }
+table.tabla, .output_html table, table { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 7.6pt; line-height: 1.22; text-align: left; margin: 0.3em 0 0.5em 0; }
+th, td { border: 1px solid #777; padding: 0.15em 0.3em; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+th { background: #e8edf2; font-family: "Liberation Sans", sans-serif; font-weight: bold; overflow-wrap: break-word; word-break: normal; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.text_cell_render table { font-size: 8.6pt; }
+img { max-width: 100%; height: auto; display: block; margin: 0.4em auto; break-inside: avoid; page-break-inside: avoid; }
+.ancho { page: ancho; }
+.ancho table { font-size: 8pt; }
+math { font-size: 1.05em; }
+math[display="block"] { margin: 0.5em 0; break-inside: avoid; }
+.output_stderr pre { color: #8a1c1c; }
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
+.highlight .c { color: #3D7B7B; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #9C6500 } /* Comment.Preproc */
+.highlight .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #E40000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #008400 } /* Generic.Inserted */
+.highlight .go { color: #717171 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #687822 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #00F; font-weight: bold } /* Name.Class */
+.highlight .no { color: #800 } /* Name.Constant */
+.highlight .nd { color: #A2F } /* Name.Decorator */
+.highlight .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00F } /* Name.Function */
+.highlight .nl { color: #767600 } /* Name.Label */
+.highlight .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666 } /* Literal.Number.Float */
+.highlight .mh { color: #666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #A45A77 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #00F } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666 } /* Literal.Number.Integer.Long */
+</style></head><body><div class="cuaderno"><div class="cell border-box-sizing text_cell rendered" id="cell-id=47920d35"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html portada">
+<h1 id="cuaderno-01-inspección-de-estructura-y-calidad-de-datos">Cuaderno 01
+· Inspección de estructura y calidad de datos</h1>
+<p><strong>Expediente:</strong> BES-jun · <strong>Cuaderno:</strong> 2
+de 7 · <strong>Estado del expediente:</strong> Listo para revisión (no
+Completo)</p>
+<h2 id="introducción-y-contexto-el-problema">1. Introducción y contexto
+(el problema)</h2>
+<p>El libro no es una tabla: es un <strong>formulario de
+presentación</strong> (celdas combinadas, rótulos y valores mezclados,
+sin fila de encabezado) con 1 270 fórmulas en cinco hojas. Una lectura
+por posición fija funciona en una hoja y falla <strong>sin
+avisar</strong> en otra, porque las filas se desplazan entre hojas. Un
+valor leído de la celda equivocada es un número plausible pero falso que
+entra a la cadena de cálculo.</p>
+<h2 id="justificación-y-necesidad">2. Justificación y necesidad</h2>
+<p>Antes de transcribir cualquier fórmula hay que saber: dónde está cada
+dato en cada hoja, qué defectos trae el libro (errores guardados, fechas
+que cambian solas, datos faltantes) y si los datos geométricos (survey,
+profundidades de equipos) son internamente coherentes. Hay que poder
+decir, con evidencia, qué defectos <strong>sí</strong> afectan a los
+cálculos y cuáles no.</p>
+<h2 id="objetivo-general">3. Objetivo general</h2>
+<p>Emitir un dictamen de calidad por hoja, apoyado en controles
+ejecutables y reproducibles, que distinga defectos que contaminan la
+cadena de cálculo de defectos que no.</p>
+<h2 id="dominio-y-alcance">4. Dominio y alcance</h2>
+<p><strong>Incluye:</strong> inventario estructural; anclaje por rótulo
+y demostración del riesgo de la coordenada fija; datos faltantes;
+errores cacheados y rastreo de dependencias; fechas; geometría del
+survey y contraste con el método de curvatura mínima; coherencia de las
+TVD de equipos con el survey; controles de dominio sobre las
+entradas.</p>
+<p><strong>No incluye:</strong> corregir o imputar valores (no se
+modifica nada); interpretar la física de las fórmulas (cuaderno 02);
+juzgar si las condiciones de operación son «buenas» o «malas» (no hay
+límites aprobados).</p>
+<h2 id="fuentes-y-datos-entradas-y-salidas">5. Fuentes y datos (entradas
+y salidas)</h2>
+<p><strong>Entradas:</strong> <code>entrada/BES_jun.xlsx</code> (copia
+verificada en el cuaderno 00). <strong>Salidas:</strong> tablas de
+inventario, anclas, errores, precedentes, survey, TVD y plausibilidad;
+dictamen por hoja.</p>
+<h2 id="objetivos-específicos-y-criterios-de-aceptación">6. Objetivos
+específicos y criterios de aceptación</h2>
+<p><strong>C01-1</strong> 5 hojas visibles y 1 270 fórmulas
+inventariadas · <strong>C01-2</strong> todos los rótulos clave hallados
+en todas las hojas · <strong>C01-3</strong> ningún error guardado es
+precedente de THD ni de «Caudal a producir» · <strong>C01-4</strong>
+cero datos requeridos faltantes · <strong>C01-5</strong> geometría del
+survey correcta en las 5 hojas · <strong>C01-6</strong> survey =
+curvatura mínima dentro de 0.01 ft / 0.01 °/100 ft ·
+<strong>C01-7</strong> TVD de equipos = interpolación del survey (&lt;
+1e-6 ft) · <strong>C01-8</strong> ningún control de dominio incumplido ·
+<strong>C01-9</strong> el libro no cambió durante el cuaderno.</p>
+<h2 id="riesgo-si-este-paso-falla">7. Riesgo si este paso falla</h2>
+<p>Una entrada mal leída o un error guardado que entra a la cadena
+produce PIP, THD y caudales con apariencia normal. Si además el survey
+fuera inconsistente, todas las profundidades de equipos —y con ellas la
+presión en el intake— quedarían sesgadas sin señal visible.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d1421e97"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="preparación-del-entorno">Preparación del entorno</h2>
+<p>La celda siguiente es la misma en todos los cuadernos: localiza el
+expediente, habilita <code>src/</code> y registra la ficha de
+reproducibilidad (fecha, versiones y huella del insumo).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=4623fda4">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">localizar_expediente</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="c1"># Sube desde el directorio actual hasta la carpeta que tiene dataset.md y entrada/.</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"dataset.md"</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entrada"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">p</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Ejecute el cuaderno dentro del expediente (donde están dataset.md y entrada/)."</span><span class="p">)</span>
+
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">localizar_expediente</span><span class="p">()</span>                 <span class="c1"># .../datasets/en_uso/BES-jun</span>
+<span class="n">RAIZ_PROYECTO</span> <span class="o">=</span> <span class="n">RAIZ</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>               <span class="c1"># .../HUC</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">RAIZ</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_colwidth"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.8g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.criterios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Criterios</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.entorno</span><span class="w"> </span><span class="kn">import</span> <span class="n">ficha</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.presentacion</span><span class="w"> </span><span class="kn">import</span> <span class="n">T</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ficha</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"campo"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_10f6c">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_10f6c_level0_col0" style="white-space:nowrap">campo</th>
+<th class="col_heading level0 col1" id="T_10f6c_level0_col1" style="white-space:nowrap">valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_10f6c_row0_col0">fecha_ejecucion</td>
+<td class="data row0 col1" id="T_10f6c_row0_col1">2026-10-20T14:25:36-03:00</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_10f6c_row1_col0" style="white-space:nowrap">python</td>
+<td class="data row1 col1" id="T_10f6c_row1_col1" style="white-space:nowrap">3.14.8</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_10f6c_row2_col0" style="white-space:nowrap">sistema</td>
+<td class="data row2 col1" id="T_10f6c_row2_col1">Linux 7.2.10-100.fc43.x86_64</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_10f6c_row3_col0" style="white-space:nowrap">pandas</td>
+<td class="data row3 col1" id="T_10f6c_row3_col1" style="white-space:nowrap">3.0.6</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_10f6c_row4_col0" style="white-space:nowrap">numpy</td>
+<td class="data row4 col1" id="T_10f6c_row4_col1" style="white-space:nowrap">2.5.4</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_10f6c_row5_col0" style="white-space:nowrap">matplotlib</td>
+<td class="data row5 col1" id="T_10f6c_row5_col1" style="white-space:nowrap">3.11.2</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_10f6c_row6_col0" style="white-space:nowrap">openpyxl</td>
+<td class="data row6 col1" id="T_10f6c_row6_col1" style="white-space:nowrap">3.1.5</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_10f6c_row7_col0" style="white-space:nowrap">expediente</td>
+<td class="data row7 col1" id="T_10f6c_row7_col1" style="white-space:nowrap">BES-jun</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_10f6c_row8_col0" style="white-space:nowrap">insumo</td>
+<td class="data row8 col1" id="T_10f6c_row8_col1">entrada/BES_jun.xlsx</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_10f6c_row9_col0">insumo_sha256</td>
+<td class="data row9 col1" id="T_10f6c_row9_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8eeb1e96">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.integridad</span><span class="w"> </span><span class="kn">import</span> <span class="n">huellas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.leer_bes_jun</span><span class="w"> </span><span class="kn">import</span> <span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">leer_libro</span>
+<span class="n">sha_inicial</span> <span class="o">=</span> <span class="n">huellas</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">)[</span><span class="s2">"sha256"</span><span class="p">]</span>      <span class="c1"># se compara de nuevo al final (C01-9)</span>
+<span class="n">hojas</span> <span class="o">=</span> <span class="n">leer_libro</span><span class="p">()</span>                                <span class="c1"># lectura sin guardar; abre el libro 2 veces (fórmulas y caché)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hojas leídas:"</span><span class="p">,</span> <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hojas leídas: ['QF-554H', 'QF-545H', 'QF-500H', 'QF-378HST', 'QF-549HST']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=65b650a3"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-1-inventario-estructural">Paso 1 · Inventario
+estructural</h2>
+<p><strong>Qué se hace.</strong> Se recorre cada celda y se clasifica
+como fórmula, constante o error guardado; se cuentan celdas combinadas y
+se listan las funciones de Excel usadas. <strong>Por qué.</strong> Sirve
+para dimensionar el problema: un libro con 1 270 fórmulas y casi 5 000
+constantes no puede revisarse a ojo. También responde una pregunta de
+aislamiento: si alguna fórmula citara <strong>otra hoja</strong>, un
+cambio en una hoja contaminaría a otra y no podríamos tratarlas por
+separado.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6cc1c4d1">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.estructura_libro</span><span class="w"> </span><span class="kn">import</span> <span class="n">inventario_hojas</span>
+<span class="n">inv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">inventario_hojas</span><span class="p">())</span>
+<span class="n">inv</span><span class="p">[</span><span class="s2">"usa TODAY()"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inv</span><span class="p">[</span><span class="s2">"funciones"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"TODAY"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fórmulas totales:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s2">"formulas"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"| constantes totales:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s2">"constantes"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+      <span class="s2">"| fórmulas que citan otra hoja:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s2">"formulas_que_citan_otra_hoja"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="n">T</span><span class="p">(</span><span class="n">inv</span><span class="p">[[</span><span class="s2">"hoja"</span><span class="p">,</span> <span class="s2">"estado"</span><span class="p">,</span> <span class="s2">"dimension"</span><span class="p">,</span> <span class="s2">"celdas_combinadas"</span><span class="p">,</span> <span class="s2">"formulas"</span><span class="p">,</span> <span class="s2">"constantes"</span><span class="p">,</span> <span class="s2">"errores_en_cache"</span><span class="p">,</span> <span class="s2">"usa TODAY()"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fórmulas totales: 1270 | constantes totales: 4885 | fórmulas que citan otra hoja: 0
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_df6b6">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_df6b6_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_df6b6_level0_col1" style="white-space:nowrap">estado</th>
+<th class="col_heading level0 col2" id="T_df6b6_level0_col2" style="white-space:nowrap">dimension</th>
+<th class="col_heading level0 col3" id="T_df6b6_level0_col3">celdas_combinadas</th>
+<th class="col_heading level0 col4" id="T_df6b6_level0_col4" style="white-space:nowrap">formulas</th>
+<th class="col_heading level0 col5" id="T_df6b6_level0_col5" style="white-space:nowrap">constantes</th>
+<th class="col_heading level0 col6" id="T_df6b6_level0_col6">errores_en_cache</th>
+<th class="col_heading level0 col7" id="T_df6b6_level0_col7">usa TODAY()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_df6b6_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_df6b6_row0_col1" style="white-space:nowrap">visible</td>
+<td class="data row0 col2" id="T_df6b6_row0_col2" style="white-space:nowrap">A1:S388</td>
+<td class="data row0 col3" id="T_df6b6_row0_col3" style="white-space:nowrap">82</td>
+<td class="data row0 col4" id="T_df6b6_row0_col4" style="white-space:nowrap">261</td>
+<td class="data row0 col5" id="T_df6b6_row0_col5" style="white-space:nowrap">973</td>
+<td class="data row0 col6" id="T_df6b6_row0_col6" style="white-space:nowrap">0</td>
+<td class="data row0 col7" id="T_df6b6_row0_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_df6b6_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_df6b6_row1_col1" style="white-space:nowrap">visible</td>
+<td class="data row1 col2" id="T_df6b6_row1_col2" style="white-space:nowrap">A1:S382</td>
+<td class="data row1 col3" id="T_df6b6_row1_col3" style="white-space:nowrap">80</td>
+<td class="data row1 col4" id="T_df6b6_row1_col4" style="white-space:nowrap">240</td>
+<td class="data row1 col5" id="T_df6b6_row1_col5" style="white-space:nowrap">979</td>
+<td class="data row1 col6" id="T_df6b6_row1_col6" style="white-space:nowrap">0</td>
+<td class="data row1 col7" id="T_df6b6_row1_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_df6b6_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_df6b6_row2_col1" style="white-space:nowrap">visible</td>
+<td class="data row2 col2" id="T_df6b6_row2_col2" style="white-space:nowrap">A1:S357</td>
+<td class="data row2 col3" id="T_df6b6_row2_col3" style="white-space:nowrap">80</td>
+<td class="data row2 col4" id="T_df6b6_row2_col4" style="white-space:nowrap">260</td>
+<td class="data row2 col5" id="T_df6b6_row2_col5" style="white-space:nowrap">1031</td>
+<td class="data row2 col6" id="T_df6b6_row2_col6" style="white-space:nowrap">0</td>
+<td class="data row2 col7" id="T_df6b6_row2_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_df6b6_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_df6b6_row3_col1" style="white-space:nowrap">visible</td>
+<td class="data row3 col2" id="T_df6b6_row3_col2" style="white-space:nowrap">A1:S343</td>
+<td class="data row3 col3" id="T_df6b6_row3_col3" style="white-space:nowrap">79</td>
+<td class="data row3 col4" id="T_df6b6_row3_col4" style="white-space:nowrap">263</td>
+<td class="data row3 col5" id="T_df6b6_row3_col5" style="white-space:nowrap">967</td>
+<td class="data row3 col6" id="T_df6b6_row3_col6" style="white-space:nowrap">0</td>
+<td class="data row3 col7" id="T_df6b6_row3_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_df6b6_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_df6b6_row4_col1" style="white-space:nowrap">visible</td>
+<td class="data row4 col2" id="T_df6b6_row4_col2" style="white-space:nowrap">A1:S351</td>
+<td class="data row4 col3" id="T_df6b6_row4_col3" style="white-space:nowrap">79</td>
+<td class="data row4 col4" id="T_df6b6_row4_col4" style="white-space:nowrap">246</td>
+<td class="data row4 col5" id="T_df6b6_row4_col5" style="white-space:nowrap">935</td>
+<td class="data row4 col6" id="T_df6b6_row4_col6" style="white-space:nowrap">13</td>
+<td class="data row4 col7" id="T_df6b6_row4_col7" style="white-space:nowrap">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f87b8657">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">inv</span><span class="p">[[</span><span class="s2">"hoja"</span><span class="p">,</span> <span class="s2">"funciones"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_a80b8">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_a80b8_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_a80b8_level0_col1" style="white-space:nowrap">funciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_a80b8_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_a80b8_row0_col1">AVERAGE×18, IF×9, INDEX×28, MATCH×7, SQRT×19, TODAY×1</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_a80b8_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_a80b8_row1_col1">IF×9, INDEX×28, MATCH×7, SQRT×19, TODAY×1</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_a80b8_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_a80b8_row2_col1">AVERAGE×18, IF×9, INDEX×28, MATCH×7, SQRT×19, TODAY×1</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_a80b8_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_a80b8_row3_col1">AVERAGE×18, IF×9, INDEX×28, MATCH×7, SQRT×18, TODAY×1</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_a80b8_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_a80b8_row4_col1">AVERAGE×9, IF×9, INDEX×28, MATCH×7, SQRT×16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=dffc6060"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> - Las cinco hojas están
+<strong>visibles</strong> y ninguna fórmula cita otra hoja: cada hoja es
+un cálculo <strong>autónomo</strong> y puede tratarse por separado sin
+riesgo de contaminación cruzada. (No implica que sean independientes
+entre sí en sus datos: comparten tablas de bomba, ver cuaderno 06.) -
+Las funciones son pocas y elementales (<code>INDEX</code>,
+<code>MATCH</code>, <code>IF</code>, <code>SQRT</code>,
+<code>AVERAGE</code>, <code>TODAY</code>).
+<code>MATCH</code>/<code>INDEX</code> implementan las interpolaciones de
+profundidad y la intersección con la curva de bomba; <code>TODAY</code>
+es la fecha del encabezado. - Cuatro de las cinco hojas usan
+<code>TODAY()</code>; la restante (QF-549HST) tiene una fecha escrita.
+Se detalla en el Paso 5. - <code>QF-549HST</code> es la única con
+errores guardados (13). El Paso 4 demuestra si importan.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=338820ab"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-2-por-qué-las-celdas-se-buscan-por-rótulo-y-no-por-coordenada">Paso
+2 · Por qué las celdas se buscan por rótulo y no por coordenada</h2>
+<p><strong>Hipótesis a poner a prueba.</strong> Las cinco hojas parecen
+la misma plantilla, así que sería tentador leer, por ejemplo, el caudal
+de operación siempre de <code>B71</code>. Se contrasta esa idea con los
+hechos: se busca cada rótulo clave en cada hoja
+(<code>anclas_por_hoja</code>) y después se compara lo que leería la
+coordenada fija <code>B71</code> contra el valor correcto.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6d9a33e9">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.estructura_libro</span><span class="w"> </span><span class="kn">import</span> <span class="n">anclas_por_hoja</span>
+<span class="n">anclas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">anclas_por_hoja</span><span class="p">())</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"Descarga (mecánica)"</span><span class="p">:</span> <span class="s2">"Descarga"</span><span class="p">,</span> <span class="s2">"Intake (mecánica)"</span><span class="p">:</span> <span class="s2">"Intake"</span><span class="p">,</span> <span class="s2">"Sensor (mecánica)"</span><span class="p">:</span> <span class="s2">"Sensor"</span><span class="p">,</span>
+    <span class="s2">"Velocidad (operación)"</span><span class="p">:</span> <span class="s2">"Velocidad"</span><span class="p">,</span> <span class="s2">"Caudal (operación)"</span><span class="p">:</span> <span class="s2">"Caudal"</span><span class="p">,</span> <span class="s2">"Presión de Sensor"</span><span class="p">:</span> <span class="s2">"P sensor"</span><span class="p">,</span>
+    <span class="s2">"PIP en (ft)"</span><span class="p">:</span> <span class="s2">"PIP ft"</span><span class="p">,</span> <span class="s2">"THD TOTAL"</span><span class="p">:</span> <span class="s2">"THD"</span><span class="p">,</span> <span class="s2">"Limite maximo"</span><span class="p">:</span> <span class="s2">"Lím. máx"</span><span class="p">,</span> <span class="s2">"Caudal a producir"</span><span class="p">:</span> <span class="s2">"Q producir"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fila donde está cada rótulo en cada hoja:"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">anclas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fila donde está cada rótulo en cada hoja:
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_60fc7">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_60fc7_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_60fc7_level0_col1" style="white-space:nowrap">Descarga</th>
+<th class="col_heading level0 col2" id="T_60fc7_level0_col2" style="white-space:nowrap">Intake</th>
+<th class="col_heading level0 col3" id="T_60fc7_level0_col3" style="white-space:nowrap">Sensor</th>
+<th class="col_heading level0 col4" id="T_60fc7_level0_col4" style="white-space:nowrap">Velocidad</th>
+<th class="col_heading level0 col5" id="T_60fc7_level0_col5" style="white-space:nowrap">Caudal</th>
+<th class="col_heading level0 col6" id="T_60fc7_level0_col6">P sensor</th>
+<th class="col_heading level0 col7" id="T_60fc7_level0_col7">PIP ft</th>
+<th class="col_heading level0 col8" id="T_60fc7_level0_col8" style="white-space:nowrap">THD</th>
+<th class="col_heading level0 col9" id="T_60fc7_level0_col9">Lím. máx</th>
+<th class="col_heading level0 col10" id="T_60fc7_level0_col10">Q producir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_60fc7_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_60fc7_row0_col1" style="white-space:nowrap">18</td>
+<td class="data row0 col2" id="T_60fc7_row0_col2" style="white-space:nowrap">20</td>
+<td class="data row0 col3" id="T_60fc7_row0_col3" style="white-space:nowrap">24</td>
+<td class="data row0 col4" id="T_60fc7_row0_col4" style="white-space:nowrap">69</td>
+<td class="data row0 col5" id="T_60fc7_row0_col5" style="white-space:nowrap">71</td>
+<td class="data row0 col6" id="T_60fc7_row0_col6" style="white-space:nowrap">73</td>
+<td class="data row0 col7" id="T_60fc7_row0_col7" style="white-space:nowrap">96</td>
+<td class="data row0 col8" id="T_60fc7_row0_col8" style="white-space:nowrap">102</td>
+<td class="data row0 col9" id="T_60fc7_row0_col9" style="white-space:nowrap">58</td>
+<td class="data row0 col10" id="T_60fc7_row0_col10" style="white-space:nowrap">106</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_60fc7_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_60fc7_row1_col1" style="white-space:nowrap">17</td>
+<td class="data row1 col2" id="T_60fc7_row1_col2" style="white-space:nowrap">19</td>
+<td class="data row1 col3" id="T_60fc7_row1_col3" style="white-space:nowrap">23</td>
+<td class="data row1 col4" id="T_60fc7_row1_col4" style="white-space:nowrap">67</td>
+<td class="data row1 col5" id="T_60fc7_row1_col5" style="white-space:nowrap">69</td>
+<td class="data row1 col6" id="T_60fc7_row1_col6" style="white-space:nowrap">71</td>
+<td class="data row1 col7" id="T_60fc7_row1_col7" style="white-space:nowrap">94</td>
+<td class="data row1 col8" id="T_60fc7_row1_col8" style="white-space:nowrap">100</td>
+<td class="data row1 col9" id="T_60fc7_row1_col9" style="white-space:nowrap">57</td>
+<td class="data row1 col10" id="T_60fc7_row1_col10" style="white-space:nowrap">104</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_60fc7_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_60fc7_row2_col1" style="white-space:nowrap">17</td>
+<td class="data row2 col2" id="T_60fc7_row2_col2" style="white-space:nowrap">19</td>
+<td class="data row2 col3" id="T_60fc7_row2_col3" style="white-space:nowrap">23</td>
+<td class="data row2 col4" id="T_60fc7_row2_col4" style="white-space:nowrap">68</td>
+<td class="data row2 col5" id="T_60fc7_row2_col5" style="white-space:nowrap">70</td>
+<td class="data row2 col6" id="T_60fc7_row2_col6" style="white-space:nowrap">72</td>
+<td class="data row2 col7" id="T_60fc7_row2_col7" style="white-space:nowrap">95</td>
+<td class="data row2 col8" id="T_60fc7_row2_col8" style="white-space:nowrap">101</td>
+<td class="data row2 col9" id="T_60fc7_row2_col9" style="white-space:nowrap">57</td>
+<td class="data row2 col10" id="T_60fc7_row2_col10" style="white-space:nowrap">105</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_60fc7_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_60fc7_row3_col1" style="white-space:nowrap">17</td>
+<td class="data row3 col2" id="T_60fc7_row3_col2" style="white-space:nowrap">19</td>
+<td class="data row3 col3" id="T_60fc7_row3_col3" style="white-space:nowrap">23</td>
+<td class="data row3 col4" id="T_60fc7_row3_col4" style="white-space:nowrap">66</td>
+<td class="data row3 col5" id="T_60fc7_row3_col5" style="white-space:nowrap">68</td>
+<td class="data row3 col6" id="T_60fc7_row3_col6" style="white-space:nowrap">70</td>
+<td class="data row3 col7" id="T_60fc7_row3_col7" style="white-space:nowrap">93</td>
+<td class="data row3 col8" id="T_60fc7_row3_col8" style="white-space:nowrap">99</td>
+<td class="data row3 col9" id="T_60fc7_row3_col9" style="white-space:nowrap">57</td>
+<td class="data row3 col10" id="T_60fc7_row3_col10" style="white-space:nowrap">103</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_60fc7_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_60fc7_row4_col1" style="white-space:nowrap">17</td>
+<td class="data row4 col2" id="T_60fc7_row4_col2" style="white-space:nowrap">19</td>
+<td class="data row4 col3" id="T_60fc7_row4_col3" style="white-space:nowrap">23</td>
+<td class="data row4 col4" id="T_60fc7_row4_col4" style="white-space:nowrap">66</td>
+<td class="data row4 col5" id="T_60fc7_row4_col5" style="white-space:nowrap">68</td>
+<td class="data row4 col6" id="T_60fc7_row4_col6" style="white-space:nowrap">70</td>
+<td class="data row4 col7" id="T_60fc7_row4_col7" style="white-space:nowrap">93</td>
+<td class="data row4 col8" id="T_60fc7_row4_col8" style="white-space:nowrap">99</td>
+<td class="data row4 col9" id="T_60fc7_row4_col9" style="white-space:nowrap">57</td>
+<td class="data row4 col10" id="T_60fc7_row4_col10" style="white-space:nowrap">103</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a575401c">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openpyxl</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workbook</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">wb</span><span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]]</span>
+    <span class="n">leido</span> <span class="o">=</span> <span class="n">ws</span><span class="p">[</span><span class="s2">"B71"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">demo</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"rótulo en A71"</span><span class="p">:</span> <span class="n">ws</span><span class="p">[</span><span class="s2">"A71"</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">"valor en B71"</span><span class="p">:</span> <span class="n">leido</span><span class="p">,</span>
+                 <span class="s2">"caudal correcto (por rótulo)"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"caudal_operacion_bfpd"</span><span class="p">],</span>
+                 <span class="s2">"¿coincide?"</span><span class="p">:</span> <span class="n">leido</span> <span class="o">==</span> <span class="n">h</span><span class="p">[</span><span class="s2">"caudal_operacion_bfpd"</span><span class="p">]})</span>
+<span class="n">wb</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lo que habría leído un acceso por coordenada fija B71:"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">demo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Lo que habría leído un acceso por coordenada fija B71:
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_4e538">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_4e538_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_4e538_level0_col1">rótulo en A71</th>
+<th class="col_heading level0 col2" id="T_4e538_level0_col2">valor en B71</th>
+<th class="col_heading level0 col3" id="T_4e538_level0_col3">caudal correcto (por rótulo)</th>
+<th class="col_heading level0 col4" id="T_4e538_level0_col4" style="white-space:nowrap">¿coincide?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_4e538_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_4e538_row0_col1" style="white-space:nowrap">Caudal</td>
+<td class="data row0 col2" id="T_4e538_row0_col2" style="white-space:nowrap">10301</td>
+<td class="data row0 col3" id="T_4e538_row0_col3" style="white-space:nowrap">10301</td>
+<td class="data row0 col4" id="T_4e538_row0_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_4e538_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_4e538_row1_col1">Presión de Sensor</td>
+<td class="data row1 col2" id="T_4e538_row1_col2" style="white-space:nowrap">667</td>
+<td class="data row1 col3" id="T_4e538_row1_col3" style="white-space:nowrap">8767</td>
+<td class="data row1 col4" id="T_4e538_row1_col4" style="white-space:nowrap">no</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_4e538_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_4e538_row2_col1" style="white-space:nowrap">—</td>
+<td class="data row2 col2" id="T_4e538_row2_col2" style="white-space:nowrap">—</td>
+<td class="data row2 col3" id="T_4e538_row2_col3" style="white-space:nowrap">7728</td>
+<td class="data row2 col4" id="T_4e538_row2_col4" style="white-space:nowrap">no</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_4e538_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_4e538_row3_col1" style="white-space:nowrap">—</td>
+<td class="data row3 col2" id="T_4e538_row3_col2" style="white-space:nowrap">—</td>
+<td class="data row3 col3" id="T_4e538_row3_col3" style="white-space:nowrap">7116</td>
+<td class="data row3 col4" id="T_4e538_row3_col4" style="white-space:nowrap">no</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_4e538_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_4e538_row4_col1" style="white-space:nowrap">—</td>
+<td class="data row4 col2" id="T_4e538_row4_col2" style="white-space:nowrap">—</td>
+<td class="data row4 col3" id="T_4e538_row4_col3" style="white-space:nowrap">5419</td>
+<td class="data row4 col4" id="T_4e538_row4_col4" style="white-space:nowrap">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=037169f6"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Las filas de los bloques
+<strong>cambian entre hojas</strong> (p. ej. «Caudal a producir» está en
+las filas 106, 104, 105, 103 y 103). La coordenada fija <code>B71</code>
+solo acierta en la primera hoja; en las otras devolvería el valor de
+<strong>otra variable</strong> o una celda vacía, y lo haría sin ningún
+error. Esta es la justificación técnica del diseño del lector: busca por
+<strong>texto de rótulo</strong>, y si un rótulo no aparece devuelve
+«faltante» en vez de adivinar. El cuaderno 03 deja registrada, para cada
+variable, la celda concreta de la que salió.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=5786e8e7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-3-datos-requeridos-falta-algo">Paso 3 · Datos requeridos:
+¿falta algo?</h2>
+<p>Un cálculo con una entrada ausente debe <strong>declararse no
+calculable</strong>, no completarse con un supuesto. Se verifica que las
+19 variables que consumen las fórmulas del expediente estén presentes en
+las cinco hojas, y que la tabla de la bomba tenga puntos.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=bd821d1b">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">requeridas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"frecuencia_hz"</span><span class="p">,</span> <span class="s2">"caudal_operacion_bfpd"</span><span class="p">,</span> <span class="s2">"presion_sensor_psi"</span><span class="p">,</span> <span class="s2">"thp_psi"</span><span class="p">,</span> <span class="s2">"id_tubing_in"</span><span class="p">,</span> <span class="s2">"etapas"</span><span class="p">,</span>
+              <span class="s2">"api_deg"</span><span class="p">,</span> <span class="s2">"bsw_numero"</span><span class="p">,</span> <span class="s2">"temperatura_c"</span><span class="p">,</span> <span class="s2">"densidad_agua_lb_gal"</span><span class="p">,</span> <span class="s2">"tvd_descarga_ft"</span><span class="p">,</span> <span class="s2">"tvd_intake_ft"</span><span class="p">,</span>
+              <span class="s2">"tvd_sensor_ft"</span><span class="p">,</span> <span class="s2">"frecuencia_curva_hz"</span><span class="p">,</span> <span class="s2">"limite_minimo_bfpd"</span><span class="p">,</span> <span class="s2">"limite_maximo_bfpd"</span><span class="p">,</span>
+              <span class="s2">"cache_pip_ft"</span><span class="p">,</span> <span class="s2">"cache_thd_ft"</span><span class="p">,</span> <span class="s2">"cache_caudal_producir_bfpd"</span><span class="p">]</span>
+<span class="n">completitud</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">faltan</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">requeridas</span> <span class="k">if</span> <span class="n">h</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">completitud</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"requeridas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">requeridas</span><span class="p">),</span>
+                        <span class="s2">"presentes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">requeridas</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">faltan</span><span class="p">),</span>
+                        <span class="s2">"faltantes"</span><span class="p">:</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">faltan</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"ninguna"</span><span class="p">,</span>
+                        <span class="s2">"puntos en tabla de bomba"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"curva"</span><span class="p">])})</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">completitud</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_7ae59">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_7ae59_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_7ae59_level0_col1" style="white-space:nowrap">requeridas</th>
+<th class="col_heading level0 col2" id="T_7ae59_level0_col2" style="white-space:nowrap">presentes</th>
+<th class="col_heading level0 col3" id="T_7ae59_level0_col3" style="white-space:nowrap">faltantes</th>
+<th class="col_heading level0 col4" id="T_7ae59_level0_col4">puntos en tabla de bomba</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_7ae59_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_7ae59_row0_col1" style="white-space:nowrap">19</td>
+<td class="data row0 col2" id="T_7ae59_row0_col2" style="white-space:nowrap">19</td>
+<td class="data row0 col3" id="T_7ae59_row0_col3" style="white-space:nowrap">ninguna</td>
+<td class="data row0 col4" id="T_7ae59_row0_col4" style="white-space:nowrap">6</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_7ae59_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_7ae59_row1_col1" style="white-space:nowrap">19</td>
+<td class="data row1 col2" id="T_7ae59_row1_col2" style="white-space:nowrap">19</td>
+<td class="data row1 col3" id="T_7ae59_row1_col3" style="white-space:nowrap">ninguna</td>
+<td class="data row1 col4" id="T_7ae59_row1_col4" style="white-space:nowrap">6</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_7ae59_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_7ae59_row2_col1" style="white-space:nowrap">19</td>
+<td class="data row2 col2" id="T_7ae59_row2_col2" style="white-space:nowrap">19</td>
+<td class="data row2 col3" id="T_7ae59_row2_col3" style="white-space:nowrap">ninguna</td>
+<td class="data row2 col4" id="T_7ae59_row2_col4" style="white-space:nowrap">6</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_7ae59_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_7ae59_row3_col1" style="white-space:nowrap">19</td>
+<td class="data row3 col2" id="T_7ae59_row3_col2" style="white-space:nowrap">19</td>
+<td class="data row3 col3" id="T_7ae59_row3_col3" style="white-space:nowrap">ninguna</td>
+<td class="data row3 col4" id="T_7ae59_row3_col4" style="white-space:nowrap">6</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_7ae59_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_7ae59_row4_col1" style="white-space:nowrap">19</td>
+<td class="data row4 col2" id="T_7ae59_row4_col2" style="white-space:nowrap">19</td>
+<td class="data row4 col3" id="T_7ae59_row4_col3" style="white-space:nowrap">ninguna</td>
+<td class="data row4 col4" id="T_7ae59_row4_col4" style="white-space:nowrap">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=4bc6f74b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> No falta ninguna entrada requerida y
+las tablas de bomba tienen seis puntos en todas las hojas. Esto
+<strong>no</strong> significa que los valores sean correctos, solo que
+existen. La correctitud física se aborda en los Pasos 6 a 8.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7c29e18d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-4-errores-guardados-y-rastreo-de-dependencias">Paso 4 ·
+Errores guardados y rastreo de dependencias</h2>
+<p><strong>Hecho.</strong> Excel guarda el resultado de cada fórmula; si
+una fórmula divide por cero, guarda <code>#DIV/0!</code>.
+<strong>Pregunta de ingeniería.</strong> ¿Esos errores contaminan lo que
+calculamos (PIP, THD, caudal a producir) o están en otra parte de la
+hoja? Afirmar «no importan» sin demostrarlo sería un riesgo; por eso se
+<strong>rastrean las precedencias</strong>: a partir de la celda
+resultado se recorre, fórmula por fórmula, todo de lo que depende
+(<code>precedentes</code>), y se verifica si alguna celda con error
+aparece en ese conjunto.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=63e651fb">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.estructura_libro</span><span class="w"> </span><span class="kn">import</span> <span class="n">errores_cacheados</span>
+<span class="n">errores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">errores_cacheados</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Errores guardados en el libro:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">errores</span><span class="p">),</span> <span class="s2">"| por hoja:"</span><span class="p">,</span> <span class="n">errores</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="n">T</span><span class="p">(</span><span class="n">errores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Errores guardados en el libro: 13 | por hoja: {'QF-549HST': 13}
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_dc9e8">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_dc9e8_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_dc9e8_level0_col1" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col2" id="T_dc9e8_level0_col2">valor_en_cache</th>
+<th class="col_heading level0 col3" id="T_dc9e8_level0_col3" style="white-space:nowrap">formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_dc9e8_row0_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row0 col1" id="T_dc9e8_row0_col1" style="white-space:nowrap">D237</td>
+<td class="data row0 col2" id="T_dc9e8_row0_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row0 col3" id="T_dc9e8_row0_col3">=AVERAGE(D234:D236)</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_dc9e8_row1_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row1 col1" id="T_dc9e8_row1_col1" style="white-space:nowrap">D241</td>
+<td class="data row1 col2" id="T_dc9e8_row1_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row1 col3" id="T_dc9e8_row1_col3">=AVERAGE(D238:D240)</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_dc9e8_row2_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row2 col1" id="T_dc9e8_row2_col1" style="white-space:nowrap">D245</td>
+<td class="data row2 col2" id="T_dc9e8_row2_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row2 col3" id="T_dc9e8_row2_col3">=AVERAGE(D242:D244)</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_dc9e8_row3_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row3 col1" id="T_dc9e8_row3_col1" style="white-space:nowrap">D246</td>
+<td class="data row3 col2" id="T_dc9e8_row3_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row3 col3" id="T_dc9e8_row3_col3">=D245*D237*SQRT(3)/1000/0.93</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_dc9e8_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_dc9e8_row4_col1" style="white-space:nowrap">D251</td>
+<td class="data row4 col2" id="T_dc9e8_row4_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row4 col3" id="T_dc9e8_row4_col3">=AVERAGE(D248:D250)</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_dc9e8_row5_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row5 col1" id="T_dc9e8_row5_col1" style="white-space:nowrap">D255</td>
+<td class="data row5 col2" id="T_dc9e8_row5_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row5 col3" id="T_dc9e8_row5_col3">=AVERAGE(D252:D254)</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_dc9e8_row6_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row6 col1" id="T_dc9e8_row6_col1" style="white-space:nowrap">D259</td>
+<td class="data row6 col2" id="T_dc9e8_row6_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row6 col3" id="T_dc9e8_row6_col3">=AVERAGE(D256:D258)</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_dc9e8_row7_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row7 col1" id="T_dc9e8_row7_col1" style="white-space:nowrap">D260</td>
+<td class="data row7 col2" id="T_dc9e8_row7_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row7 col3" id="T_dc9e8_row7_col3">=D251*D259*SQRT(3)/1000</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_dc9e8_row8_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row8 col1" id="T_dc9e8_row8_col1" style="white-space:nowrap">D265</td>
+<td class="data row8 col2" id="T_dc9e8_row8_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row8 col3" id="T_dc9e8_row8_col3">=AVERAGE(D262:D264)</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_dc9e8_row9_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row9 col1" id="T_dc9e8_row9_col1" style="white-space:nowrap">D269</td>
+<td class="data row9 col2" id="T_dc9e8_row9_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row9 col3" id="T_dc9e8_row9_col3">=AVERAGE(D266:D268)</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_dc9e8_row10_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row10 col1" id="T_dc9e8_row10_col1" style="white-space:nowrap">D273</td>
+<td class="data row10 col2" id="T_dc9e8_row10_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row10 col3" id="T_dc9e8_row10_col3">=AVERAGE(D270:D272)</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_dc9e8_row11_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row11 col1" id="T_dc9e8_row11_col1" style="white-space:nowrap">D274</td>
+<td class="data row11 col2" id="T_dc9e8_row11_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row11 col3" id="T_dc9e8_row11_col3">=D273*D265*SQRT(3)/1000</td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_dc9e8_row12_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row12 col1" id="T_dc9e8_row12_col1" style="white-space:nowrap">D276</td>
+<td class="data row12 col2" id="T_dc9e8_row12_col2" style="white-space:nowrap">#DIV/0!</td>
+<td class="data row12 col3" id="T_dc9e8_row12_col3" style="white-space:nowrap">=D246-D274</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=8a4da2f2">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">analisis.dependencias</span><span class="w"> </span><span class="kn">import</span> <span class="n">precedentes</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">con_error</span> <span class="o">=</span> <span class="n">errores</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"hoja"</span><span class="p">)[</span><span class="s2">"celda"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">anclas_por_hoja</span><span class="p">():</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">wf</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">celda</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">"THD TOTAL"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"G</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">'THD TOTAL'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Caudal a producir"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"B</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">'Caudal a producir'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">precedentes</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">celda</span><span class="p">)</span>
+        <span class="n">comunes</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"formulas"</span><span class="p">]</span> <span class="o">|</span> <span class="n">p</span><span class="p">[</span><span class="s2">"constantes"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="n">con_error</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="nb">set</span><span class="p">())</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"resultado"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">"celda"</span><span class="p">:</span> <span class="n">celda</span><span class="p">,</span>
+                      <span class="s2">"fórmulas precedentes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"formulas"</span><span class="p">]),</span> <span class="s2">"constantes precedentes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"constantes"</span><span class="p">]),</span>
+                      <span class="s2">"cita otra hoja"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"cita_otra_hoja"</span><span class="p">],</span> <span class="s2">"errores entre precedentes"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">comunes</span><span class="p">)})</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">rastreo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">rastreo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_8308e">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_8308e_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_8308e_level0_col1" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col2" id="T_8308e_level0_col2" style="white-space:nowrap">celda</th>
+<th class="col_heading level0 col3" id="T_8308e_level0_col3">fórmulas precedentes</th>
+<th class="col_heading level0 col4" id="T_8308e_level0_col4">constantes precedentes</th>
+<th class="col_heading level0 col5" id="T_8308e_level0_col5">cita otra hoja</th>
+<th class="col_heading level0 col6" id="T_8308e_level0_col6">errores entre precedentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_8308e_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_8308e_row0_col1">THD TOTAL</td>
+<td class="data row0 col2" id="T_8308e_row0_col2" style="white-space:nowrap">G102</td>
+<td class="data row0 col3" id="T_8308e_row0_col3" style="white-space:nowrap">33</td>
+<td class="data row0 col4" id="T_8308e_row0_col4" style="white-space:nowrap">123</td>
+<td class="data row0 col5" id="T_8308e_row0_col5" style="white-space:nowrap">no</td>
+<td class="data row0 col6" id="T_8308e_row0_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_8308e_row1_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row1 col1" id="T_8308e_row1_col1">Caudal a producir</td>
+<td class="data row1 col2" id="T_8308e_row1_col2" style="white-space:nowrap">B106</td>
+<td class="data row1 col3" id="T_8308e_row1_col3" style="white-space:nowrap">54</td>
+<td class="data row1 col4" id="T_8308e_row1_col4" style="white-space:nowrap">138</td>
+<td class="data row1 col5" id="T_8308e_row1_col5" style="white-space:nowrap">no</td>
+<td class="data row1 col6" id="T_8308e_row1_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_8308e_row2_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row2 col1" id="T_8308e_row2_col1">THD TOTAL</td>
+<td class="data row2 col2" id="T_8308e_row2_col2" style="white-space:nowrap">G100</td>
+<td class="data row2 col3" id="T_8308e_row2_col3" style="white-space:nowrap">33</td>
+<td class="data row2 col4" id="T_8308e_row2_col4" style="white-space:nowrap">147</td>
+<td class="data row2 col5" id="T_8308e_row2_col5" style="white-space:nowrap">no</td>
+<td class="data row2 col6" id="T_8308e_row2_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_8308e_row3_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row3 col1" id="T_8308e_row3_col1">Caudal a producir</td>
+<td class="data row3 col2" id="T_8308e_row3_col2" style="white-space:nowrap">B104</td>
+<td class="data row3 col3" id="T_8308e_row3_col3" style="white-space:nowrap">54</td>
+<td class="data row3 col4" id="T_8308e_row3_col4" style="white-space:nowrap">162</td>
+<td class="data row3 col5" id="T_8308e_row3_col5" style="white-space:nowrap">no</td>
+<td class="data row3 col6" id="T_8308e_row3_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_8308e_row4_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row4 col1" id="T_8308e_row4_col1">THD TOTAL</td>
+<td class="data row4 col2" id="T_8308e_row4_col2" style="white-space:nowrap">G101</td>
+<td class="data row4 col3" id="T_8308e_row4_col3" style="white-space:nowrap">34</td>
+<td class="data row4 col4" id="T_8308e_row4_col4" style="white-space:nowrap">152</td>
+<td class="data row4 col5" id="T_8308e_row4_col5" style="white-space:nowrap">no</td>
+<td class="data row4 col6" id="T_8308e_row4_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_8308e_row5_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row5 col1" id="T_8308e_row5_col1">Caudal a producir</td>
+<td class="data row5 col2" id="T_8308e_row5_col2" style="white-space:nowrap">B105</td>
+<td class="data row5 col3" id="T_8308e_row5_col3" style="white-space:nowrap">55</td>
+<td class="data row5 col4" id="T_8308e_row5_col4" style="white-space:nowrap">167</td>
+<td class="data row5 col5" id="T_8308e_row5_col5" style="white-space:nowrap">no</td>
+<td class="data row5 col6" id="T_8308e_row5_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_8308e_row6_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row6 col1" id="T_8308e_row6_col1">THD TOTAL</td>
+<td class="data row6 col2" id="T_8308e_row6_col2" style="white-space:nowrap">G99</td>
+<td class="data row6 col3" id="T_8308e_row6_col3" style="white-space:nowrap">34</td>
+<td class="data row6 col4" id="T_8308e_row6_col4" style="white-space:nowrap">128</td>
+<td class="data row6 col5" id="T_8308e_row6_col5" style="white-space:nowrap">no</td>
+<td class="data row6 col6" id="T_8308e_row6_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_8308e_row7_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row7 col1" id="T_8308e_row7_col1">Caudal a producir</td>
+<td class="data row7 col2" id="T_8308e_row7_col2" style="white-space:nowrap">B103</td>
+<td class="data row7 col3" id="T_8308e_row7_col3" style="white-space:nowrap">55</td>
+<td class="data row7 col4" id="T_8308e_row7_col4" style="white-space:nowrap">143</td>
+<td class="data row7 col5" id="T_8308e_row7_col5" style="white-space:nowrap">no</td>
+<td class="data row7 col6" id="T_8308e_row7_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_8308e_row8_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row8 col1" id="T_8308e_row8_col1">THD TOTAL</td>
+<td class="data row8 col2" id="T_8308e_row8_col2" style="white-space:nowrap">G99</td>
+<td class="data row8 col3" id="T_8308e_row8_col3" style="white-space:nowrap">33</td>
+<td class="data row8 col4" id="T_8308e_row8_col4" style="white-space:nowrap">145</td>
+<td class="data row8 col5" id="T_8308e_row8_col5" style="white-space:nowrap">no</td>
+<td class="data row8 col6" id="T_8308e_row8_col6" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_8308e_row9_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row9 col1" id="T_8308e_row9_col1">Caudal a producir</td>
+<td class="data row9 col2" id="T_8308e_row9_col2" style="white-space:nowrap">B103</td>
+<td class="data row9 col3" id="T_8308e_row9_col3" style="white-space:nowrap">54</td>
+<td class="data row9 col4" id="T_8308e_row9_col4" style="white-space:nowrap">160</td>
+<td class="data row9 col5" id="T_8308e_row9_col5" style="white-space:nowrap">no</td>
+<td class="data row9 col6" id="T_8308e_row9_col6" style="white-space:nowrap">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=02759edb"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Los 13 errores son
+<code>#DIV/0!</code> y están todos en <code>QF-549HST</code>, en la
+columna D de un bloque lejano a la cadena de cálculo. El rastreo muestra
+que <strong>ninguna</strong> de las celdas de las que dependen THD y
+«Caudal a producir» es una celda con error, en ninguna hoja. Por tanto
+estos errores son un defecto <strong>del libro</strong> (conviene
+avisarlo a quien lo mantiene) pero <strong>no contaminan</strong> los
+cálculos de este expediente. La conclusión se limita a eso: no se afirma
+nada sobre el bloque donde están los errores, que queda fuera del
+alcance.</p>
+<p><em>Límite del método:</em> el rastreo lee referencias
+<code>A1</code> escritas en la fórmula (con rangos); no evalúa funciones
+ni sigue nombres definidos (el libro no tiene) ni otras hojas (ninguna
+fórmula las cita, Paso 1).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=efadb684"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-5-fechas-del-encabezado">Paso 5 · Fechas del
+encabezado</h2>
+<p>Una fecha en el encabezado de un ensayo de pozo suele indicar
+<strong>cuándo</strong> se tomó el punto. Aquí hay que comprobar si
+realmente lo hace, porque de eso depende si se puede ordenar los datos
+en el tiempo.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=781d4dd5">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="s2">"fórmula/valor en la celda de fecha"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_formula"</span><span class="p">],</span>
+                 <span class="s2">"valor guardado"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_cache"</span><span class="p">],</span> <span class="s2">"es TODAY()"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"fecha_es_today"</span><span class="p">]}</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_9aaf3">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_9aaf3_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_9aaf3_level0_col1">fórmula/valor en la celda de fecha</th>
+<th class="col_heading level0 col2" id="T_9aaf3_level0_col2">valor guardado</th>
+<th class="col_heading level0 col3" id="T_9aaf3_level0_col3">es TODAY()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_9aaf3_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_9aaf3_row0_col1" style="white-space:nowrap">=TODAY()</td>
+<td class="data row0 col2" id="T_9aaf3_row0_col2">2026-10-17 00:00:00</td>
+<td class="data row0 col3" id="T_9aaf3_row0_col3" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_9aaf3_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_9aaf3_row1_col1" style="white-space:nowrap">=TODAY()</td>
+<td class="data row1 col2" id="T_9aaf3_row1_col2">2026-10-17 00:00:00</td>
+<td class="data row1 col3" id="T_9aaf3_row1_col3" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_9aaf3_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_9aaf3_row2_col1" style="white-space:nowrap">=TODAY()</td>
+<td class="data row2 col2" id="T_9aaf3_row2_col2">2026-10-17 00:00:00</td>
+<td class="data row2 col3" id="T_9aaf3_row2_col3" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_9aaf3_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_9aaf3_row3_col1" style="white-space:nowrap">=TODAY()</td>
+<td class="data row3 col2" id="T_9aaf3_row3_col2">2026-10-17 00:00:00</td>
+<td class="data row3 col3" id="T_9aaf3_row3_col3" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_9aaf3_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_9aaf3_row4_col1">2017-09-06 00:00:00</td>
+<td class="data row4 col2" id="T_9aaf3_row4_col2">2017-09-06 00:00:00</td>
+<td class="data row4 col3" id="T_9aaf3_row4_col3" style="white-space:nowrap">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=be534b73"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> En cuatro hojas la fecha es
+<code>=TODAY()</code>: es la <strong>fecha en que Excel
+recalculó</strong>, no la fecha del ensayo. Cambia cada día que se abre
+el libro. En la quinta hoja hay una fecha escrita (2017-09-06) sin que
+el libro explique a qué corresponde. <strong>Consecuencia:</strong> el
+libro <strong>no permite análisis temporal</strong> ni ordenar los
+puntos por fecha. Cada hoja es un punto de operación aislado.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7f7ea7ec"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-6-coherencia-geométrica-del-survey">Paso 6 · Coherencia
+geométrica del survey</h2>
+<p>El survey (tabla de estaciones MD, inclinación, azimut, TVD y
+<em>dogleg</em>) define las profundidades verticales que usa la hoja
+para corregir presiones. Si fuera incoherente, el error se propagaría a
+todo. Se hacen <strong>dos tipos de control</strong>:</p>
+<ol type="1">
+<li><strong>Propiedades geométricas</strong> que cualquier survey debe
+cumplir: MD estrictamente creciente y sin duplicados; TVD ≤ MD;
+inclinación en [0°, 180°]; azimut en [0°, 360°]; sin nulos.</li>
+<li><strong>Contraste independiente.</strong> Se recalculan TVD y
+<em>dogleg</em> con el <strong>método de curvatura mínima</strong>,
+procedimiento estándar de la industria, y se comparan con las columnas
+de la hoja. <em>Importante:</em> ese método <strong>no es una fórmula de
+este proyecto</strong>; se usa solo como control externo. La tolerancia
+es 0.01, una unidad del último decimal que muestra la hoja; no es un
+límite de ingeniería.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=7bc2b3fe">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.survey</span><span class="w"> </span><span class="kn">import</span> <span class="n">leer_survey</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.calidad</span><span class="w"> </span><span class="kn">import</span> <span class="n">verificar_survey</span><span class="p">,</span> <span class="n">contrastar_con_curvatura_minima</span>
+<span class="n">estaciones</span> <span class="o">=</span> <span class="n">leer_survey</span><span class="p">()</span>
+<span class="n">geom</span><span class="p">,</span> <span class="n">mcm</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">estaciones</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]]</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="o">**</span><span class="n">verificar_survey</span><span class="p">(</span><span class="n">est</span><span class="p">)})</span>
+    <span class="n">mcm</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"hoja"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">],</span> <span class="o">**</span><span class="n">contrastar_con_curvatura_minima</span><span class="p">(</span><span class="n">est</span><span class="p">)})</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+<span class="n">mcm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mcm</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">geom</span><span class="p">[[</span><span class="s2">"hoja"</span><span class="p">,</span> <span class="s2">"estaciones"</span><span class="p">,</span> <span class="s2">"md_final_ft"</span><span class="p">,</span> <span class="s2">"md_estrictamente_creciente"</span><span class="p">,</span> <span class="s2">"md_duplicadas"</span><span class="p">,</span>
+        <span class="s2">"vertical_menor_o_igual_que_md"</span><span class="p">,</span> <span class="s2">"vertical_monotona"</span><span class="p">,</span> <span class="s2">"inclinacion_max_deg"</span><span class="p">,</span> <span class="s2">"azimut_en_0_360"</span><span class="p">,</span> <span class="s2">"valores_nulos"</span><span class="p">]]</span>
+  <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"md_estrictamente_creciente"</span><span class="p">:</span> <span class="s2">"MD creciente"</span><span class="p">,</span> <span class="s2">"md_duplicadas"</span><span class="p">:</span> <span class="s2">"MD duplic."</span><span class="p">,</span>
+                   <span class="s2">"vertical_menor_o_igual_que_md"</span><span class="p">:</span> <span class="s2">"TVD≤MD"</span><span class="p">,</span> <span class="s2">"vertical_monotona"</span><span class="p">:</span> <span class="s2">"TVD monótona"</span><span class="p">,</span>
+                   <span class="s2">"inclinacion_max_deg"</span><span class="p">:</span> <span class="s2">"inc. máx (°)"</span><span class="p">,</span> <span class="s2">"azimut_en_0_360"</span><span class="p">:</span> <span class="s2">"azim. 0-360"</span><span class="p">,</span> <span class="s2">"valores_nulos"</span><span class="p">:</span> <span class="s2">"nulos"</span><span class="p">,</span>
+                   <span class="s2">"md_final_ft"</span><span class="p">:</span> <span class="s2">"MD final (ft)"</span><span class="p">}),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_3fc1f">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_3fc1f_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_3fc1f_level0_col1" style="white-space:nowrap">estaciones</th>
+<th class="col_heading level0 col2" id="T_3fc1f_level0_col2">MD final (ft)</th>
+<th class="col_heading level0 col3" id="T_3fc1f_level0_col3">MD creciente</th>
+<th class="col_heading level0 col4" id="T_3fc1f_level0_col4">MD duplic.</th>
+<th class="col_heading level0 col5" id="T_3fc1f_level0_col5" style="white-space:nowrap">TVD≤MD</th>
+<th class="col_heading level0 col6" id="T_3fc1f_level0_col6">TVD monótona</th>
+<th class="col_heading level0 col7" id="T_3fc1f_level0_col7">inc. máx (°)</th>
+<th class="col_heading level0 col8" id="T_3fc1f_level0_col8">azim. 0-360</th>
+<th class="col_heading level0 col9" id="T_3fc1f_level0_col9" style="white-space:nowrap">nulos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_3fc1f_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_3fc1f_row0_col1" style="white-space:nowrap">56</td>
+<td class="data row0 col2" id="T_3fc1f_row0_col2" style="white-space:nowrap">4530</td>
+<td class="data row0 col3" id="T_3fc1f_row0_col3" style="white-space:nowrap">sí</td>
+<td class="data row0 col4" id="T_3fc1f_row0_col4" style="white-space:nowrap">0</td>
+<td class="data row0 col5" id="T_3fc1f_row0_col5" style="white-space:nowrap">sí</td>
+<td class="data row0 col6" id="T_3fc1f_row0_col6" style="white-space:nowrap">no</td>
+<td class="data row0 col7" id="T_3fc1f_row0_col7" style="white-space:nowrap">90.68</td>
+<td class="data row0 col8" id="T_3fc1f_row0_col8" style="white-space:nowrap">sí</td>
+<td class="data row0 col9" id="T_3fc1f_row0_col9" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_3fc1f_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_3fc1f_row1_col1" style="white-space:nowrap">68</td>
+<td class="data row1 col2" id="T_3fc1f_row1_col2" style="white-space:nowrap">4576</td>
+<td class="data row1 col3" id="T_3fc1f_row1_col3" style="white-space:nowrap">sí</td>
+<td class="data row1 col4" id="T_3fc1f_row1_col4" style="white-space:nowrap">0</td>
+<td class="data row1 col5" id="T_3fc1f_row1_col5" style="white-space:nowrap">sí</td>
+<td class="data row1 col6" id="T_3fc1f_row1_col6" style="white-space:nowrap">no</td>
+<td class="data row1 col7" id="T_3fc1f_row1_col7" style="white-space:nowrap">91.5</td>
+<td class="data row1 col8" id="T_3fc1f_row1_col8" style="white-space:nowrap">sí</td>
+<td class="data row1 col9" id="T_3fc1f_row1_col9" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_3fc1f_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_3fc1f_row2_col1" style="white-space:nowrap">71</td>
+<td class="data row2 col2" id="T_3fc1f_row2_col2" style="white-space:nowrap">4637</td>
+<td class="data row2 col3" id="T_3fc1f_row2_col3" style="white-space:nowrap">sí</td>
+<td class="data row2 col4" id="T_3fc1f_row2_col4" style="white-space:nowrap">0</td>
+<td class="data row2 col5" id="T_3fc1f_row2_col5" style="white-space:nowrap">sí</td>
+<td class="data row2 col6" id="T_3fc1f_row2_col6" style="white-space:nowrap">no</td>
+<td class="data row2 col7" id="T_3fc1f_row2_col7" style="white-space:nowrap">90.8</td>
+<td class="data row2 col8" id="T_3fc1f_row2_col8" style="white-space:nowrap">sí</td>
+<td class="data row2 col9" id="T_3fc1f_row2_col9" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_3fc1f_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_3fc1f_row3_col1" style="white-space:nowrap">59</td>
+<td class="data row3 col2" id="T_3fc1f_row3_col2" style="white-space:nowrap">4598</td>
+<td class="data row3 col3" id="T_3fc1f_row3_col3" style="white-space:nowrap">sí</td>
+<td class="data row3 col4" id="T_3fc1f_row3_col4" style="white-space:nowrap">0</td>
+<td class="data row3 col5" id="T_3fc1f_row3_col5" style="white-space:nowrap">sí</td>
+<td class="data row3 col6" id="T_3fc1f_row3_col6" style="white-space:nowrap">no</td>
+<td class="data row3 col7" id="T_3fc1f_row3_col7" style="white-space:nowrap">90.49</td>
+<td class="data row3 col8" id="T_3fc1f_row3_col8" style="white-space:nowrap">sí</td>
+<td class="data row3 col9" id="T_3fc1f_row3_col9" style="white-space:nowrap">0</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_3fc1f_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_3fc1f_row4_col1" style="white-space:nowrap">67</td>
+<td class="data row4 col2" id="T_3fc1f_row4_col2" style="white-space:nowrap">4592</td>
+<td class="data row4 col3" id="T_3fc1f_row4_col3" style="white-space:nowrap">sí</td>
+<td class="data row4 col4" id="T_3fc1f_row4_col4" style="white-space:nowrap">0</td>
+<td class="data row4 col5" id="T_3fc1f_row4_col5" style="white-space:nowrap">sí</td>
+<td class="data row4 col6" id="T_3fc1f_row4_col6" style="white-space:nowrap">no</td>
+<td class="data row4 col7" id="T_3fc1f_row4_col7" style="white-space:nowrap">91.48</td>
+<td class="data row4 col8" id="T_3fc1f_row4_col8" style="white-space:nowrap">sí</td>
+<td class="data row4 col9" id="T_3fc1f_row4_col9" style="white-space:nowrap">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d8f36e40">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">T</span><span class="p">(</span><span class="n">mcm</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"max_dif_tvd_ft"</span><span class="p">:</span> <span class="s2">"máx |ΔTVD| (ft)"</span><span class="p">,</span> <span class="s2">"max_dif_dogleg_deg_100ft"</span><span class="p">:</span> <span class="s2">"máx |Δdogleg| (°/100 ft)"</span><span class="p">,</span>
+                      <span class="s2">"coincide_dentro_del_redondeo"</span><span class="p">:</span> <span class="s2">"coincide"</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_f2c6f">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_f2c6f_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_f2c6f_level0_col1">máx |ΔTVD| (ft)</th>
+<th class="col_heading level0 col2" id="T_f2c6f_level0_col2">máx |Δdogleg| (°/100 ft)</th>
+<th class="col_heading level0 col3" id="T_f2c6f_level0_col3" style="white-space:nowrap">tolerancia</th>
+<th class="col_heading level0 col4" id="T_f2c6f_level0_col4" style="white-space:nowrap">coincide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_f2c6f_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_f2c6f_row0_col1" style="white-space:nowrap">0.0049496518</td>
+<td class="data row0 col2" id="T_f2c6f_row0_col2" style="white-space:nowrap">0.0049214971</td>
+<td class="data row0 col3" id="T_f2c6f_row0_col3" style="white-space:nowrap">0.01</td>
+<td class="data row0 col4" id="T_f2c6f_row0_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_f2c6f_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_f2c6f_row1_col1" style="white-space:nowrap">0.0047268996</td>
+<td class="data row1 col2" id="T_f2c6f_row1_col2" style="white-space:nowrap">0.0048730872</td>
+<td class="data row1 col3" id="T_f2c6f_row1_col3" style="white-space:nowrap">0.01</td>
+<td class="data row1 col4" id="T_f2c6f_row1_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_f2c6f_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_f2c6f_row2_col1" style="white-space:nowrap">0.0049282311</td>
+<td class="data row2 col2" id="T_f2c6f_row2_col2" style="white-space:nowrap">0.0049082785</td>
+<td class="data row2 col3" id="T_f2c6f_row2_col3" style="white-space:nowrap">0.01</td>
+<td class="data row2 col4" id="T_f2c6f_row2_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_f2c6f_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_f2c6f_row3_col1" style="white-space:nowrap">0.0049141367</td>
+<td class="data row3 col2" id="T_f2c6f_row3_col2" style="white-space:nowrap">0.0049929494</td>
+<td class="data row3 col3" id="T_f2c6f_row3_col3" style="white-space:nowrap">0.01</td>
+<td class="data row3 col4" id="T_f2c6f_row3_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_f2c6f_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_f2c6f_row4_col1" style="white-space:nowrap">0.0049738155</td>
+<td class="data row4 col2" id="T_f2c6f_row4_col2" style="white-space:nowrap">0.0048000848</td>
+<td class="data row4 col3" id="T_f2c6f_row4_col3" style="white-space:nowrap">0.01</td>
+<td class="data row4 col4" id="T_f2c6f_row4_col4" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=bf41b2d2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> - La geometría cumple en las cinco
+hojas: MD estrictamente creciente, sin duplicados ni nulos, TVD ≤ MD. -
+<strong>«TVD monótona = no»</strong> no es un defecto: con inclinaciones
+por encima de 90° (hasta ≈ 91.5° en algunas hojas) el pozo puede subir
+ligeramente y la profundidad vertical decrece en tramos. Una regla «TVD
+siempre creciente» habría dado una <strong>falsa alarma</strong>. - Las
+columnas <strong>Vertical</strong> y <strong>Dogleg</strong> de la hoja
+coinciden con el recálculo por curvatura mínima con diferencias por
+debajo de 0.005 (el redondeo a dos decimales de la hoja). Esto cierra un
+pendiente anterior (el método con que se obtuvo <code>Vertical</code> no
+estaba verificado): ahora se sabe que es <strong>coherente con curvatura
+mínima</strong>. - <em>Límite:</em> es coherencia interna; no demuestra
+que el survey medido en campo sea exacto.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=df782ccd"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-7-de-dónde-salen-las-tvd-de-descarga-intake-y-sensor">Paso
+7 · ¿De dónde salen las TVD de descarga, intake y sensor?</h2>
+<p>La hoja escribe MD de cada equipo y calcula la TVD con
+<code>MATCH</code>/<code>INDEX</code> sobre el survey. Se
+<strong>reproduce</strong> esa interpolación en Python
+(<code>np.interp</code>, lineal) y se compara con el valor que guarda la
+hoja. Además se exige que la MD del equipo esté <strong>dentro del rango
+del survey</strong> (extrapolar sería un error silencioso) y que TVD ≤
+MD.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5c4f0547">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">analisis.calidad</span><span class="w"> </span><span class="kn">import</span> <span class="n">verificar_tvd_de_equipos</span>
+<span class="n">tvd_equipos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">verificar_tvd_de_equipos</span><span class="p">(</span>
+    <span class="n">h</span><span class="p">,</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">estaciones</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]])])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">tvd_equipos</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"md_ft"</span><span class="p">:</span> <span class="s2">"MD (ft)"</span><span class="p">,</span> <span class="s2">"tvd_hoja_ft"</span><span class="p">:</span> <span class="s2">"TVD hoja (ft)"</span><span class="p">,</span> <span class="s2">"tvd_interpolada_ft"</span><span class="p">:</span> <span class="s2">"TVD interpolada (ft)"</span><span class="p">,</span>
+                              <span class="s2">"dif_ft"</span><span class="p">:</span> <span class="s2">"dif (ft)"</span><span class="p">,</span> <span class="s2">"dentro_del_survey"</span><span class="p">:</span> <span class="s2">"MD dentro del survey"</span><span class="p">,</span>
+                              <span class="s2">"tvd_menor_o_igual_que_md"</span><span class="p">:</span> <span class="s2">"TVD≤MD"</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_5a693">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_5a693_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_5a693_level0_col1" style="white-space:nowrap">equipo</th>
+<th class="col_heading level0 col2" id="T_5a693_level0_col2">MD (ft)</th>
+<th class="col_heading level0 col3" id="T_5a693_level0_col3">TVD hoja (ft)</th>
+<th class="col_heading level0 col4" id="T_5a693_level0_col4">TVD interpolada (ft)</th>
+<th class="col_heading level0 col5" id="T_5a693_level0_col5">dif (ft)</th>
+<th class="col_heading level0 col6" id="T_5a693_level0_col6">MD dentro del survey</th>
+<th class="col_heading level0 col7" id="T_5a693_level0_col7" style="white-space:nowrap">TVD≤MD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_5a693_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_5a693_row0_col1" style="white-space:nowrap">descarga</td>
+<td class="data row0 col2" id="T_5a693_row0_col2" style="white-space:nowrap">2841.51</td>
+<td class="data row0 col3" id="T_5a693_row0_col3" style="white-space:nowrap">2644.7775</td>
+<td class="data row0 col4" id="T_5a693_row0_col4" style="white-space:nowrap">2644.7775</td>
+<td class="data row0 col5" id="T_5a693_row0_col5" style="white-space:nowrap">0</td>
+<td class="data row0 col6" id="T_5a693_row0_col6" style="white-space:nowrap">sí</td>
+<td class="data row0 col7" id="T_5a693_row0_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_5a693_row1_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row1 col1" id="T_5a693_row1_col1" style="white-space:nowrap">intake</td>
+<td class="data row1 col2" id="T_5a693_row1_col2" style="white-space:nowrap">2856.1</td>
+<td class="data row1 col3" id="T_5a693_row1_col3" style="white-space:nowrap">2653.1767</td>
+<td class="data row1 col4" id="T_5a693_row1_col4" style="white-space:nowrap">2653.1767</td>
+<td class="data row1 col5" id="T_5a693_row1_col5" style="white-space:nowrap">0</td>
+<td class="data row1 col6" id="T_5a693_row1_col6" style="white-space:nowrap">sí</td>
+<td class="data row1 col7" id="T_5a693_row1_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_5a693_row2_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row2 col1" id="T_5a693_row2_col1" style="white-space:nowrap">sensor</td>
+<td class="data row2 col2" id="T_5a693_row2_col2" style="white-space:nowrap">2900.58</td>
+<td class="data row2 col3" id="T_5a693_row2_col3" style="white-space:nowrap">2678.822</td>
+<td class="data row2 col4" id="T_5a693_row2_col4" style="white-space:nowrap">2678.822</td>
+<td class="data row2 col5" id="T_5a693_row2_col5" style="white-space:nowrap">0</td>
+<td class="data row2 col6" id="T_5a693_row2_col6" style="white-space:nowrap">sí</td>
+<td class="data row2 col7" id="T_5a693_row2_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_5a693_row3_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row3 col1" id="T_5a693_row3_col1" style="white-space:nowrap">descarga</td>
+<td class="data row3 col2" id="T_5a693_row3_col2" style="white-space:nowrap">2978.66</td>
+<td class="data row3 col3" id="T_5a693_row3_col3" style="white-space:nowrap">2527.362</td>
+<td class="data row3 col4" id="T_5a693_row3_col4" style="white-space:nowrap">2527.362</td>
+<td class="data row3 col5" id="T_5a693_row3_col5" style="white-space:nowrap">0</td>
+<td class="data row3 col6" id="T_5a693_row3_col6" style="white-space:nowrap">sí</td>
+<td class="data row3 col7" id="T_5a693_row3_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_5a693_row4_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row4 col1" id="T_5a693_row4_col1" style="white-space:nowrap">intake</td>
+<td class="data row4 col2" id="T_5a693_row4_col2" style="white-space:nowrap">2994.87</td>
+<td class="data row4 col3" id="T_5a693_row4_col3" style="white-space:nowrap">2534.6038</td>
+<td class="data row4 col4" id="T_5a693_row4_col4" style="white-space:nowrap">2534.6038</td>
+<td class="data row4 col5" id="T_5a693_row4_col5" style="white-space:nowrap">0</td>
+<td class="data row4 col6" id="T_5a693_row4_col6" style="white-space:nowrap">sí</td>
+<td class="data row4 col7" id="T_5a693_row4_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_5a693_row5_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row5 col1" id="T_5a693_row5_col1" style="white-space:nowrap">sensor</td>
+<td class="data row5 col2" id="T_5a693_row5_col2" style="white-space:nowrap">3038.12</td>
+<td class="data row5 col3" id="T_5a693_row5_col3" style="white-space:nowrap">2553.9174</td>
+<td class="data row5 col4" id="T_5a693_row5_col4" style="white-space:nowrap">2553.9174</td>
+<td class="data row5 col5" id="T_5a693_row5_col5" style="white-space:nowrap">0</td>
+<td class="data row5 col6" id="T_5a693_row5_col6" style="white-space:nowrap">sí</td>
+<td class="data row5 col7" id="T_5a693_row5_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_5a693_row6_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row6 col1" id="T_5a693_row6_col1" style="white-space:nowrap">descarga</td>
+<td class="data row6 col2" id="T_5a693_row6_col2" style="white-space:nowrap">2801.9</td>
+<td class="data row6 col3" id="T_5a693_row6_col3" style="white-space:nowrap">2572.4604</td>
+<td class="data row6 col4" id="T_5a693_row6_col4" style="white-space:nowrap">2572.4604</td>
+<td class="data row6 col5" id="T_5a693_row6_col5" style="white-space:nowrap">0</td>
+<td class="data row6 col6" id="T_5a693_row6_col6" style="white-space:nowrap">sí</td>
+<td class="data row6 col7" id="T_5a693_row6_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_5a693_row7_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row7 col1" id="T_5a693_row7_col1" style="white-space:nowrap">intake</td>
+<td class="data row7 col2" id="T_5a693_row7_col2" style="white-space:nowrap">2813.57</td>
+<td class="data row7 col3" id="T_5a693_row7_col3" style="white-space:nowrap">2578.9682</td>
+<td class="data row7 col4" id="T_5a693_row7_col4" style="white-space:nowrap">2578.9682</td>
+<td class="data row7 col5" id="T_5a693_row7_col5" style="white-space:nowrap">0</td>
+<td class="data row7 col6" id="T_5a693_row7_col6" style="white-space:nowrap">sí</td>
+<td class="data row7 col7" id="T_5a693_row7_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_5a693_row8_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row8 col1" id="T_5a693_row8_col1" style="white-space:nowrap">sensor</td>
+<td class="data row8 col2" id="T_5a693_row8_col2" style="white-space:nowrap">2859.3</td>
+<td class="data row8 col3" id="T_5a693_row8_col3" style="white-space:nowrap">2604.4984</td>
+<td class="data row8 col4" id="T_5a693_row8_col4" style="white-space:nowrap">2604.4984</td>
+<td class="data row8 col5" id="T_5a693_row8_col5" style="white-space:nowrap">0</td>
+<td class="data row8 col6" id="T_5a693_row8_col6" style="white-space:nowrap">sí</td>
+<td class="data row8 col7" id="T_5a693_row8_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_5a693_row9_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row9 col1" id="T_5a693_row9_col1" style="white-space:nowrap">descarga</td>
+<td class="data row9 col2" id="T_5a693_row9_col2" style="white-space:nowrap">3018.77</td>
+<td class="data row9 col3" id="T_5a693_row9_col3" style="white-space:nowrap">2763.6426</td>
+<td class="data row9 col4" id="T_5a693_row9_col4" style="white-space:nowrap">2763.6426</td>
+<td class="data row9 col5" id="T_5a693_row9_col5" style="white-space:nowrap">0</td>
+<td class="data row9 col6" id="T_5a693_row9_col6" style="white-space:nowrap">sí</td>
+<td class="data row9 col7" id="T_5a693_row9_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_5a693_row10_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row10 col1" id="T_5a693_row10_col1" style="white-space:nowrap">intake</td>
+<td class="data row10 col2" id="T_5a693_row10_col2" style="white-space:nowrap">3028.46</td>
+<td class="data row10 col3" id="T_5a693_row10_col3" style="white-space:nowrap">2769.6593</td>
+<td class="data row10 col4" id="T_5a693_row10_col4" style="white-space:nowrap">2769.6593</td>
+<td class="data row10 col5" id="T_5a693_row10_col5" style="white-space:nowrap">0</td>
+<td class="data row10 col6" id="T_5a693_row10_col6" style="white-space:nowrap">sí</td>
+<td class="data row10 col7" id="T_5a693_row10_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_5a693_row11_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row11 col1" id="T_5a693_row11_col1" style="white-space:nowrap">sensor</td>
+<td class="data row11 col2" id="T_5a693_row11_col2" style="white-space:nowrap">3061.68</td>
+<td class="data row11 col3" id="T_5a693_row11_col3" style="white-space:nowrap">2790.2827</td>
+<td class="data row11 col4" id="T_5a693_row11_col4" style="white-space:nowrap">2790.2827</td>
+<td class="data row11 col5" id="T_5a693_row11_col5" style="white-space:nowrap">0</td>
+<td class="data row11 col6" id="T_5a693_row11_col6" style="white-space:nowrap">sí</td>
+<td class="data row11 col7" id="T_5a693_row11_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row12 col0" id="T_5a693_row12_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row12 col1" id="T_5a693_row12_col1" style="white-space:nowrap">descarga</td>
+<td class="data row12 col2" id="T_5a693_row12_col2" style="white-space:nowrap">2787.17</td>
+<td class="data row12 col3" id="T_5a693_row12_col3" style="white-space:nowrap">2608.4579</td>
+<td class="data row12 col4" id="T_5a693_row12_col4" style="white-space:nowrap">2608.4579</td>
+<td class="data row12 col5" id="T_5a693_row12_col5" style="white-space:nowrap">0</td>
+<td class="data row12 col6" id="T_5a693_row12_col6" style="white-space:nowrap">sí</td>
+<td class="data row12 col7" id="T_5a693_row12_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row13 col0" id="T_5a693_row13_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row13 col1" id="T_5a693_row13_col1" style="white-space:nowrap">intake</td>
+<td class="data row13 col2" id="T_5a693_row13_col2" style="white-space:nowrap">2796.27</td>
+<td class="data row13 col3" id="T_5a693_row13_col3" style="white-space:nowrap">2614.0638</td>
+<td class="data row13 col4" id="T_5a693_row13_col4" style="white-space:nowrap">2614.0638</td>
+<td class="data row13 col5" id="T_5a693_row13_col5" style="white-space:nowrap">0</td>
+<td class="data row13 col6" id="T_5a693_row13_col6" style="white-space:nowrap">sí</td>
+<td class="data row13 col7" id="T_5a693_row13_col7" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row14 col0" id="T_5a693_row14_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row14 col1" id="T_5a693_row14_col1" style="white-space:nowrap">sensor</td>
+<td class="data row14 col2" id="T_5a693_row14_col2" style="white-space:nowrap">2829.66</td>
+<td class="data row14 col3" id="T_5a693_row14_col3" style="white-space:nowrap">2634.6029</td>
+<td class="data row14 col4" id="T_5a693_row14_col4" style="white-space:nowrap">2634.6029</td>
+<td class="data row14 col5" id="T_5a693_row14_col5" style="white-space:nowrap">0</td>
+<td class="data row14 col6" id="T_5a693_row14_col6" style="white-space:nowrap">sí</td>
+<td class="data row14 col7" id="T_5a693_row14_col7" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e9ba3b63"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Las 15 TVD (3 equipos × 5 hojas)
+coinciden con la interpolación lineal del survey con diferencia nula,
+todas las MD están dentro del rango y TVD ≤ MD. Por tanto las
+profundidades que usan PIP, THP y fricción <strong>provienen del
+survey</strong> y se pueden reproducir de forma independiente.
+<em>Límite:</em> se verifica la interpolación, no que las MD de los
+equipos sean las reales de la completación.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=20a5a3a6"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-8-controles-de-dominio-sobre-las-entradas">Paso 8 ·
+Controles de dominio sobre las entradas</h2>
+<p>Los controles <code>D-xx</code> son condiciones <strong>sin las
+cuales la fórmula transcrita deja de tener sentido</strong> (p. ej.
+<code>°API &gt; −131.5</code> porque la fórmula divide por
+<code>131.5 + °API</code>; <code>BS&amp;W ∈ [0, 1]</code> porque la
+fórmula lo multiplica como fracción). Los <code>G-xx</code> son
+geometría básica de la sarta. El <code>O-01</code> es una
+<strong>observación</strong>, no un juicio: compara la presión del
+sensor con la de burbuja, porque la cadena de fluido no modela gas
+libre. <strong>No se importan límites de operación</strong> de otras
+fuentes: sin ellos no se puede decir que una condición sea «buena» o
+«mala».</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=5d381008">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">analisis.calidad</span><span class="w"> </span><span class="kn">import</span> <span class="n">plausibilidad_operacion</span>
+<span class="n">pl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">f</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">plausibilidad_operacion</span><span class="p">(</span><span class="n">h</span><span class="p">)])</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">]</span>
+<span class="n">pivote</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"control"</span><span class="p">,</span> <span class="s2">"descripcion"</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"hoja"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"resultado"</span><span class="p">)[</span><span class="n">orden</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">no_cumple</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">pl</span><span class="p">[</span><span class="s2">"resultado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"NO CUMPLE"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Controles ejecutados:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pl</span><span class="p">),</span> <span class="s2">"| incumplimientos:"</span><span class="p">,</span> <span class="n">no_cumple</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pivote</span><span class="p">,</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Controles ejecutados: 60 | incumplimientos: 0
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_7d0de">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_7d0de_level0_col0" style="white-space:nowrap">control</th>
+<th class="col_heading level0 col1" id="T_7d0de_level0_col1" style="white-space:nowrap">descripcion</th>
+<th class="col_heading level0 col2" id="T_7d0de_level0_col2" style="white-space:nowrap">QF-554H</th>
+<th class="col_heading level0 col3" id="T_7d0de_level0_col3" style="white-space:nowrap">QF-545H</th>
+<th class="col_heading level0 col4" id="T_7d0de_level0_col4" style="white-space:nowrap">QF-500H</th>
+<th class="col_heading level0 col5" id="T_7d0de_level0_col5" style="white-space:nowrap">QF-378HST</th>
+<th class="col_heading level0 col6" id="T_7d0de_level0_col6" style="white-space:nowrap">QF-549HST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_7d0de_row0_col0" style="white-space:nowrap">D-01</td>
+<td class="data row0 col1" id="T_7d0de_row0_col1">Caudal de operación &gt;= 0</td>
+<td class="data row0 col2" id="T_7d0de_row0_col2" style="white-space:nowrap">cumple</td>
+<td class="data row0 col3" id="T_7d0de_row0_col3" style="white-space:nowrap">cumple</td>
+<td class="data row0 col4" id="T_7d0de_row0_col4" style="white-space:nowrap">cumple</td>
+<td class="data row0 col5" id="T_7d0de_row0_col5" style="white-space:nowrap">cumple</td>
+<td class="data row0 col6" id="T_7d0de_row0_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_7d0de_row1_col0" style="white-space:nowrap">D-02</td>
+<td class="data row1 col1" id="T_7d0de_row1_col1">Frecuencia de operación &gt; 0</td>
+<td class="data row1 col2" id="T_7d0de_row1_col2" style="white-space:nowrap">cumple</td>
+<td class="data row1 col3" id="T_7d0de_row1_col3" style="white-space:nowrap">cumple</td>
+<td class="data row1 col4" id="T_7d0de_row1_col4" style="white-space:nowrap">cumple</td>
+<td class="data row1 col5" id="T_7d0de_row1_col5" style="white-space:nowrap">cumple</td>
+<td class="data row1 col6" id="T_7d0de_row1_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_7d0de_row2_col0" style="white-space:nowrap">D-03</td>
+<td class="data row2 col1" id="T_7d0de_row2_col1">Presión de sensor &gt; 0</td>
+<td class="data row2 col2" id="T_7d0de_row2_col2" style="white-space:nowrap">cumple</td>
+<td class="data row2 col3" id="T_7d0de_row2_col3" style="white-space:nowrap">cumple</td>
+<td class="data row2 col4" id="T_7d0de_row2_col4" style="white-space:nowrap">cumple</td>
+<td class="data row2 col5" id="T_7d0de_row2_col5" style="white-space:nowrap">cumple</td>
+<td class="data row2 col6" id="T_7d0de_row2_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_7d0de_row3_col0" style="white-space:nowrap">D-04</td>
+<td class="data row3 col1" id="T_7d0de_row3_col1">THP &gt;= 0</td>
+<td class="data row3 col2" id="T_7d0de_row3_col2" style="white-space:nowrap">cumple</td>
+<td class="data row3 col3" id="T_7d0de_row3_col3" style="white-space:nowrap">cumple</td>
+<td class="data row3 col4" id="T_7d0de_row3_col4" style="white-space:nowrap">cumple</td>
+<td class="data row3 col5" id="T_7d0de_row3_col5" style="white-space:nowrap">cumple</td>
+<td class="data row3 col6" id="T_7d0de_row3_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_7d0de_row4_col0" style="white-space:nowrap">D-05</td>
+<td class="data row4 col1" id="T_7d0de_row4_col1">°API &gt; -131.5 (denominador de F-01)</td>
+<td class="data row4 col2" id="T_7d0de_row4_col2" style="white-space:nowrap">cumple</td>
+<td class="data row4 col3" id="T_7d0de_row4_col3" style="white-space:nowrap">cumple</td>
+<td class="data row4 col4" id="T_7d0de_row4_col4" style="white-space:nowrap">cumple</td>
+<td class="data row4 col5" id="T_7d0de_row4_col5" style="white-space:nowrap">cumple</td>
+<td class="data row4 col6" id="T_7d0de_row4_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_7d0de_row5_col0" style="white-space:nowrap">D-06</td>
+<td class="data row5 col1" id="T_7d0de_row5_col1">BS&amp;W entre 0 y 1 (la fórmula lo usa como fracción)</td>
+<td class="data row5 col2" id="T_7d0de_row5_col2" style="white-space:nowrap">cumple</td>
+<td class="data row5 col3" id="T_7d0de_row5_col3" style="white-space:nowrap">cumple</td>
+<td class="data row5 col4" id="T_7d0de_row5_col4" style="white-space:nowrap">cumple</td>
+<td class="data row5 col5" id="T_7d0de_row5_col5" style="white-space:nowrap">cumple</td>
+<td class="data row5 col6" id="T_7d0de_row5_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_7d0de_row6_col0" style="white-space:nowrap">D-07</td>
+<td class="data row6 col1" id="T_7d0de_row6_col1">ID del tubing &gt; 0</td>
+<td class="data row6 col2" id="T_7d0de_row6_col2" style="white-space:nowrap">cumple</td>
+<td class="data row6 col3" id="T_7d0de_row6_col3" style="white-space:nowrap">cumple</td>
+<td class="data row6 col4" id="T_7d0de_row6_col4" style="white-space:nowrap">cumple</td>
+<td class="data row6 col5" id="T_7d0de_row6_col5" style="white-space:nowrap">cumple</td>
+<td class="data row6 col6" id="T_7d0de_row6_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_7d0de_row7_col0" style="white-space:nowrap">D-08</td>
+<td class="data row7 col1" id="T_7d0de_row7_col1">Número de etapas &gt; 0</td>
+<td class="data row7 col2" id="T_7d0de_row7_col2" style="white-space:nowrap">cumple</td>
+<td class="data row7 col3" id="T_7d0de_row7_col3" style="white-space:nowrap">cumple</td>
+<td class="data row7 col4" id="T_7d0de_row7_col4" style="white-space:nowrap">cumple</td>
+<td class="data row7 col5" id="T_7d0de_row7_col5" style="white-space:nowrap">cumple</td>
+<td class="data row7 col6" id="T_7d0de_row7_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_7d0de_row8_col0" style="white-space:nowrap">D-09</td>
+<td class="data row8 col1" id="T_7d0de_row8_col1">Frecuencia de la curva &gt; 0</td>
+<td class="data row8 col2" id="T_7d0de_row8_col2" style="white-space:nowrap">cumple</td>
+<td class="data row8 col3" id="T_7d0de_row8_col3" style="white-space:nowrap">cumple</td>
+<td class="data row8 col4" id="T_7d0de_row8_col4" style="white-space:nowrap">cumple</td>
+<td class="data row8 col5" id="T_7d0de_row8_col5" style="white-space:nowrap">cumple</td>
+<td class="data row8 col6" id="T_7d0de_row8_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_7d0de_row9_col0" style="white-space:nowrap">G-01</td>
+<td class="data row9 col1" id="T_7d0de_row9_col1">TVD de descarga &lt;= MD de descarga</td>
+<td class="data row9 col2" id="T_7d0de_row9_col2" style="white-space:nowrap">cumple</td>
+<td class="data row9 col3" id="T_7d0de_row9_col3" style="white-space:nowrap">cumple</td>
+<td class="data row9 col4" id="T_7d0de_row9_col4" style="white-space:nowrap">cumple</td>
+<td class="data row9 col5" id="T_7d0de_row9_col5" style="white-space:nowrap">cumple</td>
+<td class="data row9 col6" id="T_7d0de_row9_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row10 col0" id="T_7d0de_row10_col0" style="white-space:nowrap">G-02</td>
+<td class="data row10 col1" id="T_7d0de_row10_col1">MD descarga &lt; MD intake &lt; MD sensor (orden observado de la sarta)</td>
+<td class="data row10 col2" id="T_7d0de_row10_col2" style="white-space:nowrap">cumple</td>
+<td class="data row10 col3" id="T_7d0de_row10_col3" style="white-space:nowrap">cumple</td>
+<td class="data row10 col4" id="T_7d0de_row10_col4" style="white-space:nowrap">cumple</td>
+<td class="data row10 col5" id="T_7d0de_row10_col5" style="white-space:nowrap">cumple</td>
+<td class="data row10 col6" id="T_7d0de_row10_col6" style="white-space:nowrap">cumple</td>
+</tr>
+<tr>
+<td class="data row11 col0" id="T_7d0de_row11_col0" style="white-space:nowrap">O-01</td>
+<td class="data row11 col1" id="T_7d0de_row11_col1">Presión de sensor frente a presión de burbuja (la cadena de fluido no modela gas libre)</td>
+<td class="data row11 col2" id="T_7d0de_row11_col2">sensor &gt; burbuja</td>
+<td class="data row11 col3" id="T_7d0de_row11_col3">sensor &gt; burbuja</td>
+<td class="data row11 col4" id="T_7d0de_row11_col4">sensor &gt; burbuja</td>
+<td class="data row11 col5" id="T_7d0de_row11_col5">sensor &gt; burbuja</td>
+<td class="data row11 col6" id="T_7d0de_row11_col6">sensor &gt; burbuja</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0456e926"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> No hay incumplimientos. La
+observación <code>O-01</code> indica que la presión del sensor supera la
+de burbuja en todas las hojas: eso es coherente con una cadena de fluido
+que <strong>no modela gas libre</strong>, pero es una observación, no
+una validación de la hipótesis monofásica. Un valor que
+<strong>sí</strong> hubiera fallado (por ejemplo
+<code>BS&amp;W = 97.55</code>, que es como se leería «%») lo detecta
+<code>D-06</code>; esa detección está cubierta por una prueba automática
+(<code>tests/test_controles_y_mapeo.py</code>).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6c6356e7"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-9-criterios-de-aceptación-y-dictamen-por-hoja">Paso 9 ·
+Criterios de aceptación y dictamen por hoja</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=a047ac63">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span> <span class="o">=</span> <span class="n">Criterios</span><span class="p">(</span><span class="s2">"01_inspeccion_y_calidad_datos"</span><span class="p">)</span>
+<span class="n">sha_final</span> <span class="o">=</span> <span class="n">huellas</span><span class="p">(</span><span class="n">COPIA_TRABAJO</span><span class="p">)[</span><span class="s2">"sha256"</span><span class="p">]</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-1"</span><span class="p">,</span> <span class="s2">"5 hojas visibles y 1 270 fórmulas inventariadas"</span><span class="p">,</span>
+               <span class="nb">len</span><span class="p">(</span><span class="n">inv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"visible"</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s2">"formulas"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1270</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s2">"hojas=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inv</span><span class="p">)</span><span class="si">}</span><span class="s2">, fórmulas=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="s1">'formulas'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-2"</span><span class="p">,</span> <span class="s2">"Rótulos clave hallados en todas las hojas"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">anclas</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"hoja"</span><span class="p">)</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="s2">"sin None en la tabla de anclas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-3"</span><span class="p">,</span> <span class="s2">"Ningún error guardado es precedente de THD ni de Q a producir"</span><span class="p">,</span>
+               <span class="nb">int</span><span class="p">(</span><span class="n">rastreo</span><span class="p">[</span><span class="s2">"errores entre precedentes"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rastreo</span><span class="p">[</span><span class="s2">"cita otra hoja"</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">(),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">errores</span><span class="p">)</span><span class="si">}</span><span class="s2"> errores; 0 en </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rastreo</span><span class="p">)</span><span class="si">}</span><span class="s2"> cadenas rastreadas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-4"</span><span class="p">,</span> <span class="s2">"Cero datos requeridos faltantes"</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">"faltantes"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ninguna"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">completitud</span><span class="p">),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">requeridas</span><span class="p">)</span><span class="si">}</span><span class="s2"> variables x </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hojas</span><span class="p">)</span><span class="si">}</span><span class="s2"> hojas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-5"</span><span class="p">,</span> <span class="s2">"Geometría del survey correcta en las 5 hojas"</span><span class="p">,</span>
+               <span class="nb">bool</span><span class="p">(</span><span class="n">geom</span><span class="p">[[</span><span class="s2">"md_estrictamente_creciente"</span><span class="p">,</span> <span class="s2">"vertical_menor_o_igual_que_md"</span><span class="p">,</span> <span class="s2">"inclinacion_en_0_180"</span><span class="p">,</span> <span class="s2">"azimut_en_0_360"</span><span class="p">]]</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+               <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">geom</span><span class="p">[</span><span class="s2">"md_duplicadas"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">geom</span><span class="p">[</span><span class="s2">"valores_nulos"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"5/5 hojas"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-6"</span><span class="p">,</span> <span class="s2">"Survey = curvatura mínima dentro de 0.01"</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">mcm</span><span class="p">[</span><span class="s2">"coincide_dentro_del_redondeo"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="sa">f</span><span class="s2">"máx ΔTVD=</span><span class="si">{</span><span class="n">mcm</span><span class="p">[</span><span class="s1">'max_dif_tvd_ft'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ft; máx Δdogleg=</span><span class="si">{</span><span class="n">mcm</span><span class="p">[</span><span class="s1">'max_dif_dogleg_deg_100ft'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-7"</span><span class="p">,</span> <span class="s2">"TVD de equipos = interpolación del survey"</span><span class="p">,</span>
+               <span class="nb">bool</span><span class="p">(</span><span class="n">tvd_equipos</span><span class="p">[</span><span class="s2">"dentro_del_survey"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">())</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">((</span><span class="n">tvd_equipos</span><span class="p">[</span><span class="s2">"dif_ft"</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">tvd_equipos</span><span class="p">[</span><span class="s2">"tvd_menor_o_igual_que_md"</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tvd_equipos</span><span class="p">)</span><span class="si">}</span><span class="s2"> comparaciones"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-8"</span><span class="p">,</span> <span class="s2">"Ningún control de dominio incumplido"</span><span class="p">,</span> <span class="n">no_cumple</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span><span class="si">}</span><span class="s2"> controles"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C01-9"</span><span class="p">,</span> <span class="s2">"El libro no cambió durante el cuaderno"</span><span class="p">,</span> <span class="n">sha_inicial</span> <span class="o">==</span> <span class="n">sha_final</span><span class="p">,</span> <span class="n">sha_final</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"…"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">crit</span><span class="o">.</span><span class="n">tabla</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_fecc9">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_fecc9_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_fecc9_level0_col1" style="white-space:nowrap">criterio</th>
+<th class="col_heading level0 col2" id="T_fecc9_level0_col2" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col3" id="T_fecc9_level0_col3" style="white-space:nowrap">evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_fecc9_row0_col0" style="white-space:nowrap">C01-1</td>
+<td class="data row0 col1" id="T_fecc9_row0_col1">5 hojas visibles y 1 270 fórmulas inventariadas</td>
+<td class="data row0 col2" id="T_fecc9_row0_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row0 col3" id="T_fecc9_row0_col3">hojas=5, fórmulas=1270</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_fecc9_row1_col0" style="white-space:nowrap">C01-2</td>
+<td class="data row1 col1" id="T_fecc9_row1_col1">Rótulos clave hallados en todas las hojas</td>
+<td class="data row1 col2" id="T_fecc9_row1_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row1 col3" id="T_fecc9_row1_col3">sin None en la tabla de anclas</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_fecc9_row2_col0" style="white-space:nowrap">C01-3</td>
+<td class="data row2 col1" id="T_fecc9_row2_col1">Ningún error guardado es precedente de THD ni de Q a producir</td>
+<td class="data row2 col2" id="T_fecc9_row2_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row2 col3" id="T_fecc9_row2_col3">13 errores; 0 en 10 cadenas rastreadas</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_fecc9_row3_col0" style="white-space:nowrap">C01-4</td>
+<td class="data row3 col1" id="T_fecc9_row3_col1">Cero datos requeridos faltantes</td>
+<td class="data row3 col2" id="T_fecc9_row3_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row3 col3" id="T_fecc9_row3_col3">19 variables x 5 hojas</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_fecc9_row4_col0" style="white-space:nowrap">C01-5</td>
+<td class="data row4 col1" id="T_fecc9_row4_col1">Geometría del survey correcta en las 5 hojas</td>
+<td class="data row4 col2" id="T_fecc9_row4_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row4 col3" id="T_fecc9_row4_col3">5/5 hojas</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_fecc9_row5_col0" style="white-space:nowrap">C01-6</td>
+<td class="data row5 col1" id="T_fecc9_row5_col1">Survey = curvatura mínima dentro de 0.01</td>
+<td class="data row5 col2" id="T_fecc9_row5_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row5 col3" id="T_fecc9_row5_col3">máx ΔTVD=0.0050 ft; máx Δdogleg=0.0050</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_fecc9_row6_col0" style="white-space:nowrap">C01-7</td>
+<td class="data row6 col1" id="T_fecc9_row6_col1">TVD de equipos = interpolación del survey</td>
+<td class="data row6 col2" id="T_fecc9_row6_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row6 col3" id="T_fecc9_row6_col3">15 comparaciones</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_fecc9_row7_col0" style="white-space:nowrap">C01-8</td>
+<td class="data row7 col1" id="T_fecc9_row7_col1">Ningún control de dominio incumplido</td>
+<td class="data row7 col2" id="T_fecc9_row7_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row7 col3" id="T_fecc9_row7_col3">60 controles</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_fecc9_row8_col0" style="white-space:nowrap">C01-9</td>
+<td class="data row8 col1" id="T_fecc9_row8_col1">El libro no cambió durante el cuaderno</td>
+<td class="data row8 col2" id="T_fecc9_row8_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row8 col3" id="T_fecc9_row8_col3">ccb5a738baea1332…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=f6ff777f">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span><span class="o">.</span><span class="n">exigir</span><span class="p">()</span>
+<span class="n">dictamen</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hojas</span><span class="p">:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">geom</span><span class="p">[</span><span class="n">geom</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mcm</span><span class="p">[</span><span class="n">mcm</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">tvd_equipos</span><span class="p">[</span><span class="n">tvd_equipos</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">]</span>
+    <span class="n">en_cadena</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rastreo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rastreo</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">"errores entre precedentes"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">sin_incumplimientos</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">pl</span><span class="p">[(</span><span class="n">pl</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">)][</span><span class="s2">"resultado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"NO CUMPLE"</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+    <span class="n">apta</span> <span class="o">=</span> <span class="p">(</span><span class="n">en_cadena</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"coincide_dentro_del_redondeo"</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">"dif_ft"</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+            <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"md_estrictamente_creciente"</span><span class="p">])</span> <span class="ow">and</span> <span class="n">sin_incumplimientos</span><span class="p">)</span>
+    <span class="n">dictamen</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">"hoja"</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span> <span class="s2">"pozo"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"pozo"</span><span class="p">],</span>
+        <span class="s2">"errores guardados"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">errores</span><span class="p">[</span><span class="s2">"hoja"</span><span class="p">]</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="s2">"errores en la cadena"</span><span class="p">:</span> <span class="n">en_cadena</span><span class="p">,</span>
+        <span class="s2">"survey = curvatura mínima"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"coincide_dentro_del_redondeo"</span><span class="p">]),</span>
+        <span class="s2">"TVD de equipos = survey"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">"dif_ft"</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()),</span>
+        <span class="s2">"dictamen"</span><span class="p">:</span> <span class="s2">"Apta para reproducir el cálculo de la hoja; no para decidir"</span> <span class="k">if</span> <span class="n">apta</span> <span class="k">else</span> <span class="s2">"NO APTA: ver controles"</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictamen</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_98dfe">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_98dfe_level0_col0" style="white-space:nowrap">hoja</th>
+<th class="col_heading level0 col1" id="T_98dfe_level0_col1" style="white-space:nowrap">pozo</th>
+<th class="col_heading level0 col2" id="T_98dfe_level0_col2">errores guardados</th>
+<th class="col_heading level0 col3" id="T_98dfe_level0_col3">errores en la cadena</th>
+<th class="col_heading level0 col4" id="T_98dfe_level0_col4">survey = curvatura mínima</th>
+<th class="col_heading level0 col5" id="T_98dfe_level0_col5">TVD de equipos = survey</th>
+<th class="col_heading level0 col6" id="T_98dfe_level0_col6" style="white-space:nowrap">dictamen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_98dfe_row0_col0" style="white-space:nowrap">QF-554H</td>
+<td class="data row0 col1" id="T_98dfe_row0_col1" style="white-space:nowrap">QF-084</td>
+<td class="data row0 col2" id="T_98dfe_row0_col2" style="white-space:nowrap">0</td>
+<td class="data row0 col3" id="T_98dfe_row0_col3" style="white-space:nowrap">0</td>
+<td class="data row0 col4" id="T_98dfe_row0_col4" style="white-space:nowrap">sí</td>
+<td class="data row0 col5" id="T_98dfe_row0_col5" style="white-space:nowrap">sí</td>
+<td class="data row0 col6" id="T_98dfe_row0_col6">Apta para reproducir el cálculo de la hoja; no para decidir</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_98dfe_row1_col0" style="white-space:nowrap">QF-545H</td>
+<td class="data row1 col1" id="T_98dfe_row1_col1" style="white-space:nowrap">QF-301</td>
+<td class="data row1 col2" id="T_98dfe_row1_col2" style="white-space:nowrap">0</td>
+<td class="data row1 col3" id="T_98dfe_row1_col3" style="white-space:nowrap">0</td>
+<td class="data row1 col4" id="T_98dfe_row1_col4" style="white-space:nowrap">sí</td>
+<td class="data row1 col5" id="T_98dfe_row1_col5" style="white-space:nowrap">sí</td>
+<td class="data row1 col6" id="T_98dfe_row1_col6">Apta para reproducir el cálculo de la hoja; no para decidir</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_98dfe_row2_col0" style="white-space:nowrap">QF-500H</td>
+<td class="data row2 col1" id="T_98dfe_row2_col1" style="white-space:nowrap">QF-147</td>
+<td class="data row2 col2" id="T_98dfe_row2_col2" style="white-space:nowrap">0</td>
+<td class="data row2 col3" id="T_98dfe_row2_col3" style="white-space:nowrap">0</td>
+<td class="data row2 col4" id="T_98dfe_row2_col4" style="white-space:nowrap">sí</td>
+<td class="data row2 col5" id="T_98dfe_row2_col5" style="white-space:nowrap">sí</td>
+<td class="data row2 col6" id="T_98dfe_row2_col6">Apta para reproducir el cálculo de la hoja; no para decidir</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_98dfe_row3_col0" style="white-space:nowrap">QF-378HST</td>
+<td class="data row3 col1" id="T_98dfe_row3_col1" style="white-space:nowrap">QF-005</td>
+<td class="data row3 col2" id="T_98dfe_row3_col2" style="white-space:nowrap">0</td>
+<td class="data row3 col3" id="T_98dfe_row3_col3" style="white-space:nowrap">0</td>
+<td class="data row3 col4" id="T_98dfe_row3_col4" style="white-space:nowrap">sí</td>
+<td class="data row3 col5" id="T_98dfe_row3_col5" style="white-space:nowrap">sí</td>
+<td class="data row3 col6" id="T_98dfe_row3_col6">Apta para reproducir el cálculo de la hoja; no para decidir</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_98dfe_row4_col0" style="white-space:nowrap">QF-549HST</td>
+<td class="data row4 col1" id="T_98dfe_row4_col1" style="white-space:nowrap">QF-306</td>
+<td class="data row4 col2" id="T_98dfe_row4_col2" style="white-space:nowrap">13</td>
+<td class="data row4 col3" id="T_98dfe_row4_col3" style="white-space:nowrap">0</td>
+<td class="data row4 col4" id="T_98dfe_row4_col4" style="white-space:nowrap">sí</td>
+<td class="data row4 col5" id="T_98dfe_row4_col5" style="white-space:nowrap">sí</td>
+<td class="data row4 col6" id="T_98dfe_row4_col6">Apta para reproducir el cálculo de la hoja; no para decidir</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f7abc1b5"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="conclusión-técnica">Conclusión técnica</h2>
+<ul>
+<li><strong>Resultado:</strong> el libro es estructuralmente sano para
+el propósito del expediente. Las cinco hojas son cálculos autónomos; los
+13 <code>#DIV/0!</code> están fuera de la cadena; el survey es coherente
+con curvatura mínima; las TVD de los equipos provienen del survey.</li>
+<li><strong>Defectos reales que sí afectan el uso:</strong> (1) las
+fechas <code>=TODAY()</code> impiden análisis temporal; (2) las
+posiciones cambian entre hojas, así que <strong>toda lectura debe ser
+por rótulo</strong>; (3) los 13 errores deben comunicarse a quien
+mantiene el libro.</li>
+<li><strong>Lo que este cuaderno no puede decir:</strong> que los
+valores medidos (presiones, caudales) sean correctos; solo que están
+completos, en dominio y que las profundidades son internamente
+consistentes.</li>
+<li><strong>Dictamen:</strong> «apta para reproducir el cálculo de la
+hoja». La frase <strong>no</strong> equivale a «apta para decidir»: las
+reservas físicas (BS&amp;W, signo de PIP, constantes) se tratan en los
+cuadernos 02 a 05.</li>
+<li><strong>Siguiente paso:</strong> cuaderno 02, trazabilidad de las
+fórmulas.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=57efd566"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="relación-con-el-sistema-de-reglas">Relación con el sistema de
+reglas</h2>
+<p>Dictamina qué defectos contaminan el cálculo y cuáles no. No crea
+umbrales. El motor usa esa distinción cuando un dato falta o cuando
+BS&amp;W sale de 0 a 1: advierte, no inventa el valor.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=d57d5c7e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="limitaciones">Limitaciones</h2>
+<ul>
+<li>La calidad se mide con controles <strong>propios</strong>
+(tolerancias, plausibilidad física, curvatura mínima): son criterios del
+expediente, no normas.</li>
+<li>La curvatura mínima es un control <strong>independiente</strong> de
+las columnas del survey, no un reemplazo: una desviación indica
+inconsistencia, no cuál de los dos es el correcto.</li>
+<li>Una hoja sin hallazgos significa «sin hallazgos con estos
+controles».</li>
+<li>El rastreo de precedentes resuelve referencias A1 de la misma hoja;
+una referencia dinámica (INDIRECT, OFFSET) no se seguiría (no hay en la
+cadena).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=be5711ca"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="referencias">Referencias</h2>
+<p>Solo se listan las fuentes realmente consultadas en este
+cuaderno.</p>
+<ol type="1">
+<li><strong>Libro de trabajo:</strong>
+<code>entrada/BES_jun.xlsx</code>, copia byte a byte de «Copia de FINAL
+BES-jun.xlsx» (SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>).
+Cinco hojas: QF-554H, QF-545H, QF-500H, QF-378HST y QF-549HST.</li>
+<li><strong>Software:</strong> Python 3.14.8, pandas 3.0.6, numpy 2.5.4,
+matplotlib 3.11.2, openpyxl 3.1.5 (versiones tomadas de la ficha de
+entorno de cada ejecución).</li>
+<li><strong>Métodos de uso general sin cita verificada en las fuentes
+del expediente:</strong> curvatura mínima (control de survey) y relación
+hidrostática P = ρ·g·h. Se aplican como están escritos en la hoja o se
+describen como método estándar, sin atribuirlos a un texto
+concreto.</li>
+</ol>
+</div>
+</div>
+</div>
+</div></body></html>

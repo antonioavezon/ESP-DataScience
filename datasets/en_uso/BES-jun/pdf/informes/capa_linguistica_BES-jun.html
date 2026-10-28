@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='utf-8'><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-right { content: "BES-jun · validación pendiente"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", serif; font-size: 11pt; }
+body { margin: 0; line-height: 1.4; text-align: justify; color: #111; }
+h1, h2, h3 { font-family: "Liberation Sans", sans-serif; text-align: left; break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; text-align: left; }
+th, td { border: 1px solid #444; padding: 0.2em 0.35em; vertical-align: top; }
+th { background: #e8edf2; }
+img { max-width: 100%; height: auto; }
+code { font-family: "Liberation Mono", monospace; font-size: 0.9em; }
+pre { white-space: pre-wrap; text-align: left; }
+</style></head><body><h1 id="capa-de-lenguaje-futura-bes-jun">Capa de lenguaje futura ·
+BES-jun</h1>
+<p>No hay integración con un proveedor. No hay una llamada simulada que
+parezca un servicio. Esta nota fija el contrato para cuando esa capa se
+construya. Mientras tanto, la aplicación muestra los mensajes que ya
+trae el JSON del motor.</p>
+<h2 id="qué-puede-recibir">Qué puede recibir</h2>
+<p>Solo el resultado estructurado de <code>evaluacion.motor</code>, más
+la identificación provisional del pozo:</p>
+<ul>
+<li>hoja, cluster y rótulo de pozo, con el estado de identidad;</li>
+<li>variables enviadas y su unidad;</li>
+<li>valores de los modelos (<code>pip_ft</code>,
+<code>thd_total_ft</code>, <code>caudal_a_producir_bfpd</code>) tal como
+vienen;</li>
+<li>reglas evaluadas, si se activaron, y su evidencia numérica;</li>
+<li>advertencias, incluido el aviso de dominio observado;</li>
+<li>estado de aprobación de cada regla;</li>
+<li>el texto técnico ya redactado por el motor.</li>
+</ul>
+<h2 id="qué-puede-producir">Qué puede producir</h2>
+<ul>
+<li>Una explicación en lenguaje corriente del JSON.</li>
+<li>Un resumen de las observaciones.</li>
+<li>La razón por la que una condición se marcó, citando el identificador
+de la regla.</li>
+<li>La lista de datos que faltan, si el estado es
+<code>no_evaluable</code>.</li>
+<li>La frase de que la regla no está aprobada, cuando
+<code>aprobada_para_uso_operacional</code> es falso.</li>
+</ul>
+<h2 id="qué-no-puede-hacer">Qué no puede hacer</h2>
+<ul>
+<li>Inventar un dato que no esté en el JSON.</li>
+<li>Cambiar un número.</li>
+<li>Inventar un límite.</li>
+<li>Cambiar una ecuación.</li>
+<li>Presentar una regla <code>pendiente_validacion</code> como
+aprobada.</li>
+<li>Indicar que se suba o se baje la frecuencia.</li>
+<li>Decir que el pozo está seguro.</li>
+<li>Omitir una advertencia o un dato faltante.</li>
+<li>Concluir algo sobre potencia, motor, cable o yacimiento: esos
+modelos no están en este expediente.</li>
+</ul>
+<h2 id="ejemplo-con-el-punto-registrado-de-qf-084">Ejemplo con el punto
+registrado de QF-084</h2>
+<p>El motor devuelve RC-BES-03, estado de regla
+<code>pendiente_validacion</code>, y
+<code>recomendacion_operacional_autorizada</code> en falso. Un texto
+aceptable sería:</p>
+<blockquote>
+<p>En la hoja QF-554H, el caudal registrado queda entre el mínimo y el
+máximo escritos en esa hoja, después de llevarlos a la frecuencia de
+operación. La regla RC-BES-03 no está aprobada. Esto no autoriza a
+operar el pozo ni a cambiar la frecuencia. La identidad del pozo (QF-084
+frente al nombre de la hoja) sigue sin confirmar.</p>
+</blockquote>
+<p>Un texto inaceptable sería: «El pozo está en rango. Baje la
+frecuencia para alejarse del máximo.»</p>
+<h2 id="ejemplo-si-faltara-el-caudal">Ejemplo si faltara el caudal</h2>
+<p>El estado sería <code>no_evaluable</code>. Un texto aceptable nombra
+el dato que falta y no elige RC-BES-01 ni RC-BES-03.</p>
+<h2 id="mensajes-sin-modelo-de-lenguaje">Mensajes sin modelo de
+lenguaje</h2>
+<p>Cada regla del JSON trae <code>mensaje</code> y
+<code>tipo_mensaje</code> (<code>observacion</code>,
+<code>advertencia</code>, <code>informacion</code> o
+<code>condicion_no_evaluable</code>). La aplicación puede mostrarlos tal
+cual.</p>
+</body></html>

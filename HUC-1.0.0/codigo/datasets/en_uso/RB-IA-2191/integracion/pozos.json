@@ -1,0 +1,19 @@
+{
+  "dataset_id": "RB-IA-2191",
+  "pozos": [
+    {
+      "dataset_id": "RB-IA-2191",
+      "hoja": "Hoja1",
+      "pozo_rotulo": "RB-IA-2191",
+      "estado_identidad": "el libro no trae un código de pozo distinto de su nombre de expediente",
+      "bomba_referencia": null,
+      "fecha_en_la_hoja": "2020-05-02",
+      "condiciones_registradas": {
+        "bfpd": 5180.0,
+        "bwpd": 5099.4,
+        "bsw": 0.972,
+        "frecuencia_hz": 72.3
+      }
+    }
+  ]
+}

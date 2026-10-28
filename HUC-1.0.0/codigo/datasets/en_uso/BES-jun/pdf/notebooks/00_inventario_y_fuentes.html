@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Cuaderno 00 · Control de integridad e inventario de insumos y fuentes</title><style>
+@page { size: Letter; margin: 0.8in 0.75in 0.85in 0.75in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 00 · Control de integridad e inventario de insumos y fuentes"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+@page ancho { size: Letter landscape; margin: 0.65in 0.6in 0.7in 0.6in;
+  @bottom-center { content: counter(page) " / " counter(pages); font: 8pt "Liberation Sans", sans-serif; color: #555; }
+  @top-left { content: "Cuaderno 00 · Control de integridad e inventario de insumos y fuentes"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; }
+  @top-right { content: "BES-jun · Listo para revisión"; font: 7.5pt "Liberation Sans", sans-serif; color: #777; } }
+html { font-family: "Liberation Serif", "DejaVu Serif", serif; font-size: 10.5pt; }
+body { margin: 0; line-height: 1.38; color: #111; hyphens: manual; }
+.cuaderno { text-align: justify; }
+h1, h2, h3, h4 { font-family: "Liberation Sans", "DejaVu Sans", sans-serif; text-align: left; break-after: avoid; page-break-after: avoid; line-height: 1.2; }
+h1 { font-size: 19pt; margin: 0 0 0.5em 0; border-bottom: 2px solid #333; padding-bottom: 0.2em; }
+h2 { font-size: 13.5pt; margin: 1.2em 0 0.4em 0; border-bottom: 1px solid #aaa; padding-bottom: 0.1em; }
+h3 { font-size: 11.5pt; margin: 1em 0 0.3em 0; }
+p { margin: 0.45em 0; orphans: 3; widows: 3; }
+li { margin: 0.15em 0; }
+blockquote { margin: 0.6em 0; padding: 0.3em 0.8em; border-left: 3px solid #999; background: #f6f6f6; text-align: left; }
+.portada { break-after: page; page-break-after: always; }
+.portada h1 { font-size: 21pt; }
+.portada { line-height: 1.3; }
+.portada p, .portada li { font-size: 9.8pt; margin: 0.3em 0; }
+.portada h2 { font-size: 12pt; margin: 0.8em 0 0.3em 0; }
+.portada h1 { margin-bottom: 0.3em; }
+.prompt { display: none; }
+.input, .output_wrapper { margin: 0.5em 0; }
+.input_area { text-align: left; border: 1px solid #c8c8c8; border-left: 4px solid #4c78a8; background: #f7f9fb; padding: 0.3em 0.5em; position: relative; }
+.input_area::before { content: "Código"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #4c78a8; letter-spacing: 0.06em; margin-bottom: 0.2em; }
+.output_area { text-align: left; border-left: 4px solid #8a8a8a; padding: 0.2em 0 0.2em 0.5em; margin-top: 0.3em; }
+.output_area::before { content: "Salida"; display: block; font: bold 7pt "Liberation Sans", sans-serif; color: #666; letter-spacing: 0.06em; margin-bottom: 0.15em; }
+pre { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 7.4pt; line-height: 1.28; margin: 0;
+      white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+code { font-family: "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 0.88em; }
+table.tabla, .output_html table, table { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 7.6pt; line-height: 1.22; text-align: left; margin: 0.3em 0 0.5em 0; }
+th, td { border: 1px solid #777; padding: 0.15em 0.3em; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+th { background: #e8edf2; font-family: "Liberation Sans", sans-serif; font-weight: bold; overflow-wrap: break-word; word-break: normal; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.text_cell_render table { font-size: 8.6pt; }
+img { max-width: 100%; height: auto; display: block; margin: 0.4em auto; break-inside: avoid; page-break-inside: avoid; }
+.ancho { page: ancho; }
+.ancho table { font-size: 8pt; }
+math { font-size: 1.05em; }
+math[display="block"] { margin: 0.5em 0; break-inside: avoid; }
+.output_stderr pre { color: #8a1c1c; }
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f8f8f8; }
+.highlight .c { color: #3D7B7B; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #9C6500 } /* Comment.Preproc */
+.highlight .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #E40000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #008400 } /* Generic.Inserted */
+.highlight .go { color: #717171 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #687822 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #00F; font-weight: bold } /* Name.Class */
+.highlight .no { color: #800 } /* Name.Constant */
+.highlight .nd { color: #A2F } /* Name.Decorator */
+.highlight .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00F } /* Name.Function */
+.highlight .nl { color: #767600 } /* Name.Label */
+.highlight .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666 } /* Literal.Number.Float */
+.highlight .mh { color: #666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #A45A77 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #00F } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666 } /* Literal.Number.Integer.Long */
+</style></head><body><div class="cuaderno"><div class="cell border-box-sizing text_cell rendered" id="cell-id=695b9119"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html portada">
+<h1 id="cuaderno-00-control-de-integridad-e-inventario-de-insumos-y-fuentes">Cuaderno
+00 · Control de integridad e inventario de insumos y fuentes</h1>
+<p><strong>Expediente:</strong> BES-jun · <strong>Cuaderno:</strong> 1
+de 7 · <strong>Estado del expediente:</strong> Listo para revisión (no
+Completo)</p>
+<h2 id="introducción-y-contexto-el-problema">1. Introducción y contexto
+(el problema)</h2>
+<p>Todos los cálculos del expediente parten de un archivo Excel de
+trabajo. Si ese archivo difiere del original recibido (por una edición
+manual, un guardado desde otra versión del programa, una copia
+equivocada o una corrupción), todo resultado posterior puede ser
+correcto respecto del archivo equivocado y nadie lo notaría. Este libro
+además contiene <code>=TODAY()</code> y fórmulas que se recalculan al
+abrirlo: abrirlo y guardarlo ya lo cambiaría.</p>
+<h2 id="justificación-y-necesidad">2. Justificación y necesidad</h2>
+<p>Demostrar, antes de calcular nada: (a) que la copia de trabajo es
+idéntica byte a byte al original; (b) qué contiene el archivo (hojas,
+fórmulas, macros, enlaces externos, gráficos); (c) qué fuentes técnicas
+existen, para qué se usan y que siguen íntegras. Sin esa evidencia, un
+número del informe no tiene procedencia comprobable.</p>
+<h2 id="objetivo-general">3. Objetivo general</h2>
+<p>Producir una verificación reproducible de identidad e inventario de
+insumos, con criterios de aceptación ejecutables que <strong>detienen la
+ejecución</strong> si alguno falla.</p>
+<h2 id="dominio-y-alcance">4. Dominio y alcance</h2>
+<p><strong>Incluye:</strong> huellas SHA-256 y MD5 de tres rutas del
+mismo libro; control negativo (prueba de que la comparación puede
+fallar); estructura del contenedor <code>.xlsx</code>; inventario de
+fuentes técnicas con su papel; verificación de que los otros dos
+datasets no se abrieron.</p>
+<p><strong>No incluye:</strong> validar el contenido del libro (cuaderno
+01); abrir o leer filas de <code>RB-1521</code> y
+<code>RB-IA-2191</code>; ejecutar macros del XLSM; modificar cualquier
+original.</p>
+<h2 id="fuentes-y-datos-entradas-y-salidas">5. Fuentes y datos (entradas
+y salidas)</h2>
+<p><strong>Entradas:</strong> <code>entrada/BES_jun.xlsx</code>,
+<code>fuentes/originales/</code>, la copia de la raíz,
+<code>docs/inventario_fuentes.md</code> y <code>dataset.md</code>
+(huellas registradas). <strong>Salidas:</strong> tablas de huellas,
+veredicto de identidad, inventario del contenedor, inventario de fuentes
+y tabla de criterios.</p>
+<h2 id="objetivos-específicos-y-criterios-de-aceptación">6. Objetivos
+específicos y criterios de aceptación</h2>
+<p><strong>C00-1</strong> las tres copias coinciden en tamaño, SHA-256 y
+MD5 · <strong>C00-2</strong> el control negativo detecta un bit alterado
+· <strong>C00-3</strong> el contenedor no tiene macros, enlaces externos
+ni archivos corruptos, y tiene 5 hojas y 30 gráficos ·
+<strong>C00-4</strong> el SHA-256 coincide con el de la ficha
+<code>dataset.md</code> · <strong>C00-5</strong> cada fuente técnica
+coincide con su huella registrada · <strong>C00-6</strong> los datasets
+en espera solo se comprobaron por existencia y tamaño.</p>
+<h2 id="riesgo-si-este-paso-falla">7. Riesgo si este paso falla</h2>
+<p>Resultados de ingeniería sin procedencia: un PIP o un caudal
+calculado sobre un archivo alterado se vería idéntico a uno correcto.
+Una decisión operativa basada en él no sería auditable.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=23be292d"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="preparación-del-entorno">Preparación del entorno</h2>
+<p><strong>Qué hace la celda siguiente.</strong> Localiza el expediente
+subiendo desde el directorio actual hasta la carpeta que contiene
+<code>dataset.md</code> y <code>entrada/</code>; así el cuaderno
+funciona se abra desde donde se abra y no depende de rutas escritas a
+mano. Después fija el directorio de trabajo, habilita el paquete
+<code>src/</code> e imprime la <strong>ficha de
+reproducibilidad</strong>: fecha, versiones de Python y bibliotecas, y
+la huella del insumo. Esa ficha permite saber, meses después, con qué
+entorno se produjo cada resultado.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=c623ee3d">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">localizar_expediente</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="c1"># Sube desde el directorio actual hasta la carpeta que tiene dataset.md y entrada/.</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"dataset.md"</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entrada"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">p</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Ejecute el cuaderno dentro del expediente (donde están dataset.md y entrada/)."</span><span class="p">)</span>
+
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">localizar_expediente</span><span class="p">()</span>                 <span class="c1"># .../datasets/en_uso/BES-jun</span>
+<span class="n">RAIZ_PROYECTO</span> <span class="o">=</span> <span class="n">RAIZ</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>               <span class="c1"># .../HUC</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">RAIZ</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_colwidth"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.8g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.criterios</span><span class="w"> </span><span class="kn">import</span> <span class="n">Criterios</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.entorno</span><span class="w"> </span><span class="kn">import</span> <span class="n">ficha</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">analisis.presentacion</span><span class="w"> </span><span class="kn">import</span> <span class="n">T</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ficha</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"campo"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_b19b3">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_b19b3_level0_col0" style="white-space:nowrap">campo</th>
+<th class="col_heading level0 col1" id="T_b19b3_level0_col1" style="white-space:nowrap">valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_b19b3_row0_col0">fecha_ejecucion</td>
+<td class="data row0 col1" id="T_b19b3_row0_col1">2026-10-20T14:25:28-03:00</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_b19b3_row1_col0" style="white-space:nowrap">python</td>
+<td class="data row1 col1" id="T_b19b3_row1_col1" style="white-space:nowrap">3.14.8</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_b19b3_row2_col0" style="white-space:nowrap">sistema</td>
+<td class="data row2 col1" id="T_b19b3_row2_col1">Linux 7.2.10-100.fc43.x86_64</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_b19b3_row3_col0" style="white-space:nowrap">pandas</td>
+<td class="data row3 col1" id="T_b19b3_row3_col1" style="white-space:nowrap">3.0.6</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_b19b3_row4_col0" style="white-space:nowrap">numpy</td>
+<td class="data row4 col1" id="T_b19b3_row4_col1" style="white-space:nowrap">2.5.4</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_b19b3_row5_col0" style="white-space:nowrap">matplotlib</td>
+<td class="data row5 col1" id="T_b19b3_row5_col1" style="white-space:nowrap">3.11.2</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_b19b3_row6_col0" style="white-space:nowrap">openpyxl</td>
+<td class="data row6 col1" id="T_b19b3_row6_col1" style="white-space:nowrap">3.1.5</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_b19b3_row7_col0" style="white-space:nowrap">expediente</td>
+<td class="data row7 col1" id="T_b19b3_row7_col1" style="white-space:nowrap">BES-jun</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_b19b3_row8_col0" style="white-space:nowrap">insumo</td>
+<td class="data row8 col1" id="T_b19b3_row8_col1">entrada/BES_jun.xlsx</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_b19b3_row9_col0">insumo_sha256</td>
+<td class="data row9 col1" id="T_b19b3_row9_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e992c67c"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-1-qué-copias-existen-y-dónde">Paso 1 · Qué copias existen y
+dónde</h2>
+<p>El libro existe en tres lugares: la <strong>copia de trabajo</strong>
+(la que leen el código y los cuadernos), el <strong>original
+protegido</strong> en <code>fuentes/originales/</code> (archivo de solo
+lectura) y el <strong>archivo recibido en la raíz</strong> del proyecto.
+La política del expediente es que solo se escribe sobre la copia de
+trabajo, y que el código ni siquiera la guarda (<code>openpyxl</code>
+abre y lee). El control consiste en comprobar que los tres son el mismo
+archivo.</p>
+<p>Se calculan <strong>dos huellas distintas</strong> (SHA-256 y MD5)
+más el tamaño en bytes. Usar dos algoritmos no es redundancia estética:
+MD5 está registrado en documentos anteriores del proyecto y SHA-256 es
+el que se considera confiable frente a alteraciones; que ambos coincidan
+entre copias refuerza la lectura. Una coincidencia accidental de SHA-256
+entre archivos distintos es prácticamente imposible por azar.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=abdca8dc">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.integridad</span><span class="w"> </span><span class="kn">import</span> <span class="n">comparar</span>
+
+<span class="n">NOMBRE_ORIGINAL</span> <span class="o">=</span> <span class="s2">"Copia de FINAL BES-jun.xlsx"</span>
+<span class="n">rutas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"copia de trabajo (entrada/)"</span><span class="p">:</span>    <span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"entrada"</span> <span class="o">/</span> <span class="s2">"BES_jun.xlsx"</span><span class="p">,</span>
+    <span class="s2">"original (fuentes/originales/)"</span><span class="p">:</span> <span class="n">RAIZ_PROYECTO</span> <span class="o">/</span> <span class="s2">"fuentes"</span> <span class="o">/</span> <span class="s2">"originales"</span> <span class="o">/</span> <span class="n">NOMBRE_ORIGINAL</span><span class="p">,</span>
+    <span class="s2">"recibido (raíz del proyecto)"</span><span class="p">:</span>   <span class="n">RAIZ_PROYECTO</span> <span class="o">/</span> <span class="n">NOMBRE_ORIGINAL</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">veredicto</span> <span class="o">=</span> <span class="n">comparar</span><span class="p">(</span><span class="n">rutas</span><span class="p">)</span>          <span class="c1"># lee en bloques; no modifica nada</span>
+<span class="n">huellas_tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">veredicto</span><span class="p">[</span><span class="s2">"filas"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Copias presentes:"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">huellas_tabla</span><span class="p">[</span><span class="s2">"presente"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"de"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rutas</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Coinciden en bytes, SHA-256 y MD5:"</span><span class="p">,</span> <span class="s2">"SÍ"</span> <span class="k">if</span> <span class="n">veredicto</span><span class="p">[</span><span class="s2">"coincide"</span><span class="p">]</span> <span class="k">else</span> <span class="s2">"NO"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">huellas_tabla</span><span class="p">[[</span><span class="s2">"copia"</span><span class="p">,</span> <span class="s2">"bytes"</span><span class="p">,</span> <span class="s2">"sha256"</span><span class="p">,</span> <span class="s2">"md5"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Copias presentes: 3 de 3
+Coinciden en bytes, SHA-256 y MD5: SÍ
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_57962">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_57962_level0_col0" style="white-space:nowrap">copia</th>
+<th class="col_heading level0 col1" id="T_57962_level0_col1" style="white-space:nowrap">bytes</th>
+<th class="col_heading level0 col2" id="T_57962_level0_col2" style="white-space:nowrap">sha256</th>
+<th class="col_heading level0 col3" id="T_57962_level0_col3" style="white-space:nowrap">md5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_57962_row0_col0">copia de trabajo (entrada/)</td>
+<td class="data row0 col1" id="T_57962_row0_col1" style="white-space:nowrap">329308</td>
+<td class="data row0 col2" id="T_57962_row0_col2">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+<td class="data row0 col3" id="T_57962_row0_col3">ba89f317f505f321c496e44ab5046104</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_57962_row1_col0">original (fuentes/originales/)</td>
+<td class="data row1 col1" id="T_57962_row1_col1" style="white-space:nowrap">329308</td>
+<td class="data row1 col2" id="T_57962_row1_col2">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+<td class="data row1 col3" id="T_57962_row1_col3">ba89f317f505f321c496e44ab5046104</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_57962_row2_col0">recibido (raíz del proyecto)</td>
+<td class="data row2 col1" id="T_57962_row2_col1" style="white-space:nowrap">329308</td>
+<td class="data row2 col2" id="T_57962_row2_col2">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+<td class="data row2 col3" id="T_57962_row2_col3">ba89f317f505f321c496e44ab5046104</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=f6bd4a24"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Cómo leer el resultado.</strong> Las tres filas deben mostrar
+el mismo tamaño y las mismas dos huellas. <code>comparar</code> está
+escrita para ser conservadora: <strong>una ruta ausente no cuenta como
+aprobada</strong> (el veredicto sería «NO»), porque un control que no
+pudo ejecutarse no demuestra nada.</p>
+<p><strong>Lo que esto prueba:</strong> que los tres archivos son
+idénticos bit a bit. <strong>Lo que no prueba:</strong> que el contenido
+sea correcto, completo o apto para decidir. Ese es el trabajo de los
+cuadernos 01 a 05.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=6ec4837b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-2-control-negativo-puede-este-control-fallar">Paso 2 ·
+Control negativo: ¿puede este control fallar?</h2>
+<p>Un control de integridad que siempre dice «correcto» es peor que no
+tener control. La práctica de ingeniería de pruebas es demostrar que la
+prueba <strong>detecta</strong> el defecto que debe detectar. Aquí se
+lee el libro en memoria, se invierte <strong>un solo bit</strong> en la
+mitad del archivo y se recalculan las huellas. No se escribe nada en
+disco.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b3265f8e">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.integridad</span><span class="w"> </span><span class="kn">import</span> <span class="n">control_negativo</span>
+
+<span class="n">negativo</span> <span class="o">=</span> <span class="n">control_negativo</span><span class="p">(</span><span class="n">rutas</span><span class="p">[</span><span class="s2">"copia de trabajo (entrada/)"</span><span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">"huella"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"SHA-256"</span><span class="p">,</span> <span class="s2">"MD5"</span><span class="p">],</span>
+        <span class="s2">"original"</span><span class="p">:</span> <span class="p">[</span><span class="n">negativo</span><span class="p">[</span><span class="s2">"sha256_original"</span><span class="p">],</span> <span class="n">negativo</span><span class="p">[</span><span class="s2">"md5_original"</span><span class="p">]],</span>
+        <span class="s2">"con 1 bit alterado"</span><span class="p">:</span> <span class="p">[</span><span class="n">negativo</span><span class="p">[</span><span class="s2">"sha256_alterado"</span><span class="p">],</span> <span class="n">negativo</span><span class="p">[</span><span class="s2">"md5_alterado"</span><span class="p">]],</span>
+    <span class="p">}</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_df8aa">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_df8aa_level0_col0" style="white-space:nowrap">huella</th>
+<th class="col_heading level0 col1" id="T_df8aa_level0_col1" style="white-space:nowrap">original</th>
+<th class="col_heading level0 col2" id="T_df8aa_level0_col2">con 1 bit alterado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_df8aa_row0_col0" style="white-space:nowrap">SHA-256</td>
+<td class="data row0 col1" id="T_df8aa_row0_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+<td class="data row0 col2" id="T_df8aa_row0_col2">220122f31fe0d75a1ffe7f8bbee6a2e320945ba0e4f47cf1a2dfdeccc12a5478</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_df8aa_row1_col0" style="white-space:nowrap">MD5</td>
+<td class="data row1 col1" id="T_df8aa_row1_col1">ba89f317f505f321c496e44ab5046104</td>
+<td class="data row1 col2" id="T_df8aa_row1_col2">4c0f2c328c9525f3bd3223ff2f589327</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=d441ec03">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Posición del byte alterado:"</span><span class="p">,</span> <span class="n">negativo</span><span class="p">[</span><span class="s2">"posicion_alterada"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"El control detecta la alteración de un solo bit:"</span><span class="p">,</span> <span class="s2">"SÍ"</span> <span class="k">if</span> <span class="n">negativo</span><span class="p">[</span><span class="s2">"detecta_el_cambio"</span><span class="p">]</span> <span class="k">else</span> <span class="s2">"NO"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Posición del byte alterado: 164654
+El control detecta la alteración de un solo bit: SÍ
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=0b14c905"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Con un único bit distinto, ambas
+huellas cambian por completo (no «un poco»). Eso es lo esperable de una
+función hash y demuestra que la igualdad observada en el Paso 1 es
+informativa: si la copia hubiera sido tocada, se vería.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=07fcdba2"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-3-qué-contiene-el-archivo-estructura-del-contenedor">Paso 3
+· Qué contiene el archivo (estructura del contenedor)</h2>
+<p>Un <code>.xlsx</code> es un archivo ZIP con XML dentro. Mirarlo sin
+abrir las hojas responde preguntas de <strong>riesgo</strong> que
+condicionan todo el análisis: ¿hay macros que podrían ejecutar código?
+¿hay vínculos a otros libros (valores que dependen de archivos que no
+tenemos)? ¿el ZIP está corrupto? ¿cuántas hojas y gráficos trae? La
+función <code>inventario_zip</code> lo contesta solo leyendo los nombres
+de las entradas y probando su CRC.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=6963f957">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.estructura_libro</span><span class="w"> </span><span class="kn">import</span> <span class="n">inventario_zip</span>
+
+<span class="n">contenedor</span> <span class="o">=</span> <span class="n">inventario_zip</span><span class="p">(</span><span class="n">rutas</span><span class="p">[</span><span class="s2">"copia de trabajo (entrada/)"</span><span class="p">])</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">contenedor</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"propiedad"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_600d9">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_600d9_level0_col0" style="white-space:nowrap">propiedad</th>
+<th class="col_heading level0 col1" id="T_600d9_level0_col1" style="white-space:nowrap">valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_600d9_row0_col0" style="white-space:nowrap">entradas_zip</td>
+<td class="data row0 col1" id="T_600d9_row0_col1" style="white-space:nowrap">182</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_600d9_row1_col0" style="white-space:nowrap">hojas_xml</td>
+<td class="data row1 col1" id="T_600d9_row1_col1" style="white-space:nowrap">5</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_600d9_row2_col0" style="white-space:nowrap">graficos</td>
+<td class="data row2 col1" id="T_600d9_row2_col1" style="white-space:nowrap">30</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_600d9_row3_col0" style="white-space:nowrap">imagenes</td>
+<td class="data row3 col1" id="T_600d9_row3_col1" style="white-space:nowrap">1</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_600d9_row4_col0">tiene_macros_vba</td>
+<td class="data row4 col1" id="T_600d9_row4_col1" style="white-space:nowrap">no</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_600d9_row5_col0">tiene_enlaces_externos</td>
+<td class="data row5 col1" id="T_600d9_row5_col1" style="white-space:nowrap">no</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_600d9_row6_col0">tiene_cadena_de_calculo</td>
+<td class="data row6 col1" id="T_600d9_row6_col1" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_600d9_row7_col0">primer_archivo_corrupto</td>
+<td class="data row7 col1" id="T_600d9_row7_col1" style="white-space:nowrap">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=a3496f22"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Sin macros VBA ni enlaces externos,
+el libro es <strong>autocontenido</strong>: sus valores dependen solo de
+lo que hay dentro, y abrirlo no ejecuta código. Existe
+<code>calcChain.xml</code>: significa que Excel guardó una cadena de
+cálculo, es decir, los valores calculados que leemos son los
+<strong>valores en caché</strong> de la última vez que Excel calculó.
+Esto importa: el cuaderno 02 contrasta el código contra esa caché, y por
+eso ese contraste reproduce la hoja, pero no es una validación
+independiente. Los 30 gráficos son objetos de presentación del libro; no
+se usan como datos.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=273c92de"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-4-fuentes-técnicas-y-su-papel">Paso 4 · Fuentes técnicas y
+su papel</h2>
+<p>Los cálculos del libro se apoyan en fuentes: especificaciones de
+ecuaciones, un libro de fórmulas con macros, un PDF de diseño y un
+artículo. Para cada una se calcula la huella actual y se compara con la
+<strong>registrada</strong> en <code>docs/inventario_fuentes.md</code>
+el día del inventario. Si una fuente cambió, cualquier trazabilidad
+construida sobre ella queda en duda.</p>
+<p>Dos reglas de este paso:</p>
+<ol type="1">
+<li>Los cuatro <code>.docx</code> de ecuaciones se comparan entre sí: si
+son el mismo archivo, cuentan como <strong>una</strong> fuente.</li>
+<li><code>RB-1521</code> y <code>RB-IA-2191</code> son datasets de otro
+expediente (en espera). <strong>No se abren ni se leen sus
+bytes</strong>: solo se consulta <code>os.stat</code> (existencia y
+tamaño) y se compara el tamaño con el registrado. Mezclarlos con BES-jun
+está prohibido.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=3e66ec40">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ingesta.integridad</span><span class="w"> </span><span class="kn">import</span> <span class="n">huellas</span>
+
+<span class="c1"># 1) Huellas registradas el día del inventario (se leen del documento, no se escriben a mano aquí).</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="p">(</span><span class="n">RAIZ_PROYECTO</span> <span class="o">/</span> <span class="s2">"docs"</span> <span class="o">/</span> <span class="s2">"inventario_fuentes.md"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">registrado</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">linea</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\| `([^`]+)` \| (\d+) \| `([0-9a-f]</span><span class="si">{64}</span><span class="s2">)` \| `([0-9a-f]</span><span class="si">{32}</span><span class="s2">)`"</span><span class="p">,</span> <span class="n">linea</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">registrado</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">base_e1</span> <span class="o">=</span> <span class="n">registrado</span><span class="p">[</span><span class="s2">"Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>                      <span class="c1"># la tabla dice "igual a E1" para los duplicados</span>
+    <span class="n">registrado</span><span class="p">[</span><span class="sa">f</span><span class="s2">"Modelo_Sensorless_PIP_ESP_Set_Ecuaciones (</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">).docx"</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_e1</span>
+
+<span class="c1"># 2) Papel de cada fuente en este expediente.</span>
+<span class="n">papel</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Copia de FINAL BES-jun.xlsx"</span><span class="p">:</span> <span class="s2">"Insumo: libro BES-jun"</span><span class="p">,</span>
+    <span class="s2">"Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx"</span><span class="p">:</span> <span class="s2">"E1: especificación algebraica"</span><span class="p">,</span>
+    <span class="s2">"Copia de Copia de Ecuaciones  _.xlsm"</span><span class="p">:</span> <span class="s2">"X1: fórmulas de otro libro; tiene VBA, no se ejecuta"</span><span class="p">,</span>
+    <span class="s2">"paper_sensorless - v2.docx"</span><span class="p">:</span> <span class="s2">"A1: contexto; sus métricas no son resultados de BES-jun"</span><span class="p">,</span>
+    <span class="s2">"004-ESPdesign.pdf"</span><span class="p">:</span> <span class="s2">"R1: contexto de diseño (Hazen-Williams, p. 2)"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">papel</span><span class="p">[</span><span class="sa">f</span><span class="s2">"Modelo_Sensorless_PIP_ESP_Set_Ecuaciones (</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">).docx"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Duplicado exacto de E1"</span>
+
+<span class="n">otro_expediente</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"RB-1521-PY-121120.xls"</span><span class="p">,</span> <span class="s2">"RB-IA-2191-Data.xlsx"</span><span class="p">}</span>
+<span class="n">carpeta</span> <span class="o">=</span> <span class="n">RAIZ_PROYECTO</span> <span class="o">/</span> <span class="s2">"fuentes"</span> <span class="o">/</span> <span class="s2">"originales"</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ruta</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">carpeta</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">ruta</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"trabajo.md"</span><span class="p">:</span>
+        <span class="k">continue</span>                                <span class="c1"># el plan rector se actualiza; no se compara su huella</span>
+    <span class="k">if</span> <span class="n">ruta</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">otro_expediente</span><span class="p">:</span>
+        <span class="n">esperado</span> <span class="o">=</span> <span class="n">registrado</span><span class="p">[</span><span class="n">ruta</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tam</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span>             <span class="c1"># solo existencia y tamaño: sus bytes no se leen</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"archivo"</span><span class="p">:</span> <span class="n">ruta</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"papel"</span><span class="p">:</span> <span class="s2">"Dataset de otro expediente (no se abre)"</span><span class="p">,</span>
+                      <span class="s2">"bytes"</span><span class="p">:</span> <span class="n">tam</span><span class="p">,</span> <span class="s2">"sha256 (16 primeros)"</span><span class="p">:</span> <span class="s2">"no calculado"</span><span class="p">,</span>
+                      <span class="s2">"coincide con lo registrado"</span><span class="p">:</span> <span class="s2">"tamaño sí"</span> <span class="k">if</span> <span class="n">tam</span> <span class="o">==</span> <span class="n">esperado</span> <span class="k">else</span> <span class="s2">"tamaño NO"</span><span class="p">})</span>
+        <span class="k">continue</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">huellas</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">registrado</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ruta</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"archivo"</span><span class="p">:</span> <span class="n">ruta</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"papel"</span><span class="p">:</span> <span class="n">papel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ruta</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"sin papel asignado"</span><span class="p">),</span>
+                  <span class="s2">"bytes"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"bytes"</span><span class="p">],</span> <span class="s2">"sha256 (16 primeros)"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"sha256"</span><span class="p">][:</span><span class="mi">16</span><span class="p">],</span>
+                  <span class="s2">"coincide con lo registrado"</span><span class="p">:</span> <span class="s2">"sí"</span> <span class="k">if</span> <span class="n">reg</span> <span class="ow">and</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">"bytes"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"sha256"</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s2">"md5"</span><span class="p">])</span> <span class="o">==</span> <span class="n">reg</span> <span class="k">else</span> <span class="s2">"NO"</span><span class="p">})</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">),</span> <span class="n">ancha</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla tabla-ancha" id="T_68523">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_68523_level0_col0" style="white-space:nowrap">archivo</th>
+<th class="col_heading level0 col1" id="T_68523_level0_col1" style="white-space:nowrap">papel</th>
+<th class="col_heading level0 col2" id="T_68523_level0_col2" style="white-space:nowrap">bytes</th>
+<th class="col_heading level0 col3" id="T_68523_level0_col3">sha256 (16 primeros)</th>
+<th class="col_heading level0 col4" id="T_68523_level0_col4">coincide con lo registrado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_68523_row0_col0">004-ESPdesign.pdf</td>
+<td class="data row0 col1" id="T_68523_row0_col1">R1: contexto de diseño (Hazen-Williams, p. 2)</td>
+<td class="data row0 col2" id="T_68523_row0_col2" style="white-space:nowrap">320563</td>
+<td class="data row0 col3" id="T_68523_row0_col3">9d14c9db228f3365</td>
+<td class="data row0 col4" id="T_68523_row0_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_68523_row1_col0">Copia de Copia de Ecuaciones  _.xlsm</td>
+<td class="data row1 col1" id="T_68523_row1_col1">X1: fórmulas de otro libro; tiene VBA, no se ejecuta</td>
+<td class="data row1 col2" id="T_68523_row1_col2" style="white-space:nowrap">142127</td>
+<td class="data row1 col3" id="T_68523_row1_col3">1e9eb80131a48abd</td>
+<td class="data row1 col4" id="T_68523_row1_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_68523_row2_col0">Copia de FINAL BES-jun.xlsx</td>
+<td class="data row2 col1" id="T_68523_row2_col1">Insumo: libro BES-jun</td>
+<td class="data row2 col2" id="T_68523_row2_col2" style="white-space:nowrap">329308</td>
+<td class="data row2 col3" id="T_68523_row2_col3">ccb5a738baea1332</td>
+<td class="data row2 col4" id="T_68523_row2_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_68523_row3_col0">Modelo_Sensorless_PIP_ESP_Set_Ecuaciones (1).docx</td>
+<td class="data row3 col1" id="T_68523_row3_col1">Duplicado exacto de E1</td>
+<td class="data row3 col2" id="T_68523_row3_col2" style="white-space:nowrap">43143</td>
+<td class="data row3 col3" id="T_68523_row3_col3">4ef527d9b2cafdb1</td>
+<td class="data row3 col4" id="T_68523_row3_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_68523_row4_col0">Modelo_Sensorless_PIP_ESP_Set_Ecuaciones (2).docx</td>
+<td class="data row4 col1" id="T_68523_row4_col1">Duplicado exacto de E1</td>
+<td class="data row4 col2" id="T_68523_row4_col2" style="white-space:nowrap">43143</td>
+<td class="data row4 col3" id="T_68523_row4_col3">4ef527d9b2cafdb1</td>
+<td class="data row4 col4" id="T_68523_row4_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_68523_row5_col0">Modelo_Sensorless_PIP_ESP_Set_Ecuaciones (3).docx</td>
+<td class="data row5 col1" id="T_68523_row5_col1">Duplicado exacto de E1</td>
+<td class="data row5 col2" id="T_68523_row5_col2" style="white-space:nowrap">43143</td>
+<td class="data row5 col3" id="T_68523_row5_col3">4ef527d9b2cafdb1</td>
+<td class="data row5 col4" id="T_68523_row5_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row6 col0" id="T_68523_row6_col0">Modelo_Sensorless_PIP_ESP_Set_Ecuaciones.docx</td>
+<td class="data row6 col1" id="T_68523_row6_col1">E1: especificación algebraica</td>
+<td class="data row6 col2" id="T_68523_row6_col2" style="white-space:nowrap">43143</td>
+<td class="data row6 col3" id="T_68523_row6_col3">4ef527d9b2cafdb1</td>
+<td class="data row6 col4" id="T_68523_row6_col4" style="white-space:nowrap">sí</td>
+</tr>
+<tr>
+<td class="data row7 col0" id="T_68523_row7_col0">RB-1521-PY-121120.xls</td>
+<td class="data row7 col1" id="T_68523_row7_col1">Dataset de otro expediente (no se abre)</td>
+<td class="data row7 col2" id="T_68523_row7_col2" style="white-space:nowrap">84480</td>
+<td class="data row7 col3" id="T_68523_row7_col3">no calculado</td>
+<td class="data row7 col4" id="T_68523_row7_col4">tamaño sí</td>
+</tr>
+<tr>
+<td class="data row8 col0" id="T_68523_row8_col0">RB-IA-2191-Data.xlsx</td>
+<td class="data row8 col1" id="T_68523_row8_col1">Dataset de otro expediente (no se abre)</td>
+<td class="data row8 col2" id="T_68523_row8_col2" style="white-space:nowrap">15491</td>
+<td class="data row8 col3" id="T_68523_row8_col3">no calculado</td>
+<td class="data row8 col4" id="T_68523_row8_col4">tamaño sí</td>
+</tr>
+<tr>
+<td class="data row9 col0" id="T_68523_row9_col0">paper_sensorless - v2.docx</td>
+<td class="data row9 col1" id="T_68523_row9_col1">A1: contexto; sus métricas no son resultados de BES-jun</td>
+<td class="data row9 col2" id="T_68523_row9_col2" style="white-space:nowrap">34831</td>
+<td class="data row9 col3" id="T_68523_row9_col3">9eeddb2f15597218</td>
+<td class="data row9 col4" id="T_68523_row9_col4" style="white-space:nowrap">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=b4285f0b">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">docx</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filas</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">"archivo"</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Modelo_Sensorless"</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"DOCX de ecuaciones:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">docx</span><span class="p">),</span> <span class="s2">"| SHA-256 distintos entre ellos:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">({</span><span class="n">f</span><span class="p">[</span><span class="s2">"sha256 (16 primeros)"</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">docx</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fuentes con huella que NO coincide:"</span><span class="p">,</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="s2">"archivo"</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filas</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">"coincide con lo registrado"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"NO"</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">"ninguna"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>DOCX de ecuaciones: 4 | SHA-256 distintos entre ellos: 1
+Fuentes con huella que NO coincide: ninguna
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=974def67"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Interpretación.</strong> Todas las fuentes con huella
+coinciden con lo registrado, y los cuatro <code>.docx</code> son un
+único documento con cuatro nombres: la trazabilidad se apoya en
+<strong>una</strong> especificación E1, no en cuatro. Los datasets
+<code>RB-1521</code> y <code>RB-IA-2191</code> figuran solo con su
+tamaño; esto documenta que existen y que no se tocaron. Que el XLSM
+tenga VBA no es un problema mientras no se ejecute; se lee únicamente
+como texto de fórmulas.</p>
+<p>El papel de cada fuente es una <strong>decisión de alcance</strong>,
+no una validación: que una fuente esté íntegra no significa que sus
+fórmulas sean aplicables a este libro (eso se revisa en el cuaderno
+02).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=9075fafa"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-5-contraste-con-la-ficha-del-expediente">Paso 5 · Contraste
+con la ficha del expediente</h2>
+<p>La ficha <code>dataset.md</code> es el documento que otra persona
+leerá primero. Si la huella escrita allí no coincidiera con el archivo
+real, la ficha estaría afirmando algo falso. Se extrae el SHA-256 de la
+ficha y se compara con el calculado en el Paso 1.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=cf11d739">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ficha_md</span> <span class="o">=</span> <span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">"dataset.md"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="n">sha_ficha</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"SHA-256: `([0-9a-f]</span><span class="si">{64}</span><span class="s2">)`"</span><span class="p">,</span> <span class="n">ficha_md</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sha_trabajo</span> <span class="o">=</span> <span class="n">huellas_tabla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">huellas_tabla</span><span class="p">[</span><span class="s2">"copia"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"copia de trabajo"</span><span class="p">),</span> <span class="s2">"sha256"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">T</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"fuente"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dataset.md"</span><span class="p">,</span> <span class="s2">"archivo real"</span><span class="p">],</span> <span class="s2">"SHA-256"</span><span class="p">:</span> <span class="p">[</span><span class="n">sha_ficha</span><span class="p">,</span> <span class="n">sha_trabajo</span><span class="p">]}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_b983c">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_b983c_level0_col0" style="white-space:nowrap">fuente</th>
+<th class="col_heading level0 col1" id="T_b983c_level0_col1" style="white-space:nowrap">SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_b983c_row0_col0" style="white-space:nowrap">dataset.md</td>
+<td class="data row0 col1" id="T_b983c_row0_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_b983c_row1_col0">archivo real</td>
+<td class="data row1 col1" id="T_b983c_row1_col1">ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=7cdb4f9b"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="paso-6-criterios-de-aceptación-ejecutables">Paso 6 · Criterios
+de aceptación (ejecutables)</h2>
+<p>Cada criterio declarado en la portada se evalúa aquí con la evidencia
+calculada arriba. Si alguno no se cumple, <code>exigir()</code> lanza un
+error y el cuaderno <strong>no termina</strong>: no se entrega un
+inventario con un control fallido.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=9444dadc">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span> <span class="o">=</span> <span class="n">Criterios</span><span class="p">(</span><span class="s2">"00_inventario_y_fuentes"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-1"</span><span class="p">,</span> <span class="s2">"Tres copias idénticas (bytes, SHA-256, MD5)"</span><span class="p">,</span> <span class="n">veredicto</span><span class="p">[</span><span class="s2">"coincide"</span><span class="p">],</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">veredicto</span><span class="p">[</span><span class="s1">'filas'</span><span class="p">])</span><span class="si">}</span><span class="s2"> copias; ausentes: </span><span class="si">{</span><span class="n">veredicto</span><span class="p">[</span><span class="s1">'ausentes'</span><span class="p">]</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">'ninguna'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-2"</span><span class="p">,</span> <span class="s2">"El control negativo detecta un bit alterado"</span><span class="p">,</span> <span class="n">negativo</span><span class="p">[</span><span class="s2">"detecta_el_cambio"</span><span class="p">],</span>
+               <span class="s2">"ambas huellas cambian"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-3"</span><span class="p">,</span> <span class="s2">"Contenedor sin VBA, sin enlaces externos, sin corrupción, 5 hojas, 30 gráficos"</span><span class="p">,</span>
+               <span class="p">(</span><span class="ow">not</span> <span class="n">contenedor</span><span class="p">[</span><span class="s2">"tiene_macros_vba"</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">contenedor</span><span class="p">[</span><span class="s2">"tiene_enlaces_externos"</span><span class="p">])</span>
+               <span class="ow">and</span> <span class="n">contenedor</span><span class="p">[</span><span class="s2">"primer_archivo_corrupto"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+               <span class="ow">and</span> <span class="n">contenedor</span><span class="p">[</span><span class="s2">"hojas_xml"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">contenedor</span><span class="p">[</span><span class="s2">"graficos"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">30</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s2">"hojas=</span><span class="si">{</span><span class="n">contenedor</span><span class="p">[</span><span class="s1">'hojas_xml'</span><span class="p">]</span><span class="si">}</span><span class="s2">, gráficos=</span><span class="si">{</span><span class="n">contenedor</span><span class="p">[</span><span class="s1">'graficos'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-4"</span><span class="p">,</span> <span class="s2">"SHA-256 de dataset.md = SHA-256 del archivo"</span><span class="p">,</span> <span class="n">sha_ficha</span> <span class="o">==</span> <span class="n">sha_trabajo</span><span class="p">,</span> <span class="n">sha_trabajo</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"…"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-5"</span><span class="p">,</span> <span class="s2">"Fuentes técnicas coinciden con su huella registrada"</span><span class="p">,</span>
+               <span class="nb">all</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">"coincide con lo registrado"</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"sí"</span><span class="p">,</span> <span class="s2">"tamaño sí"</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filas</span><span class="p">),</span>
+               <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'coincide con lo registrado'</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'sí'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">filas</span><span class="p">)</span><span class="si">}</span><span class="s2"> huellas completas + 2 tamaños"</span><span class="p">)</span>
+<span class="n">crit</span><span class="o">.</span><span class="n">comprobar</span><span class="p">(</span><span class="s2">"C00-6"</span><span class="p">,</span> <span class="s2">"Datasets en espera: solo existencia y tamaño"</span><span class="p">,</span>
+               <span class="nb">all</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">"sha256 (16 primeros)"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"no calculado"</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filas</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">"archivo"</span><span class="p">]</span> <span class="ow">in</span> <span class="n">otro_expediente</span><span class="p">),</span>
+               <span class="s2">"RB-1521 y RB-IA-2191 no se leyeron"</span><span class="p">)</span>
+<span class="n">T</span><span class="p">(</span><span class="n">crit</span><span class="o">.</span><span class="n">tabla</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><style type="text/css">
+</style>
+<table class="tabla" id="T_33118">
+<thead>
+<tr>
+<th class="col_heading level0 col0" id="T_33118_level0_col0" style="white-space:nowrap">id</th>
+<th class="col_heading level0 col1" id="T_33118_level0_col1" style="white-space:nowrap">criterio</th>
+<th class="col_heading level0 col2" id="T_33118_level0_col2" style="white-space:nowrap">resultado</th>
+<th class="col_heading level0 col3" id="T_33118_level0_col3" style="white-space:nowrap">evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="data row0 col0" id="T_33118_row0_col0" style="white-space:nowrap">C00-1</td>
+<td class="data row0 col1" id="T_33118_row0_col1">Tres copias idénticas (bytes, SHA-256, MD5)</td>
+<td class="data row0 col2" id="T_33118_row0_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row0 col3" id="T_33118_row0_col3">3 copias; ausentes: ninguna</td>
+</tr>
+<tr>
+<td class="data row1 col0" id="T_33118_row1_col0" style="white-space:nowrap">C00-2</td>
+<td class="data row1 col1" id="T_33118_row1_col1">El control negativo detecta un bit alterado</td>
+<td class="data row1 col2" id="T_33118_row1_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row1 col3" id="T_33118_row1_col3">ambas huellas cambian</td>
+</tr>
+<tr>
+<td class="data row2 col0" id="T_33118_row2_col0" style="white-space:nowrap">C00-3</td>
+<td class="data row2 col1" id="T_33118_row2_col1">Contenedor sin VBA, sin enlaces externos, sin corrupción, 5 hojas, 30 gráficos</td>
+<td class="data row2 col2" id="T_33118_row2_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row2 col3" id="T_33118_row2_col3">hojas=5, gráficos=30</td>
+</tr>
+<tr>
+<td class="data row3 col0" id="T_33118_row3_col0" style="white-space:nowrap">C00-4</td>
+<td class="data row3 col1" id="T_33118_row3_col1">SHA-256 de dataset.md = SHA-256 del archivo</td>
+<td class="data row3 col2" id="T_33118_row3_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row3 col3" id="T_33118_row3_col3">ccb5a738baea1332…</td>
+</tr>
+<tr>
+<td class="data row4 col0" id="T_33118_row4_col0" style="white-space:nowrap">C00-5</td>
+<td class="data row4 col1" id="T_33118_row4_col1">Fuentes técnicas coinciden con su huella registrada</td>
+<td class="data row4 col2" id="T_33118_row4_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row4 col3" id="T_33118_row4_col3">8 huellas completas + 2 tamaños</td>
+</tr>
+<tr>
+<td class="data row5 col0" id="T_33118_row5_col0" style="white-space:nowrap">C00-6</td>
+<td class="data row5 col1" id="T_33118_row5_col1">Datasets en espera: solo existencia y tamaño</td>
+<td class="data row5 col2" id="T_33118_row5_col2" style="white-space:nowrap">CUMPLE</td>
+<td class="data row5 col3" id="T_33118_row5_col3">RB-1521 y RB-IA-2191 no se leyeron</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered" id="cell-id=1785d0b8">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">crit</span><span class="o">.</span><span class="n">exigir</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Todos los criterios de aceptación del cuaderno 00 se cumplen."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Todos los criterios de aceptación del cuaderno 00 se cumplen.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=04a15851"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="conclusión-técnica">Conclusión técnica</h2>
+<ul>
+<li><strong>Resultado:</strong> la copia de trabajo es idéntica al
+original y a la copia recibida; el contenedor es autocontenido (sin
+macros ni enlaces); las fuentes técnicas están íntegras; los datasets en
+espera no se tocaron.</li>
+<li><strong>Qué habilita:</strong> los cuadernos 01 a 06 pueden afirmar
+que sus resultados provienen de <strong>este</strong> archivo,
+identificado por su SHA-256.</li>
+<li><strong>Limitaciones:</strong> la identidad binaria no dice nada
+sobre la calidad del contenido. Si el archivo se vuelve a descargar, se
+renombra o se reabre y guarda en Excel, el control debe repetirse. La
+caché de valores calculados es del último cálculo de Excel; por eso los
+contrastes contra ella (cuaderno 02 y siguientes) no son validación
+independiente.</li>
+<li><strong>Siguiente paso:</strong> cuaderno 01, inspección de
+estructura y calidad del contenido.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=da3bc953"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="relación-con-el-sistema-de-reglas">Relación con el sistema de
+reglas</h2>
+<p>Este cuaderno no produce parámetros para el motor. Comprueba que la
+copia de trabajo es el mismo archivo que se analizó. Sin esa identidad,
+<code>integracion/manifiesto.json</code> no tendría una huella que
+citar.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=03d353e0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="limitaciones">Limitaciones</h2>
+<ul>
+<li>La huella SHA-256 demuestra <strong>identidad binaria</strong>, no
+que el contenido del libro sea correcto.</li>
+<li>El inventario de fuentes registra huellas de una fecha; si el
+documento de inventario estuviera mal, el contraste lo heredaría.</li>
+<li>Los archivos <code>RB-*</code> solo se contrastan con
+<code>os.stat</code> (tamaño y fecha): <strong>no se abren</strong> por
+la regla del expediente.</li>
+<li>La ficha <code>dataset.md</code> es un documento humano: se
+contrasta, no se da por cierta.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=41205282"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="referencias">Referencias</h2>
+<p>Solo se listan las fuentes realmente consultadas en este
+cuaderno.</p>
+<ol type="1">
+<li><strong>Libro de trabajo:</strong>
+<code>entrada/BES_jun.xlsx</code>, copia byte a byte de «Copia de FINAL
+BES-jun.xlsx» (SHA-256
+<code>ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85</code>).
+Cinco hojas: QF-554H, QF-545H, QF-500H, QF-378HST y QF-549HST.</li>
+<li><strong><code>docs/inventario_fuentes.md</code></strong> (raíz del
+proyecto): registro de huellas de las fuentes en la fecha del
+inventario.</li>
+<li><strong><code>trabajo.md</code> y <code>trabajo2.md</code></strong>
+(raíz del proyecto): plan de trabajo, reglas de no mezclar libros y
+bloqueo P-14.</li>
+<li><strong>Software:</strong> Python 3.14.8, pandas 3.0.6, numpy 2.5.4,
+matplotlib 3.11.2, openpyxl 3.1.5 (versiones tomadas de la ficha de
+entorno de cada ejecución).</li>
+</ol>
+</div>
+</div>
+</div>
+</div></body></html>

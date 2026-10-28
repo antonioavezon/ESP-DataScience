@@ -1,0 +1,13 @@
+<section class="estado-pozos" aria-label="Estado de pozos">
+  <h2>ESTADO DE POZOS</h2>
+  <ul id="lista-pozos" class="lista-pozos">
+    {% for fila in estados_pozos %}
+      <li>
+        <button type="button" class="fila-estado" data-pozo="{{ fila.pozo_id }}" title="{{ fila.rotulo }}. {{ fila.fuente }}" aria-label="{{ fila.pozo_id }}. {{ fila.rotulo }}">
+          <span class="luz luz-{{ fila.tono }}" aria-hidden="true"></span>
+          <span>{{ fila.pozo_id }}</span>
+        </button>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

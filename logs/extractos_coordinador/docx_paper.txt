@@ -1,0 +1,124 @@
+# paper_sensorless - v2.docx
+parrafos=74 tablas=6
+[p1|Title] SensorLess: Implementación y Validación de un Algoritmo de Aprendizaje Automático para la Estimación Virtual de Presión de Fondo en el Campo de Crudo Pesado Caño Sur, Colombia
+[p2|Heading 1] Resumen
+[p3|Normal] Este artículo presenta la implementación en campo y validación del Multivariable SensorLess, un algoritmo de aprendizaje automático con fundamento físico desarrollado por BCPGroup para la estimación virtual de la presión de entrada de la bomba (PIP), la presión de fondo fluyente (PWF), el nivel de fluido dinámico (DFL) y la sumergencia de la bomba, en sistemas de bombeo electrosumergible (ESP) y bomba de cavidad progresiva (PCP), implementado a través del controlador inteligente de pozo CILA2S 5G. La implementación se realizó en el Campo Caño Sur, operado por Ecopetrol S.A. en la Cuenca de los Llanos de Colombia, abarcando 76 pozos ESP/PCP distribuidos en 24 clústeres entre septiembre y noviembre de 2025. Los resultados se validan frente a dos métodos de referencia independientes: sensores de fondo permanentes (DHS) y pruebas de nivel acústico (Echometer). En 128 pozos analizados, el algoritmo alcanzó una desviación mediana de 4,3% respecto al DHS, con el 57% de las mediciones por debajo del 5% y el 73% por debajo del 10%. En el subconjunto de 26 pozos con validación concurrente por Echometer, la desviación promedio SL-vs-Echometer fue de 8,9%. Los resultados demuestran que SensorLess ofrece una alternativa técnicamente viable y costo-eficiente a los sensores de fondo físicos para la vigilancia continua de producción en campos de crudo pesado.
+[p6|Heading 1] INTRODUCCIÓN
+[p7|Normal] El monitoreo continuo de las condiciones de presión en el fondo del pozo es fundamental para optimizar el desempeño del levantamiento artificial, detectar anomalías operativas y mantener la producción en campos de crudo pesado. Los enfoques convencionales se basan en sensores de fondo permanentes (DHS) instalados en la completación o en pruebas acústicas periódicas (Echometer / prueba de nivel sónico) realizadas por cuadrillas de campo. Ambos métodos presentan limitaciones significativas: los equipos DHS representan una inversión de capital sustancial por pozo, son susceptibles a falla mecánica en ambientes de alta temperatura y viscosidad, e introducen complejidad en la completación en el caso de los sistemas PCP. Las pruebas Echometer generan únicamente mediciones puntuales que requieren intervención de campo, típicamente realizadas de forma mensual o trimestral, sin generar un flujo de datos continuo en tiempo real.
+[p8|Normal] Los medidores virtuales de flujo y las tecnologías de sensores virtuales han surgido como una alternativa costo-eficiente, aprovechando variables eléctricas y operacionales medibles en superficie para inferir las condiciones de fondo a través de modelos matemáticos. BCPGroup ha desarrollado SensorLess, un algoritmo patentado embebido en el controlador inteligente CILA2S 5G, que procesa señales eléctricas en tiempo real del variador de velocidad (VSD), propiedades PVT y datos de completación del pozo para estimar PIP, PWF, DFL y sumergencia de forma continua. El algoritmo forma parte del ecosistema WOST (Wellpad Optimization System Tower) de BCPGroup, que provee inteligencia de producción a nivel de clúster a los operadores de campo.
+[p10|Normal] Este artículo documenta la implementación a gran escala de SensorLess en el Campo Caño Sur, Ecopetrol S.A., Colombia, que representa el despliegue más extenso de esta tecnología hasta la fecha. La campaña ha cubierto 76 pozos desde el 10 de septiembre hasta el 22 de noviembre de 2025. La validación se realiza frente a dos mediciones de referencia concurrentes — sensores de fondo y pruebas acústicas Echometer — proporcionando una evaluación integral con múltiples referencias de la precisión del algoritmo.
+[p11|Heading 1] DESCRIPCIÓN DE LA TECNOLOGÍA
+[p12|Heading 2] Arquitectura del Algoritmo SensorLess
+[p13|Normal] SensorLess es un modelo híbrido con fundamento físico que integra principios de mecánica de yacimientos y de bombas con aprendizaje automático supervisado. El algoritmo opera en cuatro etapas secuenciales:
+[p14|Normal] (a) Adquisición de entradas: Las señales eléctricas en tiempo real — corriente, voltaje, frecuencia y potencia del motor — son muestreadas continuamente por el CILA2S 5G en el sitio del pozo. Estas se complementan con datos estáticos de completación (profundidad de la bomba, diámetros de tubería y casing, geometría del pozo) y propiedades PVT del fluido (gravedad específica, viscosidad, GOR) cargados durante la inicialización del modelo.
+[p15|Normal] (b) Pre-procesamiento físico: Las mediciones eléctricas se convierten en variables hidráulicas equivalentes utilizando curvas de eficiencia del motor, curvas características de la bomba (H-Q-η) y factores de corrección del cable. Esta etapa restringe el espacio de soluciones a regiones operativas físicamente plausibles.
+[p16|Normal] (c) Inferencia mediante aprendizaje automático: Un modelo de aprendizaje supervisado — entrenado con mediciones históricas de DHS y Echometer de cada pozo — mapea las variables de entrada procesadas hacia valores estimados de PIP y DFL. La arquitectura es una regresión multivariable específica por pozo que se adapta continuamente a medida que nuevas mediciones de campo quedan disponibles, implementando aprendizaje en línea.
+[p17|Normal] (d) Entrega de resultados: Los valores estimados de PIP, PWF, DFL y sumergencia se transmiten al HMI del CILA2S 5G y a la plataforma WOST en tiempo real, para visualización, alarmas e integración con el módulo IPRGraph.
+[p18|Heading 2] Integración con la Plataforma CILA2S 5G
+[p19|Normal] El CILA2S 5G es un controlador inteligente de pozo basado en PC industrial, diseñado y manufacturado  por BCPGroup en Colombia. SensorLess se ejecuta como servicio nativo dentro del firmware del CILA2S 5G, sin requerir conectividad a la nube para la inferencia, garantizando continuidad operativa en condiciones de campo remoto. Los datos se sincronizan con la plataforma WOST mediante el SCC (Sistema de Control de Cluster), permitiendo monitoreo a nivel de conjunto en todos los clústeres. La propiedad intelectual de SensorLess está protegida bajo las solicitudes de patente en EE. UU. No. 63/827,610 (ESP) y No. 19/253,095 (PCP).
+[p20|Heading 1] IMPLEMENTACIÓN EN CAMPO
+[p21|Heading 2] Campo Caño Sur — Descripción General
+[p22|Normal] El Campo Caño Sur es un campo maduro de producción de crudo pesado operado por Ecopetrol S.A. en la Cuenca de los Llanos de Colombia. El campo produce crudo con gravedad API en el rango de 12–18°, requiriendo levantamiento artificial en todos los pozos productores. El método predominante es el bombeo electrosumergible (ESP) con motores de imanes permanentes (MIP) operando a frecuencia variable mediante controladores CILA2S 5G, con un complemento menor de bombas de cavidad progresiva (PCP). 
+[p23|Heading 2] Alcance y Cronograma de Implementación
+[p24|Normal] La campaña se inició el 10 de septiembre de 2025 con la primera actualización en el pozo CASE-0402H. Al 22 de noviembre de 2025, 76 de los 112 pozos programados han sido actualizados exitosamente, representando un 67,8% de avance en 76 días, distribuidos así:
+[p25|Normal] Tabla 1. Resumen de implementación SensorLess, Campo Caño Sur (nov. 2025).
+[p26|Normal] El proceso de actualización por pozo comprende: (i) actualización de firmware del CILA2S 5G, (ii) carga de datos de completación y PVT específicos del pozo, y (iii) inicialización del modelo de aprendizaje supervisado con mediciones históricas disponibles de DHS y Echometer. Los pozos sin historial previo inician el entrenamiento desde la primera medición post-despliegue.
+[p27|Heading 1] RESULTADOS Y VALIDACIÓN
+[p28|Heading 2] Metodología de Validación
+[p29|Normal] El desempeño del algoritmo se evaluó mediante dos métodos de referencia complementarios aplicados de forma concurrente en el sitio del pozo:
+[p30|Normal] Sensor de Fondo (DHS): Instalados en la completación proporcionan mediciones continuas de PIP en tiempo real. Las lecturas del DHS se registraron desde el datalogger del CILA2S 5G en el mismo instante que las estimaciones de SensorLess, permitiendo comparaciones directas punto a punto. En el presente estudio se analizaron 128 eventos de medición en 53 pozos.
+[p31|Normal] Nivel Acústico (Echometer): Pruebas de nivel sónico realizadas por cuadrillas de campo en pozos seleccionados, generando una determinación acústica independiente del nivel de fluido dinámico y PIP equivalente. Se documentaron 26 eventos de comparación concurrente Echometer–SensorLess en 19 pozos durante el período septiembre–octubre 2025.
+[p32|Normal] El porcentaje de error se define como la desviación relativa absoluta entre la estimación de SensorLess y la medición de referencia: ε (%) = |PIPSL − PIPref| / PIPref × 100.
+[p33|Heading 2] SensorLess vs. Sensor de Fondo (DHS)
+[p34|Normal] La Tabla 2 resume las estadísticas poblacionales de los 128 eventos de medición en 53 pozos con datos de DHS disponibles:
+[p35|Normal] Tabla 2. Estadísticas poblacionales — SensorLess vs. DHS (128 eventos, 53 pozos).
+[p36|Normal] La desviación mediana de 4,3% es la métrica de tendencia central más representativa para este conjunto de datos, dado que la distribución presenta sesgo a la derecha por un pequeño número de pozos con desviaciones elevadas en fase temprana. El análisis detallado revela que los errores elevados están principalmente asociados a tres escenarios: (i) re-arranques del pozo, donde la recuperación transitoria de presión es rápida y el suavizado del modelo introduce desfase; (ii) inicio de rampas de incremento de frecuencia, donde el nuevo punto de operación no está representado en los datos de entrenamiento; y (iii) pozos cuyo modelo inicial se entrenó con menos de 72 horas de operación estable.
+[p37|Normal] La Tabla 3 presenta resultados individuales representativos del Reporte de Monitoreo 3 (octubre–noviembre 2025):
+[p38|Normal] Tabla 3. Resultados representativos — SensorLess vs. DHS (Monitoreo Ronda 3).
+[p39|Heading 2] SensorLess vs. Nivel Acústico (Echometer)
+[p40|Normal] Las pruebas Echometer proporcionan una referencia independiente, basada en física del sistema, no afectada por deriva del sensor. En los 26 eventos concurrentes, SensorLess demostró el siguiente desempeño:
+[p41|Normal] Tabla 4. Desempeño de SensorLess y DHS frente al Echometer (26 eventos).
+[p42|Normal] Los casos más destacados de la validación Echometer incluyen: CASE-0402H (SL=772,3 vs ECH=763,9 psi; 1,1%), CASE-0357H (SL=160,2 vs ECH=161,3 psi; 0,7%), CASE-0608H (SL=318,4 vs ECH=321,7 psi; 1,0% oct. 21; 4,1% oct. 10) y CASE-0603H (SL=592,6 vs ECH=597,0 psi; 0,7%). Estos resultados confirman que en condiciones operativas estables, SensorLess alcanza una precisión equivalente a la del Echometer.
+[p43|Normal] La comparación entre DHS y Echometer (columna 3 de la Tabla 4) revela además una desviación promedio de 3,9% entre los dos métodos de referencia, confirmando que las diferencias en la física de los instrumentos contribuyen a una porción no despreciable de la incertidumbre total observada.
+[p44|Heading 2] Comportamiento de Aprendizaje Temporal
+[p45|Normal] Los datos de monitoreo longitudinal (octubre–noviembre 2025) demuestran un patrón consistente de mejora en la precisión del modelo con el tiempo. En pozos con condiciones operativas estables durante todo el período — como CASE-0566, CASE-0039 y CASE-0426H — las desviaciones se mantuvieron persistentemente por debajo del 5%. En pozos con perturbaciones (re-arranques, cambios de frecuencia, entrada de emulsiones o gas ), los aumentos temporales de desviación fueron seguidos de auto-corrección progresiva del modelo a medida que el algoritmo incorporó nuevos datos del pozo.
+[p46|Normal] Este comportamiento es consistente con la arquitectura de aprendizaje supervisado en línea de SensorLess, que actualiza los parámetros del modelo específico por pozo cada vez que se incorpora una nueva medición de referencia. La tasa de convergencia es función de la frecuencia de las mediciones de referencia y de la estabilidad operativa durante la fase de aprendizaje.
+[p48|Heading 1] DISCUSIÓN
+[p49|Normal] Los resultados de implementación en el Campo Caño Sur validan a SensorLess como un sensor virtual operativamente viable para el monitoreo continuo de presión de fondo en un campo de crudo pesado con pozos ESP/PCP. La desviación mediana de 4,3% frente al DHS — referencia continua de mayor estándar — es comparable con los valores de precisión reportados en la literatura para VFMs híbridos en aplicaciones similares: Vanvik et al. (2022) reportan desviación promedio dentro de ±10% durante 15 semanas continuas en pozos ESP con separadores de prueba como referencia; Maheshwari et al. (2022) reportan precisión de ±5% en la fase dominante validada con medidor Coriolis en campo offshore; y Gryzlov et al. (2021) demuestran errores de 1,9–2,0% con modelos de redes neuronales recurrentes entrenados sobre datos de señales de superficie. La validación independiente mediante Echometer refuerza adicionalmente la confianza en la consistencia física del algoritmo.
+[p50|Normal] Una observación crítica de los datos de campo es que la desviación promedio elevada (11,0%) respecto a la mediana (4,3%) está impulsada por un pequeño subconjunto de pozos en fase temprana de entrenamiento o con condiciones operativas atípicas. Al excluir pozos con menos de 7 días de operación estable post-despliegue o con cambios operativos activos, el promedio poblacional desciende a aproximadamente 5,5%, consistente con la mediana. Esto subraya la importancia del protocolo de implementación: los pozos inicializados con un conjunto de datos de entrenamiento nutrido exhiben alta precisión inmediata, mientras que los pozos de reciente incorporación requieren un período de estabilización de típicamente 5–10 días para alcanzar desviaciones sub-5%.
+[p51|Normal] Desde la perspectiva económica, SensorLess elimina la necesidad de equipos DHS físicos en los pozos monitoreados, con el consiguiente ahorro en diseño de completación, frecuencia de workover y reemplazo de sensores. El controlador CILA2S 5G — ya desplegado para el control del variador de velocidad — es el único requerimiento de hardware adicional por pozo. Para una flota de 76 pozos como la del Campo Caño Sur, esto se traduce en una reducción significativa del OPEX de vigilancia, al tiempo que aumenta la frecuencia de monitoreo desde capturas mensuales (Echometer) a flujos continuos en tiempo real. En la próxima versión del Multivariable SensorLess se incorporaran parámetros adicionales de alto impacto en la gerencia del pozo PCP, como son la medición de caudal y la carga axial, además del % de BSW en pozos BES.
+[p52|Heading 1] CONCLUSIONES
+[p53|Normal] 1. SensorLess alcanzó una desviación mediana de 4,3% frente a sensores de fondo permanentes (DHS) en 128 eventos de medición de 53 pozos del Campo Caño Sur, con el 57% de las mediciones por debajo del 5% y el 73% por debajo del 10%. Estos resultados confirman la viabilidad técnica del algoritmo como sensor virtual continuo de presión de fondo.
+[p54|Normal] 2. La validación concurrente con 26 pruebas acústicas Echometer independientes arrojó una desviación promedio SL-vs-Echometer de 8,9%, con casos individuales que alcanzaron errores de 0,7–1,1% en condiciones operativas estables. La desviación DHS-vs-Echometer de 3,9% confirma que las diferencias en la física de los instrumentos contribuyen de forma no despreciable a la incertidumbre total observada.
+[p55|Normal] 3. El componente de aprendizaje automático del algoritmo demuestra un comportamiento de convergencia consistente, con mejora progresiva de la precisión a medida que se acumulan datos de operación estable y se incorporan nuevas mediciones de referencia al modelo específico del pozo.
+[p56|Normal] 4. Las desviaciones elevadas están sistemáticamente asociadas a perturbaciones operativas (re-arranques, cambios de frecuencia) y a la fase de inicialización del modelo (Cold-Start) , confirmando que la precisión del algoritmo es función del volumen de datos y de la estabilidad operativa, y no una limitación intrínseca del método.
+[p57|Normal] 5. El despliegue en 76 pozos distribuidos en 24 clústeres en 76 días valida la escalabilidad del flujo de trabajo de implementación, con una fecha de finalización proyectada del 28 de junio de 2026 para la flota completa de 112 pozos.
+[p58|Normal] 6. El multivariable SensorLess embebido en el CILA2S 5G ofrece una vía costo-eficiente hacia la vigilancia continua en tiempo real del fondo del pozo en campos de crudo mediano - pesado, eliminando el costo de capital de los equipos DHS físicos y entregando una frecuencia y riqueza de datos de monitoreo superiores a las campañas convencionales de Echometer.
+[p59|Normal] 7. La incorporación del Machine Learning ha permitido controlar las variable de productividad del pozo (PIP,Nivel, presiones de la bomba,..)  debido a las perturbaciones que sufre el pozo durante su ciclo de vida que afectan las medidas generadas por el Multivariable SensorLess.
+[p60|Heading 1] AGRADECIMIENTOS
+[p61|Normal] Los autores agradecen a Ecopetrol S.A. por el permiso para publicar los datos de campo del Campo Caño Sur. Un reconocimiento especial al equipo de ingeniería de BCPGroup, al equipo de operaciones de campo de SLACOL y al personal de ingeniería de producción de Ecopetrol en el Campo Caño Sur por su apoyo durante la campaña de implementación. La protección de patente del algoritmo SensorLess es propiedad de BCPGroup S.A.S.
+[p62|Heading 1] NOMENCLATURA
+[p65|Heading 1] REFERENCIAS
+[p66|Normal] BCPGroup S.A.S. (2025). Reporte de Monitoreo 3 — Algoritmo Sensorless, Campo Caño Sur. Informe Técnico Interno. Bogotá, Colombia.
+[p67|Normal] BCPGroup S.A.S. (2025). Reporte de Avance 3 — Masificación Sensorless, Campo Caño Sur. Informe Técnico Interno. Bogotá, Colombia.
+[p68|Normal] Bikmukhametov, T. y Jäschke, J. 2019. First Principles and Machine Learning Virtual Flow Metering: A Literature Review. Journal of Petroleum Science and Engineering, vol. 184, 106487. https://doi.org/10.1016/j.petrol.2019.106487
+[p69|Normal] Vanvik, T., Henriksson, J., Yang, Z., y Weisz, G. 2022. Virtual Flow Metering for Continuous Real-Time Production Monitoring of Unconventional Wells. Paper URTeC-3723767 presentado en la Unconventional Resources Technology Conference, Houston, Texas, EE. UU., 20–22 de junio. https://doi.org/10.15530/urtec-2022-3723767
+[p70|Normal] Maheshwari, N., Lobari, S., y Saary, A.A. 2022. Production Optimization and Reservoir Monitoring Through Virtual Flow Metering. Paper SPE-211233-MS presentado en ADIPEC, Abu Dhabi, EAU, 31 de octubre–3 de noviembre. https://doi.org/10.2118/211233-MS
+[p71|Normal] Ishak, M.A., Al-qutami Hasan, T.A., Ellingsen, H., Ruden, T., y Khaledi, H. 2020. Evaluation of Data Driven Versus Multiphase Transient Flow Simulator for Virtual Flow Meter Application. Paper OTC-30422-MS presentado en la Offshore Technology Conference Asia, Kuala Lumpur, Malasia, 2–6 de noviembre. https://doi.org/10.4043/30422-MS
+[p72|Normal] Gryzlov, A., Mironova, L., Safonov, S., y Arsalan, M. 2021. Artificial Intelligence and Data Analytics for Virtual Flow Metering. Paper SPE-204662-MS presentado en el SPE Middle East Oil & Gas Show and Conference, Manama, Baréin, 15 de diciembre. https://doi.org/10.2118/204662-MS
+[p73|Normal] Takacs, G. (2018). Electrical Submersible Pumps Manual: Design, Operations, and Maintenance. 2.ª ed. Gulf Professional Publishing.
+
+## TABLA 1 filas=1 cols=1
+T1R1: 
+
+## TABLA 2 filas=4 cols=3
+T2R1: Plataforma || Pozos Actualizados || Clústeres
+T2R2: ESP Skid (CILA2S 5G) || 62 || 20
+T2R3: ESP/PCP WOST || 14 || 4
+T2R4: Total || 76 || 24
+
+## TABLA 3 filas=8 cols=2
+T3R1: Métrica || Valor
+T3R2: Total de eventos de medición || 128
+T3R3: Pozos evaluados || 53
+T3R4: Desviación mediana (SL vs DHS) || 4,3%
+T3R5: Desviación promedio (SL vs DHS) || 11,0%
+T3R6: Mediciones < 5% de desviación || 73 (57%)
+T3R7: Mediciones < 10% de desviación || 93 (73%)
+T3R8: Desviación mínima observada || 0,0%
+
+## TABLA 4 filas=11 cols=4
+T4R1: Pozo || PIP SL (psi) || PIP DHS (psi) || Error (%)
+T4R2: CASE-0426H || 815,2 || 814,4 || 0,1%
+T4R3: CASE-0292H || 745,4 || 745,5 || 0,0%
+T4R4: CASE-0402H || 772,3 || 771,3 || 0,1%
+T4R5: CASE-0039 || 535,7 || 555,0 || 3,5%
+T4R6: CASE-0566 || 303,0 || 292,7 || 3,5%
+T4R7: CASE-0410H || 446,2 || 437,7 || 1,9%
+T4R8: CASE-0216H || 330,3 || 349,2 || 5,4%
+T4R9: CASE-27 || 581,6 || 613,6 || 5,2%
+T4R10: CASE-0009H || 539,9 || 564,8 || 4,4%
+T4R11: CASE-0246H || 628,9 || 654,5 || 3,9%
+
+## TABLA 5 filas=5 cols=3
+T5R1: Métrica || SL vs ECH || DHS vs ECH
+T5R2: Eventos comparados || 26 || 23
+T5R3: Desviación promedio || 8,9% || 3,9%
+T5R4: Eventos < 5% desviación || 10 (38%) || 16 (70%)
+T5R5: Eventos < 10% desviación || 17 (65%) || 21 (91%)
+
+## TABLA 6 filas=14 cols=3
+T6R1: Símbolo || Definición || Unidad
+T6R2: PIP || Presión de Entrada de la Bomba || psi
+T6R3: PWF || Presión de Fondo Fluyente || psi
+T6R4: DFL || Nivel de Fluido Dinámico || ft
+T6R5: DHS || Sensor de Fondo Permanente (manómetro de completación) || —
+T6R6: ECH || Prueba de nivel acústico Echometer || —
+T6R7: SL || Estimación del algoritmo SensorLess || —
+T6R8: VSD/VFD || Variador de Velocidad / Variador de Frecuencia || —
+T6R9: ESP || Bomba Electrosumergible || —
+T6R10: PCP || Bomba de Cavidad Progresiva || —
+T6R11: MIP/PMM || Motor de Imanes Permanentes || —
+T6R12: GOR || Relación Gas-Petróleo || pc/STB
+T6R13: ε || Desviación relativa absoluta || %
+T6R14: H-Q-η || Curva característica Caudal-Altura-Eficiencia de la bomba || —

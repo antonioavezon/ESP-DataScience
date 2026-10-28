@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block titulo %}Configuración de IA · HUC{% endblock %}
+{% block contenido %}
+<h1>Configuración de IA</h1>
+<p class="nota">Estos controles valen para las solicitudes de esta sesión. No instalan modelos ni modifican el servicio del sistema.</p>
+{% if aviso %}<p class="aviso">{{ aviso }}</p>{% endif %}
+<p>Servidor: {{ prefs.base_url }}. Estado: {% if ollama.disponible %}responde, {{ ollama.modelos|length }} modelos{% else %}no disponible. {{ ollama.error }}{% endif %}.</p>
+
+{% if ollama.disponible %}
+<table>
+  <thead><tr><th>Modelo</th><th>Razonamiento interno</th></tr></thead>
+  <tbody>
+  {% for modelo in ollama.modelos %}
+    <tr>
+      <td>{{ modelo.nombre }}</td>
+      <td>{% if modelo.thinking %}Este modelo puede consumir tokens de razonamiento y aumentar la latencia. Ese texto no se muestra.{% else %}No declarado en las capacidades listadas.{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <input type="hidden" name="accion" value="guardar">
+  <label for="modelo">Modelo de las próximas inferencias</label>
+  {% if ollama.modelos %}
+    <select id="modelo" name="modelo">
+      {% for modelo in ollama.modelos %}
+        <option value="{{ modelo.nombre }}" {% if modelo.nombre == prefs.modelo %}selected{% endif %}>{{ modelo.nombre }}</option>
+      {% endfor %}
+      {% if not modelo_listado %}
+        <option value="{{ prefs.modelo }}" selected>{{ prefs.modelo }} (no instalado)</option>
+      {% endif %}
+    </select>
+  {% else %}
+    <input id="modelo" name="modelo" value="{{ prefs.modelo }}">
+  {% endif %}
+  <label for="num_predict">Máximo de tokens generados (32 a {{ predict_maximo }})</label>
+  <input id="num_predict" name="num_predict" value="{{ prefs.num_predict }}" inputmode="numeric">
+  <label for="timeout_s">Tiempo máximo de respuesta, en segundos (5 a {{ timeout_maximo }})</label>
+  <input id="timeout_s" name="timeout_s" value="{{ prefs.timeout_s }}" inputmode="numeric">
+  <div class="fila-botones"><button type="submit">Guardar selección</button></div>
+</form>
+
+<form method="post" class="fila-botones">
+  {% csrf_token %}
+  <button class="secundario" name="accion" value="conexion" type="submit">Probar conexión</button>
+  <button class="secundario" name="accion" value="tecnica" type="submit">Prueba técnica controlada</button>
+</form>
+<p class="nota">La prueba técnica pregunta: {{ consulta_tecnica }}</p>
+{% if prueba_conexion %}
+  <p class="{% if prueba_conexion.ok %}ok{% else %}error{% endif %}">
+    {% if prueba_conexion.ok %}Conexión correcta. Modelos listados: {{ prueba_conexion.cantidad }}.{% else %}{{ prueba_conexion.error }}{% endif %}
+  </p>
+{% endif %}
+
+{% if respuesta %}
+  <h2>Última inferencia</h2>
+  {% if respuesta.incompleta %}<p class="aviso">Respuesta incompleta. No es una conclusión terminada.</p>{% endif %}
+  {% if respuesta.ok %}<pre>{{ respuesta.contenido }}</pre>{% else %}<p class="error">{{ respuesta.error }}</p>{% endif %}
+  <p class="nota">Modelo {{ respuesta.modelo|default:"No disponible" }}. Duración {% if respuesta.duracion_s != None %}{{ respuesta.duracion_s|floatformat:2 }} s{% else %}no disponible{% endif %}. Tokens {{ respuesta.tokens_generados|default:"no disponibles" }}. Motivo {{ respuesta.done_reason|default:"no disponible" }}.</p>
+  <p class="nota">Fuentes del contexto: {{ respuesta.fuentes|join:"; " }}.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "dataset_id": "RB-IA-2191",
+  "nota": "Los encabezados no declaran unidades. BFPD/BWPD/BOPD se tratan como BFPD de trabajo. BSW está entre 0 y 1 pero no cierra con BWPD/BFPD.",
+  "variables": [
+    {"nombre": "BFPD", "unidad": "BFPD", "tipo": "entrada de la identidad BOPD"},
+    {"nombre": "BWPD", "unidad": "BFPD", "tipo": "entrada de la identidad BOPD"},
+    {"nombre": "BOPD", "unidad": "BFPD", "tipo": "salida: BFPD − BWPD"},
+    {"nombre": "BSW", "unidad": "fracción", "tipo": "valor almacenado; no entra al motor"},
+    {"nombre": "HZ", "unidad": "Hz", "tipo": "valor almacenado"},
+    {"nombre": "PIP", "unidad": "sin unidad en encabezado", "tipo": "valor almacenado"}
+  ]
+}

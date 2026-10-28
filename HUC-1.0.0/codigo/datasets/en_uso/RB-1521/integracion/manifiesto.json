@@ -1,0 +1,14 @@
+{
+  "dataset_id": "RB-1521",
+  "version": "0.1.0",
+  "esquema_contrato": "1.0.0",
+  "estado_dataset": "investigacion_en_curso",
+  "estado_reglas": "sin_regla_de_caudal",
+  "archivo_entrada": "entrada/RB-1521-PY-121120.xls",
+  "sha256_entrada": "3c5043da6255c36c2c4270e465b4ee20dd7e6de534e58b8e84b42d350edf8808",
+  "pozos": ["RB-1521"],
+  "modelos": ["M-RB1521-PARTICION"],
+  "reglas": [],
+  "reglas_aprobadas": [],
+  "compatibilidad": {"motor": "0.1.0"}
+}

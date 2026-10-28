@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block titulo %}Consola ESP{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}?v=8">
+</head>
+<body>
+  <div class="marco">
+    {% include "core/_menu.html" %}
+    <main class="contenido">
+      {% block contenido %}{% endblock %}
+    </main>
+  </div>
+  <script src="{% static 'js/consola.js' %}?v=4"></script>
+  <script src="{% static 'js/pozos_menu.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,1124 @@
+{
+  "fecha": "2026-10-21T17:09:06+00:00",
+  "dataset_id": "BES-jun",
+  "version_dataset": "validacion_pendiente",
+  "version_contrato": "1.3.0",
+  "version_motor": "0.4.2",
+  "version_catalogo": "1.1.0",
+  "total": 182,
+  "aprobadas": 182,
+  "fallidas": 0,
+  "omitidas": 0,
+  "errores": [],
+  "reglas_afectadas": [
+    "RC-BES-01",
+    "RC-BES-02",
+    "RC-BES-03",
+    "RC-BES-04"
+  ],
+  "contratos_afectados": [
+    "1.3.0"
+  ],
+  "evidencias": [
+    "logs/autotest_reporte.json",
+    "tests/test_autotest_reglas.py",
+    "tests/test_evaluacion_integracion.py"
+  ],
+  "codigo_salida_pytest": 0,
+  "duracion_s": 19.719,
+  "estado": "aprobado",
+  "pruebas": [
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[None]",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[True]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[63]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[1.5]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[nombre4]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[nombre5]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[nombre6]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_nombre_que_no_es_texto_no_lanza[nombre7]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[fecha_observacion-23]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[fecha_observacion-valor1]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[escenario_id-1234]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[dataset_id-valor3]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[pozo_id-valor4]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[version_configuracion-1.3]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_campo_mal_tipado_no_se_copia_a_la_respuesta[modo-valor6]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[null]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[[]]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[\"BES-jun\"]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[{]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_de_raiz_incorrecta_es_controlado[{}]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_json_demasiado_grande_no_se_interpreta",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_lista_de_variables_excesiva_no_se_recorre",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_la_misma_solicitud_dos_veces_da_el_mismo_estado",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_el_orden_de_variables_distintas_no_cambia_la_regla",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_tipos_generados_con_semilla_no_rompen_el_esquema",
+      "resultado": "passed",
+      "duracion_s": 0.0198,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_una_excepcion_de_modelo_no_expone_la_traza_y_queda_registrada",
+      "resultado": "passed",
+      "duracion_s": 0.0031,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_la_evaluacion_no_cambia_el_excel_ni_la_ficha",
+      "resultado": "passed",
+      "duracion_s": 0.0016,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_las_plantillas_publicadas_se_vuelven_a_ejecutar",
+      "resultado": "passed",
+      "duracion_s": 0.0053,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_una_curva_de_un_numero_no_llega_al_calculo",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva0-ESTRUCTURA_INVALIDA]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva1-TIPO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva2-ESTRUCTURA_INVALIDA]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva3-CAMPO_OBLIGATORIO]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva4-CAMPO_DESCONOCIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva5-ESTRUCTURA_INVALIDA]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva6-ESTRUCTURA_INVALIDA]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_curvas_mal_formadas_son_entrada_invalida[curva7-VALOR_NO_FINITO]",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_un_parametro_con_campo_inesperado_se_rechaza",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_unidad_de_escenario_incorrecta_o_ausente",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_identificadores_y_fechas_mal_formados[pozo_id-   -IDENTIFICADOR_MAL_FORMADO]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_identificadores_y_fechas_mal_formados[pozo_id- QF-084 -IDENTIFICADOR_MAL_FORMADO]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_identificadores_y_fechas_mal_formados[escenario_id-  -IDENTIFICADOR_MAL_FORMADO]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_identificadores_y_fechas_mal_formados[fecha_observacion-23/10/2026-FORMATO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_identificadores_y_fechas_mal_formados[fecha_observacion-2026-13-40-FORMATO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_una_fecha_iso_no_cambia_el_significado_de_la_medicion",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_una_curva_bien_formada_no_reescribe_la_ficha",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_adversarial.py::test_los_mensajes_no_proponen_un_promedio",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_el_excel_original_no_cambia_de_huella",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_cada_hoja_tiene_su_propia_celda_y_la_misma_algebra",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_la_celda_reproduce_el_excel_y_no_la_hidrostatica",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_sensor_encima_del_intake_cambia_el_signo_de_la_correccion",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_igual_profundidad_no_aplica_correccion",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_gradiente_nulo_o_presion_faltante_no_producen_un_pip",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_una_unidad_distinta_de_psi_no_se_convierte",
+      "resultado": "passed",
+      "duracion_s": 0.7739,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_el_rotulo_psi_por_ft_esta_escrito_como_producto",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_md_y_tvd_no_son_la_misma_correccion",
+      "resultado": "passed",
+      "duracion_s": 0.0011,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_auditoria_pip.py::test_el_thd_resta_el_pip",
+      "resultado": "passed",
+      "duracion_s": 0.3308,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_la_hoja_coincide_con_la_especificacion_y_los_cinco_son_rc_bes_03",
+      "resultado": "passed",
+      "duracion_s": 0.0022,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_qf084_no_vuelve_a_rc_bes_01",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_rc_bes_01_solo_por_encima_del_maximo_escalado",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_rc_bes_02_solo_por_debajo_del_minimo_escalado",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_limites_contradictorios_en_la_ficha_no_clasifican",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_sin_limite_minimo_no_es_evaluable",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_rc_bes_04_sigue_no_evaluable_y_cita_ct_06",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas0-TIPO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas1-TIPO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas2-VALOR_NO_FINITO]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas3-VALOR_NO_FINITO]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas4-FISICAMENTE_INADMISIBLE]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas5-FISICAMENTE_INADMISIBLE]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas6-FISICAMENTE_INADMISIBLE]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas7-TIPO_INVALIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas8-UNIDAD_AUSENTE]",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_entradas_invalidas_no_lanzan_y_no_ejecutan_reglas[entradas9-CAMPO_DESCONOCIDO]",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_solicitud_sin_version_o_con_version_vieja_o_dataset_ajeno",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_solicitud_con_texto_campo_desconocido_y_estructura_mala",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_pozo_desconocido_es_controlado",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_la_salida_valida_cumple_el_esquema_y_la_invalida_tambien_se_serializa",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_trazabilidad_de_reglas_coincide_con_la_matriz_revisada",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_variable_duplicada_no_cambia_la_evaluacion",
+      "resultado": "passed",
+      "duracion_s": 0.0029,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_json_con_clave_repetida_no_se_queda_con_el_ultimo_valor",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_el_operador_no_reescribe_la_ficha",
+      "resultado": "passed",
+      "duracion_s": 0.0021,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_escenario_hipotetico_no_autoriza_ni_guarda_la_ficha",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_configuracion_ajena_o_version_incompatible_no_evalua",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_toda_respuesta_cumple_el_esquema_incluso_si_falla",
+      "resultado": "passed",
+      "duracion_s": 0.0022,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_un_fallo_del_modelo_no_parece_un_resultado_operacional",
+      "resultado": "passed",
+      "duracion_s": 0.0011,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_el_ejemplo_de_integracion_se_ejecuta_y_cumple_el_esquema",
+      "resultado": "passed",
+      "duracion_s": 0.001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_la_documentacion_vigente_no_presenta_el_cierre_de_53_pruebas_como_actual",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_autotest_reglas.py::test_los_documentos_vigentes_no_clasifican_qf084_como_rc_bes_01",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_el_inventario_cuadra_y_no_repite_identificadores",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_cada_funcion_declarada_existe_y_la_prueba_cita_un_test",
+      "resultado": "passed",
+      "duracion_s": 0.0031,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_e05_no_figura_como_validada_y_las_hipotesis_no_son_el_motor",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_las_reglas_apuntan_a_formulas_o_a_ninguna",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_el_json_publicado_tiene_el_mismo_resumen_que_el_codigo",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_los_cinco_pozos_conservan_la_regla_y_la_diferencia_de_pip",
+      "resultado": "passed",
+      "duracion_s": 2.3141,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_aux_elasticidad_tiene_oraculo_independiente_de_la_combinacion",
+      "resultado": "passed",
+      "duracion_s": 0.6669,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_aux_derivada_por_pie_tiene_oraculo",
+      "resultado": "passed",
+      "duracion_s": 0.7894,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_aux_curvatura_minima_en_pozo_vertical",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_catastro_formulas.py::test_aux_interpolacion_de_tvd",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_control_negativo_detecta_un_bit_cambiado",
+      "resultado": "passed",
+      "duracion_s": 0.0014,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_una_ruta_ausente_no_aprueba_el_control",
+      "resultado": "passed",
+      "duracion_s": 0.0008,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_copias_identicas_coinciden",
+      "resultado": "passed",
+      "duracion_s": 0.0015,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_estructura_del_libro",
+      "resultado": "passed",
+      "duracion_s": 0.7083,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_trece_errores_cacheados_solo_en_qf_549hst",
+      "resultado": "passed",
+      "duracion_s": 0.8077,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_las_filas_de_los_bloques_cambian_entre_hojas",
+      "resultado": "passed",
+      "duracion_s": 0.3311,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_celdas_citadas_expande_rangos_y_omite_texto",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_los_errores_cacheados_no_son_precedentes_de_la_cadena",
+      "resultado": "passed",
+      "duracion_s": 1.4451,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_survey_geometria_y_curvatura_minima",
+      "resultado": "passed",
+      "duracion_s": 0.0013,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_plausibilidad_no_marca_incumplimientos_en_los_datos_reales",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_plausibilidad_detecta_un_bsw_en_porcentaje",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_caudal_a_producir_reproduce_la_cache_de_las_cinco_hojas",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_caudal_a_producir_fuera_de_la_curva_no_es_calculable",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_limites_se_escalan_con_f_sobre_60",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_en_la_misma_base_de_frecuencia_las_cinco_hojas_estan_dentro",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_la_comparacion_sin_escalar_produce_la_falsa_alarma_de_qf_084",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_signo_opuesto_de_pip_cambia_exactamente_dos_veces_la_diferencia_de_tvd",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_exponente_por_defecto_es_el_de_la_hoja",
+      "resultado": "passed",
+      "duracion_s": 0.0,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_el_mapeo_coincide_con_el_lector",
+      "resultado": "passed",
+      "duracion_s": 0.7741,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_criterios_exigir_falla_si_un_criterio_no_se_cumple",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_constantes_literales_ignoran_referencias_y_funciones",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_controles_y_mapeo.py::test_la_firma_estructural_es_igual_en_las_cinco_hojas_para_la_cadena",
+      "resultado": "passed",
+      "duracion_s": 0.3338,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_el_retroceso_de_caudal_no_llega_al_modelo",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_el_caudal_decreciente_se_rechaza",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_el_caudal_duplicado_senala_el_punto",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_el_head_no_descendente_senala_su_campo",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_caudal_y_head_invalidos_se_informan_juntos",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_valores_muy_proximos_se_aceptan_si_la_comparacion_exacta_crece",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_muchos_puntos_validos_no_son_un_error_estructural",
+      "resultado": "passed",
+      "duracion_s": 0.0013,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_una_curva_valida_sin_interseccion_es_no_evaluable",
+      "resultado": "passed",
+      "duracion_s": 0.0019,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_la_curva_de_la_hoja_sigue_siendo_aceptable",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_interpolacion_analitica_en_el_vertice_y_entre_puntos",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_curvas_orden.py::test_la_fecha_mala_y_el_retroceso_se_rechazan_juntos",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_estadisticas_y_survey.py::test_un_punto_no_tiene_desviacion",
+      "resultado": "passed",
+      "duracion_s": 0.0005,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_estadisticas_y_survey.py::test_dato_incompleto_queda_en_faltantes",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_estadisticas_y_survey.py::test_survey_tiene_las_estaciones_numericas_de_cada_hoja",
+      "resultado": "passed",
+      "duracion_s": 0.4916,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_estadisticas_y_survey.py::test_la_tabla_de_seis_puntos_coincide_dentro_de_cada_referencia",
+      "resultado": "passed",
+      "duracion_s": 0.6667,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_estadisticas_y_survey.py::test_operacion_no_mezcla_hojas",
+      "resultado": "passed",
+      "duracion_s": 0.7739,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_qf084_con_datos_registrados_es_rc_bes_03_y_no_autoriza_operar",
+      "resultado": "passed",
+      "duracion_s": 0.0007,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_la_hoja_qf554h_resuelve_el_mismo_pozo",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_igualdad_en_el_maximo_escalado_sigue_dentro",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_por_encima_del_maximo_escalado_avisa_sin_ordenar",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_sin_caudal_no_elige_regla",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_unidad_equivocada_es_error",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_dataset_y_pozo_desconocidos",
+      "resultado": "passed",
+      "duracion_s": 0.0004,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_version_de_contrato_distinta",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_frecuencia_fuera_del_observado_advierte_y_no_autoriza",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_rc04_no_es_evaluable",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_ninguna_regla_del_catalogo_esta_aprobada",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_el_informe_no_recupera_la_clasificacion_vieja_de_qf084",
+      "resultado": "passed",
+      "duracion_s": 0.4513,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_promover_no_mueve_el_expediente",
+      "resultado": "passed",
+      "duracion_s": 0.001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_evaluacion_integracion.py::test_una_salida_con_recomendacion_no_autorizada_no_pasa_el_contrato",
+      "resultado": "passed",
+      "duracion_s": 0.0003,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_f01_api_12_coincide_con_cache_de_la_hoja",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_fluido_reproduce_gradiente_cacheado_en_las_cinco_hojas",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_signo_de_pip_es_el_de_la_celda_y_no_el_opuesto",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_exponente_de_friccion_es_el_de_la_hoja_no_el_del_pdf",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_dato_faltante_no_produce_numero",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_fuera_de_dominio_gradiente_cero_y_caudal_negativo",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_cinco_hojas_cinco_pozos_distintos",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_fluidos_y_balance_bes_jun.py::test_regla_candidata_usa_el_limite_de_la_misma_hoja",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_api_10_es_gravedad_especifica_1_por_la_definicion",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_subir_el_api_baja_la_gravedad_especifica",
+      "resultado": "passed",
+      "duracion_s": 0.0,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_el_gradiente_es_el_factor_0_052_de_la_celda",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_el_signo_de_la_celda_no_coincide_con_la_hidrostatica_simple",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_la_thd_cambia_con_el_signo_de_cada_termino",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_la_friccion_de_la_hoja_tiene_los_exponentes_escritos",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_la_afinidad_de_la_hoja_escala_caudal_con_f_y_altura_con_f2",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_propiedades_fisicas.py::test_sin_interseccion_no_se_extrapola",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_sensibilidad_local.py::test_q_estrella_coincide_con_la_cadena",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_sensibilidad_local.py::test_el_metodo_recupera_el_exponente_exacto_de_la_friccion",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_sensibilidad_local.py::test_signos_fisicos_en_las_cinco_hojas",
+      "resultado": "passed",
+      "duracion_s": 0.0006,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_sensibilidad_local.py::test_derivada_por_pie_finita_y_con_signo",
+      "resultado": "passed",
+      "duracion_s": 0.0002,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e01_definicion_oraculo_y_monotonia",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e02_coeficientes_de_la_celda_sin_origen_experimental",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e03_mezcla_lineal_sin_convertir_el_rotulo_porcentual",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e04_factor_0_052_y_contraste_con_el_sistema_internacional",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e05_reproduccion_hidrostatica_y_cinco_pozos",
+      "resultado": "passed",
+      "duracion_s": 0.7917,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e06_presion_y_altura_son_inversas_del_gradiente",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e07_exponentes_de_la_hoja_no_el_pdf",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e08_el_balance_tiene_los_signos_escritos",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e09_afinidad_con_una_razon_que_no_sale_del_dataset",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    },
+    {
+      "nodo": "tests/test_verificacion_ecuaciones.py::test_e10_interpolacion_analitica_sin_extrapolacion",
+      "resultado": "passed",
+      "duracion_s": 0.0001,
+      "mensaje": ""
+    }
+  ]
+}

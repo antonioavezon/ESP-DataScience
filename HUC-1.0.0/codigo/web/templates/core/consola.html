@@ -1,0 +1,43 @@
+{% extends "base_consola.html" %}
+{% block titulo %}Consola ESP{% endblock %}
+{% block contenido %}
+<h1>Consola ESP</h1>
+<section class="instrumento consola-zonas" aria-label="Consola operacional">
+  <div class="tarjeta fila-pozo">
+    <label for="pozo">Pozo</label>
+    <select id="pozo">
+      {% for pozo in pozos %}
+        <option value="{{ pozo.pozo_id }}">{{ pozo.pozo_id }}</option>
+      {% empty %}
+        <option value="">No hay pozos en las fichas de integración</option>
+      {% endfor %}
+    </select>
+  </div>
+  <article class="tarjeta" aria-label="Identificación">
+    <h2>Identificación</h2>
+    <p id="identidad-dataset"></p>
+    <p id="identidad-escenario"></p>
+    <p id="identidad-momento"></p>
+  </article>
+  <section id="pantalla" class="tarjeta pantalla tono-{{ estado_pantalla.tono|default:'sin-clasificacion' }}" aria-live="polite">
+    <div class="semaforo">
+      <span id="lampara" class="lampara" aria-hidden="true"></span>
+      <p class="estado-linea"><span id="rotulo">{{ estado_pantalla.rotulo|default:"SIN RESULTADO" }}</span></p>
+    </div>
+    <p id="comunicacion" class="leyenda"></p>
+  </section>
+  <article class="tarjeta" aria-label="Valores publicados">
+    <h2>Variables</h2>
+    <div id="variables"></div>
+  </article>
+  <article class="tarjeta" aria-label="Resultados del proceso">
+    <h2>Resultados</h2>
+    <div id="resultados"></div>
+  </article>
+  <article class="tarjeta" aria-label="Explicación">
+    <h2>Explicación</h2>
+    <p id="mensaje"></p>
+  </article>
+</section>
+<noscript><p>La actualización automática necesita JavaScript. Los pozos listados salen de las fichas reales.</p></noscript>
+{% endblock %}

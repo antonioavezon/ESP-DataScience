@@ -1,0 +1,56 @@
+{
+  "solicitud": {
+    "dataset_id": "BES-jun",
+    "pozo_id": "QF-084",
+    "version_configuracion": "1.3.0",
+    "modo": "simulacion",
+    "escenario_id": "retroceso-caudal",
+    "variables": [],
+    "parametros_escenario": {
+      "curva": [
+        {
+          "caudal_bfpd": 0,
+          "head_ft": 100
+        },
+        {
+          "caudal_bfpd": 200,
+          "head_ft": 50
+        },
+        {
+          "caudal_bfpd": 100,
+          "head_ft": 0
+        }
+      ],
+      "etapas": {
+        "valor": 1,
+        "unidad": "1"
+      }
+    }
+  },
+  "resumen": {
+    "contrato": "1.3.0",
+    "motor": "0.4.1",
+    "estado": "no_evaluable",
+    "modelos": [
+      "M-BES-FLUIDO",
+      "M-BES-BALANCE",
+      "M-BES-INTERSECCION"
+    ],
+    "reglas": [
+      {
+        "id": "RC-BES-01",
+        "activada": false,
+        "estado": null
+      },
+      {
+        "id": "RC-BES-04",
+        "activada": false,
+        "estado": null
+      }
+    ],
+    "reglas_ejecutadas": 0,
+    "errores": [],
+    "recomendacion": false,
+    "hipotetico": true
+  }
+}

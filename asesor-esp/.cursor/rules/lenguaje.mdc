@@ -1,0 +1,12 @@
+---
+description: Principios de la capa de lenguaje (etapa posterior)
+globs: src/asesor_esp/lenguaje/**,docs/lenguaje/**
+alwaysApply: false
+---
+
+- Etapa posterior: no implementes nada en src/asesor_esp/lenguaje/ sin la puerta G4 aprobada en trabajo.md §13. Hasta entonces solo se escriben documentos de diseño en docs/lenguaje/.
+- El modelo de lenguaje no calcula: solo redacta a partir del JSON del motor (docs/contrato_salida.md).
+- Todo número del mensaje debe existir en el JSON; toda regla citada debe existir en src/asesor_esp/reglas/reglas.yaml.
+- Estructura del mensaje al operador: qué está pasando, por qué, qué sugerimos evaluar, qué vigilar y nivel de confianza.
+- Vocabulario: columna "para operador" de docs/conceptos/glosario.md; ninguna sigla sin explicar.
+- Nunca dar órdenes sobre el pozo: sugerir qué evaluar y cuándo escalar a ingeniería.

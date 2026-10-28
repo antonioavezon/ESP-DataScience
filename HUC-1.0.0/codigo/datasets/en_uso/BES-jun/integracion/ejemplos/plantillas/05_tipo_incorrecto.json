@@ -1,0 +1,60 @@
+{
+  "nota": "El nombre de la variable es un texto.",
+  "solicitud": {
+    "dataset_id": "BES-jun",
+    "pozo_id": "QF-084",
+    "version_configuracion": "1.3.0",
+    "variables": [
+      {
+        "nombre": [
+          "frecuencia_hz"
+        ],
+        "valor": 63,
+        "unidad": "Hz",
+        "procedencia": "operador"
+      }
+    ]
+  },
+  "resultado": {
+    "dataset_solicitado": "BES-jun",
+    "dataset_evaluado": null,
+    "pozo_solicitado": "QF-084",
+    "pozo_resuelto": null,
+    "version_contrato": "1.3.0",
+    "version_motor": "0.4.2",
+    "version_catalogo_reglas": "1.1.0",
+    "version_software": "0.4.2",
+    "fecha_referencia": null,
+    "incidente_id": null,
+    "estado_evaluacion": "entrada_invalida",
+    "identidad": {
+      "estado": "no_resuelta"
+    },
+    "modelos": [],
+    "reglas": [],
+    "advertencias": [],
+    "mensajes": [
+      {
+        "tipo": "error_dato",
+        "codigo": "TIPO_INVALIDO",
+        "texto": "variables.0.nombre: El tipo no es el del contrato. El valor recibido no se copia a la respuesta."
+      }
+    ],
+    "errores": [
+      {
+        "campo": "variables.0.nombre",
+        "codigo": "TIPO_INVALIDO",
+        "detalle": "El tipo no es el del contrato. El valor recibido no se copia a la respuesta.",
+        "mensaje": "El tipo no es el del contrato. El valor recibido no se copia a la respuesta.",
+        "tipo_esperado": "string"
+      }
+    ],
+    "reglas_ejecutadas": 0,
+    "recomendacion_operacional_autorizada": false,
+    "fuera_de_dominio_observado": false,
+    "modo": "operacional",
+    "hipotetico": false,
+    "escenario_id": null,
+    "parametros_modificados": []
+  }
+}

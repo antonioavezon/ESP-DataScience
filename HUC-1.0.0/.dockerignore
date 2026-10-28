@@ -1,0 +1,9 @@
+**/__pycache__
+**/.venv
+**/*.sqlite3
+**/.env
+codigo/datasets/**/docs
+codigo/datasets/**/logs
+codigo/datasets/**/tests
+codigo/web/tests
+codigo/proceso/tests

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rb1521-entrada-1.0.0",
+  "type": "object",
+  "required": ["dataset_id", "pozo_id"],
+  "properties": {
+    "dataset_id": {"const": "RB-1521"},
+    "pozo_id": {"const": "RB-1521"},
+    "variables": {"type": "array"}
+  }
+}

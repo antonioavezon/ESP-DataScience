@@ -1,0 +1,11 @@
+---
+description: Formato de la documentación del proyecto
+globs: docs/**
+alwaysApply: false
+---
+
+- Bitácora (docs/bitacora.md): una entrada por tarea verificada, con el formato del archivo. Solo se agregan entradas; nunca se editan las anteriores.
+- Decisiones (docs/decisiones.md): formato ADR con contexto, decisión, consecuencias y estado.
+- Catálogo de fórmulas: una ficha por F-xx con ecuación, variables y unidades, fuente exacta, supuestos, validez, revisión dimensional, revisión física y estado.
+- Cada afirmación técnica cita su fuente: archivo y página, sección u hoja!celda.
+- Escribe para alguien que llega mañana: qué se hizo, por qué y cómo comprobarlo.

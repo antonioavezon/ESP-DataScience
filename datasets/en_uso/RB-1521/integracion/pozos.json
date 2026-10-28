@@ -1,0 +1,17 @@
+{
+  "dataset_id": "RB-1521",
+  "pozos": [
+    {
+      "dataset_id": "RB-1521",
+      "hoja": "Hoja1",
+      "pozo_rotulo": "RB-1521",
+      "estado_identidad": "el libro no trae un código de pozo distinto de su nombre",
+      "bomba_referencia": "S11000N",
+      "fecha_en_la_hoja": "2020-05-02",
+      "condiciones_registradas": {
+        "caudal_fluidos": 8977.0,
+        "bsw": 0.985
+      }
+    }
+  ]
+}

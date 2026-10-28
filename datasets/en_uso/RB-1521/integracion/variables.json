@@ -1,0 +1,10 @@
+{
+  "dataset_id": "RB-1521",
+  "nota": "Los encabezados del libro no declaran unidades. BFPD y fracción son la lectura de trabajo de Q y BSW.",
+  "variables": [
+    {"nombre": "Q-fluidos", "unidad": "BFPD", "tipo": "entrada de la partición"},
+    {"nombre": "BSW", "unidad": "fracción", "tipo": "entrada de la partición"},
+    {"nombre": "Q-water", "unidad": "BFPD", "tipo": "salida de la partición"},
+    {"nombre": "Q-oil", "unidad": "BFPD", "tipo": "salida de la partición"}
+  ]
+}

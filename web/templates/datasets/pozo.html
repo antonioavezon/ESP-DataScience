@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titulo %}{{ pozo.pozo_rotulo }} · HUC{% endblock %}
+{% block contenido %}
+<h1>{{ pozo.pozo_rotulo }}</h1>
+<p class="nota">Dataset {{ ficha.identificador }}. Hoja {{ pozo.hoja }}.</p>
+<p>Bomba de referencia: {{ pozo.bomba_referencia|default:"No disponible" }}. Etapas: {{ pozo.etapas|default:"No disponible" }}. ID de tubing: {{ pozo.id_tubing_in|default:"No disponible" }} in.</p>
+
+<h2>Profundidades registradas en la ficha</h2>
+{% if pozo.profundidades_ft %}
+<table>
+  <thead><tr><th>Magnitud</th><th>Valor</th></tr></thead>
+  <tbody>
+  {% for clave, valor in pozo.profundidades_ft.items %}
+    <tr><td>{{ clave }}</td><td>{% if valor == None %}No disponible{% else %}{{ valor }} ft{% endif %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p>No disponible</p>{% endif %}
+
+<h2>Resultado determinístico existente</h2>
+{% if resultado %}
+<table>
+  <thead><tr><th>Columna</th><th>Valor</th></tr></thead>
+  <tbody>
+  {% for clave, valor in resultado.items %}
+    <tr>
+      <td>{{ clave }}</td>
+      <td>{% if valor == "" or valor == None %}No disponible{% else %}{{ valor }}{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p>No disponible</p>{% endif %}
+
+<p><a href="{% url 'detalle_dataset' ficha.identificador %}">Volver al dataset</a></p>
+{% endblock %}

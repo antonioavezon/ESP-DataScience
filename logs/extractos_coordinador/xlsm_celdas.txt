@@ -1,0 +1,831 @@
+
+===== SHEET 'Hoja1' state=visible xml=xl/worksheets/sheet1.xml =====
+dimension=B2:L45
+merges=21
+MERGE I4:I5
+MERGE J4:J5
+MERGE F4:H5
+MERGE F7:H7
+MERGE F29:H29
+MERGE F27:H27
+MERGE F25:H25
+MERGE F23:H23
+MERGE F21:H21
+MERGE F19:H19
+MERGE F17:H17
+MERGE F15:H15
+MERGE F13:H13
+MERGE F9:H9
+MERGE E43:H43
+MERGE F45:H45
+MERGE B2:D2
+MERGE F31:H31
+MERGE E39:H41
+MERGE F33:H33
+MERGE F35:H35
+V B2 t=s val=S:DATA  232HST
+V B3 t=s val=S:API
+V C3 t=None val=16
+V D3 t=s val=S:°
+V B4 t=s val=S:Viscosidad Crudo  µo
+V C4 t=None val=5
+V D4 t=s val=S:cps
+V I4 t=s val=S:Gavedad Especifica Crudo =
+F J4 t=None f=141.5/(131.5+C3) cached=0.95932203389830506
+V B5 t=s val=S:Constante de conversion
+V C5 t=None val=62.4
+V B6 t=s val=S:Gradiente del agua
+V C6 t=None val=0.433
+V D6 t=s val=S:psi/pie³
+V B7 t=s val=S:Factor conversion de  µo
+V C7 t=None val=6.7197000000000003E-4
+V D7 t=s val=S:lbm/pie-seg
+V I7 t=s val=S:Densidad Crudo= 
+F J7 t=None f=J4*62.4 cached=59.861694915254233
+V K7 t=s val=S:lb/pie³
+V B8 t=s val=S:Presion del Reservorio Pr
+V C8 t=None val=2000
+V D8 t=s val=S:psi
+V B9 t=s val=S:IP
+V C9 t=None val=1.5
+V D9 t=s val=S:BPD/psi
+V I9 t=s val=S:Gradiente Crudo=
+F J9 t=None f=J4*C6 cached=0.4153864406779661
+V K9 t=s val=S:psi/pie
+V L9 t=s val=S: 
+V B10 t=s val=S:BSW 
+V C10 t=None val=0
+V D10 t=s val=S:%
+V B11 t=s val=S:Profundidad de los perforados
+V C11 t=None val=7000
+V D11 t=s val=S:pies
+V I11 t=s val=S: µo en lbm/pie-seg=
+F J11 t=None f=C4*0.00067197 cached=3.3598500000000002E-3
+V K11 t=s val=S:lbm/pie-seg
+V B12 t=s val=S:Sumergencia
+V C12 t=None val=1000
+V D12 t=s val=S:pies
+V B13 t=s val=S:Profundidad ESP
+V C13 t=None val=6000
+V D13 t=s val=S:pies
+V I13 t=s val=S:Pwf=
+F J13 t=None f=J33+((C11-C13)*J9) cached=830.77288135593221
+V K13 t=s val=S:psi
+V B14 t=s val=S:Tubing 
+V C14 t=None val=3.5
+V D14 t=s val=S:Pulgadas
+V B15 t=s val=S:Diametro Interno Tubing di
+V C15 t=None val=3
+V D15 t=s val=S:Pulgadas
+V I15 t=s val=S:Caudal  Q=
+F J15 t=None f=C9*(C8-J13) cached=1753.8406779661018
+V K15 t=s val=S:BPD
+V B16 t=s val=S:Rugosidad  ɛ
+V C16 t=None val=1E-3
+V D16 t=s val=S:Pulgadas
+V B17 t=s val=S:Casing 
+V C17 t=None val=7
+V D17 t=s val=S:Pulgadas
+V F17 t=s val=S:  
+V I17 t=s val=S:Velocidad=
+F J17 t=None f=(J15*5.615*(1/(24*3600)))/((3.1416*(C20^2))/4) cached=2.3219627193455707
+V K17 t=s val=S:pie/seg
+V B18 t=s val=S:Profundidad del Casing
+V C18 t=None val=7200
+V D18 t=s val=S:pies
+V B19 t=s val=S:Factor Conversion Velocid
+V C19 t=None val=5.6150000000000002
+V D19 t=s val=S:pc/B
+V I19 t=s val=S:Numero de Reynolds=
+F J19 t=None f=(C20*J17*J7)/J11 cached=10342.472425112626
+V B20 t=s val=S:Diametro tubing en ft 
+V C20 t=None val=0.25
+V D20 t=s val=S:pies
+V B21 t=s val=S:Factor conversion de(ΔP/ΔL)friccion 
+V C21 t=None val=144
+V D21 t=s val=S:lb/ft²
+V I21 t=s val=S:factor de friccion=
+F J21 t=None f=64/J19 cached=6.1880754784127993E-3
+V B22 t=s val=S: Pwh     THP         
+V C22 t=None val=200
+V D22 t=s val=S:psi
+V I23 t=s val=S:(ΔP/ΔL)friccion=
+F J23 t=None f=((J21*J7*(J17^2))/(2*32.2*C20))/144 cached=8.6144336150097622E-4
+V K23 t=s val=S:psi/pie
+V I25 t=s val=S:(ΔP/ΔL)gravedad=
+F J25 t=None f=J7/C21 cached=0.4157062146892655
+V K25 t=s val=S:psi/pie
+V I27 t=s val=S:(ΔP/ΔL)Total=
+F J27 t=None f=J25+J23 cached=0.41656765805076645
+V K27 t=s val=S:psi/pie
+V I29 t=s val=S:ΔP Total=
+F J29 t=None f=J27*C13 cached=2499.4059483045985
+V K29 t=s val=S:psi
+V I31 t=s val=S:Presion de Descarga=
+F J31 t=None f=C22+J29 cached=2699.4059483045985
+V K31 t=s val=S:psi
+V I33 t=s val=S:PIP=
+F J33 t=None f=C12*J9 cached=415.38644067796611
+V K33 t=s val=S:psi
+V I35 t=s val=S:ΔP Bomba =
+F J35 t=None f=J31-J33 cached=2284.0195076266323
+V K35 t=s val=S:psi
+V I37 t=s val=S:Head=
+F J37 t=None f=J35/J9 cached=5498.5413194971115
+V K37 t=s val=S:pies
+V E39 t=s val=S:Los siguientes valores los obtenemos de la curva de la bomba 
+V I39 t=s val=S:Pies por etapa=
+V J39 t=None val=54
+V K39 t=s val=S:pies
+V I40 t=s val=S:Eficiencia=
+V J40 t=None val=62
+V K40 t=s val=S:%
+V I41 t=s val=S:Potencia por etapa=
+V J41 t=None val=1.4
+V K41 t=s val=S:HP
+V I43 t=s val=S:Numero de Etapas=
+F J43 t=None f=J37/J39 cached=101.82483924994651
+V I45 t=s val=S:Potencia de la bomba=
+F J45 t=None f=J41*J43*J4 cached=136.7559366468773
+V K45 t=s val=S:HP
+COUNTS formulas=19 values=106
+
+===== SHEET 'METODO' state=visible xml=xl/worksheets/sheet2.xml =====
+dimension=B2:R47
+merges=22
+MERGE F9:H9
+MERGE B2:D2
+MERGE F4:H5
+MERGE I4:I5
+MERGE J4:J5
+MERGE F7:H7
+MERGE F13:H13
+MERGE F15:H15
+MERGE F17:H17
+MERGE F19:H19
+MERGE F21:H21
+MERGE E39:H41
+MERGE E43:H43
+MERGE F45:H45
+MERGE L19:L21
+MERGE F25:H25
+MERGE F27:H27
+MERGE F29:H29
+MERGE F31:H31
+MERGE F33:H33
+MERGE F35:H35
+MERGE F23:H23
+V B2 t=s val=S:DATA
+V E2 t=s val=S:1)
+V I2 t=s val=S:IP=
+F J2 t=None f=C23/(C8-C24) cached=15.080728639583633
+V B3 t=s val=S:API
+V C3 t=None val=13.8
+V D3 t=s val=S:°
+V B4 t=s val=S:Viscosidad Crudo  µo
+V C4 t=None val=367
+V D4 t=s val=S:cps
+V E4 t=s val=S:2)
+V I4 t=s val=S:Gavedad Especifica Crudo =
+F J4 t=None f=141.5/(131.5+C3) cached=0.97384721266345486
+V B5 t=s val=S:Constante de conversion
+V C5 t=None val=62.4
+V B6 t=s val=S:Gradiente del agua
+V C6 t=None val=0.433
+V D6 t=s val=S:psi/pie³
+V B7 t=s val=S:Factor conversion de  µo
+V C7 t=None val=6.7197000000000003E-4
+V D7 t=s val=S:lbm/pie-seg
+V E7 t=s val=S:3)
+V I7 t=s val=S:Densidad Crudo= 
+F J7 t=None f=J4*62.4 cached=60.768066070199581
+V K7 t=s val=S:lb/pie³
+V B8 t=s val=S:Presion del Reservorio Pr
+V C8 t=None val=1119.94
+V D8 t=s val=S:psi
+V B9 t=s val=S:IP
+V C9 t=None val=15.8
+V D9 t=s val=S:BPD/psi
+V E9 t=s val=S:4)
+V I9 t=s val=S:Gradiente Fluido=
+F J9 t=None f=J4*C6 cached=0.42167584308327594
+V K9 t=s val=S:psi/pie
+V L9 t=s val=S: 
+V B10 t=s val=S:BSW 
+V C10 t=None val=96.6
+V D10 t=s val=S:%
+V B11 t=s val=S:Profundidad de los perforados
+V C11 t=None val=2601.7453
+V D11 t=s val=S:pies
+V I11 t=s val=S: µo en lbm/pie-seg=
+F J11 t=None f=C4*0.00067197 cached=0.24661299
+V K11 t=s val=S:lbm/pie-seg
+V B12 t=s val=S:Sumergencia
+V C12 t=None val=1574
+V D12 t=s val=S:pies
+V B13 t=s val=S:Profundidad Intake. ESP
+V C13 t=None val=2619.58
+V D13 t=s val=S:pies
+V I13 t=s val=S:Pwf=
+F J13 t=None f=J33+((C11-C13)*J9) cached=656.19731485443913
+V K13 t=s val=S:psi
+V B14 t=s val=S:Tubing 
+V C14 t=None val=3.5
+V D14 t=s val=S:Pulgadas
+V B15 t=s val=S:Diametro Interno Tubing 
+V C15 t=None val=2.992
+V D15 t=s val=S:Pulgadas
+V I15 t=s val=S:Caudal  Q=
+F J15 t=None f=C9*(C8-J13) cached=7327.1344252998633
+V K15 t=s val=S:BPD
+V B16 t=s val=S:Rugosidad  ɛ
+F C16 t=None f=0.0005*0.25 cached=1.25E-4
+V B17 t=s val=S:Casing 
+V C17 t=None val=7
+V D17 t=s val=S:Pulgadas
+V F17 t=s val=S:  
+V I17 t=s val=S:Velocidad=
+F J17 t=None f=(C23*5.615*(1/(24*3600)))/((3.1416*(C20^2))/4) cached=6.9051832635411072
+V K17 t=s val=S:pie/seg
+V B18 t=s val=S:Profundidad del Casing
+V C18 t=None val=3779
+V D18 t=s val=S:pies
+V B19 t=s val=S:Factor Conversion Velocid
+V C19 t=None val=5.6150000000000002
+V D19 t=s val=S:pc/B
+V E19 t=s val=S:7)
+V I19 t=s val=S:Numero de Reynolds=
+F J19 t=None f=(C20*J17*J7)/J11 cached=425.37766642554226
+V L19 t=s val=S:Si  
+V M19 t=s val=S:<2000
+V N19 t=s val=S:Flujo Laminar
+V B20 t=s val=S:Diametro tubing en ft 
+V C20 t=None val=0.25
+V D20 t=s val=S:pies
+V M20 t=s val=S:2000-4000
+V N20 t=s val=S:Flujo transitorio
+V B21 t=s val=S:Factor conversion de(ΔP/ΔL)friccion 
+V C21 t=None val=144
+V D21 t=s val=S:lb/ft²
+V E21 t=s val=S:7.1)
+V I21 t=s val=S:factor de friccion=
+F J21 t=None f=64/J19 cached=0.15045453734746675
+V M21 t=s val=S:>4000
+V N21 t=s val=S:Flujo turbulento
+V B22 t=s val=S: THP         
+V C22 t=None val=175
+V D22 t=s val=S:psi
+V B23 t=s val=S:Q Prueba
+V C23 t=None val=5215.67
+V D23 t=s val=S:BPD
+V E23 t=s val=S:8.1)
+V I23 t=s val=S:(ΔP/ΔL)friccion=
+F J23 t=None f=((J21*J7*(J17^2))/(2*32.2*C20))/144 cached=0.18803675816368037
+V K23 t=s val=S:psi/pie
+V B24 t=s val=S:Pwf Prueba
+V C24 t=None val=774.09
+V D24 t=s val=S:psi
+V E25 t=s val=S:8.2)
+V I25 t=s val=S:(ΔP/ΔL)gravedad=
+F J25 t=None f=J7/C21 cached=0.42200045882083043
+V K25 t=s val=S:psi/pie
+V E27 t=s val=S:8.3)
+V I27 t=s val=S:(ΔP/ΔL)Total=
+F J27 t=None f=J25+J23 cached=0.61003721698451074
+V K27 t=s val=S:psi/pie
+V E29 t=s val=S:8)
+V I29 t=s val=S:ΔP Total=
+F J29 t=None f=J27*C13 cached=1598.0412928682847
+V K29 t=s val=S:psi
+V E31 t=s val=S:9)
+V I31 t=s val=S:Presion de Descarga=
+F J31 t=None f=C22+J29 cached=1773.0412928682847
+V K31 t=s val=S:psi
+V I33 t=s val=S:PIP=
+F J33 t=None f=C12*J9 cached=663.71777701307633
+V K33 t=s val=S:psi
+V M33 t=s val=S:10)
+V P33 t=s val=S:PIP=
+F Q33 t=None f=J31-Q37 cached=391.63123092747264
+V R33 t=s val=S:psi
+V I35 t=s val=S:ΔP Bomba =
+F J35 t=None f=J31-J33 cached=1109.3235158552084
+V K35 t=s val=S:psi
+V D37 t=s val=S:5)
+V E37 t=s val=S:Dato BOMBA
+V I37 t=s val=S:Head=
+F J37 t=None f=J35/J9 cached=2630.7495059329976
+V K37 t=s val=S:pies
+V L37 t=s val=S:6)
+V P37 t=s val=S:ΔP ESP=
+F Q37 t=None f=(P41*P40)*J9 cached=1381.4100619408121
+V R37 t=s val=S:psi
+V E39 t=s val=S:Los siguientes valores los obtenemos de la curva de la bomba 
+V I39 t=s val=S:Pies por etapa=
+V J39 t=None val=54
+V K39 t=s val=S:pies
+V M39 t=s val=S:Datos de la bomba:
+V O39 t=s val=S:Modelo ESP
+V P39 t=s val=S:GN4000
+V I40 t=s val=S:Eficiencia=
+V J40 t=None val=62
+V K40 t=s val=S:%
+V O40 t=s val=S:# etapas=
+V P40 t=None val=52
+V I41 t=s val=S:Potencia por etapa=
+V J41 t=None val=1.4
+V K41 t=s val=S:HP
+V O41 t=s val=S:Head/etapa=
+V P41 t=None val=63
+V I43 t=s val=S:Numero de Etapas=
+F J43 t=None f=J37/J39 cached=48.717583443203658
+V K43 t=s val=S:11)
+V P43 t=s val=S:Sumergencia=
+F Q43 t=None f=Q33/J9 cached=928.74950593299729
+V R43 t=s val=S:pies
+V I45 t=s val=S:Potencia de la bomba=
+F J45 t=None f=J41*J43*J4 cached=66.420875981408415
+V K45 t=s val=S:HP
+V L45 t=s val=S:12)
+V P45 t=s val=S:Nivel de Fluido Dimanico=
+F Q45 t=None f=C13-Q43 cached=1690.8304940670027
+V R45 t=s val=S:pies
+COUNTS formulas=25 values=150
+
+===== SHEET 'Metodo Ordenado' state=visible xml=xl/worksheets/sheet3.xml =====
+dimension=B2:Q54
+merges=17
+MERGE L22:L24
+MERGE F24:H24
+MERGE B2:D2
+MERGE F4:H5
+MERGE I4:I5
+MERGE J4:J5
+MERGE F7:H7
+MERGE F9:H9
+MERGE F2:H2
+MERGE F20:H20
+MERGE F22:H22
+MERGE F36:H36
+MERGE F26:H26
+MERGE F28:H28
+MERGE F30:H30
+MERGE F32:H32
+MERGE F34:H34
+V B2 t=s val=S:DATA  232HST     GN4000
+V E2 t=s val=S:1)
+V I2 t=s val=S:IP=
+F J2 t=None f=C23/(C8-C24) cached=12.035837042880486
+V B3 t=s val=S:API
+V C3 t=None val=13.8
+V D3 t=s val=S:°
+V B4 t=s val=S:Viscosidad Crudo  µo
+V C4 t=None val=367
+V D4 t=s val=S:cps
+V E4 t=s val=S:2)
+V I4 t=s val=S:Gavedad Especifica Crudo =
+F J4 t=None f=141.5/(131.5+C3) cached=0.97384721266345486
+V B5 t=s val=S:Constante de conversion
+V C5 t=None val=62.4
+V B6 t=s val=S:Gradiente del agua
+V C6 t=None val=0.433
+V D6 t=s val=S:psi/pie³
+V B7 t=s val=S:Factor conversion de  µo
+V C7 t=None val=6.7197000000000003E-4
+V D7 t=s val=S:lbm/pie-seg
+V E7 t=s val=S:3)
+V I7 t=s val=S:Densidad Crudo= 
+F J7 t=None f=J4*62.4 cached=60.768066070199581
+V K7 t=s val=S:lb/pie³
+V L7 t=s val=S: 
+V B8 t=s val=S:Presion del Reservorio Pr
+V C8 t=None val=1119.94
+V D8 t=s val=S:psi
+V B9 t=s val=S:IP
+V C9 t=None val=12.04
+V D9 t=s val=S:BPD/psi
+V E9 t=s val=S:4)
+V I9 t=s val=S:Gradiente Fluido=
+F J9 t=None f=J4*C6 cached=0.42167584308327594
+V K9 t=s val=S:psi/pie
+V L9 t=s val=S: 
+V B10 t=s val=S:BSW 
+V C10 t=None val=96.6
+V D10 t=s val=S:%
+V B11 t=s val=S:Profundidad de los perforados
+V C11 t=None val=2601.7453
+V D11 t=s val=S:pies
+V I11 t=s val=S: µo en lbm/pie-seg=
+F J11 t=None f=C4*0.00067197 cached=0.24661299
+V K11 t=s val=S:lbm/pie-seg
+V B12 t=s val=S:Sumergencia
+V C12 t=None val=1553
+V D12 t=s val=S:pies
+V B13 t=s val=S:Profundidad Intake. ESP
+V C13 t=None val=2619.58
+V D13 t=s val=S:pies
+V E13 t=s val=S:5)
+V F13 t=s val=S:Datos de la bomba:
+V G13 t=s val=S:Modelo ESP
+V I13 t=s val=S:HEAD
+V J13 t=None val=3276
+F K13 t=None f=J13*0.803 cached=2630.6280000000002
+V L13 t=s val=S:HEAD i
+V M13 t=None val=2631
+V B14 t=s val=S:Tubing 
+V C14 t=None val=3.5
+V D14 t=s val=S:Pulgadas
+V G14 t=s val=S:# etapas=
+V H14 t=None val=63
+V B15 t=s val=S:Diametro Interno Tubing 
+V C15 t=None val=2.992
+V D15 t=s val=S:Pulgadas
+V G15 t=s val=S:Head/etapa=
+V H15 t=None val=52
+V B16 t=s val=S:Rugosidad  ɛ
+F C16 t=None f=0.0005*0.25 cached=1.25E-4
+V B17 t=s val=S:Casing 
+V C17 t=None val=7
+V D17 t=s val=S:Pulgadas
+V E17 t=s val=S:6)
+V I17 t=s val=S:ΔP ESP=
+F J17 t=None f=+J13*J9 cached=1381.4100619408121
+V K17 t=s val=S:psi
+V B18 t=s val=S:Profundidad del Casing
+V C18 t=None val=3779
+V D18 t=s val=S:pies
+V B19 t=s val=S:Factor Conversion Velocid
+V C19 t=None val=5.6150000000000002
+V D19 t=s val=S:pc/B
+V B20 t=s val=S:Diametro tubing en ft 
+V C20 t=None val=0.25
+V D20 t=s val=S:pies
+V F20 t=s val=S:  
+V I20 t=s val=S:Velocidad=
+F J20 t=None f=(C23*5.615*(1/(24*3600)))/((3.1416*(C20^2))/4) cached=5.6558300087711855
+V K20 t=s val=S:pie/seg
+V B21 t=s val=S:Factor conversion de(ΔP/ΔL)friccion 
+V C21 t=None val=144
+V D21 t=s val=S:lb/ft²
+V B22 t=s val=S: THP         
+V C22 t=None val=175
+V D22 t=s val=S:psi
+V E22 t=s val=S:7)
+V I22 t=s val=S:Numero de Reynolds=
+F J22 t=None f=(C20*J20*J7)/J11 cached=348.41418091442068
+V L22 t=s val=S:Si  
+V M22 t=s val=S:<2000
+V N22 t=s val=S:Flujo Laminar
+V B23 t=s val=S:Q Prueba
+V C23 t=None val=4272
+V D23 t=s val=S:BPD
+V M23 t=s val=S:2000-4000
+V N23 t=s val=S:Flujo transitorio
+V B24 t=s val=S:Pwf Prueba
+V C24 t=None val=765
+V D24 t=s val=S:psi
+V E24 t=s val=S:7.1)
+V I24 t=s val=S:factor de friccion=
+F J24 t=None f=64/J22 cached=0.18368942340989278
+V M24 t=s val=S:>4000
+V N24 t=s val=S:Flujo turbulento
+V B26 t=s val=S:Q Nueva 
+V E26 t=s val=S:8.1)
+V I26 t=s val=S:(ΔP/ΔL)friccion=
+F J26 t=None f=((J24*J7*(J20^2))/(2*32.2*C20))/144 cached=0.15401530980204703
+V K26 t=s val=S:psi/pie
+V E28 t=s val=S:8.2)
+V I28 t=s val=S:(ΔP/ΔL)gravedad=
+F J28 t=None f=J7/C21 cached=0.42200045882083043
+V K28 t=s val=S:psi/pie
+V E30 t=s val=S:8.3)
+V I30 t=s val=S:(ΔP/ΔL)Total=
+F J30 t=None f=J28+J26 cached=0.57601576862287751
+V K30 t=s val=S:psi/pie
+V C32 t=s val=S:Eff Bomba=
+F D32 t=None f=((D40*C23*J7)/(1360*D42)) cached=1960.8326288066046
+V E32 t=s val=S:8)
+V I32 t=s val=S:ΔP Total=
+F J32 t=None f=J30*C13 cached=1508.9193871691175
+V K32 t=s val=S:psi
+V C34 t=s val=S:Altura Dinamica=
+F D34 t=None f=(C22*2.31)/J4 cached=415.10618374558305
+V E34 t=s val=S:9)
+V I34 t=s val=S:Presion de Descarga=
+F J34 t=None f=C22+J32 cached=1683.9193871691175
+V K34 t=s val=S:psi
+V C36 t=s val=S:Pedida por friccion=
+F D36 t=None f=J32/1000 cached=1.5089193871691176
+V E36 t=s val=S:10)
+V I36 t=s val=S:PIP=
+F J36 t=None f=J34-J17 cached=302.50932522830544
+V K36 t=s val=S:psi
+V L36 t=None val=672
+V C38 t=s val=S:Lev Dinamico=
+F D38 t=None f=C11-((C24*2.31)/J4) cached=787.1382681978796
+V E38 t=s val=S:11)
+V I38 t=s val=S:Sumergencia=
+F J38 t=None f=J36/J9 cached=717.39780732130646
+V K38 t=s val=S:pies
+V L38 t=None val=1574
+V C40 t=s val=S:TDH=
+F D40 t=None f=D38+D36+D34 cached=1203.7533713306318
+V E40 t=s val=S:12)
+V I40 t=s val=S:Nivel de Fluido Dimanico=
+F J40 t=None f=C13-J38 cached=1902.1821926786934
+V K40 t=s val=S:pies
+V L40 t=None val=1046
+V C42 t=s val=S:HP=
+F D42 t=None f=1.91*63*J4 cached=117.18303509979353
+F D46 t=None f=(2895*C23*J7)/(1360*D42) cached=4715.7587223371029
+V K47 t=s val=S:IP=
+F L47 t=None f=C23/(((0.04*((C8*((1-(0.2*(C24/C8)))-(0.8*((C24/C8)^2))))/1.8)))+(0.96*(C8-C24))) cached=12.104034442104341
+V B48 t=s val=S:Qprueba m³/s
+F C48 t=None f=C23*0.00000184 cached=7.8604799999999996E-3
+V B49 t=s val=S:HEAD m
+F C49 t=None f=J13*0.3048 cached=998.52480000000003
+V B50 t=s val=S:densidad kg/m³
+V C50 t=None val=973.44
+V B51 t=s val=S:Eff Bomba
+F C51 t=None f=(C50*C48*C49*J4)/D42 cached=63.49553606767514
+V K54 t=s val=S:Qmax=
+F L54 t=None f=C23/(1-(0.2*(C24/C8))-(0.8*((C24/C8)^2))) cached=8716.3160464102293
+COUNTS formulas=31 values=147
+
+===== SHEET 'Hoja2' state=visible xml=xl/worksheets/sheet4.xml =====
+dimension=A1:G13
+merges=0
+V A1 t=s val=S:a
+V B1 t=s val=S:b
+V C1 t=s val=S:c
+F A2 t=None f=B2^2 cached=1.1080332409972298E-6
+F B2 t=None f=1/950 cached=1.0526315789473684E-3
+F C2 t=None f=4268/4272 cached=0.99906367041198507
+F A3 t=None f=-0.8*A2 cached=-8.8642659279778391E-7
+F B3 t=None f=-0.2*B2 cached=-2.105263157894737E-4
+F C3 t=None f=1-C2 cached=9.3632958801492805E-4
+F B6 t=None f=((-B3)+(((B3^2)-(4*A3*C3))^(1/2)))/(2*A3) cached=-241.86725840222132
+F B7 t=None f=((-B3)-(((B3^2)-(4*A3*C3))^(1/2)))/(2*A3) cached=4.367258402221327
+COUNTS formulas=8 values=3
+
+===== SHEET 'Prueba Sesnorless' state=visible xml=xl/worksheets/sheet5.xml =====
+dimension=B1:R82
+merges=19
+MERGE I4:I5
+MERGE I2:K2
+MERGE J4:J5
+MERGE F36:H36
+MERGE F12:H13
+MERGE F9:H9
+MERGE F26:H26
+MERGE F20:H21
+MERGE F15:H19
+MERGE F27:H27
+MERGE F28:H28
+MERGE F30:H30
+MERGE F32:H32
+MERGE F34:H34
+MERGE F7:H7
+MERGE F55:H56
+MERGE B2:D2
+MERGE F2:H2
+MERGE F4:H5
+V E1 t=None val=15
+V B2 t=s val=S:DATA  232HST     GN4000
+V F2 t=s val=S:ECUACIONES DE LA BES
+V I2 t=s val=S:VARIABLES
+V B3 t=s val=S:API
+V C3 t=None val=13.8
+V D3 t=s val=S:°
+V B4 t=s val=S:Viscosidad Crudo  µo
+V C4 t=None val=367
+V D4 t=s val=S:cps
+V I4 t=s val=S:Gavedad Especifica Crudo =
+F J4 t=None f=141.5/(131.5+C3) cached=0.97384721266345486
+V B5 t=s val=S:Constante de conversion
+V C5 t=None val=62.4
+V B6 t=s val=S:Gradiente del agua
+V C6 t=None val=0.433
+V D6 t=s val=S:psi/pie³
+V B7 t=s val=S:Factor conversion de  µo
+V C7 t=None val=6.7197000000000003E-4
+V D7 t=s val=S:lbm/pie-seg
+V I7 t=s val=S:Densidad Crudo= 
+F J7 t=None f=J4*62.4 cached=60.768066070199581
+V K7 t=s val=S:lb/pie³
+V L7 t=s val=S: 
+V B8 t=s val=S:Presion del Reservorio Py
+V C8 t=None val=1119.94
+V D8 t=s val=S:psi
+V B9 t=s val=S:IP
+V C9 t=None val=12.04
+V D9 t=s val=S:BPD/psi
+V I9 t=s val=S:Gradiente Fluido=
+F J9 t=None f=J4*C6 cached=0.42167584308327594
+V K9 t=s val=S:psi/pie
+V L9 t=s val=S: 
+V B10 t=s val=S:BSW 
+V C10 t=None val=96.6
+V D10 t=s val=S:%
+V B11 t=s val=S:Profundidad de los perforados
+V C11 t=None val=2862.6
+V D11 t=s val=S:pies
+V P11 t=s val=S: µo en lbm/pie-seg=
+F Q11 t=None f=C4*0.00067197 cached=0.24661299
+V R11 t=s val=S:lbm/pie-seg
+V B12 t=s val=S:Sumergencia
+V C12 t=None val=1553
+V D12 t=s val=S:pies
+V I12 t=s val=S:Caudal Actual=
+F J12 t=None f=C23*(C25/60) cached=4628
+V K12 t=s val=S:bbl/dia
+V B13 t=s val=S:Profundidad Intake. ESP
+V C13 t=None val=2619.58
+V D13 t=s val=S:pies
+V B14 t=s val=S:Tubing 
+V C14 t=None val=3.5
+V D14 t=s val=S:Pulgadas
+V B15 t=s val=S:Diametro Interno Tubing 
+V C15 t=None val=2.992
+V D15 t=s val=S:Pulgadas
+V B16 t=s val=S:Rugosidad  ɛ
+F C16 t=None f=0.0005*0.25 cached=1.25E-4
+V B17 t=s val=S:Casing 
+V C17 t=None val=7
+V D17 t=s val=S:Pulgadas
+V I17 t=s val=S:Qmax=
+F J17 t=None f=C23/(1-(0.2*(C24/C8))-(0.8*((C24/C8)^2))) cached=8716.3160464102293
+V K17 t=s val=S:bbl/dia
+V B18 t=s val=S:Profundidad del Casing
+V C18 t=None val=3779
+V D18 t=s val=S:pies
+V B19 t=s val=S:Factor Conversion Velocid
+V C19 t=None val=5.6150000000000002
+V D19 t=s val=S:pc/B
+V N19 t=None val=12.035837042880486
+V O19 t=s val=S:IP
+V B20 t=s val=S:Diametro tubing en ft 
+V C20 t=None val=0.25
+V D20 t=s val=S:pies
+V F20 t=s val=S:  
+V N20 t=None val=11914.756522229109
+V O20 t=s val=S:Qburbuja
+V B21 t=s val=S:Factor conversion de(ΔP/ΔL)friccion 
+V C21 t=None val=144
+V D21 t=s val=S:lb/ft²
+V I21 t=s val=S:Pwf=
+V J21 t=None val=735.42166666666662
+V K21 t=s val=S:psi
+V N21 t=None val=12784.011419770477
+V O21 t=s val=S:Qmax
+V B22 t=s val=S: THP         
+V C22 t=None val=175
+V D22 t=s val=S:psi
+V B23 t=s val=S:Q Prueba
+V C23 t=None val=4272
+V D23 t=s val=S:BPD
+V I23 t=s val=S:PIP=
+F J23 t=None f=J21-((C11-C29)*J9) cached=648.97811883459508
+V K23 t=s val=S:psi
+V L23 t=None val=672
+V O23 t=None val=774
+V P23 t=s val=S:Psi
+V B24 t=s val=S:Pwf Prueba
+V C24 t=None val=765
+V D24 t=s val=S:psi
+V B25 t=s val=S:Frecuencia
+V C25 t=None val=65
+V D25 t=s val=S:Hz
+V I25 t=s val=S:Sumergencia=
+F J25 t=None f=(J23-C30)/J9 cached=1538.8079006139542
+V K25 t=s val=S:ft
+V L25 t=None val=1574
+V B26 t=s val=S:Qactual
+F C26 t=None f=J12 cached=4628
+V D26 t=s val=S:BPD
+V B27 t=s val=S:Presion Burbuja 
+V C27 t=None val=130
+V D27 t=s val=S:psi
+V I27 t=s val=S:Nivel de Fluido Dimanico=
+F J27 t=None f=C13-J25 cached=1080.7720993860457
+V K27 t=s val=S:pies
+V L27 t=None val=1046
+V B28 t=s val=S:Pwf Actual 
+F C28 t=None f=J21 cached=735.42166666666662
+V D28 t=s val=S:psi
+V B29 t=s val=S:Profundidad Sensor
+V C29 t=None val=2657.6
+V D29 t=s val=S:ft
+V I29 t=s val=S:Velocidad=
+F J29 t=None f=(C23*5.615*(1/(24*3600)))/((3.1416*(C20^2))/4) cached=5.6558300087711855
+V K29 t=s val=S:pie/seg
+V B30 t=s val=S:Presion Casing
+V C30 t=None val=0.1
+V D30 t=s val=S:psi
+V B31 t=s val=S:Corriente motor
+V C31 t=None val=31.95
+V D31 t=s val=S:Amperios
+V I31 t=s val=S:Numero de Reynolds=
+F J31 t=None f=(C20*J29*J7)/Q11 cached=348.41418091442068
+V L31 t=s val=S:Si  
+V M31 t=s val=S:<2000
+V N31 t=s val=S:Flujo Laminar
+V B32 t=s val=S:voltaje motor 
+V C32 t=None val=2705
+V D32 t=s val=S:Voltios
+V M32 t=s val=S:2000-4000
+V N32 t=s val=S:Flujo transitorio
+V B33 t=s val=S:Eff Motor
+V C33 t=None val=0.75
+V I33 t=s val=S:factor de friccion=
+F J33 t=None f=64/J31 cached=0.18368942340989278
+V M33 t=s val=S:>4000
+V N33 t=s val=S:Flujo turbulento
+V B34 t=s val=S:Numero de Sellos 
+V C34 t=None val=2
+V B35 t=s val=S:Eff Bomba
+V C35 t=None val=0.62
+V I35 t=s val=S:(ΔP/ΔL)friccion=
+F J35 t=None f=((J33*J7*(J29^2))/(2*32.2*C20))/144 cached=0.15401530980204703
+V K35 t=s val=S:psi/pie
+V B36 t=s val=S:Hz 2
+V C36 t=None val=65
+V D36 t=s val=S:Hz
+V B37 t=s val=S:Hz 1
+V C37 t=None val=60
+V D37 t=s val=S:Hz
+V I37 t=s val=S:(ΔP/ΔL)gravedad=
+F J37 t=None f=J7/C21 cached=0.42200045882083043
+V K37 t=s val=S:psi/pie
+V N38 t=s val=S:Calibre 
+V I39 t=s val=S:(ΔP/ΔL)Total=
+F J39 t=None f=J37+J35 cached=0.57601576862287751
+V K39 t=s val=S:psi/pie
+V I41 t=s val=S:TDH
+F J41 t=None f=J39*C13 cached=1508.9193871691175
+V K41 t=s val=S:psi
+F L41 t=None f=J41/J9 cached=3578.3870760439172
+V M41 t=s val=S:ft
+F N41 t=None f=L41/64 cached=55.912298063186206
+V I45 t=s val=S:Potencia variador=
+F J45 t=None f=L45/0.746 cached=160.52767617312421
+V K45 t=s val=S:hp
+F L45 t=None f=(C32*C31*SQRT(3)*0.8)/1000 cached=119.75364642515066
+V M45 t=s val=S:vatio
+V I47 t=s val=S:Perdida del cable=
+F J47 t=None f=J45-P47 cached=1.3581322906052264
+V K47 t=s val=S:hp
+F L47 t=None f=2400*(10/1000) cached=24
+V M47 t=s val=S:Votios
+F N47 t=None f=((C32-L47)*C31)*(3^(1/2))*0.8 cached=118691.13717775559
+V O47 t=s val=S:vatios
+F P47 t=None f=N47/745.69 cached=159.16954388251898
+V Q47 t=s val=S:hp
+V I49 t=s val=S:Perdida Motor=
+F J49 t=None f=P47-P49 cached=39.792385970629738
+V K49 t=s val=S:hp
+F P49 t=None f=P47*C33 cached=119.37715791188924
+V Q49 t=s val=S:hp
+V I51 t=s val=S:Perdida Sello=
+F J51 t=None f=P49-P51 cached=8
+V K51 t=s val=S:hp
+F P51 t=None f=P49-(4*C34) cached=111.37715791188924
+V Q51 t=s val=S:hp
+V I53 t=s val=S:Perdida Bomba=
+F J53 t=None f=P51-P53 cached=42.323320006517918
+V K53 t=s val=S:hp
+F P53 t=None f=P51*C35 cached=69.053837905371324
+V Q53 t=s val=S:hp
+V I55 t=s val=S:Potencia Real=
+F J55 t=None f=J45-(J47+J49+J51+J53) cached=69.053837905371324
+V K55 t=s val=S:hp
+F L55 t=None f=P53*136000/J12 cached=2029.2398347300132
+F M55 t=None f=L55*0.433 cached=878.66084843809574
+F N55 t=None f=84/63 cached=1.3333333333333333
+V I58 t=s val=S:PIP inferido=
+F J58 t=None f=+(L41-L55)*0.433 cached=670.78075548892048
+V K58 t=s val=S:psi
+F N58 t=None f=J41-(((J55*13600*J9)/J12)) cached=1423.351245356323
+V I60 t=s val=S:Sumergencia inferida=
+F J60 t=None f=((J58-1)/J9) cached=1588.3782921770237
+V K60 t=s val=S:ft
+V I62 t=s val=S:Nivel de fluido dinamico inferido=
+F J62 t=None f=C13-J60 cached=1031.2017078229762
+V K62 t=s val=S:ft
+V I64 t=s val=S:Pwf inferido=
+F J64 t=None f=J58+((C11-C29)*J9) cached=757.22430332099202
+V K64 t=s val=S:psi
+V C69 t=s val=S:Eff Bomba=
+F D69 t=None f=((D77*C23*J7)/(1360*D79)) cached=2385.7472494586341
+V C71 t=s val=S:Altura Dinamica=
+F D71 t=None f=(C22*2.31)/J4 cached=415.10618374558305
+V C73 t=s val=S:Pedida por friccion=
+F D73 t=None f=J41/1000 cached=1.5089193871691176
+V C75 t=s val=S:Lev Dinamico=
+F D75 t=None f=C11-((C24*2.31)/J4) cached=1047.9929681978795
+V C77 t=s val=S:TDH=
+F D77 t=None f=D75+D73+D71 cached=1464.6080713306314
+V C79 t=s val=S:HP=
+F D79 t=None f=1.91*63*J4 cached=117.18303509979353
+F D82 t=None f=(2895*C23*J7)/(1360*D79) cached=4715.7587223371029
+COUNTS formulas=49 values=189

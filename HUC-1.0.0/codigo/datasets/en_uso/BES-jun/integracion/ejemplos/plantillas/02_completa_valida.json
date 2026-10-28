@@ -1,0 +1,181 @@
+{
+  "nota": "Caudal y frecuencia registrados de QF-084. No son una recomendación.",
+  "solicitud": {
+    "dataset_id": "BES-jun",
+    "pozo_id": "QF-084",
+    "version_configuracion": "1.3.0",
+    "variables": [
+      {
+        "nombre": "caudal_operacion_bfpd",
+        "valor": 10301,
+        "unidad": "BFPD",
+        "procedencia": "operador"
+      },
+      {
+        "nombre": "frecuencia_hz",
+        "valor": 63,
+        "unidad": "Hz",
+        "procedencia": "operador"
+      }
+    ]
+  },
+  "resultado": {
+    "dataset_solicitado": "BES-jun",
+    "dataset_evaluado": "BES-jun",
+    "pozo_solicitado": "QF-084",
+    "pozo_resuelto": "QF-084",
+    "version_contrato": "1.3.0",
+    "version_motor": "0.4.2",
+    "version_catalogo_reglas": "1.1.0",
+    "version_software": "0.4.2",
+    "fecha_referencia": null,
+    "incidente_id": null,
+    "estado_evaluacion": "completada_preliminar",
+    "identidad": {
+      "estado": "provisional",
+      "pozo_id_solicitado": "QF-084",
+      "hoja": "QF-554H",
+      "cluster": "QF-554H",
+      "pozo_rotulo": "QF-084",
+      "coincide_con": "pozo",
+      "motivo": "Dentro de este archivo la hoja es única, pero el libro no declara si la llave global es Cluster o Pozo."
+    },
+    "modelos": [
+      {
+        "id": "M-BES-FLUIDO",
+        "version": "transcripcion-1",
+        "funcion": "modelo_deterministico.fluidos_bes_jun.evaluar_fluido",
+        "estado": "calculable",
+        "valores": {
+          "gradiente_psi_ft": 0.4334307341337953
+        },
+        "alertas": []
+      },
+      {
+        "id": "M-BES-BALANCE",
+        "version": "transcripcion-1",
+        "funcion": "modelo_deterministico.balance_bes_jun.evaluar_balance",
+        "estado": "calculable",
+        "valores": {
+          "pip_ft": 1714.4964643339983,
+          "thd_total_ft": 2083.216985247075
+        },
+        "alertas": []
+      },
+      {
+        "id": "M-BES-INTERSECCION",
+        "version": "transcripcion-1",
+        "funcion": "modelo_deterministico.interseccion_bes_jun.caudal_a_producir",
+        "estado": "calculable",
+        "valores": {
+          "caudal_a_producir_bfpd": 10535.166588487325
+        },
+        "alertas": []
+      }
+    ],
+    "reglas": [
+      {
+        "id": "RC-BES-03",
+        "version": "1.1.0",
+        "estado_regla": "pendiente_validacion",
+        "resultado": "dentro_de_los_limites_escritos",
+        "evaluable": true,
+        "activada": true,
+        "aprobada_para_uso_operacional": false,
+        "tipo_mensaje": "observacion",
+        "mensaje": "El caudal registrado queda entre el mínimo y el máximo escritos, en la misma frecuencia. No autoriza operar el pozo.",
+        "evidencia": {
+          "caudal_operacion_bfpd": 10301,
+          "frecuencia_operacion_hz": 63,
+          "limite_minimo_a_frecuencia_bfpd": 2625.0,
+          "limite_maximo_a_frecuencia_bfpd": 10500.0,
+          "limite_maximo_escrito_a_60_hz_bfpd": 10000.0,
+          "uso_del_limite_maximo_pct": 98.1047619047619,
+          "comparacion_sin_escalar": {
+            "id": "RC-BES-01",
+            "resultado": "por_encima_del_limite_maximo",
+            "nota": "Mezcla la frecuencia de operación con el límite a 60 Hz. No es la clasificación vigente."
+          }
+        },
+        "limitaciones": [
+          "estar entre dos números de la hoja no es un dictamen de seguridad",
+          "CT-08 sigue abierta"
+        ],
+        "consultas_tecnicas": [
+          "CT-06",
+          "CT-08"
+        ]
+      },
+      {
+        "id": "RC-BES-01",
+        "version": "1.1.0",
+        "estado_regla": "pendiente_validacion",
+        "resultado": "no_activada",
+        "evaluable": true,
+        "activada": false,
+        "aprobada_para_uso_operacional": false,
+        "tipo_mensaje": "informacion",
+        "mensaje": "Esta condición no se cumple en el punto evaluado. Sigue pendiente de validación.",
+        "evidencia": {},
+        "limitaciones": [
+          "no autoriza cambiar la frecuencia",
+          "el escalamiento no está validado para esta bomba (CT-08)"
+        ],
+        "consultas_tecnicas": [
+          "CT-06",
+          "CT-08"
+        ]
+      },
+      {
+        "id": "RC-BES-02",
+        "version": "1.1.0",
+        "estado_regla": "pendiente_validacion",
+        "resultado": "no_activada",
+        "evaluable": true,
+        "activada": false,
+        "aprobada_para_uso_operacional": false,
+        "tipo_mensaje": "informacion",
+        "mensaje": "Esta condición no se cumple en el punto evaluado. Sigue pendiente de validación.",
+        "evidencia": {},
+        "limitaciones": [
+          "no autoriza cambiar la frecuencia",
+          "en las cinco hojas de BES-jun esta condición no se activa"
+        ],
+        "consultas_tecnicas": [
+          "CT-06",
+          "CT-08"
+        ]
+      },
+      {
+        "id": "RC-BES-04",
+        "version": "1.1.0",
+        "estado_regla": "no_evaluable",
+        "resultado": "no_evaluable",
+        "evaluable": false,
+        "activada": false,
+        "aprobada_para_uso_operacional": false,
+        "tipo_mensaje": "condicion_no_evaluable",
+        "mensaje": "No evaluable: falta la curva de fabricante y la reconciliación de la columna EFF.",
+        "evidencia": {},
+        "limitaciones": [
+          "no produce verdadero ni falso"
+        ],
+        "consultas_tecnicas": [
+          "CT-06"
+        ]
+      }
+    ],
+    "advertencias": [
+      "La fecha de la hoja es =TODAY(); no es una fecha histórica de medición."
+    ],
+    "mensajes": [],
+    "errores": [],
+    "reglas_ejecutadas": 3,
+    "recomendacion_operacional_autorizada": false,
+    "fuera_de_dominio_observado": false,
+    "modo": "operacional",
+    "hipotetico": false,
+    "escenario_id": null,
+    "parametros_modificados": []
+  }
+}
