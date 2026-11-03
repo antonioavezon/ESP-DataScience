@@ -1,0 +1,16 @@
+# Dependencias mínimas para GitHub Actions (categoría A).
+# Alineadas con HUC-1.0.0/servicios/requirements-runtime.txt y suites locales.
+# No incluye Jupyter ni paquetes solo para análisis exploratorio.
+Django==6.0.9
+gunicorn==23.0.0
+whitenoise==6.9.0
+httpx==0.28.1
+paho-mqtt==2.1.0
+pandas==3.0.6
+numpy==2.5.4
+matplotlib==3.11.2
+openpyxl==3.1.5
+xlrd==1.2.0
+jsonschema==4.26.0
+pytest==9.1.1
+pip-audit==2.9.0

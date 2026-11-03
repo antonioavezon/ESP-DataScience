@@ -1,0 +1,118 @@
+# CI categoría A — pruebas compatibles con runners estándar de GitHub.
+# No ejecuta Ollama, MQTT E2E ni holdouts lingüísticos locales (ver especializadas.yml).
+name: CI HUC
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'infra/**', 'docs-sdd-adopcion', 'mejoramiento-**']
+  workflow_dispatch:
+
+concurrency:
+  group: ci-huc-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+  DJANGO_DEBUG: "1"
+  DJANGO_ALLOWED_HOSTS: "testserver,localhost,127.0.0.1"
+  DJANGO_SECRET_KEY: "ci-only-not-a-secret"
+
+jobs:
+  syntax-servicios:
+    name: Syntax + DATA/PROCESO/IA
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Instalar dependencias CI
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+
+      - name: Suites syntax + servicios
+        run: |
+          chmod +x scripts/ci/run-suites.sh
+          ./scripts/ci/run-suites.sh syntax
+          ./scripts/ci/run-suites.sh servicios
+
+  web:
+    name: WEB Django
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Instalar dependencias CI
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+
+      - name: Suite WEB
+        run: |
+          chmod +x scripts/ci/run-suites.sh
+          ./scripts/ci/run-suites.sh web
+
+  motores:
+    name: Motores BES/RB
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Instalar dependencias CI
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+
+      - name: Backend matplotlib Agg
+        run: |
+          echo "MPLBACKEND=Agg" >> "$GITHUB_ENV"
+
+      - name: Suites motores
+        run: |
+          chmod +x scripts/ci/run-suites.sh
+          ./scripts/ci/run-suites.sh motores
+
+  compose:
+    name: Docker Compose config
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validar compose.yaml
+        run: |
+          chmod +x scripts/ci/run-suites.sh
+          ./scripts/ci/run-suites.sh compose

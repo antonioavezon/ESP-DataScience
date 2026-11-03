@@ -1,0 +1,54 @@
+# Categoría C — no forma parte del gate estándar de PR.
+# Requiere infraestructura local o runners con Ollama/MQTT/datasets extendidos.
+name: Especializadas HUC
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Suite a ejecutar (documentación / smoke local en runner self-hosted)"
+        required: true
+        default: documentar
+        type: choice
+        options:
+          - documentar
+          - smoke-compose-stack
+
+permissions:
+  contents: read
+
+jobs:
+  documentar:
+    if: inputs.suite == 'documentar'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inventario de pruebas fuera de CI estándar
+        run: |
+          cat <<'EOF'
+          Suites categoría C (no ejecutadas automáticamente en PR):
+          - E2E MQTT de simulación con stack Docker completo
+          - Inferencia real Ollama / Qwen (holdouts lingüísticos)
+          - Baterías en /home/antonio/auditorias (fuera del repo)
+          - archive/esp-datascience-lab (laboratorio histórico, no producto HUC)
+
+          Para ejecutar localmente el stack:
+            cd HUC-1.0.0 && docker compose --env-file .env.example up --build
+          No usar datasets originales como destino de escritura.
+          EOF
+
+  smoke-compose:
+    if: inputs.suite == 'smoke-compose-stack'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Solo validación de configuración (sin levantar Ollama)
+        run: |
+          chmod +x scripts/ci/run-suites.sh
+          ./scripts/ci/run-suites.sh compose
+          echo "Levantamiento completo del stack queda fuera de runners compartidos (memoria/modelo)."

@@ -15,7 +15,7 @@ La simulación no escribe datasets originales ni persiste valores simulados como
 Toda integración nueva declara entradas/salidas, unidades e identificadores (dataset, pozo, escenario). Los resultados tipificados conservan `valor`, unidad y nombre semántico.
 
 ### V. Pruebas antes de integrar
-Los cambios incluyen o actualizan pruebas automatizadas relevantes (WEB, motores, DATA, PROCESO, IA). No se integra a `main` con fallas críticas nuevas sin justificación documentada.
+Los cambios incluyen o actualizan pruebas automatizadas relevantes (WEB, motores, DATA, PROCESO, IA). No se integra a `main` con fallas críticas nuevas sin justificación documentada. Los cambios deben pasar los workflows de GitHub Actions aplicables (`CI HUC`, `Seguridad HUC`) cuando estén disponibles; la evidencia de CI forma parte de la aceptación junto a las pruebas locales.
 
 ### VI. Seguridad y secretos
 No versionar `.env` reales, claves ni tokens. No exponer MQTT/Ollama a la LAN salvo decisión explícita. No publicar datos operacionales sensibles.
@@ -36,10 +36,10 @@ Preferir el cambio mínimo que cumpla la especificación. Cambios de fórmulas f
 5. Tareas (`/speckit-tasks`).
 6. Análisis opcional (`/speckit-analyze`).
 7. Implementación controlada (`/speckit-implement`) en rama.
-8. Pruebas listadas en la spec/plan.
-9. Revisión humana y PR a `main`.
+8. Pruebas listadas en la spec/plan (local + `scripts/ci/run-suites.sh`).
+9. Pull Request → GitHub Actions → revisión humana → merge a `main`.
 
 ## Governance
-Esta constitución prima sobre hábitos ad hoc del agente. Enmiendas requieren ADR en `docs/plataforma/adr/` y actualización de este archivo. Los PRs deben poder trazarse a una spec cuando el cambio sea funcional.
+Esta constitución prima sobre hábitos ad hoc del agente. Enmiendas requieren ADR en `docs/plataforma/adr/` y actualización de este archivo. Los PRs deben poder trazarse a una spec cuando el cambio sea funcional. La infraestructura de CI se documenta en `docs/plataforma/12_integracion_continua.md`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-03 | **Last Amended**: 2026-11-03
+**Version**: 1.1.0 | **Ratified**: 2026-11-03 | **Last Amended**: 2026-11-03 (CI/SDD)

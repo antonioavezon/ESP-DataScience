@@ -25,10 +25,16 @@
 5. Adversarial no inventa fórmula.
 6. Comparación no imprime `None` como magnitud.
 
+## CI (GitHub Actions)
+Ver `12_integracion_continua.md` y `matriz_pruebas_ci.md`.
+- Categoría A: workflows `ci.yml` + `security.yml`.
+- Categoría C (Ollama real, E2E MQTT, holdouts locales): `especializadas.yml` / ejecución local.
+- Orquestación: `scripts/ci/run-suites.sh`.
+
 ## Brechas
-- CI GitHub Actions: no verificado como pipeline activo en consolidación (gh CLI sin login API).
-- E2E MQTT de simulación no re-ejecutado en cada commit.
+- Obligatoriedad de status checks en merge: depende de branch protection (configuración administrativa).
+- E2E MQTT de simulación no forma parte del gate de cada PR.
 - Holdout lingüístico 40 casos no está en el árbol Git (vive en auditorías locales).
 
 ## Criterio de aceptación para cambios SDD
-Toda especificación nueva debe nombrar suites a ejecutar y datos de prueba seguros (sin datasets destructivos).
+Toda especificación nueva debe nombrar suites a ejecutar y datos de prueba seguros (sin datasets destructivos). El PR debe mostrar los workflows aplicables en verde antes del merge.
