@@ -1,6 +1,6 @@
 # Documentación de plataforma HUC
 
-Índice de la documentación técnica alineada con el código en `main` (`468b519` al inicio de esta rama documental).
+Índice de la documentación técnica alineada con el código en `main` (actualizar SHA tras cada consolidación).
 
 | Doc | Contenido |
 |---|---|
@@ -15,7 +15,10 @@
 | [09 Glosario](09_glosario.md) | Términos |
 | [10 Spec Kit](10_preparacion_spec_kit.md) | Adopción SDD |
 | [11 Flujo SDD Cursor](11_flujo_sdd_cursor.md) | Skills instaladas y procedimiento |
+| [12 Integración continua](12_integracion_continua.md) | GitHub Actions, gates, límites |
+| [13 Protección main (propuesta)](13_proteccion_main_propuesta.md) | Rulesets pendientes de autorización |
 | [Matriz de trazabilidad](matriz_trazabilidad.md) | Requisito→evidencia→prueba |
+| [Matriz de pruebas CI](matriz_pruebas_ci.md) | Suites A/B/C y línea base |
 
 Documentación histórica de estudio (ecuaciones, bloqueos, hoja de ruta antigua) permanece en `docs/*.md` de la raíz de `docs/` y no se sustituye aquí.
 

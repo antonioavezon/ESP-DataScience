@@ -10,5 +10,8 @@
 | MQTT escenarios/resultados | proceso contratos | `mensajes.py` | topics huc/v1 | `proceso/tests`; E2E histórico |
 | Despliegue Compose | HUC-1.0.0 | `compose.yaml` | env example | `compose config` |
 | Docs SDD | docs/plataforma | este árbol | — | revisión humana Fase 2 |
+| CI categoría A | GitHub Actions | `.github/workflows/ci.yml` | jobs verdes | `scripts/ci/run-suites.sh` |
+| Anti-secretos | scripts CI | `check-no-secrets.sh` | sin `.env` rastreados | workflow `security.yml` |
+| Gate SDD+CI | constitución V + doc 11/12 | PR → Actions → merge | evidencia de run | humano + checks |
 
 Leyenda de cumplimiento: ver §05. Elementos marcados como brecha no bloquean documentación pero condicionan specs futuras.

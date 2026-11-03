@@ -15,7 +15,9 @@ from evaluacion.contratos import VERSION_CONTRATO, errores_de_salida
 from evaluacion.motor import evaluar_solicitud
 from modelo_deterministico.balance_bes_jun import evaluar_balance, pip_en_ft, thd_total_ft
 
-ORIGINAL = Path("/home/antonio/projects/HUC/fuentes/originales/Copia de FINAL BES-jun.xlsx")
+# Raíz del repo (…/datasets/en_uso/BES-jun/tests → 4 niveles arriba).
+_RAIZ_REPO = Path(__file__).resolve().parents[4]
+ORIGINAL = _RAIZ_REPO / "fuentes" / "originales" / "Copia de FINAL BES-jun.xlsx"
 HUELLA = "ccb5a738baea13321993e8b6eccefd6cac90ecda86b1c4b9181f897fcfa83f85"
 FORMULA_PIP = re.compile(r"^=\(B(\d+)-\(\(C(\d+)-C(\d+)\)\*B(\d+)\)\)/B\4$")
 

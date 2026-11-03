@@ -1,0 +1,52 @@
+# Controles de seguridad proporcionados: secretos evidentes + auditoría de dependencias CI.
+name: Seguridad HUC
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'infra/**']
+  workflow_dispatch:
+
+concurrency:
+  group: sec-huc-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  secretos:
+    name: Anti-secretos básicos
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Revisar archivos y patrones sensibles
+        run: |
+          chmod +x scripts/ci/check-no-secrets.sh
+          ./scripts/ci/check-no-secrets.sh
+
+  dependencias:
+    name: pip-audit requirements-ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Instalar e auditar
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+          # Fallar solo ante vulnerabilidades conocidas en el grafo instalado.
+          pip-audit -r requirements-ci.txt --progress-spinner off
