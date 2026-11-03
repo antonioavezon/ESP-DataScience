@@ -1,0 +1,42 @@
+# Entornos locales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+.jupyter/
+
+# Credenciales
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Modelos generados
+results/models/*
+!results/models/.gitkeep
+
+# Archivos de referencia que requieren revisión de derechos
+docs/esp_gassy_flow_paper.pdf
+archive/dataset_original.zip
+ProjectESP/
