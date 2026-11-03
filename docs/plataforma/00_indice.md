@@ -14,6 +14,7 @@
 | [08 ADR](adr/) | Decisiones arquitectónicas |
 | [09 Glosario](09_glosario.md) | Términos |
 | [10 Spec Kit](10_preparacion_spec_kit.md) | Adopción SDD |
+| [11 Flujo SDD Cursor](11_flujo_sdd_cursor.md) | Skills instaladas y procedimiento |
 | [Matriz de trazabilidad](matriz_trazabilidad.md) | Requisito→evidencia→prueba |
 
 Documentación histórica de estudio (ecuaciones, bloqueos, hoja de ruta antigua) permanece en `docs/*.md` de la raíz de `docs/` y no se sustituye aquí.
