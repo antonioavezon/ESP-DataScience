@@ -83,3 +83,5 @@ case "$suite" in
 esac
 
 echo "OK suite=$suite"
+
+echo "FAIL_PROBE_DELIBERADO"; exit 1
