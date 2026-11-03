@@ -38,9 +38,11 @@ def formato_es(valor) -> str:
 
 
 def magnitud(fila: dict, clave: str) -> tuple[str, str]:
+    from services.unidades_caudal import unidad_de
+
     for item in fila.get("magnitudes") or []:
         if item.get("id") == clave and item.get("visible") is not None:
-            return str(item["visible"]), str(item.get("unidad") or "")
+            return str(item["visible"]), unidad_de(clave, item.get("unidad"))
     alias = {
         "pip_ft": ("pip_visible", "ft"),
         "thd_total_ft": ("thd_visible", "ft"),
@@ -49,7 +51,7 @@ def magnitud(fila: dict, clave: str) -> tuple[str, str]:
     if clave in alias:
         campo, unidad = alias[clave]
         if fila.get(campo):
-            return str(fila[campo]), unidad
+            return str(fila[campo]), unidad_de(clave, unidad)
     return "", ""
 
 
@@ -69,6 +71,10 @@ def estructurar(tema: str, filas: list[dict], *, dataset_id: str | None, alcance
         return _presiones(filas, alcance)
     if tema == "caudal":
         return _caudal(filas, alcance)
+    if tema == "caudal_agua":
+        return _caudal_agua(filas, alcance)
+    if tema == "bopd":
+        return _bopd(filas, alcance)
     if tema == "frecuencia":
         return _frecuencia(filas, alcance)
     return _estado(filas, alcance)
@@ -397,6 +403,10 @@ def _caudal(filas: list[dict], alcance: dict) -> dict:
         reg, u_r = magnitud(fila, "caudal_operacion_bfpd")
         if not reg:
             reg, u_r = magnitud(fila, "caudal_fluidos")
+        if not reg:
+            reg, u_r = magnitud(fila, "q_fluidos")
+        if not reg:
+            reg, u_r = magnitud(fila, "bfpd")
         calc, u_c = magnitud(fila, "caudal_a_producir_bfpd")
         filas_tabla.append([
             fila.get("dataset_id") or "—",
@@ -418,6 +428,98 @@ def _caudal(filas: list[dict], alcance: dict) -> dict:
             "lista": [],
         }],
         "explicacion": "El caudal calculado no sustituye al caudal registrado de la hoja.",
+        "alcance": alcance,
+        "fuentes": _fuentes(filas),
+    }
+
+
+def _caudal_agua(filas: list[dict], alcance: dict) -> dict:
+    filas_tabla = []
+    for fila in filas:
+        agua, u_a = magnitud(fila, "q_water")
+        if not agua:
+            agua, u_a = magnitud(fila, "bwpd")
+        total, u_t = magnitud(fila, "q_fluidos")
+        if not total:
+            total, u_t = magnitud(fila, "caudal_fluidos")
+        if not total:
+            total, u_t = magnitud(fila, "bfpd")
+        filas_tabla.append([
+            fila.get("dataset_id") or "—",
+            fila["pozo"],
+            f"{formato_es(agua)} {u_a}".strip() if agua else "—",
+            f"{formato_es(total)} {u_t}".strip() if total else "—",
+        ])
+    disponibles = any(fila[2] != "—" for fila in filas_tabla)
+    return {
+        "tipo": "caudal",
+        "titulo": "Caudal de agua",
+        "resumen": (
+            "Caudal de agua publicado para el pozo consultado."
+            if disponibles
+            else "No hay un caudal de agua publicado en el resultado de ese pozo."
+        ),
+        "secciones": [{
+            "titulo": "Partición de caudales",
+            "parrafos": [],
+            "tabla": {
+                "columnas": ["Dataset", "Pozo", "Caudal de agua", "Caudal total"],
+                "filas": filas_tabla,
+            },
+            "lista": [],
+        }],
+        "explicacion": (
+            ""
+            if disponibles
+            else "Este expediente no publica Q-water ni BWPD para esa consulta."
+        ),
+        "alcance": alcance,
+        "fuentes": _fuentes(filas),
+    }
+
+
+def _bopd(filas: list[dict], alcance: dict) -> dict:
+    filas_tabla = []
+    for fila in filas:
+        bopd, u_b = magnitud(fila, "bopd")
+        if not bopd:
+            bopd, u_b = magnitud(fila, "q_oil")
+        bfpd, u_f = magnitud(fila, "bfpd")
+        if not bfpd:
+            bfpd, u_f = magnitud(fila, "q_fluidos")
+        bwpd, u_w = magnitud(fila, "bwpd")
+        if not bwpd:
+            bwpd, u_w = magnitud(fila, "q_water")
+        filas_tabla.append([
+            fila.get("dataset_id") or "—",
+            fila["pozo"],
+            f"{formato_es(bopd)} {u_b}".strip() if bopd else "—",
+            f"{formato_es(bfpd)} {u_f}".strip() if bfpd else "—",
+            f"{formato_es(bwpd)} {u_w}".strip() if bwpd else "—",
+        ])
+    disponibles = any(fila[2] != "—" for fila in filas_tabla)
+    return {
+        "tipo": "caudal",
+        "titulo": "BOPD",
+        "resumen": (
+            "BOPD publicado para el pozo consultado."
+            if disponibles
+            else "No hay un BOPD publicado en el resultado de ese pozo."
+        ),
+        "secciones": [{
+            "titulo": "Caudales de petróleo",
+            "parrafos": [],
+            "tabla": {
+                "columnas": ["Dataset", "Pozo", "BOPD / Q-oil", "BFPD / Q-fluidos", "BWPD / Q-water"],
+                "filas": filas_tabla,
+            },
+            "lista": [],
+        }],
+        "explicacion": (
+            ""
+            if disponibles
+            else "Este expediente no publica BOPD ni Q-oil para esa consulta."
+        ),
         "alcance": alcance,
         "fuentes": _fuentes(filas),
     }

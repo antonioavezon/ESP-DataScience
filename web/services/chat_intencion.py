@@ -20,7 +20,8 @@ _AJENO = re.compile(
 )
 _ESP = re.compile(
     r"\b(pozos?|bombas?|esp|bes|electrosumergibles?|pip|thd|caudal|frecuencia|"
-    r"cavitaci[oó]n|admisi[oó]n|presi[oó]n|bfpd|fluido|sensor|altura|etapa|etapas|tubing|curva)\b",
+    r"cavitaci[oó]n|admisi[oó]n|presi[oó]n|bfpd|bwpd|bopd|q-water|q-oil|"
+    r"agua|petr[oó]leo|fluido|sensor|altura|etapa|etapas|tubing|curva)\b",
     re.IGNORECASE,
 )
 
@@ -62,8 +63,10 @@ def interpretar(consulta: str, contexto: dict | None = None, pozo_formulario: st
         return _decision("simular", destino[:1], cambios, variable, datasets)
     if "cavit" in bajo:
         return _decision("conceptual", [], {}, "cavitacion", datasets)
+    if _es_contraste_conceptual(bajo) and not pozos and not desconocidos:
+        return _decision("conceptual", [], {}, _variable_definicion(bajo), datasets)
     if _es_definicion(bajo) and not pozos and not desconocidos and not _solo_anáfora(bajo) and not _pide_explicar_estado(bajo):
-        return _decision("conceptual", [], {}, "pip" if "pip" in bajo else "general", datasets)
+        return _decision("conceptual", [], {}, _variable_definicion(bajo), datasets)
     if desconocidos:
         return _decision("pozo_desconocido", desconocidos, {}, "", datasets)
     # Pozo nombrado + «por qué el caudal…»
@@ -83,7 +86,10 @@ def interpretar(consulta: str, contexto: dict | None = None, pozo_formulario: st
     if "hidrost" in bajo and "pip" in bajo:
         return _decision("diferencia_pip", pozos or pozos_form or _ancla(contexto, ambito), {}, "pip_ft", datasets)
     if "compar" in bajo and (len(pozos) >= 2 or (ambito == "dataset" and not pozos)):
-        return _decision("comparar", pozos[:4] if pozos else [], {}, "pip_ft", datasets)
+        variable = "caudal" if any(g in bajo for g in ("caudal", "bfpd", "produce")) else "pip_ft"
+        return _decision("comparar", pozos[:4] if pozos else [], {}, variable, datasets)
+    if _pide_mayor(bajo) and len(pozos) >= 2:
+        return _decision("comparar", pozos[:4], {}, "caudal", datasets)
     if _es_seguimiento(bajo):
         destino = pozos or pozos_form or _ancla(contexto, ambito)
         if destino:
@@ -112,6 +118,10 @@ def interpretar(consulta: str, contexto: dict | None = None, pozo_formulario: st
         return _decision("presiones", pozos, {}, "presiones", datasets)
     if pozos and _pide_frecuencia(bajo) and "hz" not in cambios:
         return _decision("frecuencia", pozos, {}, "frecuencia_hz", datasets)
+    if pozos and _pide_bopd(bajo):
+        return _decision("caudal", pozos, {}, "bopd", datasets)
+    if pozos and _pide_caudal_agua(bajo) and "caudal_operacion_bfpd" not in cambios:
+        return _decision("caudal", pozos, {}, "q_water", datasets)
     if pozos and _pide_caudal_simple(bajo) and "caudal_operacion_bfpd" not in cambios:
         return _decision("caudal", pozos, {}, "caudal", datasets)
     if _pide_medidas(bajo):
@@ -120,6 +130,10 @@ def interpretar(consulta: str, contexto: dict | None = None, pozo_formulario: st
         return _decision("presiones", _ambito_pozos(pozos, pozos_form, ambito), {}, "presiones", datasets)
     if _pide_frecuencia(bajo) and "hz" not in cambios:
         return _decision("frecuencia", _ambito_pozos(pozos, pozos_form, ambito), {}, "frecuencia_hz", datasets)
+    if _pide_bopd(bajo):
+        return _decision("caudal", _ambito_pozos(pozos, pozos_form, ambito), {}, "bopd", datasets)
+    if _pide_caudal_agua(bajo) and "caudal_operacion_bfpd" not in cambios:
+        return _decision("caudal", _ambito_pozos(pozos, pozos_form, ambito), {}, "q_water", datasets)
     if _pide_caudal_simple(bajo) and "caudal_operacion_bfpd" not in cambios:
         return _decision("caudal", _ambito_pozos(pozos, pozos_form, ambito), {}, "caudal", datasets)
     if _pide_inventario(bajo) and not pozos:
@@ -267,8 +281,20 @@ def _es_definicion(bajo: str) -> bool:
         r"\bque representa\b",
         r"\bpara qu[eé] se utiliza\b",
         r"\bpara que se utiliza\b",
+        r"\bexplica(?:me|r)?\b",
+        r"\bexpl[ií]came\b",
     )
-    return any(re.search(p, bajo) for p in patrones)
+    if any(re.search(p, bajo) for p in patrones):
+        return True
+    # «¿PIP es presión de impulsión?» / contrastes de significado sin «qué».
+    if re.search(r"\b(pip|bopd|bwpd|bfpd|thd)\b", bajo) and any(
+        giro in bajo for giro in (
+            "impulsión", "impulsion", "admisión", "admision",
+            "es presión", "es presion", "es caudal", "no es",
+        )
+    ):
+        return True
+    return False
 
 
 def _es_ajena(bajo: str) -> bool:
@@ -371,11 +397,72 @@ def _pide_presiones(bajo: str) -> bool:
 
 
 def _pide_caudal_simple(bajo: str) -> bool:
+    if _pide_caudal_agua(bajo) or _pide_bopd(bajo):
+        return False
     return any(giro in bajo for giro in (
         "cuál es su caudal", "cual es su caudal", "qué caudal", "que caudal",
         "cuánto produce", "cuanto produce", "cuál es el caudal", "cual es el caudal",
         "caudal calculado", "caudal registrado", "mayor caudal",
+        "caudal total", "total de fluidos", "caudal de fluidos", "bfpd del",
+        "cuánto fluido", "cuanto fluido",
     ))
+
+
+def _pide_caudal_agua(bajo: str) -> bool:
+    return any(giro in bajo for giro in (
+        "caudal de agua", "caudal agua", "q-water", "q water", "q_water",
+        "cuánta agua", "cuanta agua", "agua produce", "bwpd",
+    ))
+
+
+def _pide_bopd(bajo: str) -> bool:
+    return any(giro in bajo for giro in (
+        "bopd", "caudal de petróleo", "caudal de petroleo", "caudal petróleo",
+        "caudal petroleo", "q-oil", "q oil", "q_oil",
+        "cuánto petróleo", "cuanto petroleo", "cuánto petroleo", "cuanto petróleo",
+        "petróleo produce", "petroleo produce", "produce petróleo", "produce petroleo",
+        "producción de petróleo", "produccion de petroleo",
+    ))
+
+
+def _variable_definicion(bajo: str) -> str:
+    if _es_contraste_conceptual(bajo) or (
+        ("presi" in bajo or "presión" in bajo or "presion" in bajo)
+        and ("altura" in bajo or "hidrául" in bajo or "hidraul" in bajo)
+    ):
+        return "presion_altura"
+    if re.search(r"\bbopd\b", bajo) or (
+        ("petróleo" in bajo or "petroleo" in bajo)
+        and any(g in bajo for g in ("significa", "representa", "qué es", "que es", "definición", "definicion"))
+    ):
+        return "bopd"
+    if re.search(r"\bbwpd\b", bajo):
+        return "bwpd"
+    if re.search(r"\bbfpd\b", bajo):
+        return "bfpd"
+    if "pip" in bajo or "admisión" in bajo or "admision" in bajo:
+        return "pip"
+    if "thd" in bajo:
+        return "thd"
+    return "general"
+
+
+def _es_contraste_conceptual(bajo: str) -> bool:
+    """Contrastes de conceptos (p. ej. presión vs altura) sin pedir un pozo."""
+    if any(p in bajo for p in ("qf-", "rb-")):
+        return False
+    if re.search(r"diferencia entre.{0,60}(presi[oó]n|altura|hidr[aá]ul)", bajo):
+        return True
+    if ("presi" in bajo or "presión" in bajo or "presion" in bajo) and (
+        "altura" in bajo or "hidrául" in bajo or "hidraul" in bajo
+    ) and any(
+        g in bajo for g in (
+            "diferencia", "disting", "versus", " vs ", "frente a",
+            "relación entre", "relacion entre", "qué diferencia", "que diferencia",
+        )
+    ):
+        return True
+    return False
 
 
 def _pide_frecuencia(bajo: str) -> bool:
@@ -395,6 +482,8 @@ def _pide_inventario(bajo: str) -> bool:
 
 
 def _pide_calculo(bajo: str) -> bool:
+    if _es_contraste_conceptual(bajo):
+        return False
     return any(giro in bajo for giro in ("pip", "thd", "caudal", "calcula", "calcular", "altura", "presión de admisión", "presion de admision"))
 
 

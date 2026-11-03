@@ -32,6 +32,7 @@ staticfiles/
 *~
 ~$*
 logs/*.log
+**/logs/incidentes.jsonl
 .cache/
 .local/
 

@@ -272,10 +272,14 @@ class ConsolaOperacionalTests(TestCase):
         qf084 = next(fila for fila in cuerpo["pozos"] if fila["pozo_id"] == "QF-084")
         self.assertEqual(qf084["codigo"], "NORMAL")
         self.assertTrue(qf084["clasificacion_valida"])
-        self.assertTrue(all(fila["codigo"] == "NORMAL" for fila in cuerpo["pozos"] if fila["pozo_id"] != "RB-1521"))
-        registro = next(fila for fila in cuerpo["pozos"] if fila["pozo_id"] == "RB-1521")
-        self.assertEqual(registro["rotulo"], "REGISTRO")
-        self.assertFalse(registro["clasificacion_valida"])
+        sin_regla = {"RB-1521", "RB-IA-2191"}
+        self.assertTrue(
+            all(fila["codigo"] == "NORMAL" for fila in cuerpo["pozos"] if fila["pozo_id"] not in sin_regla)
+        )
+        for pozo_id in sin_regla:
+            registro = next(fila for fila in cuerpo["pozos"] if fila["pozo_id"] == pozo_id)
+            self.assertEqual(registro["rotulo"], "REGISTRO")
+            self.assertFalse(registro["clasificacion_valida"])
         self.assertNotIn("ollama", json.dumps(cuerpo).lower())
         self.assertEqual(_sha(EXCEL), HASH)
         self.assertEqual(_sha(ORIGINAL), HASH)

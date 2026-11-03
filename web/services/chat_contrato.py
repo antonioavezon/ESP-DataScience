@@ -99,7 +99,13 @@ def desde_estructura(estructura: dict | None, *, alcance: dict, tipo: str | None
 
 
 def fusionar_linguistica(contrato: dict, aporte: dict | None) -> dict:
-    """Integra solo campos lingüísticos validados. No toca tablas ni métricas."""
+    """Integra solo campos lingüísticos validados. No toca tablas ni métricas.
+
+    Evita repeticiones: el resumen del modelo sustituye al determinístico; la
+    explicación solo se agrega si aporta contenido nuevo frente a resumen/tabla.
+    """
+    from services.chat_dedupe import aporta_novedad, dedupe_frases
+
     if not isinstance(contrato, dict):
         return contrato_vacio(alcance={}, status="fallback")
     salida = {
@@ -107,17 +113,70 @@ def fusionar_linguistica(contrato: dict, aporte: dict | None) -> dict:
         "answer": {**(contrato.get("answer") or {}), "blocks": list((contrato.get("answer") or {}).get("blocks") or [])},
     }
     if not isinstance(aporte, dict):
-        return salida
-    resumen = str(aporte.get("resumen") or "").strip()
-    explicacion = str(aporte.get("explicacion") or "").strip()
+        return _dedupe_contrato(salida)
+    resumen = dedupe_frases(str(aporte.get("resumen") or "").strip())
+    explicacion = dedupe_frases(str(aporte.get("explicacion") or "").strip())
+    bases = []
     if resumen:
         salida["answer"]["summary"] = resumen
-    if explicacion:
+        bases.append(resumen)
+    else:
+        bases.append(str(salida["answer"].get("summary") or ""))
+    # Texto ya presente en bloques determinísticos (párrafos/tablas).
+    for bloque in salida["answer"]["blocks"]:
+        if bloque.get("type") == "paragraph" and bloque.get("text"):
+            bases.append(str(bloque["text"]))
+        if bloque.get("type") == "table":
+            for fila in bloque.get("rows") or []:
+                bases.append(" ".join(str(c) for c in fila))
+    # Quitar párrafos determinísticos que solo reiteran el nuevo resumen.
+    if resumen:
+        depurados = []
+        for bloque in salida["answer"]["blocks"]:
+            if bloque.get("type") == "paragraph" and bloque.get("role") != "model":
+                if not aporta_novedad(str(bloque.get("text") or ""), [resumen], umbral=0.72):
+                    continue
+            if bloque.get("type") == "paragraph" and bloque.get("role") == "model":
+                continue
+            depurados.append(bloque)
+        salida["answer"]["blocks"] = depurados
+    especulativa = any(
+        giro in explicacion.casefold()
+        for giro in (
+            "podría reflejar", "podria reflejar", "sugiere que", "sugiere un", "lo que sugiere",
+            "probablemente", "posible daño", "saturación", "saturacion", "yacimiento", "reservorio",
+            "riesgo de", "conviene subir", "conviene bajar", "dominado por agua",
+        )
+    )
+    if explicacion and not especulativa and aporta_novedad(explicacion, bases, umbral=0.75):
         bloques = [b for b in salida["answer"]["blocks"] if not (b.get("type") == "paragraph" and b.get("role") == "model")]
         bloques.append({"type": "paragraph", "text": explicacion, "heading": None, "role": "model"})
         salida["answer"]["blocks"] = bloques
         salida["linguistic_source"] = "model"
-    return salida
+    elif resumen:
+        salida["linguistic_source"] = "model"
+    return _dedupe_contrato(salida)
+
+
+def _dedupe_contrato(contrato: dict) -> dict:
+    from services.chat_dedupe import aporta_novedad, dedupe_frases
+
+    answer = contrato.get("answer") or {}
+    resumen = dedupe_frases(str(answer.get("summary") or ""))
+    answer["summary"] = resumen
+    vistos = [resumen] if resumen else []
+    bloques = []
+    for bloque in answer.get("blocks") or []:
+        if bloque.get("type") == "paragraph":
+            texto = dedupe_frases(str(bloque.get("text") or ""))
+            if not texto or not aporta_novedad(texto, vistos, umbral=0.8):
+                continue
+            bloque = {**bloque, "text": texto}
+            vistos.append(texto)
+        bloques.append(bloque)
+    answer["blocks"] = bloques
+    contrato["answer"] = answer
+    return contrato
 
 
 def validar(contrato: Any) -> tuple[bool, str]:
