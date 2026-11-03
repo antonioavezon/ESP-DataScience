@@ -9,12 +9,15 @@
   function mandoEditable(control, alCambiar) {
     var articulo = document.createElement("article");
     articulo.className = "tarjeta mando";
-    var valor = control.valor_original;
-    if (valor === null || valor === undefined) {
+    var valorOriginal = control.valor_original;
+    if (valorOriginal === null || valorOriginal === undefined) {
       articulo.innerHTML = "<h2></h2><p class='valor-grande'>No disponible</p>";
       articulo.querySelector("h2").textContent = control.nombre;
       return articulo;
     }
+    var valor = (control.valor_en_uso !== null && control.valor_en_uso !== undefined)
+      ? control.valor_en_uso
+      : valorOriginal;
     var recorrido = control.recorrido || {};
     articulo.innerHTML =
       "<header><h2></h2><button type='button' class='inicio'>Inicio</button></header>" +
@@ -24,12 +27,12 @@
       "<div class='extremos'><span></span><span></span></div>" +
       "<label class='exacto'>Exacto <input type='number' step='any' inputmode='decimal'></label>";
     articulo.querySelector("h2").textContent = control.nombre;
-    articulo.querySelector(".original").textContent = formatoVisible(valor) + " " + (control.unidad || "");
+    articulo.querySelector(".original").textContent = formatoVisible(valorOriginal) + " " + (control.unidad || "");
     var grande = articulo.querySelector(".valor-grande");
     var rango = articulo.querySelector("input[type=range]");
     var numero = articulo.querySelector("input[type=number]");
     grande.dataset.mando = control.id;
-    grande.dataset.inicial = String(valor);
+    grande.dataset.inicial = String(valorOriginal);
     grande.dataset.valor = String(valor);
     rango.min = recorrido.minimo;
     rango.max = recorrido.maximo;
@@ -55,7 +58,7 @@
     reflejar(valor, false);
     rango.addEventListener("input", function () { reflejar(rango.value, true); });
     numero.addEventListener("change", function () { reflejar(numero.value, true); });
-    articulo.querySelector(".inicio").addEventListener("click", function () { reflejar(valor, true); });
+    articulo.querySelector(".inicio").addEventListener("click", function () { reflejar(valorOriginal, true); });
     return articulo;
   }
 

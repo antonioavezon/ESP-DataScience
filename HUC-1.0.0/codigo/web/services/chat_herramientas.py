@@ -128,6 +128,8 @@ def _escenario_visible(identificador) -> str:
 
 
 def _magnitudes(resultados: dict) -> list[dict]:
+    from services.unidades_caudal import unidad_de
+
     magnitudes = []
     for clave, item in resultados.items():
         if not isinstance(item, dict) or item.get("valor") is None:
@@ -136,7 +138,7 @@ def _magnitudes(resultados: dict) -> list[dict]:
             "id": clave,
             "nombre": item.get("nombre") or clave,
             "visible": item.get("valor_visible") or formato_visible(item.get("valor")),
-            "unidad": item.get("unidad") or "",
+            "unidad": unidad_de(clave, item.get("unidad")),
             "tipo": "resultado",
             "descripcion": "",
         })

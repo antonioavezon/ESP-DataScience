@@ -26,28 +26,39 @@ def pozos() -> list[dict]:
 
 
 def base(pozo_id: str) -> dict | None:
+    from data.simuladores.valores_en_uso import obtener
+
     _, localizar, escenario_de = _servicios()
     encontrados = localizar(pozo_id)
     if len(encontrados) != 1:
         return None
     ficha, pozo = encontrados[0]
     escenario = escenario_de(pozo, ficha)
+    en_uso = obtener(pozo_id) or {}
+    controles = []
+    for control in escenario["controles"]:
+        original = control["valor_inicial"]
+        actual = en_uso.get(control["id"])
+        if actual is None and original is not None:
+            actual = float(original)
+        controles.append({
+            "id": control["id"],
+            "nombre": control["nombre"],
+            "unidad": control["unidad"],
+            "valor_original": original,
+            "valor_en_uso": actual,
+            "modificado": control["id"] in en_uso,
+            "recorrido": control["recorrido"],
+            "paso": control.get("paso"),
+        })
     return {
         "pozo_id": pozo_id,
         "dataset_id": escenario["dataset_id"],
         "evaluable": bool(escenario["evaluable"]),
         "hoja": escenario["hoja"],
         "version_contrato": "1.3.0",
-        "controles": [
-            {
-                "id": control["id"],
-                "nombre": control["nombre"],
-                "unidad": control["unidad"],
-                "valor_original": control["valor_inicial"],
-                "recorrido": control["recorrido"],
-            }
-            for control in escenario["controles"]
-        ],
+        "tiene_valores_en_uso": bool(en_uso),
+        "controles": controles,
     }
 
 

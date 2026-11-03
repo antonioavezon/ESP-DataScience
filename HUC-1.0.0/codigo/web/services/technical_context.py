@@ -5,14 +5,17 @@ from __future__ import annotations
 from services.dataset_registry import FichaDataset, obtener
 from services.huc_adapter import adaptador_para
 from services.ollama_client import ENTRADA_MAXIMA
+from services.unidades_caudal import DEFINICION_BFPD, DEFINICION_BOPD, DEFINICION_BWPD
 
 DEFINICION_PIP = (
-    "PIP = Pump Intake Pressure: presión del fluido en la entrada de la bomba electrosumergible."
+    "PIP = Pump Intake Pressure: presión del fluido en la entrada de la bomba electrosumergible. "
+    "No significa presión de inicio de producción ni presión de impulsión."
 )
 
 INSTRUCCION = """Eres el asistente técnico local de HUC. Respondes en español, en prosa breve.
 
 Usa solo el contexto suministrado. Explica el resultado calculado con sus unidades.
+Distingue BFPD (fluidos), BWPD (agua) y BOPD (petróleo); no intercambies esas etiquetas.
 
 No inventes fórmulas, unidades, pozos ni mediciones. No indiques subir ni bajar la frecuencia ni declares que un pozo está seguro.
 

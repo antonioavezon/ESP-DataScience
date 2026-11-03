@@ -87,14 +87,15 @@ def _responder(consulta, decision, previo, cliente, cfg, dataset_id=None, ambito
             "Puedo responder consultas sobre bombas electrosumergibles y los pozos de este expediente. "
             "Esa pregunta no entra en ese tema."
         )
-        aviso = contrato_vacio(alcance=alcance, tipo="notice", titulo="Fuera de alcance", resumen=mensaje)
+        # Resumen vacío: el aviso vive solo en el bloque notice (evita duplicar la frase).
+        aviso = contrato_vacio(alcance=alcance, tipo="notice", titulo="Fuera de alcance", resumen="")
         aviso["answer"]["blocks"] = [{"type": "notice", "level": "info", "text": mensaje}]
         return _paquete(consulta, mensaje, True, None, [_FUENTE_PIP], previo, estructura=aviso, alcance=alcance)
     if intencion == "consulta_esp":
         return _consulta_esp(consulta, decision, previo, cliente, cfg, dataset_id, alcance)
     if intencion == "pozo_desconocido":
         mensaje = "No tengo ese pozo en el expediente que estoy consultando."
-        aviso = contrato_vacio(alcance=alcance, tipo="notice", titulo="Pozo no encontrado", resumen=mensaje, status="error")
+        aviso = contrato_vacio(alcance=alcance, tipo="notice", titulo="Pozo no encontrado", resumen="", status="error")
         aviso["answer"]["blocks"] = [{"type": "notice", "level": "error", "text": mensaje}]
         return _paquete(consulta, mensaje, False, None, [_FUENTE_MOTOR], previo, estructura=aviso, alcance=alcance)
     if intencion == "explicar_estado":
@@ -103,7 +104,11 @@ def _responder(consulta, decision, previo, cliente, cfg, dataset_id=None, ambito
         bajo = consulta.lower()
         if any(giro in bajo for giro in ("presi", "pip", "thp")):
             decision = {**decision, "intencion": "presiones", "variable": "presiones"}
-        elif any(giro in bajo for giro in ("caudal", "produce", "bfpd")):
+        elif any(giro in bajo for giro in ("agua", "bwpd", "q-water", "q_water")):
+            decision = {**decision, "intencion": "caudal", "variable": "q_water"}
+        elif any(giro in bajo for giro in ("petróleo", "petroleo", "bopd", "q-oil", "q_oil")):
+            decision = {**decision, "intencion": "caudal", "variable": "bopd"}
+        elif any(giro in bajo for giro in ("caudal", "produce", "bfpd", "fluidos")):
             decision = {**decision, "intencion": "caudal", "variable": "caudal"}
         elif any(giro in bajo for giro in ("frecuen", "hz")):
             decision = {**decision, "intencion": "frecuencia", "variable": "frecuencia_hz"}
@@ -138,20 +143,42 @@ def _responder(consulta, decision, previo, cliente, cfg, dataset_id=None, ambito
     contrato = desde_estructura(estructura, alcance=alcance) if estructura else None
     if contrato is None and plantilla:
         tipo = "definition" if decision["intencion"] == "conceptual" else "open"
-        contrato = contrato_vacio(alcance=alcance, tipo=tipo, titulo="", resumen=plantilla[:180])
         if tipo == "definition":
+            # Un solo bloque de definición: sin resumen que copie el mismo texto.
+            termino = (decision.get("variable") or "concepto").upper()
+            if termino in ("PIP", "GENERAL"):
+                termino = "PIP"
+            elif termino == "PRESION_ALTURA":
+                termino = "Presión y altura hidráulica"
+            contrato = contrato_vacio(
+                alcance=alcance,
+                tipo=tipo,
+                titulo="",
+                resumen="",
+            )
             contrato["answer"]["blocks"] = [{
                 "type": "definition",
-                "term": (decision.get("variable") or "concepto").upper(),
+                "term": termino,
                 "text": plantilla,
             }]
-        else:
+        elif decision["intencion"] in ("aclarar", "rechazar_autorizacion"):
+            # Un solo bloque: evita repetir el mismo aviso en resumen y párrafo.
+            contrato = contrato_vacio(alcance=alcance, tipo=tipo, titulo="", resumen="")
             contrato["answer"]["blocks"] = [{"type": "paragraph", "text": plantilla}]
-    # Las respuestas «por qué» ya traen argumentación determinística; el LLM solo
-    # añadía paráfrasis y duplicaba el cierre.
+        else:
+            contrato = contrato_vacio(alcance=alcance, tipo=tipo, titulo="", resumen=plantilla[:180])
+            contrato["answer"]["blocks"] = [{"type": "paragraph", "text": plantilla}]
+    # Las respuestas «por qué» y las definiciones canónicas ya son suficientes;
+    # el LLM solo añadía paráfrasis y duplicaba el cierre.
     variable = decision.get("variable") or ""
-    omitir_llm = variable in ("motivo_estado", "motivo_caudal") or (
-        estructura is not None and estructura.get("tipo") == "estado_pozo" and estructura.get("rotulo")
+    omitir_llm = (
+        variable in ("motivo_estado", "motivo_caudal")
+        or decision["intencion"] in ("conceptual", "aclarar", "rechazar_autorizacion")
+        or (
+            estructura is not None
+            and estructura.get("tipo") == "estado_pozo"
+            and estructura.get("rotulo")
+        )
     )
     inferencia = None if omitir_llm else _explicar(cliente, cfg, plantilla, decision, contrato)
     filas = [completar(fila) for fila in corrida.get("filas") or []]
@@ -239,6 +266,10 @@ def _respuesta_estructurada(decision: dict, corrida: dict, dataset_id: str | Non
             tema = "motivo_estado"
         if variable == "motivo_caudal" or (intencion == "caudal" and "motivo" in variable):
             tema = "motivo_caudal"
+        if variable == "q_water":
+            tema = "caudal_agua"
+        if variable in ("bopd", "q_oil"):
+            tema = "bopd"
         estructura = estructurar(tema, filas, dataset_id=dataset_filtro, alcance=alcance or {})
         return estructura, texto_plano(estructura), list(estructura.get("fuentes") or [_FUENTE_MOTOR])
     plantilla, _, fuentes = _plantilla(decision, corrida, dataset_id)
@@ -247,13 +278,40 @@ def _respuesta_estructurada(decision: dict, corrida: dict, dataset_id: str | Non
 
 def _plantilla(decision: dict, corrida: dict, dataset_id: str | None = None) -> tuple[str, list[str], list[str]]:
     intencion = decision["intencion"]
-    filas = corrida["filas"]
+    filas = [completar(fila) for fila in (corrida.get("filas") or [])]
     if intencion == "conceptual":
-        if decision.get("variable") == "cavitacion":
+        from services.unidades_caudal import DEFINICION_BFPD, DEFINICION_BOPD, DEFINICION_BWPD
+
+        variable = decision.get("variable") or ""
+        if variable == "cavitacion":
             return (
                 "La cavitación es la formación de burbujas de vapor cuando la presión del líquido baja hasta su presión de vapor. "
                 "En una bomba electrosumergible interesa en la entrada, donde una presión demasiado baja puede dañar los impulsores. "
                 "Esta explicación no calcula la presión de un pozo.",
+                [],
+                [_FUENTE_PIP],
+            )
+        if variable == "presion_altura":
+            return (
+                "La presión es la fuerza por unidad de área que ejerce el fluido (por ejemplo, en psi). "
+                "La altura hidráulica expresa esa misma energía del fluido como una columna equivalente (por ejemplo, en ft). "
+                "THD (Total Dynamic Head) es la altura total de descarga usada en el análisis de la bomba: "
+                "no es una presión manométrica en psi, aunque se relaciona con ella mediante el gradiente del fluido. "
+                "Esta explicación no calcula un pozo concreto.",
+                [],
+                [_FUENTE_PIP],
+            )
+        if variable == "bopd":
+            return (DEFINICION_BOPD, [], [_FUENTE_PIP])
+        if variable == "bwpd":
+            return (DEFINICION_BWPD, [], [_FUENTE_PIP])
+        if variable == "bfpd":
+            return (DEFINICION_BFPD, [], [_FUENTE_PIP])
+        if variable == "thd":
+            return (
+                "THD (Total Dynamic Head) es la altura total de descarga: la columna hidráulica equivalente "
+                "que la bomba debe vencer. Se expresa en pies de fluido y no debe confundirse con una presión "
+                "manométrica en psi. Esta explicación no calcula un pozo concreto.",
                 [],
                 [_FUENTE_PIP],
             )
@@ -289,7 +347,12 @@ def _plantilla(decision: dict, corrida: dict, dataset_id: str | None = None) -> 
         return _comparar(filas), cifras, [_FUENTE_MOTOR]
     fila = filas[0]
     if intencion in ("estado", "medidas", "presiones", "caudal", "frecuencia"):
-        texto = redactar(intencion, filas, dataset_id)
+        tema = intencion
+        if intencion == "caudal" and decision.get("variable") == "q_water":
+            tema = "caudal_agua"
+        if intencion == "caudal" and decision.get("variable") in ("bopd", "q_oil"):
+            tema = "bopd"
+        texto = redactar(tema, filas, dataset_id)
         return texto, _cifras_magnitudes(filas) or cifras, [_FUENTE_MOTOR]
     if intencion == "reglas":
         return _reglas(fila), cifras, [_FUENTE_MOTOR]
@@ -302,16 +365,44 @@ def _plantilla(decision: dict, corrida: dict, dataset_id: str | None = None) -> 
 
 def _calculo(fila: dict, variable: str) -> str:
     if variable == "thd_total_ft":
+        if not fila.get("thd_visible"):
+            return (
+                f"En el pozo {fila['pozo']} no hay una altura total de descarga (THD) publicada en el resultado."
+            )
         return (
             f"La altura total de descarga calculada para {fila['pozo']} es {fila['thd_visible']} ft. "
             "Sale del balance de la hoja. No es una orden de operar la bomba."
         )
-    if variable == "caudal_operacion_bfpd":
-        return (
-            f"El caudal de intersección calculado para {fila['pozo']} es {fila['caudal_visible']} BFPD. "
-            "Es el punto en que la curva, llevada a la frecuencia de la hoja, iguala la altura total. "
-            "No es el caudal registrado."
+    if variable in ("caudal_operacion_bfpd", "caudal_a_producir_bfpd", "caudal"):
+        # Preferir caudal registrado/publicado (q_fluidos/bfpd) antes que intersección ausente.
+        por_id = {item.get("id"): item for item in (fila.get("magnitudes") or []) if isinstance(item, dict)}
+        registrado = (
+            por_id.get("caudal_operacion_bfpd")
+            or por_id.get("q_fluidos")
+            or por_id.get("bfpd")
+            or por_id.get("caudal_fluidos")
         )
+        calculado = por_id.get("caudal_a_producir_bfpd")
+        if registrado and registrado.get("visible"):
+            texto = (
+                f"El caudal de fluidos publicado para {fila['pozo']} es "
+                f"{registrado['visible']} {registrado.get('unidad') or 'BFPD'}."
+            )
+            if calculado and calculado.get("visible"):
+                texto += (
+                    f" El caudal de intersección calculado es {calculado['visible']} "
+                    f"{calculado.get('unidad') or 'BFPD'}."
+                )
+            return texto
+        if fila.get("caudal_visible"):
+            return (
+                f"El caudal de intersección calculado para {fila['pozo']} es {fila['caudal_visible']} BFPD. "
+                "Es el punto en que la curva, llevada a la frecuencia de la hoja, iguala la altura total. "
+                "No es el caudal registrado."
+            )
+        return f"En el pozo {fila['pozo']} no hay un caudal publicado en el resultado consultable."
+    if not fila.get("pip_visible"):
+        return f"En el pozo {fila['pozo']} no hay una PIP publicada en el resultado consultable."
     return (
         f"La presión de admisión calculada para {fila['pozo']} es {fila['pip_visible']} ft. "
         "Es el valor transcrito de la hoja. La posición en la que el sensor mide, y el signo frente a la "
@@ -365,14 +456,99 @@ def _diferencia(fila: dict) -> str:
     )
 
 
+def _magnitud_por_ids(fila: dict, ids: tuple[str, ...]) -> tuple[str | None, str | None, str | None]:
+    """Devuelve (id, visible, unidad) de la primera magnitud disponible; nunca 'None'."""
+    por_id = {
+        item.get("id"): item
+        for item in (fila.get("magnitudes") or [])
+        if isinstance(item, dict) and item.get("id")
+    }
+    for clave in ids:
+        item = por_id.get(clave)
+        if not item:
+            continue
+        visible = item.get("visible")
+        if visible in (None, "", "None", "none", "null"):
+            continue
+        unidad = item.get("unidad") or ""
+        return clave, str(visible), str(unidad)
+    # Compatibilidad BES: campos aplanados de la fila.
+    alias = {
+        "pip_ft": ("pip_visible", "ft", "pip_ft"),
+        "thd_total_ft": ("thd_visible", "ft", "thd_total_ft"),
+        "caudal_a_producir_bfpd": ("caudal_visible", "BFPD", "caudal_a_producir_bfpd"),
+    }
+    for clave in ids:
+        if clave not in alias:
+            continue
+        campo, unidad, mid = alias[clave]
+        visible = fila.get(campo)
+        if visible in (None, "", "None", "none", "null"):
+            continue
+        return mid, str(visible), unidad
+    return None, None, None
+
+
+def _linea_comparacion(fila: dict) -> str:
+    partes = []
+    adm_id, adm, adm_u = _magnitud_por_ids(fila, ("pip_ft", "pip"))
+    if adm:
+        partes.append(f"admisión {adm} {adm_u or 'ft'}".strip())
+    thd_id, thd, thd_u = _magnitud_por_ids(fila, ("thd_total_ft",))
+    if thd:
+        partes.append(f"altura total {thd} {thd_u or 'ft'}".strip())
+    caud_id, caud, caud_u = _magnitud_por_ids(
+        fila,
+        ("caudal_a_producir_bfpd", "q_fluidos", "bfpd", "caudal_fluidos"),
+    )
+    if caud:
+        etiqueta = "caudal de intersección" if caud_id == "caudal_a_producir_bfpd" else "caudal de fluidos"
+        partes.append(f"{etiqueta} {caud} {caud_u or 'BFPD'}".strip())
+    agua_id, agua, agua_u = _magnitud_por_ids(fila, ("q_water", "bwpd"))
+    if agua and not caud:
+        partes.append(f"caudal de agua {agua} {agua_u or 'BWPD'}".strip())
+    if not partes:
+        # Último recurso: hasta tres magnitudes publicadas, sin inventar.
+        publicados = []
+        for item in fila.get("magnitudes") or []:
+            if not isinstance(item, dict):
+                continue
+            visible = item.get("visible")
+            if visible in (None, "", "None", "none", "null"):
+                continue
+            nombre = item.get("nombre") or item.get("id") or "magnitud"
+            unidad = item.get("unidad") or ""
+            publicados.append(f"{nombre} {visible} {unidad}".strip())
+            if len(publicados) >= 3:
+                break
+        if publicados:
+            return f"{fila.get('pozo')}: " + "; ".join(publicados) + "."
+        return (
+            f"{fila.get('pozo')}: no hay magnitudes comparables publicadas en el resultado consultable."
+        )
+    return f"{fila.get('pozo')}: " + ", ".join(partes) + "."
+
+
 def _comparar(filas: list[dict]) -> str:
-    lineas = [
-        f"{fila['pozo']}: admisión {fila['pip_visible']} ft, altura total {fila['thd_visible']} ft, caudal de intersección {fila['caudal_visible']} BFPD."
-        for fila in filas
-    ]
-    orden = sorted(filas, key=lambda fila: fila["pip_ft"] if isinstance(fila["pip_ft"], (int, float)) else -1, reverse=True)
-    mayor = orden[0]["pozo"] if orden and isinstance(orden[0]["pip_ft"], (int, float)) else ""
-    cierre = f" La mayor presión de admisión, en pies de fluido, es la de {mayor}." if mayor else ""
+    lineas = [_linea_comparacion(fila) for fila in filas]
+    candidatos = []
+    for fila in filas:
+        _, visible, _ = _magnitud_por_ids(fila, ("pip_ft", "pip"))
+        if visible is None:
+            continue
+        try:
+            candidatos.append((fila.get("pozo"), float(str(visible).replace(",", "."))))
+        except (TypeError, ValueError):
+            continue
+    cierre = ""
+    if candidatos:
+        mayor = max(candidatos, key=lambda item: item[1])[0]
+        cierre = f" La mayor presión de admisión publicada es la de {mayor}."
+    elif len(filas) >= 2:
+        cierre = (
+            " Las magnitudes disponibles no son todas equivalentes entre estos expedientes; "
+            "solo se contrastan las publicadas por cada motor."
+        )
     return " ".join(lineas) + cierre + " La comparación usa el cálculo de cada hoja y no autoriza una maniobra."
 
 
@@ -380,18 +556,30 @@ def _cifras(filas: list[dict]) -> list[str]:
     cifras = []
     for fila in filas:
         for clave in ("pip_visible", "thd_visible", "caudal_visible"):
-            if fila.get(clave):
+            if fila.get(clave) not in (None, "", "None"):
                 cifras.append(str(fila[clave]))
+        for item in fila.get("magnitudes") or []:
+            if isinstance(item, dict) and item.get("visible") not in (None, "", "None"):
+                cifras.append(str(item["visible"]))
     return cifras
 
 
 _SISTEMA = (
     "Eres el asistente técnico de HUC para pozos con bomba electrosumergible.\n"
-    "Tu rol: explicar hechos ya calculados. No calculas ni inventas cifras, unidades ni estados.\n"
+    "Tu rol: explicar hechos ya calculados por el motor determinístico. "
+    "No calculas, no inventas cifras, unidades, estados ni fórmulas físicas.\n"
     "Responde en español profesional, natural y preciso.\n"
     "Devuelve solo JSON con las claves resumen y explicacion.\n"
-    "resumen: una o dos frases. explicacion: desarrollo breve sin repetir el resumen.\n"
-    "Conserva todos los números y unidades del texto de hechos exactamente.\n"
+    "resumen: una o dos frases con la respuesta directa a la pregunta, usando las cifras de los hechos.\n"
+    "explicacion: aporta interpretación o contexto breve. "
+    "PROHIBIDO repetir el resumen, volver a listar las mismas cifras o parafrasear la misma idea.\n"
+    "Si los hechos ya responden la pregunta, la explicacion puede quedar vacía (\"\").\n"
+    "No especules sobre causas de yacimiento, saturación, daños, riesgos ni diagnósticos "
+    "que no estén explícitos en los hechos.\n"
+    "Conserva números y unidades exactamente como aparecen en los hechos.\n"
+    "Distingue BFPD (fluidos), BWPD (agua) y BOPD (petróleo).\n"
+    "PIP = Pump Intake Pressure (presión en la entrada de la bomba); "
+    "no es presión de inicio de producción ni de impulsión.\n"
     "No autorices maniobras. No menciones códigos internos, contratos ni nombres de funciones."
 )
 
@@ -408,8 +596,10 @@ def _explicar(cliente, cfg, plantilla: str, decision: dict, contrato: dict | Non
         {
             "role": "user",
             "content": (
-                f"{contexto}Hechos verificados (no los alteres):\n{plantilla}\n\n"
-                "Redacta resumen y explicacion en JSON."
+                f"{contexto}Hechos verificados del motor (fuente única; no los alteres ni recalcules):\n"
+                f"{plantilla}\n\n"
+                "Redacta JSON {\"resumen\":\"...\",\"explicacion\":\"...\"}. "
+                "No repitas la misma frase dos veces."
             ),
         },
     ]
@@ -504,7 +694,14 @@ def _unir(plantilla: str, texto: str, corpus_texto, rotulos: list[str] | None = 
 
 
 def _cifras_de_texto(texto: str) -> list[str]:
-    return re.findall(r"\d+\.\d+", texto or "")
+    # Incluye enteros y decimales con punto o coma (p. ej. 80,6 / 5180 / 8.842,34).
+    hallados = re.findall(r"\d+(?:[.,]\d+)?", texto or "")
+    normalizados = []
+    for cifra in hallados:
+        normalizados.append(cifra)
+        normalizados.append(cifra.replace(",", "."))
+        normalizados.append(cifra.replace(".", "").replace(",", "."))
+    return normalizados
 
 
 def _cifras_magnitudes(filas: list[dict]) -> list[str]:

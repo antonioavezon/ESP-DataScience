@@ -3,6 +3,8 @@
   if (!pozo || !window.HucMandos) return;
   var token = (document.querySelector('meta[name="csrf-token"]') || {}).content || "";
   var mandos = document.getElementById("mandos");
+  var relojFase = null;
+  var ultimaFase = "";
 
   function nota(texto) {
     document.getElementById("publicacion").textContent = texto;
@@ -19,7 +21,13 @@
           return;
         }
         HucMandos.dibujar(mandos, cuerpo.controles);
-        nota("Valores originales cargados. Sin publicar.");
+        if (cuerpo.tiene_valores_en_uso) {
+          nota("Valores en uso activos (sesión de simulación).");
+        } else {
+          nota("Valores de referencia cargados. Sin publicar.");
+        }
+        ultimaFase = cuerpo.fase_secuencia || "detenida";
+        document.getElementById("fase").textContent = "Fase: " + ultimaFase;
       });
   }
 
@@ -54,6 +62,32 @@
     });
   }
 
+  function detenerPollFase() {
+    if (relojFase) {
+      window.clearInterval(relojFase);
+      relojFase = null;
+    }
+  }
+
+  function vigilarFase() {
+    detenerPollFase();
+    relojFase = window.setInterval(function () {
+      fetch("/api/pozos/" + encodeURIComponent(pozo.value) + "/fase/")
+        .then(function (respuesta) { return respuesta.json(); })
+        .then(function (dato) {
+          var fase = dato.fase || "detenida";
+          document.getElementById("fase").textContent = "Fase: " + fase;
+          if (ultimaFase === "en_curso" && fase === "detenida") {
+            detenerPollFase();
+            cargar();
+            nota("Secuencia finalizada. Los últimos valores en uso permanecen activos.");
+          }
+          ultimaFase = fase;
+          if (fase === "detenida") detenerPollFase();
+        });
+    }, 1000);
+  }
+
   var acceso = document.getElementById("acceso");
   if (acceso) {
     acceso.addEventListener("submit", function (evento) {
@@ -80,7 +114,8 @@
           nota(cuerpo.error || "No se publicó.");
           return;
         }
-        nota("Publicado. Esperando acuse.");
+        cargar();
+        nota("Publicado. Valores en uso conservados. Esperando acuse.");
         vigilar(cuerpo.evaluacion_id);
       });
   });
@@ -92,11 +127,25 @@
           nota(cuerpo.error || "No se restauró.");
           return;
         }
+        detenerPollFase();
         cargar();
-        nota("Restauración publicada.");
+        nota("Restauración publicada. Valores de referencia activos.");
         vigilar(cuerpo.evaluacion_id);
       });
   });
+
+  var cerrar = document.getElementById("cerrar-sesion");
+  if (cerrar) {
+    cerrar.addEventListener("click", function () {
+      post("/api/cerrar-sesion/", {}).then(function () {
+        detenerPollFase();
+        document.getElementById("panel").hidden = true;
+        if (acceso) acceso.hidden = false;
+        mandos.innerHTML = "";
+        nota("Sesión cerrada. La próxima entrada inicia desde los valores de referencia.");
+      });
+    });
+  }
 
   function automatica(accion) {
     var cuerpo = {accion: accion};
@@ -107,14 +156,28 @@
     }
     post("/api/pozos/" + encodeURIComponent(pozo.value) + "/automatica/", cuerpo)
       .then(function (dato) {
-        document.getElementById("fase").textContent = dato.error || ("Fase: " + (dato.fase || accion));
+        if (!dato._ok) {
+          document.getElementById("fase").textContent = dato.error || "No se pudo ejecutar.";
+          return;
+        }
+        ultimaFase = dato.fase || accion;
+        document.getElementById("fase").textContent = "Fase: " + ultimaFase;
+        if (accion === "iniciar" && ultimaFase === "en_curso") {
+          vigilarFase();
+        }
+        if (accion === "detener") {
+          detenerPollFase();
+          cargar();
+          nota("Secuencia detenida. Se conservan los últimos valores en uso.");
+        }
       });
   }
 
   document.getElementById("auto-iniciar").addEventListener("click", function () { automatica("iniciar"); });
-  document.getElementById("auto-pausar").addEventListener("click", function () { automatica("pausar"); });
-  document.getElementById("auto-reanudar").addEventListener("click", function () { automatica("reanudar"); });
   document.getElementById("auto-detener").addEventListener("click", function () { automatica("detener"); });
-  pozo.addEventListener("change", cargar);
-  if (pozo.value) cargar();
+  pozo.addEventListener("change", function () {
+    detenerPollFase();
+    cargar();
+  });
+  if (pozo.value && !document.getElementById("panel").hidden) cargar();
 })();

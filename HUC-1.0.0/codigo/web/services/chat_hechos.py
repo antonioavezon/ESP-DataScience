@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from services.escenario_inicial import escenario_de, listar_pozos, localizar
 from services.formato_numero import formato_visible
+from services.unidades_caudal import unidad_de
 
 CATALOGO = {
     "frecuencia_hz": ("Frecuencia de operación", "Hz", "Frecuencia registrada para el punto de la hoja.", "entrada"),
@@ -17,8 +18,11 @@ CATALOGO = {
     "caudal_a_producir_bfpd": ("Caudal calculado", "BFPD", "Caudal de intersección del balance. No es el caudal registrado.", "resultado"),
     "gradiente_psi_ft": ("Gradiente", "psi/ft", "Gradiente publicado por el cálculo.", "resultado"),
     "q_fluidos": ("Q-fluidos", "BFPD", "Caudal de fluidos del resultado.", "resultado"),
-    "q_water": ("Q-water", "BFPD", "Caudal de agua de la partición.", "resultado"),
-    "q_oil": ("Q-oil", "BFPD", "Caudal de petróleo de la partición.", "resultado"),
+    "q_water": ("Q-water", "BWPD", "Caudal de agua de la partición.", "resultado"),
+    "q_oil": ("Q-oil", "BOPD", "Caudal de petróleo de la partición.", "resultado"),
+    "bfpd": ("BFPD", "BFPD", "Caudal de fluidos del expediente.", "resultado"),
+    "bwpd": ("BWPD", "BWPD", "Caudal de agua del expediente.", "resultado"),
+    "bopd": ("BOPD", "BOPD", "Caudal de petróleo del expediente.", "resultado"),
 }
 
 
@@ -79,6 +83,10 @@ def redactar(tema: str, filas: list[dict], dataset_id: str | None = None) -> str
         return _presiones(filas)
     if tema == "caudal":
         return _caudal(filas)
+    if tema == "caudal_agua":
+        return _caudal_agua(filas)
+    if tema == "bopd":
+        return _bopd(filas)
     if tema == "frecuencia":
         return _frecuencia(filas)
     return _estado(filas)
@@ -96,6 +104,7 @@ def corpus(filas: list[dict], respaldo: str) -> str:
 
 
 def _item(identificador: str, valor, unidad: str, tipo: str, nombre: str | None = None) -> dict:
+    unidad = unidad_de(identificador, unidad)
     ficha = CATALOGO.get(identificador)
     return {
         "id": identificador,
@@ -216,7 +225,12 @@ def _caudal(filas: list[dict]) -> str:
     for fila in filas:
         por_id = {item["id"]: item for item in fila.get("magnitudes") or []}
         partes = [f"En el pozo {fila['pozo']}"]
-        registrado = por_id.get("caudal_operacion_bfpd") or por_id.get("caudal_fluidos") or por_id.get("q_fluidos")
+        registrado = (
+            por_id.get("caudal_operacion_bfpd")
+            or por_id.get("caudal_fluidos")
+            or por_id.get("q_fluidos")
+            or por_id.get("bfpd")
+        )
         calculado = por_id.get("caudal_a_producir_bfpd")
         if registrado:
             partes.append(f"el caudal registrado es {registrado['visible']} {registrado['unidad']}.")
@@ -228,6 +242,44 @@ def _caudal(filas: list[dict]) -> str:
         if not registrado and not calculado:
             partes.append("no hay un caudal publicado en el resultado.")
         textos.append(" ".join(partes))
+    return " ".join(textos)
+
+
+def _caudal_agua(filas: list[dict]) -> str:
+    textos = []
+    for fila in filas:
+        por_id = {item["id"]: item for item in fila.get("magnitudes") or []}
+        agua = por_id.get("q_water") or por_id.get("bwpd")
+        total = por_id.get("q_fluidos") or por_id.get("caudal_fluidos") or por_id.get("bfpd")
+        if agua:
+            frase = (
+                f"En el pozo {fila['pozo']} el caudal de agua es {agua['visible']} "
+                f"{unidad_de(agua.get('id') or 'q_water', agua.get('unidad'))}."
+            )
+            if total:
+                frase += (
+                    f" El caudal total de fluidos es {total['visible']} "
+                    f"{unidad_de(total.get('id') or 'bfpd', total.get('unidad'))}; "
+                    "no sustituye al caudal de agua."
+                )
+            textos.append(frase)
+        else:
+            textos.append(f"En el pozo {fila['pozo']} no hay un caudal de agua publicado en el resultado.")
+    return " ".join(textos)
+
+
+def _bopd(filas: list[dict]) -> str:
+    textos = []
+    for fila in filas:
+        por_id = {item["id"]: item for item in fila.get("magnitudes") or []}
+        bopd = por_id.get("bopd") or por_id.get("q_oil")
+        if bopd:
+            textos.append(
+                f"En el pozo {fila['pozo']} el BOPD publicado es {bopd['visible']} "
+                f"{unidad_de(bopd.get('id') or 'bopd', bopd.get('unidad'))}."
+            )
+        else:
+            textos.append(f"En el pozo {fila['pozo']} no hay un BOPD publicado en el resultado.")
     return " ".join(textos)
 
 
