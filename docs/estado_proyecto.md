@@ -30,3 +30,14 @@ Fecha: 2026-10-20.
 ## Bloqueos visibles
 
 CT-01 a CT-10 y P-14. No se dan por cerrados.
+
+
+---
+
+## Actualización 2026-11-03 (consolidación GitHub + SDD)
+
+La documentación operativa de plataforma para Spec-Driven Development está en
+[`docs/plataforma/00_indice.md`](plataforma/00_indice.md).
+
+`main` en GitHub (`antonioavezon/ESP-DataScience`) contiene HUC consolidado;
+el laboratorio previo está en `archive/esp-datascience-lab/`.
