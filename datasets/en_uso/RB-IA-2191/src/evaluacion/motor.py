@@ -63,9 +63,10 @@ def evaluar_solicitud(solicitud: dict) -> dict:
                 "dias_identidad_exacta": float(contar_identidades(serie)),
             },
             "etiquetas": {
+                # Etiquetas semánticas: misma dimensión (barriles/día), distinto fluido.
                 "bfpd": {"nombre": "BFPD", "unidad": "BFPD"},
-                "bwpd": {"nombre": "BWPD", "unidad": "BFPD"},
-                "bopd": {"nombre": "BOPD", "unidad": "BFPD"},
+                "bwpd": {"nombre": "BWPD", "unidad": "BWPD"},
+                "bopd": {"nombre": "BOPD", "unidad": "BOPD"},
                 "bsw": {"nombre": "BSW (almacenado)", "unidad": "fracción", "decimales": 3},
                 "frecuencia_hz": {"nombre": "HZ", "unidad": "Hz"},
                 "pip": {"nombre": "PIP (almacenado)", "unidad": ""},
@@ -97,8 +98,9 @@ def _leer_entradas(solicitud: dict, referencia: dict) -> tuple[tuple[float, floa
                 return None, "La unidad de bfpd debe ser BFPD."
             bfpd = float(valor)
         elif nombre == "bwpd":
-            if item.get("unidad") not in (None, "BFPD"):
-                return None, "La unidad de bwpd debe ser BFPD."
+            # Entrada: se admite BFPD (unidad de trabajo histórica) o BWPD (etiqueta semántica).
+            if item.get("unidad") not in (None, "BFPD", "BWPD"):
+                return None, "La unidad de bwpd debe ser BWPD o BFPD."
             bwpd = float(valor)
         else:
             return None, f"{nombre} no entra en el cálculo BOPD de este expediente."

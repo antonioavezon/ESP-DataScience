@@ -63,8 +63,8 @@ def evaluar_solicitud(solicitud: dict) -> dict:
             "etiquetas": {
                 "q_fluidos": {"nombre": "Q-fluidos", "unidad": "BFPD"},
                 "bsw": {"nombre": "BSW", "unidad": "fracción", "decimales": 3},
-                "q_water": {"nombre": "Q-water", "unidad": "BFPD"},
-                "q_oil": {"nombre": "Q-oil", "unidad": "BFPD"},
+                "q_water": {"nombre": "Q-water", "unidad": "BWPD"},
+                "q_oil": {"nombre": "Q-oil", "unidad": "BOPD"},
                 "dias_serie": {"nombre": "Días de la serie", "unidad": "d"},
                 "dias_identidad_exacta": {"nombre": "Días en que la partición cierra", "unidad": "d"},
             },

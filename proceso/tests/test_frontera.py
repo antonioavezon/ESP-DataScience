@@ -31,11 +31,18 @@ class Escenarios(unittest.TestCase):
         from data.simuladores.escenarios import base, pozos, validar
 
         identificadores = [item["pozo_id"] for item in pozos() if item["evaluable"]]
-        self.assertEqual(identificadores, ["QF-084", "QF-301", "QF-147", "QF-005", "QF-306", "RB-1521"])
+        self.assertEqual(
+            identificadores,
+            ["QF-084", "QF-301", "QF-147", "QF-005", "QF-306", "RB-1521", "RB-IA-2191"],
+        )
         serie = base("RB-1521")
         self.assertEqual([item["id"] for item in serie["controles"]], ["caudal_fluidos", "bsw"])
         _, ajeno = validar("RB-1521", {"frecuencia_hz": 60})
         self.assertIn("no es una entrada", ajeno)
+        rbia = base("RB-IA-2191")
+        self.assertEqual([item["id"] for item in rbia["controles"]], ["bfpd", "bwpd"])
+        _, ajeno_ia = validar("RB-IA-2191", {"frecuencia_hz": 60})
+        self.assertIn("no es una entrada", ajeno_ia)
         ficha = base("QF-084")
         self.assertEqual([item["id"] for item in ficha["controles"]], ["frecuencia_hz", "caudal_operacion_bfpd"])
         cambios, error = validar("QF-084", {"frecuencia_hz": 60})
