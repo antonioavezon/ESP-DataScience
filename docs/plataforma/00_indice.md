@@ -16,6 +16,7 @@
 | [10 Spec Kit](10_preparacion_spec_kit.md) | Adopción SDD |
 | [11 Flujo SDD Cursor](11_flujo_sdd_cursor.md) | Skills instaladas y procedimiento |
 | [12 Integración continua](12_integracion_continua.md) | GitHub Actions, gates, límites |
+| [13 Protección main (propuesta)](13_proteccion_main_propuesta.md) | Rulesets pendientes de autorización |
 | [Matriz de trazabilidad](matriz_trazabilidad.md) | Requisito→evidencia→prueba |
 | [Matriz de pruebas CI](matriz_pruebas_ci.md) | Suites A/B/C y línea base |
 
