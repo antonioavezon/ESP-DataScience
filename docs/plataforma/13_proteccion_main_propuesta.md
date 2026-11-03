@@ -36,3 +36,10 @@ gh api repos/antonioavezon/ESP-DataScience/rulesets -f ...
 ## Limitaciones conocidas
 - Repos privados en plan Free pueden tener restricciones en branch protection clásica; rulesets repository rules varían por plan.
 - Sin `gh` autenticado no se puede verificar ni aplicar desde esta estación.
+
+## Verificación 2026-11-03
+- Cuenta: `antonioavezon` con permiso `ADMIN` sobre el repo.
+- Visibilidad: **privada**.
+- API `branches/main/protection` y `rulesets`: **HTTP 403** — *“Upgrade to GitHub Pro or make this repository public to enable this feature.”*
+- Conclusión: **no es posible activar branch protection / rulesets obligatorios** en este plan sin pasar a GitHub Pro o hacer público el repositorio.
+- Alternativa operativa mientras tanto: exigir revisión humana del estado verde de `CI HUC` y `Seguridad HUC` antes de merge, documentada en constitución V y doc 12.
