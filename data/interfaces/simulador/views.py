@@ -11,7 +11,7 @@ from data.servicios.publicador import publicar
 from data.simuladores.automatico import Secuencia
 from data.simuladores.escenarios import base as ficha_base
 from data.simuladores.escenarios import mensaje, pozos as listar, validar
-from data.simuladores.valores_en_uso import guardar, limpiar, limpiar_todo
+from data.simuladores.valores_en_uso import activos, guardar, limpiar, limpiar_todo
 
 _SECUENCIA = Secuencia()
 
@@ -73,9 +73,16 @@ def acceder(request):
 def cerrar_sesion(request):
     for pozo in listar():
         _SECUENCIA.detener(pozo["pozo_id"])
+    simulados = activos()
     limpiar_todo()
+    # Igual que restaurar: los pozos que estaban simulados vuelven a publicar su escenario
+    # base, para que PROCESO y la consola regresen a los datos de la hoja.
+    for pozo_id in simulados:
+        ficha = ficha_base(pozo_id)
+        if ficha is not None and ficha["evaluable"]:
+            publicar(mensaje(pozo_id, {}))
     request.session.flush()
-    return JsonResponse({"autenticado": False})
+    return JsonResponse({"autenticado": False, "restaurados": simulados})
 
 
 @require_GET

@@ -40,4 +40,4 @@ sequenceDiagram
 ```
 
 ## Flujo C — Retorno a datos de hoja
-`restaurar` / base del pozo limpian valores en uso y republican escenario base (código Data). Evidencia: `data/interfaces/simulador/views.py`, `escenarios.py`.
+`restaurar` (un pozo) y `cerrar-sesion` (todos los pozos con valores en uso) limpian los valores en uso y republican el escenario base (código Data). Regresión: `data/tests/test_cerrar_sesion.py`. Evidencia: `data/interfaces/simulador/views.py`, `escenarios.py`.
