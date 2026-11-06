@@ -294,7 +294,7 @@ Recorrido de unos 15 minutos con la aplicación en marcha (`./verificar.sh` en v
 8. **Ejecutar un escenario.** Abra <http://localhost:8001>, ingrese con `operador` y la clave de `.env`. Elija **QF-084**, cambie la frecuencia de 63 a **60 Hz** y pulse **Aplicar escenario**. En la consola (puerto 8000) el pozo pasa a origen *simulado* y PROCESO recalcula: el caudal calculado baja de 10535.17 a **9449.00 BFPD** y el estado pasa a **INCIPIENTE** (la PIP de la hoja no cambia). Opcional: **Iniciar secuencia** (intervalo, duración y semilla) para ver una serie automática.
 9. **Regresar a los datos originales.** Pulse **Restaurar valores**. **Cerrar sesión** también republica la base de todos los pozos simulados. La consola vuelve a origen *hoja*, con exactamente los mismos valores del paso 4. Los libros Excel nunca se modifican: puede comprobarlo con `sha256sum -c datasets/SHA256SUMS`.
 
-Tiempos observados en CPU (28 hilos, sin GPU): las respuestas que usan el LLM tardan entre 6 y 14 s; las conceptuales o de estado, menos de 1 s.
+Tiempos observados en CPU (28 hilos, sin GPU): las respuestas que usan el LLM tardan entre 7 y 20 s (la primera incluye la carga del modelo en memoria); las conceptuales o de estado, menos de 1 s.
 
 ---
 
@@ -315,7 +315,7 @@ export DJANGO_DEBUG=1 DJANGO_SECRET_KEY=solo-pruebas DJANGO_ALLOWED_HOSTS=testse
 | Suite | Contenido | Resultado de referencia |
 |---|---|---|
 | `syntax` | Compilación de todos los módulos | OK |
-| `servicios` | PROCESO (fronteras), DATA (valores en uso), MODELOS_IA | 10 pruebas |
+| `servicios` | PROCESO (fronteras), DATA (valores en uso, cierre de sesión), MODELOS_IA (contrato, guarda de unidades) | 16 pruebas |
 | `web` | Django: consola, datasets, asistente, contratos JSON, unidades, guardas del LLM (con cliente simulado) | 123 pruebas |
 | `motores` | BES-jun (fórmulas, robustez, adversariales), RB-1521, RB-IA-2191 | 194 pruebas |
 | `compose` | Validación de `compose.yaml` | OK |
