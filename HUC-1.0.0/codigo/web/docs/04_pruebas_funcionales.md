@@ -5,8 +5,8 @@ Entorno: Fedora 43, Python 3.14.8, Django 6.0.9. Las órdenes se ejecutaron el 2
 ## Expediente BES-jun, antes de crear `web/`
 
 ```bash
-cd /home/antonio/projects/HUC/datasets/en_uso/BES-jun
-PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m pytest -q --tb=line
+cd datasets/en_uso/BES-jun
+PYTHONPATH=src python -m pytest -q --tb=line
 ```
 
 Resultado: 182 pruebas aprobadas en 20,42 s.
@@ -18,9 +18,9 @@ La misma orden. Resultado: 182 pruebas aprobadas en 20,08 s. No se modificó nin
 ## Django
 
 ```bash
-cd /home/antonio/projects/HUC/web
-/home/antonio/projects/HUC/.venv/bin/python manage.py check
-/home/antonio/projects/HUC/.venv/bin/python manage.py test tests.test_huc_web
+cd web
+python manage.py check
+python manage.py test tests.test_huc_web
 ```
 
 `check` no reportó problemas. La suite tiene 16 pruebas y terminó bien en 1,600 s en la última ejecución. Cubren, agrupadas, los veinte puntos pedidos: arranque y rutas, dashboard, registro, BES-jun, pendientes sin resultados, lectura del CSV, rechazo de texto en una medición, campo en blanco distinto de cero, adaptador sobre `evaluar_solicitud` (QF-084, `completada_preliminar`, RC-BES-03 activada, recomendación operacional en falso), Ollama simulado disponible y caído, modelo ausente, timeout, JSON inválido, respuesta vacía, respuesta con `done_reason=length`, descarte de `thinking`, contexto de PIP, rutas ajenas al registro y SHA-256 del Excel.

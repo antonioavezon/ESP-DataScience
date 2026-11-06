@@ -60,7 +60,7 @@ El contrato 1.3.0 rechaza la solicitud —estado `entrada_invalida`, `dataset_ev
 
 Desde la raíz del expediente, con el entorno del proyecto:
 
-    PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m evaluacion.motor --dataset BES-jun --pozo QF-084
+    PYTHONPATH=src python -m evaluacion.motor --dataset BES-jun --pozo QF-084
 
 En código:
 
@@ -134,12 +134,12 @@ Puede listar los pozos de `pozos.json`, mostrar los parámetros registrados, env
 
 ## Qué probar antes de usarlo
 
-    PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m evaluacion.autotest
+    PYTHONPATH=src python -m evaluacion.autotest
 
 Ese comando corre pytest sobre `tests/` y escribe `logs/autotest_reporte.json` y `logs/autotest_reporte.md`. Tiene que quedar en estado `aprobado`. En particular, con los datos registrados de QF-084 el resultado es RC-BES-03 y `recomendacion_operacional_autorizada` es falso.
 
 ## Cómo se regenera este paquete
 
-    PYTHONPATH=src /home/antonio/projects/HUC/.venv/bin/python -m integracion.construir_paquete
+    PYTHONPATH=src python -m integracion.construir_paquete
 
 Ese comando reescribe los JSON, esta guía, la ficha maestra y el catálogo de reglas. No mueve el expediente a `procesadas`.

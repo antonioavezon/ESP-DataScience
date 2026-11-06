@@ -1,41 +1,42 @@
-## Inicio
+# Inicio rápido de HUC
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
-./iniciar.sh
+Todos los comandos se ejecutan desde la carpeta `HUC-1.0.0/` del repositorio.
+La guía completa está en el [README](README.md).
 
-## Inicio con GPU
+## Instalación y primer arranque
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
-./iniciar.sh gpu
+```bash
+cd HUC-1.0.0
+./instalar.sh          # CPU
+./instalar.sh gpu      # GPU NVIDIA (opcional)
+./verificar.sh
+```
 
-## Detención
+## Inicio / detención / estado
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
+```bash
+./iniciar.sh           # CPU
+./iniciar.sh gpu       # GPU NVIDIA
 ./detener.sh
-
-## Estado
-
-cd /home/antonio/projects/HUC/HUC-1.0.0
 ./estado.sh
+```
 
 ## Logs
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
-docker compose logs
+```bash
+docker compose logs --tail 100
+docker compose logs -f huc-ollama
+```
 
-## Fórmulas
+## Fórmulas del motor
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
+```bash
 docker compose exec huc-proceso python /app/proceso/formulas.py list
+```
 
-## Visualizador
+## Interfaces
 
-cd /home/antonio/projects/HUC/HUC-1.0.0
-./estado.sh
-hostname -I
+- Visualización y asistente: <http://localhost:8000>
+- Simulador (DATA): <http://localhost:8001> — usuario `operador`, clave en `HUC-1.0.0/.env` (`HUC_SIM_CLAVE`).
 
-http://IP_DEL_PC:8000
-
-## Simulador
-
-http://IP_DEL_PC:8001
+Desde otro equipo de la red: `http://IP_DEL_PC:8000` (la IP debe figurar en `DJANGO_ALLOWED_HOSTS` y `CSRF_TRUSTED_ORIGINS`).

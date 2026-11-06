@@ -13,7 +13,7 @@ Interfaz local, en Django, para consultar los expedientes que ya están en el re
 
 ## Entorno
 
-Fedora 43. El intérprete del proyecto es `/home/antonio/projects/HUC/.venv` (Python 3.14.8). Django 6.0.9 y httpx 0.28.1 se instalaron en ese mismo entorno. El `requirements.txt` de la raíz del repositorio no se modificó: las dependencias de la web están en `web/requirements.txt`.
+Fedora 43. El intérprete del proyecto es `.venv` en la raíz del repositorio (Python 3.14.8). Django 6.0.9 y httpx 0.28.1 se instalaron en ese mismo entorno. El `requirements.txt` de la raíz del repositorio no se modificó: las dependencias de la web están en `web/requirements.txt`.
 
 El servidor de desarrollo debe escuchar solo en `127.0.0.1`.
 
@@ -22,8 +22,8 @@ El servidor de desarrollo debe escuchar solo en `127.0.0.1`.
 Desde esta carpeta, con el entorno del repositorio:
 
 ```bash
-cd /home/antonio/projects/HUC/web
-/home/antonio/projects/HUC/.venv/bin/python manage.py runserver 127.0.0.1:8000
+cd web
+python manage.py runserver 127.0.0.1:8000
 ```
 
 Abrir `http://127.0.0.1:8000/`.
