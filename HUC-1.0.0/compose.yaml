@@ -48,7 +48,7 @@ services:
       context: .
       dockerfile: servicios/Dockerfile
       target: proceso
-    image: huc-proceso:1.0.0
+    image: ${COMPOSE_PROJECT_NAME:-huc}-proceso:1.0.0
     container_name: ${COMPOSE_PROJECT_NAME:-huc}-proceso
     restart: unless-stopped
     environment: &entorno
@@ -77,7 +77,7 @@ services:
       context: .
       dockerfile: servicios/Dockerfile
       target: ia
-    image: huc-ia:1.0.0
+    image: ${COMPOSE_PROJECT_NAME:-huc}-ia:1.0.0
     container_name: ${COMPOSE_PROJECT_NAME:-huc}-ia
     restart: unless-stopped
     environment:
@@ -102,7 +102,7 @@ services:
       context: .
       dockerfile: servicios/Dockerfile
       target: visualizacion
-    image: huc-visualizacion:1.0.0
+    image: ${COMPOSE_PROJECT_NAME:-huc}-visualizacion:1.0.0
     container_name: ${COMPOSE_PROJECT_NAME:-huc}-visualizacion
     restart: unless-stopped
     environment:
@@ -134,7 +134,7 @@ services:
       context: .
       dockerfile: servicios/Dockerfile
       target: data
-    image: huc-data:1.0.0
+    image: ${COMPOSE_PROJECT_NAME:-huc}-data:1.0.0
     container_name: ${COMPOSE_PROJECT_NAME:-huc}-data
     restart: unless-stopped
     environment:
