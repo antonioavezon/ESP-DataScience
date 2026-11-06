@@ -1,9 +1,22 @@
-HUC 1.0.0
-Linux x86-64, Docker y Docker Compose.
-Memoria recomendada: 8 GiB o más si se usa el modelo lingüístico.
-Perfil CPU: ./instalar.sh y ./iniciar.sh
-Perfil GPU NVIDIA: ./iniciar.sh gpu
-El archivo .env guarda la clave del simulador y los hosts permitidos.
-No hace falta Python ni Django en el anfitrión.
-Los puertos publicados son 8000 y 8001.
-MQTT y Ollama permanecen en la red interna huc.
+HUC 1.0.0 — instalación resumida (detalle completo en ../README.md)
+
+Requisitos: Docker Engine con Docker Compose v2. Probado en Linux x86-64.
+Memoria: 8 GiB o más (el modelo lingüístico usa ~3,5 GiB en CPU).
+Disco: ~10 GB libres (imágenes ~5 GB + modelo ~2,5 GB).
+No hace falta Python ni Django en el anfitrión. No hace falta GPU.
+
+  ./instalar.sh          perfil CPU: crea .env, construye imágenes y arranca
+  ./instalar.sh gpu      igual, con GPU NVIDIA (NVIDIA Container Toolkit)
+  ./verificar.sh         comprueba servicios, modelo y un resultado determinístico
+  ./estado.sh            estado de contenedores
+  ./detener.sh           detiene (conserva volúmenes)
+  ./iniciar.sh [gpu]     vuelve a arrancar
+
+Primer arranque: Ollama descarga el modelo (~2,5 GB). Mientras tanto
+huc-ollama aparece "starting"/"unhealthy" y el asistente responde solo
+con texto determinístico. Seguir con: docker compose logs -f huc-ollama
+
+Puertos publicados: 8000 (visualización y asistente) y 8001 (simulador).
+Se cambian con HUC_PUERTO_WEB / HUC_PUERTO_DATA en .env.
+MQTT y Ollama permanecen en la red interna de Docker.
+La clave del simulador está en .env (HUC_SIM_CLAVE).

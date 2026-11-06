@@ -1,6 +1,6 @@
 # Desarrollo de la plataforma web HUC
 
-Fecha de esta versión: 2026-10-21. Entorno en el que se construyó y se ejecutó: Fedora 43, Python 3.14.8 en `/home/antonio/projects/HUC/.venv`.
+Fecha de esta versión: 2026-10-21. Entorno en el que se construyó y se ejecutó: Fedora 43, Python 3.14.8 en `.venv` en la raíz del repositorio.
 
 ## A. Objetivo general
 
@@ -65,19 +65,19 @@ Estas órdenes son para Fedora 43, con el entorno virtual que ya existe en el re
 1. Situarse en la carpeta de la aplicación. Así `manage.py` encuentra `config.settings`.
 
 ```bash
-cd /home/antonio/projects/HUC/web
+cd web
 ```
 
 2. Instalar Django y httpx dentro del entorno del repositorio. `pip` de ese intérprete no toca los paquetes del sistema Fedora. Las versiones quedan fijadas en `web/requirements.txt` (Django 6.0.9, httpx 0.28.1). En la máquina de desarrollo ya se ejecutó y ambos quedaron instalados.
 
 ```bash
-/home/antonio/projects/HUC/.venv/bin/python -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 3. Opcional: exportar las variables. Si no se exportan, la aplicación usa los defaults de desarrollo (depuración activa, hosts `127.0.0.1` y `localhost`, Ollama local y el modelo Instruct). Un archivo `.env` no se carga solo; hay que exportar las variables en la shell o en el servicio que arranque Django. La plantilla está en `.env.example`. No se creó un `.env` con una clave real.
 
 ```bash
-export DJANGO_SECRET_KEY="$(/home/antonio/projects/HUC/.venv/bin/python -c 'import secrets; print(secrets.token_urlsafe(48))')"
+export DJANGO_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
 export DJANGO_DEBUG=1
 export DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 export OLLAMA_BASE_URL=http://127.0.0.1:11434
@@ -91,19 +91,19 @@ export OLLAMA_NUM_PREDICT=512
 4. Crear las tablas de sesión. En esta versión la única migración aplicada fue `sessions.0001_initial`. No crea tablas de pozos ni borra datos científicos. SQLite aparece en `web/db.sqlite3`.
 
 ```bash
-/home/antonio/projects/HUC/.venv/bin/python manage.py migrate
+python manage.py migrate
 ```
 
 5. Comprobar la configuración de Django.
 
 ```bash
-/home/antonio/projects/HUC/.venv/bin/python manage.py check
+python manage.py check
 ```
 
 6. Arrancar el servidor de desarrollo atado a la interfaz local. `runserver` sin dirección puede quedar más abierto; por eso se escribe `127.0.0.1:8000`.
 
 ```bash
-/home/antonio/projects/HUC/.venv/bin/python manage.py runserver 127.0.0.1:8000
+python manage.py runserver 127.0.0.1:8000
 ```
 
 7. Abrir en el navegador `http://127.0.0.1:8000/`.
@@ -111,7 +111,7 @@ export OLLAMA_NUM_PREDICT=512
 Para repetir la suite de la web:
 
 ```bash
-/home/antonio/projects/HUC/.venv/bin/python manage.py test tests.test_huc_web
+python manage.py test tests.test_huc_web
 ```
 
 ## F. Integración con Ollama
