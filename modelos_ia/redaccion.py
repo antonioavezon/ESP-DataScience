@@ -12,6 +12,10 @@ _PROHIBIDO = re.compile(
     r"no hay en las hojas otro tipo|no aparece ningún otro tipo|no aparece ningun otro tipo",
     re.IGNORECASE,
 )
+# Token tras una cifra con mayúscula o barra: candidato a unidad (BFPD, Hz, psi/ft, BFP-DF…).
+_UNIDAD_TRAS_CIFRA = re.compile(
+    r"\d(?:[.,]\d+)?\s+((?=[\w/-]*[A-Z/])[A-Za-z°][\w°]*(?:[/-][\w°]+)*)"
+)
 _ROTULOS = ("NORMAL", "REGISTRO", "CRÍTICO", "CRITICO", "INCIPIENTE")
 
 
@@ -35,6 +39,10 @@ def _aceptar(propuesto: str, corpus: str, rotulos: list[str], pozos: list[str]) 
         return False
     for hallada in _CIFRA.findall(propuesto):
         if not _presente(hallada, corpus) and not _presente(hallada.replace(",", "."), corpus):
+            return False
+    # La unidad que acompaña a una cifra debe existir tal cual en los hechos (p. ej. BFPD, Hz, psi/ft).
+    for unidad in _UNIDAD_TRAS_CIFRA.findall(propuesto):
+        if not re.search(rf"(?<![\w/-]){re.escape(unidad)}(?![\w/-])", corpus):
             return False
     esperados = {item.upper() for item in rotulos if item}
     for rotulo in _ROTULOS:
